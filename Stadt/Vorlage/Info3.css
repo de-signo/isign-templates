@@ -14,8 +14,6 @@ body
     
     /* background */
     background-color: white;
-	
-	-ms-content-zooming: none;
 }
 
 h1, h2, h3, p
@@ -25,10 +23,6 @@ h1, h2, h3, p
     font-variant: normal;
     padding: 0;
     margin: 0;
-}
-a 
-{
-    touch-action: none; /* disable 300ms delay */
 }
 a.start
 {

@@ -67,6 +67,7 @@
                     PropertyName="Visible" Evaluate="IsNotEmpty" />
 
                 <st:StyleElementControl runat="server" FieldKey="entrance" />
+		<st:StyleElementControl runat="server" FieldKey="info" />
             </p>
             <p class="d2">
                 <asp:PlaceHolder runat="server" ID="litPhone">Fon:

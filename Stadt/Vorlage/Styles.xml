@@ -159,6 +159,13 @@
         <content_class bind="Column" parentField="source" type="TextFree" />
 
       </field>
+      <field key="info">
+        <names>
+          <name>Info</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+
+      </field>
       <field key="house">
         <names>
           <name>Haus</name>

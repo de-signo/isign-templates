@@ -85,6 +85,6 @@
 
 
 <st:DisableSelectExtender runat="server" TargetControlID="categoryList" />
-<st:ContentController runat="server" PauseOnEmptyData="true" DataSourceID="dsSource" />
+<st:ContentController runat="server" ID="contentController" PauseOnEmptyData="true" DataSourceID="dsSource" />
 
 <!-- End SignMain.ascx -->

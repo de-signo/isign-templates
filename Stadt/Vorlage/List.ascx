@@ -29,7 +29,8 @@
 
         ScriptManager.RegisterStartupScript(this, this.GetType(), "scrolltop",
              @"Sys.Application.add_load(function() { 
-                document.getElementById('" + divScroll.ClientID + @"').scrollTop = 575; 
+                var el = document.getElementById('" + divScroll.ClientID + @"');
+                if (el) el.scrollTop = 575; 
                 });", true);
     }
 </script>

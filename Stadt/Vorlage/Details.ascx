@@ -5,7 +5,7 @@
 <%@ Assembly Name="ISS, Version=4.0.0.0, Culture=neutral, PublicKeyToken=8ea0619067b237be" %>
 <%--
   SignDetails.ascx
-  
+
   Style for Stolltec.Forms 3.0. (Information)
   Child style for SignTop.ascx
   German locale
@@ -35,7 +35,7 @@
 </div>
 <st:SimpleView runat="server" DataSourceID="dsSource" EmptyDataText="Daten nicht gefunden.">
     <ItemTemplate>
-	<div class="hd2">
+        <div class="hd2">
             <asp:LinkButton runat="server" Text="Startseite" CssClass="start"
                 CommandName="Reset" />
             <asp:LinkButton runat="server" Text="Zurück" CssClass="back" CommandName="Back" />
@@ -54,7 +54,7 @@
                 <st:StyleElementControl runat="server" FieldKey="term2" />
             </h3>
              <p class="d1">
-                <asp:PlaceHolder runat="server" ID="phHouse">Haus
+                <asp:PlaceHolder runat="server" ID="phHouse">
                     <st:StyleElementControl runat="server" FieldKey="house" />,
                 </asp:PlaceHolder>
                 <st:StyleElementProperty runat="server" TargetControlID="phHouse" FieldKey="house"
@@ -67,7 +67,7 @@
                     PropertyName="Visible" Evaluate="IsNotEmpty" />
 
                 <st:StyleElementControl runat="server" FieldKey="entrance" />
-		<st:StyleElementControl runat="server" FieldKey="info" />
+                <st:StyleElementControl runat="server" FieldKey="info" />
             </p>
             <p class="d2">
                 <asp:PlaceHolder runat="server" ID="litPhone">Fon:
@@ -105,7 +105,7 @@
                     <Move Relative="True" Vertical="5" Duration="0.2" Fps="25" />
 
                     <HideAction AnimationTarget="circles" Visible="True" />
-                    
+
                     <Color  Duration=".2" Fps="10" StartValue="#000000" EndValue="#000000" Property="Color"/>
                     <HideAction AnimationTarget="circlel" Visible="True" />
                     <Color  Duration=".8" Fps="5" StartValue="#000000" EndValue="#000000" Property="Color" />
@@ -125,4 +125,3 @@
     <st:DisplayIdParameter Name="Display" />
     <asp:Parameter Name="File" DefaultValue="Details.ascx" />
 </st:Counter>
-

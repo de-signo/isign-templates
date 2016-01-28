@@ -1,17 +1,16 @@
-﻿
 /* redefine defaults */
 * {  margin: 0; padding: 0; border:none; overflow:hidden; outline:none;}
-    
+
 html { height: 100%; }
 body
 {
-	/* fill complete frame (required) */
+        /* fill complete frame (required) */
     height: 100%;
-   
-    
+
+
     /* text */
     font-family: Arial, sans-serif;
-    
+
     /* background */
     background-color: white;
 }
@@ -48,21 +47,21 @@ a.back
 }
 
 /* top */
-form 
+form
 {
     height: 100%;
 }
-.top 
+.top
 {
     position:fixed;
-    width: 100%;    
+    width: 100%;
     height: 100%;
 }
-.top>div 
+.top>div
 {
     height: 100%;
 }
-.top>div.lt0 
+.top>div.lt0
 {
     height: 25px;
     position:absolute;
@@ -72,20 +71,20 @@ form
     margin-left: 66px;
 }
 /* main */
-.lm1 
+.lm1
 {
     height: 25px;
     background-color: #e5e5e5;
 }
 
 
-.hm1 
+.hm1
 {
     position: relative;
     height: 258px;
     padding: 45px 0 0 0;
 }
-.hm1>h2 
+.hm1>h2
 {
     padding: 0 0 30px 0;
     margin: 0 0 0 66px;
@@ -93,7 +92,7 @@ form
     line-height: 49px;
     color: #7f7f7f;
 }
-.hm1>h1 
+.hm1>h1
 {
     position: absolute;
     top: 98px;
@@ -107,7 +106,7 @@ form
     position:relative;
     margin-top: 56px;
 }
-.dm1 a 
+.dm1 a
 {
     display: block;
     text-decoration: none;
@@ -131,7 +130,7 @@ form
     width: 570px;
 }
 
-.handm 
+.handm
 {
     position: absolute;
     top: 107px;
@@ -144,7 +143,7 @@ form
 .handm>img.hand { left: 70px; top: 35px; }
 
 /* list */
-.hl1, .hd1 
+.hl1, .hd1
 {
     position:relative;
     height:204px;
@@ -158,61 +157,61 @@ form
     margin: 0 0 0 66px;
     font-size: 47px;
     line-height: 47px;
-    color: #605D5C;   
+    color: #605D5C;
 }
 .hl1>h2:first-child,
-.hd1>h2:first-child 
+.hd1>h2:first-child
 {
     margin-top: 58px;
 }
 
-.hl2 
+.hl2
 {
     position: relative;
     height: 218px;
 }
 .hl2>h1
 {
-    color: #605D5C;   
+    color: #605D5C;
     font-size: 40px;
     line-height: 40px;
     margin: 54px 0 0 66px;
 }
-.hl2>h2 
+.hl2>h2
 {
     color: #7f7f7f;
     font-size: 45px;
     line-height: 45px;
     margin: 16px 0 0 66px;
 }
-.hl2>h2 em 
+.hl2>h2 em
 {
     text-decoration: none;
     font-variant: normal;
     font-style: normal;
 }
 
-.hl2>a 
+.hl2>a
 {
     position: absolute;
     left: 715px;
     top:79px;
 }
 
-.dl 
+.dl
 {
     margin: 0 80px 0 66px;
     height: 1265px;
 }
-.dl>div 
+.dl>div
 {
-    float:left;   
+    float:left;
 }
-.dl>div>.spacer 
+.dl>div>.spacer
 {
     height: 575px;
 }
-.dl li 
+.dl li
 {
     display: block;
     overflow: hidden;
@@ -221,7 +220,7 @@ form
     background: url(btn_list.png) no-repeat center;
     margin-bottom: 19px;
 }
-.dl li>div 
+.dl li>div
 {
     float: left;
     overflow: hidden;
@@ -234,7 +233,7 @@ form
     margin: 10px 0 0 31px;
     width: 520px;
 }
-.dl li>div.col1>h2 
+.dl li>div.col1>h2
 {
     font-size:25px;
     line-height: 29px;
@@ -252,24 +251,24 @@ form
     width: 256px;
 }
 
-.dl>div.scrollbar 
+.dl>div.scrollbar
 {
     margin-top: 407px;
     float:right;
     width: 70px;
 }
 
-.scrollbar .scrollup 
+.scrollbar .scrollup
 {
     height: 70px;
     width: 70px;
     background-image: url(btn_scrollup.png);
 }
-.scrollbar .scrollup.disable_scroll 
+.scrollbar .scrollup.disable_scroll
 {
     background-image: url(btn_scrollup_d.png);
 }
-.scrollbar .scroll 
+.scrollbar .scroll
 {
     height: 208px;
     width: 66px;
@@ -288,12 +287,12 @@ form
     width: 70px;
     background-image: url(btn_scrolldown.png);
 }
-.scrollbar .scrolldown.disable_scroll 
+.scrollbar .scrolldown.disable_scroll
 {
     background-image: url(btn_scrolldown_d.png);
 }
 
-.fl1>a 
+.fl1>a
 {
     position: absolute;
     right: 120px;
@@ -312,11 +311,11 @@ form
 .handl>img.hand { left: 67px; top: 32px; }
 
 /* details */
-.hd2 
+.hd2
 {
     height: 207px;
 }
-.hd2>img 
+.hd2>img
 { /* qr-code*/
     margin: 28px 0 0 66px;
     width: 100px;
@@ -339,7 +338,7 @@ form
 
 .dd1
 {
-    height: 315px;
+    height: 385px;                   /* Ori: 315 */
     margin: 0 130px 0 66px;
 }
 .dd1 h1
@@ -349,18 +348,18 @@ form
     margin: 0 0 19px 0;
     color: #605D5C;
 }
-.dd1 h1 em 
+.dd1 h1 em
 {
     font-style:normal;
 }
-.dd1 h2 
+.dd1 h2
 {
     font-size: 46px;
     line-height: 50px;
     margin: 0 0 8px 0;
     color: #7f7f7f;
 }
-.dd1 h3 
+.dd1 h3
 {
     font-size: 32px;
     line-height: 42px;
@@ -368,12 +367,12 @@ form
     color: #605D5C;
 }
 
-.dd1 p.d1 
+.dd1 p.d1
 {
     font-size: 32px;
     line-height: 40px;
     margin: 0 0 12px 0;
-    color: #7f7f7f;    
+    color: #7f7f7f;
 }
 
 .dd1 p.d2
@@ -383,37 +382,48 @@ form
     color: #605D5C;
 }
 
-.dd1 img 
+.dd1 img
 {
     float: right;
     width: 150px;
     height: 200px;
-    
+
 }
 
 .dd2
-{
-    height: 764px;
+{   margin-top: 20px;
+    height: 753px;                 /* Ori: height: 764px; */
 }
-.dd2>img 
+.dd2>img
 {
     width: 1080px;
-    height: 764px;
+    height: 753px;            /* Ori:           alt:  height: 764px; */
+    /*  background-color:green;  */
 }
 
 
 .fd1>a
 {
-    margin-top: 262px;
+    margin-top: 162px;              /* Ori: margin-top: 262px;   */
     float:right;
 }
 .fd1 .handl
 {
     float: left;
     position: relative;
-    margin: 153px 0 0 169px;
+    margin: 53px 0 0 169px;         /* Ori: margin: 153px 0 0 169px;    */
     width: 200px;
     height: 120px;
 }
 
 
+.d3
+{
+    /* background-color:yellow; */
+    margin-top: 20px;
+           /*      padding-bottom: 50px;     */
+    font-size: 24px;        /*      22px;     */
+    /* height: 160px; */
+    color: #605D5C;   /* Ori: color: #605D5C; */
+
+}

@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" Inherits="Stolltec.Forms.Show.StyleControlBase, Stolltec.Forms.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=9b480668faf77978" %>
+<%@ Control Language="C#" Inherits="Stolltec.Forms.Show.StyleControlBase, Stolltec.Forms.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=9b480668faf77978" %>
 <%@ Register TagPrefix="iss" Namespace="ISS.Web.UI" Assembly="ISS.Web" %>
 <%@ Register Assembly="Stolltec.Forms.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=9b480668faf77978"
     Namespace="Stolltec.Forms.Show" TagPrefix="st" %>
@@ -67,8 +67,8 @@
                     PropertyName="Visible" Evaluate="IsNotEmpty" />
 
                 <st:StyleElementControl runat="server" FieldKey="entrance" />
-                <st:StyleElementControl runat="server" FieldKey="info" />
             </p>
+
             <p class="d2">
                 <asp:PlaceHolder runat="server" ID="litPhone">Fon:
                     <st:StyleElementControl runat="server" FieldKey="phone" />,
@@ -81,6 +81,13 @@
                 <st:StyleElementProperty runat="server" TargetControlID="litEMail" FieldKey="email"
                     PropertyName="Visible" Evaluate="IsNotEmpty" />
             </p>
+
+            <p class="d3">
+                <st:StyleElementControl runat="server" FieldKey="info" />
+            </p>
+
+
+
         </div>
         <div class="dd2">
             <st:StyleElementControl runat="server" FieldKey="map" />

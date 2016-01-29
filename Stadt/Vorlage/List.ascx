@@ -85,8 +85,7 @@
                         </h3>
                     </div>
                     <div class="col2">
-                                <asp:Placeholder runat="server" ID="phHouse">Haus <st:StyleElementControl runat="server" FieldKey="house" /></asp:Placeholder>
-                                <st:StyleElementProperty runat="server" FieldKey="house" TargetControlID="phHouse" PropertyName="Visible" Evaluate="IsNotEmpty" />
+                                <st:StyleElementControl runat="server" FieldKey="house" />
                                 <br />
                                 <st:StyleElementControl runat="server" FieldKey="level" />
                                 <br />

@@ -1,14 +1,11 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" Inherits="Stolltec.Forms.Show.StyleControlBase, Stolltec.Forms.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=9b480668faf77978" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" ClassName="Stolltec.Forms.Show.ListABC" CodeFile="Code.cs" Inherits="Stolltec.Forms.Show.ListABCBase"%>
 <%@ Register TagPrefix="iss" Namespace="ISS.Web.UI" Assembly="ISS.Web" %>
 <%@ Register Assembly="Stolltec.Forms.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=9b480668faf77978"
     Namespace="Stolltec.Forms.Show" TagPrefix="st" %>
-<%@ Register TagPrefix="my" Src="ItemList.ascx" TagName="ItemList" %>
 <%@ Assembly Name="ISS, Version=4.0.0.0, Culture=neutral, PublicKeyToken=8ea0619067b237be" %>
+
 <%--
-  List.ascx
-  
   Style for Stolltec.Forms 3.0. (Information)
-  Child style for SignTop.ascx
   German locale
   List of entries which lead to a detailed view.
   Auto width, scrollable
@@ -28,7 +25,7 @@
 
 <st:Counter runat="server" Visible="false">
     <st:DisplayIdParameter Name="Display" />
-    <asp:Parameter Name="File" DefaultValue="List.ascx" />
+    <asp:Parameter Name="File" DefaultValue="ListABC.ascx" />
 </st:Counter>
 
 <%-- Header --%>
@@ -54,10 +51,21 @@
         <st:ViewParameter runat="server" FieldKey="category" Name="category" />
     </SelectParameters>
 </st:StyleDataSource>
+
+
+<ul>
+<% for (char a = 'A'; a <= 'Z'; a++) { %>
+<li><a href="#anchor<%= a %>"><%= a %></a></li>
+<% } %>
+</ul>
+
 <div class="dl">
     <div id="divScroll" runat="server">
         <div class="spacer"></div>
-        <my:ItemList ID="itemList" runat="server" DataSourceID="dsSource" />
+        <ul class="groups">
+            <%-- Placeholder is replaced by a grouped list (See Code.cs)--%>
+	        <asp:PlaceHolder runat="server" ID="repeaterPlaceholder" />
+        </ul>
     </div>
     <div class="scrollbar">
         <div class="scrollup" runat="server" id="btnUp">

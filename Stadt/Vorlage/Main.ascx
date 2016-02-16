@@ -50,6 +50,14 @@
             </asp:LinkButton>
         </ItemTemplate>
     </asp:Repeater>
+
+    <% if ((string)StyleInstance["options"].Value == "search") { %>
+        <asp:LinkButton runat="server" ID="lnkSearch" CommandName="SelectView" CommandArgument="?__VIEWKEY=search">
+            SUCHE...
+        </asp:LinkButton>
+    <% } else { %>
+        <!-- Search disabled -->
+    <% } %>
   <div class="handm">
         <img id="circles" runat="server" class="ci" src="circlei1.png"/>
         <img id="circlel" runat="server" class="co" src="circleo1.png"/>

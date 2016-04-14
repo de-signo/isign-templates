@@ -4,7 +4,7 @@
     Namespace="Stolltec.Forms.Show" TagPrefix="st" %>
 <%--
   SignMain.ascx
-  
+
   Style for Stolltec.Forms 3.0. (Information)
   Child style for SignTop.ascx
   German locale
@@ -13,7 +13,7 @@
   Auto width, scrollable
 --%>
 <script runat="server" language="C#">
-   
+
     void ItemCommand(object sender, EventArgs ea)
     {
         var cea = ea as CommandEventArgs;
@@ -21,24 +21,29 @@
     }
 </script>
 <!-- Begin SignMain.ascx -->
-<div class="lm1">
-</div>
+
+<!--  <div class="lm1">
+</div>  -->
 
 <%-- Header --%>
-<div class="hm1">
-    <h2 runat="server" id="date"></h2>
-    <h2><span runat="server" id="time"></span> Uhr</h2>
-    <st:DateTimeExtender runat="server" ID="dteDate" TargetControlID="date" Format="dddd, dd.MM.yyyy" UpdateInterval="60000" />
-    <st:DateTimeExtender runat="server" ID="dteTime" TargetControlID="time" Format="HH:mm" UpdateInterval="10000" />
-    <h1>Wegweiser</h1>
-</div>
-<div class="hm2">
-    <img id="Img1" runat="server" alt="header" src="header1.jpg" />
+                                                              <!--  ---- Datum u. Uhrzeit ----   -->
+    <div runat="server" class="datum">
+         <span runat="server" id="date" class="datum2"></span>,
+         <span runat="server" id="time" class="zeit2"></span> Uhr
+         <span><st:DateTimeExtender runat="server" ID="dteDate" TargetControlID="date" Format="dddd, dd.MM.yyyy" UpdateInterval="600000" /></span>   <!--  orig:  UpdateInterval="60000"   -->
+         <span><st:DateTimeExtender runat="server" ID="dteTime" TargetControlID="time" Format="HH:mm" UpdateInterval="1000000" /></span>
+    </div>
+
+<div class="Ueberschrift">Suchen & Finden</div>               <!--  ---- Überschrift ----   -->
+
+<div>
+    <img runat="server" class="Img1" alt="header" src="header1.jpg" />              <!--  ---- Headerbild ----   -->
 </div>
 
+ <!--   <a href="ListABC.ascx">Test xyz</a>   -->
+
 <%-- Data --%>
-<div class="lm2">
-</div>
+
 <st:StyleDataSource FieldKey="source" runat="server" ID="dsSource" />
 <div runat="server" id="categoryList" class="dm1">
     <asp:Repeater runat="server" ID="rp" DataSourceID="dsSource" OnItemCommand="ItemCommand">
@@ -51,14 +56,19 @@
         </ItemTemplate>
     </asp:Repeater>
 
-    <% if ((string)StyleInstance["options"].Value == "search") { %>
-        <asp:LinkButton runat="server" ID="lnkSearch" CommandName="SelectView" CommandArgument="?__VIEWKEY=search">
-            SUCHE...
-        </asp:LinkButton>
+    <% if ((string)StyleInstance["options"].Value == "search") { %>                     <!-- -------------- Suchfeld ----------------- -->
+          <div class="Suchfeld">
+              <asp:LinkButton runat="server" ID="lnkSearch" CommandName="SelectView" CommandArgument="?__VIEWKEY=search">
+                <div class="Suchfeld2"> <!-- <img runat="server" class="Img2" alt="Suche" src="Lupe.png" /> --> </div>
+              </asp:LinkButton>
+          </div>
+
     <% } else { %>
         <!-- Search disabled -->
     <% } %>
-  <div class="handm">
+
+
+  <div class="handm">                                      <!-- -------------- Hand ----------------- -->
         <img id="circles" runat="server" class="ci" src="circlei1.png"/>
         <img id="circlel" runat="server" class="co" src="circleo1.png"/>
         <img id="hand" runat="server" class="hand" src="hand1.png" />
@@ -74,7 +84,7 @@
                     <Move Relative="True" Vertical="5" Duration="0.2" Fps="25" />
 
                     <HideAction AnimationTarget="circles" Visible="True" />
-                    
+
                     <Color  Duration=".2" Fps="10" StartValue="#000000" EndValue="#000000" Property="Color"/>
                     <HideAction AnimationTarget="circlel" Visible="True" />
                     <Color  Duration=".8" Fps="5" StartValue="#000000" EndValue="#000000" Property="Color" />
@@ -86,6 +96,8 @@
             </Animations>
         </ajax:AnimationExtender>
     </div>
+
+
 </div>
 
 <div class="l3">

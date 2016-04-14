@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" ClassName="Stolltec.Forms.Show.ListABC" CodeFile="Code.cs" Inherits="Stolltec.Forms.Show.ListABCBase"%>
+<%@ Control Language="C#" AutoEventWireup="true" ClassName="Stolltec.Forms.Show.ListABC" CodeFile="Code.cs" Inherits="Stolltec.Forms.Show.ListABCBase"%>
 <%@ Register TagPrefix="iss" Namespace="ISS.Web.UI" Assembly="ISS.Web" %>
 <%@ Register Assembly="Stolltec.Forms.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=9b480668faf77978"
     Namespace="Stolltec.Forms.Show" TagPrefix="st" %>
@@ -16,9 +16,9 @@
         base.OnPreRender(e);
 
         ScriptManager.RegisterStartupScript(this, this.GetType(), "scrolltop",
-             @"Sys.Application.add_load(function() { 
+             @"Sys.Application.add_load(function() {
                 var el = document.getElementById('" + divScroll.ClientID + @"');
-                if (el) el.scrollTop = 575; 
+                if (el) el.scrollTop = 575;
                 });", true);
     }
 </script>
@@ -29,22 +29,29 @@
 </st:Counter>
 
 <%-- Header --%>
-<div class="hl1">
-    <h2 runat="server" id="date"></h2>
-    <h2><span runat="server" id="time"></span> Uhr</h2>
+
+<div class="hl1" class="datum">                     <!--  ---- Datum u. Uhrzeit ----   -->
+    <h2 runat="server" id="date" class="datum2"></h2>
+    <h2><span runat="server" id="time" class="zeit2"></span> Uhr</h2>
     <st:DateTimeExtender runat="server" ID="dteDate" TargetControlID="date" Format="dddd, dd.MM.yyyy" UpdateInterval="60000" />
     <st:DateTimeExtender runat="server" ID="dteTime" TargetControlID="time" Format="HH:mm" UpdateInterval="10000" />
 </div>
 
-<div class="hl2">
+<%-- oben --%>
+
+<div class="hl2">                      <!--  ----------- Suchbereichsanzeige + Button Startseite -----------   -->
     <h1>
-        Ihr Suchbereich: A-Z
+        Ihr Suchbereich:
     </h1>
     <h2>
         <st:StyleElementControl runat="server" FieldKey="category" />
     </h2>
     <asp:LinkButton runat="server" CssClass="start" Text="Startseite" CommandName="Reset" />
 </div>
+
+
+
+
 <%-- Body --%>
 <st:StyleDataSource FieldKey="source" runat="server" ID="dsSource">
     <SelectParameters>
@@ -53,21 +60,23 @@
 </st:StyleDataSource>
 
 
-<ul>
-<% for (char a = 'A'; a <= 'Z'; a++) { %>
-<li><a href="#anchor<%= a %>"><%= a %></a></li>
-<% } %>
-</ul>
+
+
+
+
+
 
 <div class="dl">
-    <div id="divScroll" runat="server">
+
+    <div id="divScroll" runat="server">                            <!-- -------------- Auflistung ----------------- -->
         <div class="spacer"></div>
         <ul class="groups">
             <%-- Placeholder is replaced by a grouped list (See Code.cs)--%>
-	        <asp:PlaceHolder runat="server" ID="repeaterPlaceholder" />
+                <asp:PlaceHolder runat="server" ID="repeaterPlaceholder" />
         </ul>
     </div>
-    <div class="scrollbar">
+
+    <div class="scrollbar">                     <!-- -------------- Scrollbar ----------------- -->
         <div class="scrollup" runat="server" id="btnUp">
         </div>
         <iss:scrollbarcontrol runat="server" id="scRes" upbuttonid="btnUp" downbuttonid="btnDown"
@@ -76,12 +85,23 @@
         <div class="scrolldown" runat="server" id="btnDown">
         </div>
     </div>
+
 </div>
+
+
 <iss:FillBoxExtender runat="server" TargetControlID="divScroll" FillHeight="true" FillWidth="false" IgnoreSibblings="true" />
 <iss:ScrollingExtender runat="server" TargetControlID="divScroll" ID="scrollBehavior"
     ScrollStep="575" StepInPercent="false" Linear="false" />
+
+<%-- Schnellzugriff --%>              <!-- -------------- Schnellzugriff ----------------- -->
+<ul class="Schnellzugr">
+        <% for (char a = 'A'; a <= 'Z'; a++) { %>
+           <li class="Schnellzugr2"> <a href="#anchor<%= a %>"  class="Schnellzugr3"> <%= a %> </a> </li>
+        <% } %>
+</ul>
+
 <div class="fl1">
-    <div class="handl">
+    <div class="handl">                        <!-- -------------- Hand ----------------- -->
         <img id="circles" runat="server" class="ci" src="circlei2.png"/>
         <img id="circlel" runat="server" class="co" src="circleo2.png"/>
         <img id="hand" runat="server" class="hand" src="hand2.png" />
@@ -97,7 +117,7 @@
                     <Move Relative="True" Vertical="5" Duration="0.2" Fps="25" />
 
                     <HideAction AnimationTarget="circles" Visible="True" />
-                    
+
                     <Color  Duration=".2" Fps="10" StartValue="#000000" EndValue="#000000" Property="Color"/>
                     <HideAction AnimationTarget="circlel" Visible="True" />
                     <Color  Duration=".8" Fps="5" StartValue="#000000" EndValue="#000000" Property="Color" />
@@ -109,7 +129,7 @@
             </Animations>
         </ajax:AnimationExtender>
     </div>
-    
+
     <asp:LinkButton runat="server" CssClass="start" Text="Startseite" CommandName="Reset" />
-    
+
 </div>

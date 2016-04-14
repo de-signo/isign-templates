@@ -51,40 +51,37 @@
 
 
 <%-- Header --%>
-<div class="hl1">
-    <h2 runat="server" id="date"></h2>
-    <h2><span runat="server" id="time"></span> Uhr</h2>
-    <st:DateTimeExtender runat="server" ID="dteDate" TargetControlID="date" Format="dddd, dd.MM.yyyy" UpdateInterval="60000" />
-    <st:DateTimeExtender runat="server" ID="dteTime" TargetControlID="time" Format="HH:mm" UpdateInterval="10000" />
+<div class="hl1">                                             <!--  ---- Datum u. Uhrzeit ----   -->
+    <h2 runat="server" id="date" class="datum2"></h2>
+    <h2><span runat="server" id="time" class="zeit2"></span> Uhr</h2>
+    <st:DateTimeExtender runat="server" ID="dteDate" TargetControlID="date" Format="dddd, dd.MM.yyyy" UpdateInterval="60000000" />       <!--  ori: 60000 ----   -->
+    <st:DateTimeExtender runat="server" ID="dteTime" TargetControlID="time" Format="HH:mm" UpdateInterval="10000000" />         <!--  ori: 10000 ----   -->
 </div>
+
+
+<div class="hl2">                      <!--  ----------- Button Startseite (pm)-----------   -->
+    <asp:LinkButton runat="server" CssClass="start start_Search" Text="Startseite" CommandName="Reset" />
+</div>
+
+
 
 <%-- Data --%>
- <div class="search_box">
-    <asp:TextBox runat="server" ID="txtFind" />
-    <st:FindBoxExtender runat="server" TargetControlID="txtFind" ClientDataSourceID="cdsSource" />
-</div>
-<div class="resultspace">
-    <iss:dataviewi runat="server" id="dataView" autofetch="true" cssclass="results">
-       <LayoutTemplate>
-            <div runat="server" id="itemPlaceholder" />
-       </LayoutTemplate>
-       <ItemTemplate>
-        <div runat="server" id="itemTemplate">
-        <div onclick="handleSelect(this)">
-            <input type="hidden" sys:value="{{_KEY}}" />
-            <div>
-                <span>{binding <%= StyleInstance["name"].Value %>, convert=nullToEmpty}</span>
-            </div>
-        </div>
-        </div>
-       </ItemTemplate>
-    </iss:dataviewi>
+ <div class="search_box">                                 <!--  ----------- Suchbox -----------   -->
+
+    <div class="search_box2">
+       <asp:TextBox runat="server" ID="txtFind" />
+    </div>
+        <st:FindBoxExtender runat="server" TargetControlID="txtFind" ClientDataSourceID="cdsSource" />
 
 </div>
+
+
+
+<%-- -------------------- Tastatur ------------------------ --%>
 <div class="userinput">
     <%-- Keyboard --%>
     <st:Keyboard runat="server" TextBoxID="txtFind" CssClass="keyboard" Characters="1234567890" />
-    <% 
+    <%
     var opt = (string)StyleInstance["options"].Value;
     switch (opt)
     {
@@ -102,7 +99,7 @@
     <st:Keyboard runat="server" TextBoxID="txtFind" CssClass="keyboard" Characters="YXCVBNM" />
         <%  break;
     } %>
-    <st:Keyboard runat="server" TextBoxID="txtFind" CssClass="keyboard" Characters="- &#13;">
+    <st:Keyboard runat="server" TextBoxID="txtFind" CssClass="keyboard tastenreihe5" Characters="- &#13;">
         <ButtonStyles>
             <st:ButtonStyle Character=" " CssClass="key_space" />
             <st:ButtonStyle Character="&#13;" CssClass="key_del" Text="Entf" />
@@ -110,4 +107,21 @@
     </st:Keyboard>
 </div>
 
+<div class="resultspace">                                  <!--  ----------- Ergebnisanzeige -----------   -->
+    <iss:dataviewi runat="server" id="dataView" autofetch="true" cssclass="results">
+       <LayoutTemplate>
+            <div runat="server" id="itemPlaceholder" /> ---temp: Platzhalter resultspace (hier: id=itemPlaceholder) ---
+       </LayoutTemplate>
+       <ItemTemplate>
+        <div runat="server" id="itemTemplate">
+        <div onclick="handleSelect(this)">
+            <input type="hidden" sys:value="{{_KEY}}" />
+            <div>
+                <span>{binding <%= StyleInstance["name"].Value %>, convert=nullToEmpty}</span>
+            </div>
+        </div>
+        </div>
+       </ItemTemplate>
+    </iss:dataviewi>
 
+</div>

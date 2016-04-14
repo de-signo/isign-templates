@@ -52,12 +52,12 @@ namespace Stolltec.Forms.Show
 
             // group data
             var grouped = (from x in baseData.Cast<object>()
-                           let groupBy = DataBinder.Eval(x, field).ToString().First()
+                           let groupBy = DataBinder.Eval(x, field).ToString().FirstOrDefault()
                            group x by groupBy into y
                            select y).ToArray();
             return grouped;
         }
-        
+
 
         protected override void OnItemCreated(RepeaterItemEventArgs e)
         {

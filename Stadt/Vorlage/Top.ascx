@@ -6,6 +6,7 @@
 
 <asp:ScriptManagerProxy runat="server"> <Scripts> <asp:ScriptReference Name="jquery" /> </Scripts> </asp:ScriptManagerProxy>
 
+<script src="<%= ResolveUrl("bind.js") %>" type="text/javascript"></script>
 <script src="<%= ResolveUrl("hammer.min.js") %>" type="text/javascript"></script>
 <script type="text/javascript">
 $(document).ready(function() {

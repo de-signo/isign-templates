@@ -52,7 +52,8 @@ namespace Stolltec.Forms.Show
 
             // group data
             var grouped = (from x in baseData.Cast<object>()
-                           let groupBy = DataBinder.Eval(x, field).ToString().FirstOrDefault()
+                           let fieldValue = DataBinder.Eval(x, field).ToString()
+                           let groupBy = String.IsNullOrEmpty(fieldValue) ? ' ' : fieldValue[0]
                            group x by groupBy into y
                            select y).ToArray();
             return grouped;

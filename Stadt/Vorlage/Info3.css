@@ -112,7 +112,7 @@ form
 .dm1
 {
     position:relative;
-    margin-top: 56px;
+    margin-top: 110px;           /* 56 */
 }
 .dm1 a                                                                /* +++ Buttons */
 {
@@ -172,7 +172,7 @@ form
 .handm
 {
     position: absolute;
-    top: 107px;
+    top: 167px;
     left: 854px;
     width: 200px;
     height: 120px;
@@ -536,78 +536,97 @@ form
   width:1080px;
 }
 
-.Img2
+.Img2                              /* Lupe */
 {
   width:50px;
-  margin: 10px 0 0 0;       /* Test:  margin: 12px 0 0 0; */
+  margin: 10px 0 -7px 0;
 }
 
 .Suchfeld
 {
-  position:absolute;     /* --- nur Testeinstellung! --- */
-  top:10px;               /* --- nur Testeinstellung! ---              top:0px;   top:780px;          */
-  left:100px;                      /* --- nur Testeinstellung! --- */
-  vertical-align:center;
-  text-align:center;
-            /* Test:  background:green; */
+                       /*   position:absolute; --- nur Testeinstellung! --- */
+                       /*   top:10px; --- nur Testeinstellung! ---              top:0px;   top:780px;          */
+                       /*   left:100px; --- nur Testeinstellung! --- */
 }
 
 
 .Suchfeld2
 {
-   color:rgb(0,0,0);
-   background:rgb(230,230,230);     /* ---   --- */
-   height: 70px;                    /* ---  74 --- */
+   background:rgb(230,230,230);
+   height: 70px;
    border-radius: 15px;
-   border:solid rgb(0,0,0) 2px;  /* border:solid red 2px; */
+   border:solid rgb(80,80,80) 2px;
+
 }
+
+
+.Suchfeld3
+{
+   color:rgb(100,100,100);
+   font-size: 44px;
+}
+
+
+
+
 
 
 /* ------------------ Search.ascx ----------------------- */
 
-.userinput                                            /* ------ Tastatur ------ */
+.userinput                                            /* ------ Tastaturbreite Alle ------ */
 {
-    margin: 0 50px 0 117px;
+                    /*  temporär wieder deaktiviert: margin: 0 50px 0 117px;   PM   */
                   /*   background: rgb(255,255,0);   PM   */
 }
 
-/*  loe doppelt
-.keyboard a  { display: inline-block; text-align: center;
-               text-decoration: none; outline: 0 none; color: White;}
-*/
+
+
+.userinput1                                            /* ------ Tastatur Rand li -  Zahlenreihe ------ */
+{
+    margin-left: 117px;
+}
+
+.userinput2                                            /* ------ Tastatur Rand li -  ABC Bereich ------ */
+{
+    margin-left: 117px;
+}
+
+.userinput3                                            /* ------ Tastatur  Quertz Bereich ------ */
+{
+     text-align: center;
+}
+
+
+.userinput5                                            /* ------ Tastatur Rand li -   untere Reihe ------ */
+{
+    margin-left: 292px;
+
+}
+
 
 .keyboard a:active { outline: 0 none; }
 
-.keyboard a
+
+.userinput1 a, .userinput2 a, .userinput3 a, .userinput5 a                    /* Tastenreihen */
 {
      display: inline-block;       /* !! Tasten feste Größe zuweisbar !! */
      text-align: center;
      text-decoration: none; outline: 0 none;
-     background: linear-gradient(to bottom, rgb(139,177,222), rgb(0,123,192));    /* Ori: background-image: url(images/Key.png);  */
+     background: linear-gradient(to bottom, rgb(139,177,222), rgb(0,123,192));
      border-radius: 7px;
-     margin: 6px 17px 6px 0px;                         /* Ori: alt: margin: 6px 16px 6px 0px;   /   margin: 6px 5px;  */
+     margin: 6px 17px 6px 0px;
      height: 70px;
      width: 70px;
-     font-size: 50px;                                /* Ori: 26  */
-     line-height: 72px;                              /* Ori: 70  */
-     color:rgb(255,255,255);                                 /* Ori: color: #DEDEDE;  */
+     font-size: 50px;
+     line-height: 72px;
+     color:rgb(255,255,255);
 }
 
-
-.tastenreihe5
+.keyboard a.key_space            /* Spacetaste sitzt ca. 1px zu hoch (wg. fehlendem Character), vorerst nicht behebbar, daher Bild hinterlegt */
 {
-    width: 700px;
-    margin-left: 174px;
-
-}
-
-
-
-.keyboard a.key_space            /* Spaceteast sitzt ca. 1px zu hoch (wg. fehlendem Character), nicht behebbar, daher Bild hinterlegt */
-{
-    width: 328px;                      /* Ori: 200px  */
+    width: 328px;
     height: 70px;
-    margin: 6px 20px 6px 0px;          /* Ori: 26px 20px 8px 0px;  */
+    margin: 6px 20px 6px 0px;
 }
 
 .keyboard a.key_del
@@ -627,11 +646,11 @@ form
      font-size: 44px;
      color: rgb(0,0,0);
      text-align:center;
-              /* padding:20px; */
+
      width: 842px;
      height:70px;
 
-     margin:50px 0 30px 0;
+     margin:50px 0 30px 7px;
       border:solid black 2px;
       border-radius:7px;
 }
@@ -663,30 +682,18 @@ form
 }
 
 
-/*
-.search_box2
-{
-     background-color:rgb(255,255,220);
-     font-size: 46px;
-}
-
-*/
 
 /* ------------------ ListABC.ascx ----------------------- */
 
 .Schnellzugr
 {
-       /* background-color:rgb(255,210,255); */    /* +++ Nur gesamter Bereich */
-       /* color:rgb(200,150,230); */    /*   funkt. nicht */
           margin: 20px 0 0 69px;     /*   +++ OK !   66*/
 }
 
 .Schnellzugr2
 {
-    /* color:rgb(0,150,230); */         /*   funkt. nicht */
-    /* background-color:rgb(255,210,255); */    /* +++ Nur gesamter Bereich (Zeile?) */
            display:inline;              /*   +++ OK ! */
-   /*   OK aber einzeln */
+
 }
 
 .Schnellzugr3

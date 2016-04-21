@@ -23,6 +23,25 @@
     }
 </script>
 
+
+ <%-- Script für Formatierung des Schnellzugriffs (nicht verwendete Buchstaben ausschließen)  --%>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $("a.Schnellzugr3").each(function() {
+        // href ist z.B. "#anchorW" das kann auch als jquery id-selektor verwendet werden.
+        // hier wird also geprüft, ob der als href angegebene anchor auch existiert.
+        this.attr("href");
+        if ($(href).length == 0) {
+            this.addClass("unbenutzt");
+        }
+    });
+});
+</script>
+
+
+
+
 <st:Counter runat="server" Visible="false">
     <st:DisplayIdParameter Name="Display" />
     <asp:Parameter Name="File" DefaultValue="ListABC.ascx" />

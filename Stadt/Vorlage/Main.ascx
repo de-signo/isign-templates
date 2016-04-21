@@ -40,7 +40,7 @@
     <img runat="server" class="Img1" alt="header" src="header1.jpg" />              <!--  ---- Headerbild ----   -->
 </div>
 
- <!--   <a href="ListABC.ascx">Test xyz</a>   -->
+
 
 <%-- Data --%>
 
@@ -59,7 +59,10 @@
     <% if ((string)StyleInstance["options"].Value == "search") { %>                     <!-- -------------- Suchfeld ----------------- -->
           <div class="Suchfeld">
               <asp:LinkButton runat="server" ID="lnkSearch" CommandName="SelectView" CommandArgument="?__VIEWKEY=search">
-                <div class="Suchfeld2"> <!-- <img runat="server" class="Img2" alt="Suche" src="Lupe.png" /> --> </div>
+                <div class="Suchfeld2">
+                    <span class="Suchfeld3"> Suchen &nbsp;&nbsp;&nbsp;</span>
+                    <img runat="server" class="Img2" alt="Suche" src="Lupe.png" />
+                </div>
               </asp:LinkButton>
           </div>
 

@@ -78,6 +78,13 @@ namespace Stolltec.Forms.Show
             }
             base.OnItemCreated(e);
         }
+	
+	protected override void OnItemCommand(RepeaterCommandEventArgs e)
+        {           
+            base.OnItemCommand(e);
+            RaiseBubbleEvent(this, e);
+        }
+	
 
         private class GroupDataSource : DataSourceControl
         {

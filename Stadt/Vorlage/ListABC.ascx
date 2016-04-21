@@ -25,19 +25,18 @@
 
 
  <%-- Script für Formatierung des Schnellzugriffs (nicht verwendete Buchstaben ausschließen)  --%>
-
-<script type="text/javascript">
-$(document).ready(function() {
+<st:Javascript runat="server">
+Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function() {
     $("a.Schnellzugr3").each(function() {
         // href ist z.B. "#anchorW" das kann auch als jquery id-selektor verwendet werden.
         // hier wird also geprüft, ob der als href angegebene anchor auch existiert.
-        this.attr("href");
+        var href = $(this).attr("href");
         if ($(href).length == 0) {
-            this.addClass("unbenutzt");
+            $(this).addClass("unbenutzt");
         }
     });
 });
-</script>
+</st:Javascript>
 
 
 

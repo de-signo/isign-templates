@@ -79,33 +79,54 @@
 
 <%-- -------------------- Tastatur ------------------------ --%>
 <div class="userinput">
+
+
     <%-- Keyboard --%>
-    <st:Keyboard runat="server" TextBoxID="txtFind" CssClass="keyboard" Characters="1234567890" />
+    <!--  ----------- Zahlenreihe -----------   -->
+    <div class="userinput1">
+         <st:Keyboard runat="server" TextBoxID="txtFind" CssClass="keyboard" Characters="1234567890" />
+    </div>
+
     <%
     var opt = (string)StyleInstance["options"].Value;
     switch (opt)
     {
         case "abc":
              %>
-    <st:Keyboard runat="server" TextBoxID="txtFind" CssClass="keyboard" Characters="ABCDEFGHIJ" />
-    <st:Keyboard runat="server" TextBoxID="txtFind" CssClass="keyboard" Characters="KLMNOPQRST" />
-    <st:Keyboard runat="server" TextBoxID="txtFind" CssClass="keyboard" Characters="UVWXYZÄÖÜß" />
+
+    <!--  ----------- ABC Version -----------   -->
+    <div class="userinput2">
+           <st:Keyboard runat="server" TextBoxID="txtFind" CssClass="keyboard" Characters="ABCDEFGHIJ" />
+           <st:Keyboard runat="server" TextBoxID="txtFind" CssClass="keyboard" Characters="KLMNOPQRST" />
+           <st:Keyboard runat="server" TextBoxID="txtFind" CssClass="keyboard" Characters="UVWXYZÄÖÜß" />
+    </div>
+
         <%  break;
         case "qwertz":
         default:
             %>
-    <st:Keyboard runat="server" TextBoxID="txtFind" CssClass="keyboard" Characters="QWERTZUIOPÜ" />
-    <st:Keyboard runat="server" TextBoxID="txtFind" CssClass="keyboard" Characters="ASDFGHJKLÖÄ" />
-    <st:Keyboard runat="server" TextBoxID="txtFind" CssClass="keyboard" Characters="YXCVBNM" />
+    <!--  ----------- Qwertz Version -----------   -->
+    <div class="userinput3">
+          <st:Keyboard runat="server" TextBoxID="txtFind" CssClass="keyboard3" Characters="QWERTZUIOPÜ" />
+          <st:Keyboard runat="server" TextBoxID="txtFind" CssClass="keyboard3" Characters="ASDFGHJKLÖÄ" />
+          <st:Keyboard runat="server" TextBoxID="txtFind" CssClass="keyboard3" Characters="YXCVBNM" />
+    </div>
+
         <%  break;
     } %>
-    <st:Keyboard runat="server" TextBoxID="txtFind" CssClass="keyboard tastenreihe5" Characters="- &#13;">
-        <ButtonStyles>
-            <st:ButtonStyle Character=" " CssClass="key_space" />
-            <st:ButtonStyle Character="&#13;" CssClass="key_del" Text="Entf" />
-        </ButtonStyles>
-    </st:Keyboard>
+
+    <!--  ----------- Tastereihe 5 unten -----------   -->
+    <div class="userinput5">
+           <st:Keyboard runat="server" TextBoxID="txtFind" CssClass="keyboard" Characters="- &#13;">
+               <ButtonStyles>
+                   <st:ButtonStyle Character=" " CssClass="key_space" />
+                   <st:ButtonStyle Character="&#13;" CssClass="key_del" Text="Entf" />
+               </ButtonStyles>
+           </st:Keyboard>
+    </div>
+
 </div>
+
 
 <div class="resultspace">                                  <!--  ----------- Ergebnisanzeige -----------   -->
     <iss:dataviewi runat="server" id="dataView" autofetch="true" cssclass="results">

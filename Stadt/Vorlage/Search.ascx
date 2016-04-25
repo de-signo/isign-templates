@@ -51,7 +51,7 @@
 
 
 <%-- Header --%>
-<div class="hl1">                                             <!--  ---- Datum u. Uhrzeit ----   -->
+<div class="hl1">                                             <!--  ----- Datum u. Uhrzeit -----   -->
     <h2 runat="server" id="date" class="datum2"></h2>
     <h2><span runat="server" id="time" class="zeit2"></span> Uhr</h2>
     <st:DateTimeExtender runat="server" ID="dteDate" TargetControlID="date" Format="dddd, dd.MM.yyyy" UpdateInterval="60000000" />       <!--  ori: 60000 ----   -->
@@ -144,5 +144,10 @@
         </div>
        </ItemTemplate>
     </iss:dataviewi>
+
+</div>
+
+<div class="hl2">
+    <asp:LinkButton runat="server" CssClass="start" Text="Startseite" CommandName="Reset" />
 
 </div>

@@ -216,14 +216,14 @@ form
 }
 .hl2>h1
 {
-    color: #605D5C;
+    color:rgb(96,93,92);    /* #605D5C; */
     font-size: 32px;                                    /* +++ Schriftgröße "Ihr Suchbereich" , orig: 40px */
     line-height: 40px;
     margin: 54px 0 0 66px;
 }
 .hl2>h2
 {
-    color:rgb(127,127,127);           /* Orig: color: #7f7f7f; */
+    color:rgb(96,93,92);           /* v2:        Orig: color: #7f7f7f; */
     font-size: 45px;
     line-height: 45px;
     margin: 16px 0 0 66px;
@@ -420,7 +420,7 @@ form
     font-size: 46px;
     line-height: 50px;
     margin: 0 0 8px 0;
-    color: #7f7f7f;
+    color:rgb(96,93,92);     /* Ori: color: #7f7f7f; */
 }
 .dd1 h3
 {
@@ -435,7 +435,7 @@ form
     font-size: 32px;
     line-height: 40px;
     margin: 0 0 12px 0;
-    color: #7f7f7f;
+    color:rgb(96,93,92);     /* Ori: color: #7f7f7f; */
 }
 
 .dd1 p.d2
@@ -482,12 +482,12 @@ form
 
 .d3
 {
-    /* background-color:yellow; */
+
     margin-top: 20px;
-           /*      padding-bottom: 50px;     */
-    font-size: 24px;        /*      22px;     */
-    /* height: 160px; */
-    color: #605D5C;   /* Ori: color: #605D5C; */
+
+    font-size: 20px;
+
+    color: #605D5C;
 
 }
 
@@ -698,8 +698,8 @@ form
 
 .Schnellzugr3
 {
-    color:rgb(80,80,80);    /*   +++ OK ! */
-    background-color:rgb(230,230,230);         /*   +++ OK ! */
+    color:rgb(230,230,230);    /*   +++ OK !           80,80,80 */
+    background-color:rgb(80,80,80);         /*   +++ OK ! 230,230,230*/
     font-size:24px;              /*   +++ OK ! */
     margin:0 4px 0 0;            /*   +++ OK ! */
     padding-top: 6px;
@@ -710,7 +710,11 @@ form
     height: 32px;
 }
 
-
+.unbenutzt    
+{
+   color:rgb(180,180,180);
+   background-color:rgb(230,230,230);
+}
 
 .groups #anchorB     /* "B" Buchstabe li. oben über Auflistung */
 {

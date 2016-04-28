@@ -82,7 +82,7 @@ Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function() {
 <%-- Schnellzugriff --%>              <!-- -------------- Schnellzugriff ----------------- -->
 <ul class="Schnellzugr">
         <% for (char a = 'A'; a <= 'Z'; a++) { %>
-           <li class="Schnellzugr2"> <a href="#anchor<%= a %>"  class="Schnellzugr3"> <%= a %> </a> </li>
+           <li class="Schnellzugr2"> <a href="#anchor<%= a %>"  class="Schnellzugr3"></a> </li>
         <% } %>
 </ul>
 
@@ -121,7 +121,7 @@ Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function() {
 <%-- Schnellzugriff --%>              <!-- -------------- Schnellzugriff ----------------- -->
 <ul class="Schnellzugr">
         <% for (char a = 'A'; a <= 'Z'; a++) { %>
-           <li class="Schnellzugr2"> <a href="#anchor<%= a %>"  class="Schnellzugr3"> <%= a %> </a> </li>
+           <li class="Schnellzugr2"> <a href="#anchor<%= a %>"  class="Schnellzugr3"></a> </li>
         <% } %>
 </ul>
 

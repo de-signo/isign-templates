@@ -37,6 +37,22 @@ namespace Stolltec.Forms.Show
 
             return (IStyleControl)control;
         }
+	
+        char GetGroup(string value) {
+            var first = Char.ToUpperInvariant(String.IsNullOrEmpty(fieldValue) ? ' ' : fieldValue[0]);
+
+            if (first == 'Ä')
+                first = 'A';
+            else if (first == 'Ö')
+                first = 'O';
+            else if (first == 'Ü')
+                first = 'U';
+            else if (first == 'ß')
+                first = 'S';
+
+            return first;
+        }
+	
         protected override IEnumerable GetData()
         {
             var key = GroupByField;
@@ -53,7 +69,7 @@ namespace Stolltec.Forms.Show
             // group data
             var grouped = (from x in baseData.Cast<object>()
                            let fieldValue = DataBinder.Eval(x, field).ToString()
-                           let groupBy = String.IsNullOrEmpty(fieldValue) ? ' ' : fieldValue[0]
+                           let groupBy = GetGroup(fieldValue)
                            group x by groupBy into y
                            select y).ToArray();
             return grouped;

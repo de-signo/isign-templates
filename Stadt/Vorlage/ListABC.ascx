@@ -35,6 +35,10 @@ Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function() {
             $(this).addClass("unbenutzt");
         }
     });
+    
+    $("#ToggleHandicap").click(function() {
+	$(document.body).toggleClass("handicapped");
+    });
 });
 </st:Javascript>
 
@@ -80,7 +84,7 @@ Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function() {
 
 
 <%-- Schnellzugriff --%>              <!-- -------------- Schnellzugriff ----------------- -->
-<ul class="Schnellzugr">
+<ul class="Schnellzugr handicap-only">
         <% for (char a = 'A'; a <= 'Z'; a++) { %>
            <li class="Schnellzugr2"> <a href="#anchor<%= a %>"  class="Schnellzugr3"></a> </li>
         <% } %>
@@ -125,6 +129,8 @@ Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function() {
         <% } %>
 </ul>
 
+
+<a id="ToggleHandicap">Rollstuhlfahrer</a>
 
 <div class="fl1">                  <!-- -------------- Hand ----------------- -->
     <div class="handl">

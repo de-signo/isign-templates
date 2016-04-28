@@ -735,3 +735,12 @@ form
    /* color:rgb(180,180,180);
    background-color:rgb(230,230,230);   */
 }
+
+
+/* show .handicap-only only in handicapped mode */
+.handicap-only {
+    display: none;
+}
+.handicapped .handicap-only {
+    display: inherit;
+}

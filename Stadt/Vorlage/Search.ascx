@@ -131,10 +131,11 @@
 <div class="resultspace">                                  <!--  ----------- Ergebnisanzeige -----------   -->
     <iss:dataviewi runat="server" id="dataView" autofetch="true" cssclass="results">
        <LayoutTemplate>
-            <div runat="server" id="itemPlaceholder" /> <!-- ---temp: Platzhalter resultspace (hier: id=itemPlaceholder) ---   -->
+            <div runat="server" id="itemPlaceholder" />       <!-- ---temp: Platzhalter resultspace (hier: id=itemPlaceholder) ---   -->
        </LayoutTemplate>
        <ItemTemplate>
         <div runat="server" id="itemTemplate">
+
         <div onclick="handleSelect(this)">
             <input type="hidden" sys:value="{{_KEY}}" />
             <div>
@@ -144,10 +145,5 @@
         </div>
        </ItemTemplate>
     </iss:dataviewi>
-
-</div>
-
-<div class="hl2">
-    <asp:LinkButton runat="server" CssClass="start" Text="Startseite" CommandName="Reset" />
 
 </div>

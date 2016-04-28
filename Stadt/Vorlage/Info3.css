@@ -27,6 +27,7 @@ h1, h2, h3, p
     padding: 0;
     margin: 0;
 }
+
 a.start
 {
     display: block;
@@ -38,6 +39,7 @@ a.start
     font-size: 45px;
     line-height: 62px;
     text-align: center;
+    border-radius: 7px;
 }
 
 a.back
@@ -48,6 +50,7 @@ a.back
     background: url(btn_back.png) no-repeat center;
     text-decoration: none;
     font-size:0;
+    border-radius: 7px;
 }
 
 /* top */
@@ -67,6 +70,7 @@ form
 {
     height: 100%;
 }
+
 .top>div.lt0
 {
     height: 25px;
@@ -91,6 +95,7 @@ form
     /* height: 258px; */
     /* padding: 0 0 0 0;  */   /* Orig: padding: 45px 0 0 0;  */
 }
+
 .hm1>h2
 {
     padding: 0 0 30px 0;
@@ -118,9 +123,6 @@ form
 {
     display: block;
     text-decoration: none;
-          /*  Ori:  background: url(btn_category.png) no-repeat center; */
-    /* background-color:red; */
-
     background: linear-gradient(to bottom, rgb(139,177,222), rgb(0,123,192));
     border-radius: 15px;
 
@@ -139,12 +141,8 @@ form
     display: block;
     text-decoration: none;
           /*  Ori:  background: url(btn_category.png) no-repeat center; */
-    /* background-color:red; */
-
     background: linear-gradient(to bottom, rgb(139,177,222), rgb(0,123,192));
     border-radius: 15px;
-
-
     height: 74px;
     width: 574px;
     line-height: 72px;
@@ -153,11 +151,6 @@ form
     margin: 0 auto 41px auto;
     text-align: center;
 }
-
-
-
-
-
 
 .dm1 a>em
 {
@@ -221,13 +214,15 @@ form
     line-height: 40px;
     margin: 54px 0 0 66px;
 }
+
 .hl2>h2
 {
     color:rgb(96,93,92);           /* v2:        Orig: color: #7f7f7f; */
     font-size: 45px;
-    line-height: 45px;
+    line-height: 50px;
     margin: 16px 0 0 66px;
 }
+
 .hl2>h2 em
 {
     text-decoration: none;
@@ -242,10 +237,10 @@ form
     top:79px;
 }
 
-.dl
+.dl                                         /* Bereich Auflistung */
 {
-    margin: 0 80px 0 66px;
-    height: 1265px;
+    margin: 30px 80px 30px 66px;           /* Alt:   0 80px 50px 66px */
+    height: 1130px;
 }
 
 .dl>div
@@ -264,7 +259,7 @@ form
     overflow: hidden;
            /* Ori:  height: 96px;     width: 823px;         */
            /* Ori: background: url(btn_list.png) no-repeat center; */
-    margin-bottom: 19px;
+
 }
 
 .dl .item               /* +++ Neu */
@@ -272,6 +267,7 @@ form
     background: linear-gradient(to bottom, rgb(139,177,222), rgb(0,123,192));
     border-radius: 15px;
     height: 96px;
+        margin-bottom: 19px;
 }
 
 
@@ -356,15 +352,15 @@ form
 .fl1>a
 {
     position: absolute;
-    right: 80px;            /* Ori: 120px; */
+    right: 80px;
     bottom: 85px;
 }
 
 .fl1 .handl
 {
     position: absolute;
-    left: 169px;
-    top: 1750px;             /* Ori: 1711px; */
+    left: 905px;
+    top: 1400px;
     width: 200px;
     height: 120px;
 }
@@ -457,7 +453,8 @@ form
 {   margin-top: 20px;
     height: 753px;                 /* Ori: height: 764px; */
 }
-.dd2>img
+
+.dd2>img                              /* Lageplan: vorgegebene Abmessungen --  jeweils ANPASSEN !!! */
 {
     width: 1080px;
     height: 753px;            /* Ori:           alt:  height: 764px; */
@@ -470,6 +467,7 @@ form
     margin-top: 162px;              /* Ori: margin-top: 262px;   */
     float:right;
 }
+
 .fd1 .handl
 {
     float: left;
@@ -593,7 +591,8 @@ form
 
 .userinput3                                            /* ------ Tastatur  Quertz Bereich ------ */
 {
-     text-align: center;
+    margin-left: 25px;
+    text-align: center;
 }
 
 
@@ -660,21 +659,32 @@ form
 
 .resultspace
 {
-     background-color:rgb(255,255,220);         /* Test */
-     margin:40px 0 40px 0;
+     margin:50px 0 40px 0;
      text-align:center;
-     color:blue;
-     /* width: 500px; */
-     height: 230px;
+     /* width: 500px;    height: 230px;  */
+
 }
 
-#itemPlaceholder
-{    /*               Test
-     color:blue;
-     font-size:45px;
-     background-color:rgb(255,80,255);
-     */
+.results div>div
+{
+     margin:0 0 18px 80px;
+     font-size: 28px;
+     width: 920px;
+     height: 36px;
+     background-color: rgb(240, 240, 240);
+     border: 2px solid rgb(170,170,170);
+     border-radius: 7px;
+     padding-top:3px;
 }
+
+.results span
+{
+     color: rgb(50,50,50);
+
+}
+
+
+
 
 .start_Search
 {
@@ -687,36 +697,47 @@ form
 
 .Schnellzugr
 {
-          margin: 20px 0 0 69px;     /*   +++ OK !   66*/
+          margin: 20px 170px 0 69px;     /*   +++ OK !   195*/
 }
 
 .Schnellzugr2
 {
-           display:inline;              /*   +++ OK ! */
+           display:inline;
 
 }
 
 .Schnellzugr3
 {
-    color:rgb(230,230,230);    /*   +++ OK !           80,80,80 */
-    background-color:rgb(80,80,80);         /*   +++ OK ! 230,230,230*/
-    font-size:24px;              /*   +++ OK ! */
-    margin:0 4px 0 0;            /*   +++ OK ! */
-    padding-top: 6px;
+    color:rgb(230,230,230);
+     background: rgb(140,140,140);                                      /* background: rgb(140,140,140);  */
+           /* seltsam: NICHT überschreibar !    background: linear-gradient(to bottom, rgb(139,177,222), rgb(0,123,192));  */
+     border-radius: 5px;
+
+
+   /*  background-color:rgb(80,80,80); */
+    font-size:44px;
+    font-weight:bold;
+    margin:0 9px 5px 0;
+    padding-top: 1px;
     text-align:center;
-    width:40px;               /*     width:40px;  */                /*   funkt. nicht */
     display: inline-block;      /* !! Tasten feste Größe zuweisbar !! */
-    width: 23px;
-    height: 32px;
+    width: 50px;
+    height: 50px;
 }
 
-.unbenutzt    
+
+
+.unbenutzt
 {
-   color:rgb(180,180,180);
-   background-color:rgb(230,230,230);
+   color:rgb(210,210,210);
+   background-color:rgb(235,235,235);
+   /* display: none; */
+   /* color:rgb(180,180,180);
+   background-color:rgb(230,230,230);   */
 }
 
-.groups #anchorB     /* "B" Buchstabe li. oben über Auflistung */
+.groups a     /* Anker-Buchstaben li. oben über Auflistung */
 {
-   color:rgb(255,255,255);     /* "unsichtbar" machen */
+   display: none;     /* "unsichtbar" machen */
+
 }

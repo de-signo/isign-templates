@@ -79,6 +79,13 @@ Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function() {
 
 
 
+<%-- Schnellzugriff --%>              <!-- -------------- Schnellzugriff ----------------- -->
+<ul class="Schnellzugr">
+        <% for (char a = 'A'; a <= 'Z'; a++) { %>
+           <li class="Schnellzugr2"> <a href="#anchor<%= a %>"  class="Schnellzugr3"> <%= a %> </a> </li>
+        <% } %>
+</ul>
+
 
 
 
@@ -118,8 +125,9 @@ Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function() {
         <% } %>
 </ul>
 
-<div class="fl1">
-    <div class="handl">                        <!-- -------------- Hand ----------------- -->
+
+<div class="fl1">                  <!-- -------------- Hand ----------------- -->
+    <div class="handl">
         <img id="circles" runat="server" class="ci" src="circlei2.png"/>
         <img id="circlel" runat="server" class="co" src="circleo2.png"/>
         <img id="hand" runat="server" class="hand" src="hand2.png" />
@@ -147,7 +155,4 @@ Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function() {
             </Animations>
         </ajax:AnimationExtender>
     </div>
-
-    <asp:LinkButton runat="server" CssClass="start" Text="Startseite" CommandName="Reset" />
-
 </div>

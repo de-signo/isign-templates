@@ -39,7 +39,7 @@ namespace Stolltec.Forms.Show
         }
 	
         char GetGroup(string value) {
-            var first = Char.ToUpperInvariant(String.IsNullOrEmpty(fieldValue) ? ' ' : fieldValue[0]);
+            var first = Char.ToUpperInvariant(String.IsNullOrEmpty(value) ? ' ' : value[0]);
 
             if (first == 'Ä')
                 first = 'A';

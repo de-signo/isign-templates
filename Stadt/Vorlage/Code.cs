@@ -184,7 +184,7 @@ namespace Stolltec.Forms.Show
                         var container = ctl.BindingContainer as IDataItemContainer;
                         var dataItem = container.DataItem as IGrouping<char, object>;
                         var key = dataItem.Key;
-                        ctl.Text = String.Format(@"<a id=""anchor{0}"">{0}</a>", key);
+                        ctl.Text = String.Format(@"<a id=""anchor{0}""></a>", key);
                     };
                     li.Controls.Add(a);
 

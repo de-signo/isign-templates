@@ -188,9 +188,14 @@ namespace Stolltec.Forms.Show
                     };
                     li.Controls.Add(a);
 
-                    var list = LoadControl("ItemList.ascx") as ItemListBase;
+                    var list = LoadControl("ItemList.ascx");
+                    if (list == null)
+                        throw new ApplicationException("Could not load ItemList.ascx");
+                    var listBase = list as ItemListBase;
+                    if (listBase == null)
+                        throw new ApplicationException(String.Format("{0}(ItemList.ascx) does not inherit ItemListBase", list.GetType()));
                     list.ID = "itemList";
-                    list.DataSourceID = MyRepeater.GroupDataSourceID;
+                    listBase.DataSourceID = MyRepeater.GroupDataSourceID;
                     li.Controls.Add(list);
                 })
             };

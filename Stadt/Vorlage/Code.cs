@@ -10,11 +10,6 @@ using System.Web.UI.WebControls;
 namespace Stolltec.Forms.Show
 {
 
-    partial class ItemListBase : UserControl
-    {
-        public virtual string DataSourceID {get;set;}
-    }
-
     [ParseChildren(true)]
     [PersistChildren(false)]
     public class MyRepeater : Repeater

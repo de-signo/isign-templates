@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" ClassName="ItemList" CodeFile="Code.cs" Inherits="Stolltec.Forms.Show.ItemListBase" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" ClassName="ItemList" CodeFile="ItemList.cs" Inherits="Stolltec.Forms.Show.ItemListBase" %>
 <%@ Register TagPrefix="iss" Namespace="ISS.Web.UI" Assembly="ISS.Web" %>
 <%@ Register Assembly="Stolltec.Forms.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=9b480668faf77978"
     Namespace="Stolltec.Forms.Show" TagPrefix="st" %>

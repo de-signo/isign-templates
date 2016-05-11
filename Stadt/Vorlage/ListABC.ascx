@@ -20,29 +20,25 @@
                 var el = document.getElementById('" + divScroll.ClientID + @"');
                 if (el) el.scrollTop = 575;
                 });", true);
+
+        // Script für Formatierung des Schnellzugriffs (nicht verwendete Buchstaben ausschließen) 
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "anchor",
+            @"Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function() {
+                $(""a.Schnellzugr3"").each(function() {" +
+                    // href ist z.B. ""#anchorW"" das kann auch als jquery id-selektor verwendet werden.
+                    // hier wird also geprüft, ob der als href angegebene anchor auch existiert.
+                    @"var href = $(this).attr(""href"");
+                    if ($(href).length == 0) {
+                        $(this).addClass(""unbenutzt"");
+                    }
+                });
+    
+                $(""#ToggleHandicap"").click(function() {
+	            $(document.body).toggleClass(""handicapped"");
+                });
+            });", true);
     }
 </script>
-
-
- <%-- Script für Formatierung des Schnellzugriffs (nicht verwendete Buchstaben ausschließen)  --%>
-<st:Javascript runat="server">
-Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function() {
-    $("a.Schnellzugr3").each(function() {
-        // href ist z.B. "#anchorW" das kann auch als jquery id-selektor verwendet werden.
-        // hier wird also geprüft, ob der als href angegebene anchor auch existiert.
-        var href = $(this).attr("href");
-        if ($(href).length == 0) {
-            $(this).addClass("unbenutzt");
-        }
-    });
-    
-    $("#ToggleHandicap").click(function() {
-	$(document.body).toggleClass("handicapped");
-    });
-});
-</st:Javascript>
-
-
 
 
 <st:Counter runat="server" Visible="false">

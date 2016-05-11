@@ -183,14 +183,16 @@ namespace Stolltec.Forms.Show
                     };
                     li.Controls.Add(a);
 
-                    var list = LoadControl("ItemList.ascx");
+                    Control list = LoadControl("ItemList.ascx");
                     if (list == null)
                         throw new ApplicationException("Could not load ItemList.ascx");
-                    var listBase = list as ItemListBase;
-                    if (listBase == null)
-                        throw new ApplicationException(String.Format("{0}(ItemList.ascx) does not inherit ItemListBase", list.GetType()));
+
+                    Type type = list.GetType();
+                    var prop = type.GetProperty("DataSourceID");
+                    if (prop == null)
+                        throw new ApplicationException(String.Format("{0}(ItemList.ascx) does no have a DataSourceID property", list.GetType()));
                     list.ID = "itemList";
-                    listBase.DataSourceID = MyRepeater.GroupDataSourceID;
+                    prop.SetMethod.Invoke(list, new[] { MyRepeater.GroupDataSourceID });
                     li.Controls.Add(list);
                 })
             };

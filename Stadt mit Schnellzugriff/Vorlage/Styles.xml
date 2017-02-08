@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<StyleList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://stollsoft.de/iSign/v2/Content/Forms/Styles">
+
+
+  <style key="Stadt_top"
+          file="Top.ascx"
+         interactive="true" target="Info 3.0" preview="preview.png">
+    <names>
+      <name culture="de">Stadt</name>
+    </names>
+    <fields>
+      <field key="views">
+        <names>
+          <name>Ansichten</name>
+        </names>
+        <content_class type="Views" />
+      </field>
+    </fields>
+  </style>
+
+  <style key="Stadt_main"
+          file="Main.ascx"
+         interactive="true" target="Info 3.0">
+    <names>
+      <name culture="de">Startseite / Kategorien</name>
+    </names>
+    <parentStyle>Stadt_top</parentStyle>
+    <fields>
+    
+      <field key="source">
+        <names>
+          <name>Datenquelle</name>
+        </names>
+        <content_class type="DataSource" />
+      </field>
+      <field key="id">
+        <names>
+          <name>Kategorie ID</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+
+      </field>
+      <field key="name">
+        <names>
+          <name>Name</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="Html" />
+      </field>
+      
+      <field key="options">
+        <names>
+          <name>Optionen</name>
+        </names>
+         <content_class type="TextChoose">
+          <text key="none">Kein Suchfeld</text>
+          <text key="search">Mit Suchfeld</text>
+        </content_class>
+      </field>
+    </fields>
+  </style>
+  
+  <style key="Stadt_search"
+          file="Search.ascx"
+         interactive="true" target="Info 3.0">
+    <names>
+      <name culture="de">Suche</name>
+    </names>
+    <parentStyle>Stadt_top</parentStyle>
+    <fields>
+      <field key="view_key">
+        <names>
+          <name>Ansichtsname</name>
+        </names>
+        <content_class type="TextFree" bind="Fixed" defaultValue="search" />
+      </field>
+      <field key="source">
+        <names>
+          <name>Datenquelle</name>
+        </names>
+        <content_class type="DataSource" />
+      </field>
+      <field key="id">
+        <names>
+          <name>Kategorie ID</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+      <field key="name">
+        <names>
+          <name>Name</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="Html" />
+      </field>
+      <field key="options">
+        <names>
+          <name>Optionen</name>
+        </names>
+         <content_class type="TextChoose">
+          <text key="abc">ABC Tastatur</text>
+          <text key="qwertz">QWERTZ Tastatur</text>
+        </content_class>
+      </field>
+    </fields>
+  </style>
+  <style key="Stadt_list"
+         file="List.ascx"
+        interactive="true" target="Info 3.0">
+    <names>
+      <name culture="de">Listenansicht</name>
+    </names>
+    <parentStyle>Stadt_top</parentStyle>
+    <fields>
+      <field key="view_key">
+        <names>
+          <name>Ansichtsname</name>
+        </names>
+        <content_class type="TextFree" bind="Fixed" defaultValue="list" />
+      </field>
+      <field key="source">
+        <names>
+          <name>Datenquelle</name>
+        </names>
+        <content_class type="DataSource" />
+      </field>
+      <field key="category">
+        <names>
+          <name>Kategorie</name>
+        </names>
+        <content_class bind="ViewParameter" type="Html"/>
+      </field>
+      <field key="id">
+        <names>
+          <name>Element ID</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+      <field key="term1">
+        <names>
+          <name>Begriff Zeile 1</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+
+      </field>
+      <field key="term2">
+        <names>
+          <name>Begriff Zeile 2</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+      <field key="house">
+        <names>
+          <name>Haus</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+      <field key="level">
+        <names>
+          <name>Ebene</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+      <field key="entrance">
+        <names>
+          <name>Eingang</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+    </fields>
+  </style>
+  <style key="Stadt_list_abc"
+         file="ListABC.ascx"
+        interactive="true" target="Info 3.0">
+    <names>
+      <name culture="de">Listenansicht mit Schnellzugriff</name>
+    </names>
+    <parentStyle>Stadt_top</parentStyle>
+    <fields>
+      <field key="view_key">
+        <names>
+          <name>Ansichtsname</name>
+        </names>
+        <content_class type="TextFree" bind="Fixed" defaultValue="list" />
+      </field>
+      <field key="source">
+        <names>
+          <name>Datenquelle</name>
+        </names>
+        <content_class type="DataSource" />
+      </field>
+      <field key="category">
+        <names>
+          <name>Kategorie</name>
+        </names>
+        <content_class bind="ViewParameter" type="Html"/>
+      </field>
+      <field key="id">
+        <names>
+          <name>Element ID</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+      <field key="term1">
+        <names>
+          <name>Begriff Zeile 1</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+
+      </field>
+      <field key="term2">
+        <names>
+          <name>Begriff Zeile 2</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+      <field key="house">
+        <names>
+          <name>Haus</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+      <field key="level">
+        <names>
+          <name>Ebene</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+      <field key="entrance">
+        <names>
+          <name>Eingang</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+    </fields>
+  </style>
+  <style key="Stadt_details"
+        file="Details.ascx"
+       interactive="true" target="Info 3.0">
+    <names>
+      <name culture="de">Detailansicht</name>
+    </names>
+    <parentStyle>Stadt_top</parentStyle>
+    <fields>
+      <field key="view_key">
+        <names>
+          <name>Ansichtsname</name>
+        </names>
+        <content_class type="TextFree" bind="Fixed" defaultValue="details" />
+      </field>
+      <field key="source">
+        <names>
+          <name>Datenquelle</name>
+        </names>
+        <content_class type="DataSource" />
+      </field>
+      <field key="id">
+        <names>
+          <name>ID</name>
+        </names>
+        <content_class bind="ViewParameter" type="TextFree"/>
+      </field>
+      <field key="category">
+        <names>
+          <name>Kategorie</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="Html"/>
+      </field>
+      <field key="term1">
+        <names>
+          <name>Begriff Zeile 1</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+
+      </field>
+      <field key="term2">
+        <names>
+          <name>Begriff Zeile 2</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+
+      </field>
+      <field key="info">
+        <names>
+          <name>Info</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+
+      </field>
+      <field key="house">
+        <names>
+          <name>Haus</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+      <field key="level">
+        <names>
+          <name>Ebene</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+      <field key="entrance">
+        <names>
+          <name>Eingang</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+      <field key="phone">
+        <names>
+          <name>Telefon</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+      <field key="email">
+        <names>
+          <name>E-Mail</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+      <field key="map">
+        <names>
+          <name>Lageplan</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="PictureRef" />
+      </field>
+    </fields>
+  </style>
+</StyleList>

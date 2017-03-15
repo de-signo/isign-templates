@@ -1,9 +1,7 @@
 <%@ Control Language="C#" AutoEventWireup="true" Inherits="Stolltec.Forms.Show.StyleControlBase, Stolltec.Forms.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=9b480668faf77978" %>
-<%@ Register TagPrefix="iss" Namespace="ISS.Web.UI" Assembly="ISS.Web" %>
 <%@ Register Assembly="Stolltec.Forms.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=9b480668faf77978"
     Namespace="Stolltec.Forms.Show" TagPrefix="st" %>
 <%@ Register TagPrefix="my" Src="ItemList.ascx" TagName="ItemList" %>
-<%@ Assembly Name="ISS, Version=4.0.0.0, Culture=neutral, PublicKeyToken=8ea0619067b237be" %>
 <%--
   List.ascx
 

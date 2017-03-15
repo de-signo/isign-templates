@@ -1,8 +1,6 @@
 <%@ Control Language="C#" AutoEventWireup="true" ClassName="Stolltec.Forms.Show.ListABC" CodeFile="Code.cs" Inherits="Stolltec.Forms.Show.ListABCBase"%>
-<%@ Register TagPrefix="iss" Namespace="ISS.Web.UI" Assembly="ISS.Web" %>
 <%@ Register Assembly="Stolltec.Forms.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=9b480668faf77978"
     Namespace="Stolltec.Forms.Show" TagPrefix="st" %>
-<%@ Assembly Name="ISS, Version=4.0.0.0, Culture=neutral, PublicKeyToken=8ea0619067b237be" %>
 
 <%--
   Style for Stolltec.Forms 3.0. (Information)

@@ -1,0 +1,32 @@
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Stadt</title>
+    <link href="@Href("css/Info3.css")" type="text/css" rel="Stylesheet" />
+</head>
+<body>
+    @Scripts.Render("~/Scripts/jquery", "~/Scripts/forms", "js/hammer.min.js", "js/site.js")
+
+    @RenderBody()
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+            ContentController.resumeOnClick(true);
+
+            $("body")
+            .disableSelect()
+            .clickBlanking({ timeout:500 })
+            .autoReset({ timeout: 40000, navigateUrl:"@Html.Raw(Page.Home)", reset: function() {
+              ContentController.isPaused(true);
+            }});
+            
+            var hammertime = new Hammer(document.body, {});
+    });
+    </script>
+</body>
+</html>
+

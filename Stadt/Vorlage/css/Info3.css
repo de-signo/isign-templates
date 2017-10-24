@@ -13,7 +13,7 @@ body
     height: 100%;
 
     /* text */
-    font-family: Arial, Helvetica; sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 
     /* background */
     background-color: white;
@@ -31,26 +31,40 @@ h1, h2, h3, p
 a.start
 {
     display: block;
-    width: 230px;
-    height: 62px;
-    background: url(btn_start.png) no-repeat center;
+    width: 230px;      /*    */
+    height: 120px;      /*  62px;*/
+    background-color: yellow;
+    background: url(HomeButton-2_grau_kl.png) no-repeat center;         /* background: url(btn_start.png) no-repeat center; */
+     /* background-size: 50px 50px;  */
     text-decoration: none;
     color: White;
     font-size: 45px;
     line-height: 62px;
     text-align: center;
-    border-radius: 7px;
+    /* border-radius: 7px; */
 }
 
 a.back
 {
     display: block;
-    width: 62px;
-    height: 62px;
-    background: url(btn_back.png) no-repeat center;
+    width: 100px;
+    height:100px;
+    background: url(Button_Zurueck.png) no-repeat center;
+    background-size: 88px auto;
     text-decoration: none;
     font-size:0;
-    border-radius: 7px;
+}
+
+
+a.rollstuhlfahrer
+{
+    display: block;
+    width: 100px;
+    height:100px;
+    background: url(Button_Rollstuhlfahrer.png) no-repeat center;
+    background-size: 88px auto;
+    text-decoration: none;
+    font-size:0;
 }
 
 /* top */
@@ -88,14 +102,6 @@ form
     background-color: #e5e5e5;
 }
 
-
-.hm1                                 /*  Bereich Header - nicht benötigt?  in der ascx-datei gelöscht */
-{
-    /* position: relative; */
-    /* height: 258px; */
-    /* padding: 0 0 0 0;  */   /* Orig: padding: 45px 0 0 0;  */
-}
-
 .hm1>h2
 {
     padding: 0 0 30px 0;
@@ -117,32 +123,15 @@ form
 .dm1
 {
     position:relative;
-    margin-top: 110px;           /* 56 */
+    margin-top: 65px;
 }
-.dm1 a                                                                /* +++ Buttons */
+.dm1 a
 {
     display: block;
     text-decoration: none;
     background: linear-gradient(to bottom, rgb(139,177,222), rgb(0,123,192));
     border-radius: 15px;
 
-
-    height: 74px;
-    width: 574px;
-    line-height: 72px;
-    font-size: 40px;
-    color: #e5e5e5;
-    margin: 0 auto 41px auto;
-    text-align: center;
-}
-
-.dm1 a                                                                /* +++ Buttons */
-{
-    display: block;
-    text-decoration: none;
-          /*  Ori:  background: url(btn_category.png) no-repeat center; */
-    background: linear-gradient(to bottom, rgb(139,177,222), rgb(0,123,192));
-    border-radius: 15px;
     height: 74px;
     width: 574px;
     line-height: 72px;
@@ -160,6 +149,24 @@ form
     background: url(btn_category_important.png) no-repeat center;
     height: 72px;
     width: 570px;
+}
+
+
+.search_mock
+{
+  list-style: none;
+  background:rgb(230,230,230);
+  height: 70px;
+  border-radius: 15px;
+  border:solid rgb(80,80,80) 2px;
+  color:rgb(100,100,100);
+  font-size: 44px;
+}
+
+.search_mock img
+{
+  width:50px;
+  margin: 10px 0 -7px 0;
 }
 
 .handm
@@ -234,13 +241,13 @@ form
 {
     position: absolute;
     right:80px;              /* Ori:       left: 715px; */
-    top:79px;
+    top:50px;                 /* top:79px; */
 }
 
 .dl                                         /* Bereich Auflistung */
 {
     margin: 30px 80px 30px 66px;           /* Alt:   0 80px 50px 66px */
-    height: 1130px;
+    height: 1030px;                        /* Alt:   1130 */
 }
 
 .dl>div
@@ -257,12 +264,9 @@ form
 {
     display: block;
     overflow: hidden;
-           /* Ori:  height: 96px;     width: 823px;         */
-           /* Ori: background: url(btn_list.png) no-repeat center; */
-
 }
 
-.dl .item               /* +++ Neu */
+.dl .item
 {
     background: linear-gradient(to bottom, rgb(139,177,222), rgb(0,123,192));
     border-radius: 15px;
@@ -291,7 +295,7 @@ form
     font-size:25px;
     line-height: 29px;
     font-weight: normal;
-    color:rgb(255,255,255);           /* +++ Schriftfarbe */
+    color:rgb(255,255,255);
 }
 
 .dl li>div.col1>h3
@@ -299,7 +303,7 @@ form
     font-size:18px;
     line-height: 22px;
     font-weight: normal;
-    color:rgb(255,255,255);           /* +++ Schriftfarbe */
+    color:rgb(255,255,255);
 }
 
 .dl li>div.col2
@@ -359,8 +363,8 @@ form
 .fl1 .handl
 {
     position: absolute;
-    left: 905px;
-    top: 1400px;
+    left: 896px;
+    top: 1520px;
     width: 200px;
     height: 120px;
 }
@@ -397,9 +401,10 @@ form
 
 .dd1
 {
-    height: 385px;                   /* Ori: 315 */
-    margin: 0 130px 0 66px;
+    height: 400px;
+    margin: 80px 290px 0 66px;
 }
+
 .dd1 h1
 {
     font-size: 42px;
@@ -407,17 +412,20 @@ form
     margin: 0 0 19px 0;
     color: #605D5C;
 }
+
 .dd1 h1 em
 {
     font-style:normal;
 }
+
 .dd1 h2
 {
     font-size: 46px;
     line-height: 50px;
     margin: 0 0 8px 0;
-    color:rgb(96,93,92);     /* Ori: color: #7f7f7f; */
+    color:rgb(96,93,92);
 }
+
 .dd1 h3
 {
     font-size: 32px;
@@ -431,7 +439,7 @@ form
     font-size: 32px;
     line-height: 40px;
     margin: 0 0 12px 0;
-    color:rgb(96,93,92);     /* Ori: color: #7f7f7f; */
+    color:rgb(96,93,92);
 }
 
 .dd1 p.d2
@@ -451,20 +459,19 @@ form
 
 .dd2
 {   margin-top: 20px;
-    height: 753px;                 /* Ori: height: 764px; */
+    height: 753px;
 }
 
 .dd2>img                              /* Lageplan: vorgegebene Abmessungen --  jeweils ANPASSEN !!! */
 {
     width: 1080px;
-    height: 753px;            /* Ori:           alt:  height: 764px; */
-    /*  background-color:green;  */
+    height: 753px;
 }
 
 
 .fd1>a
 {
-    margin-top: 162px;              /* Ori: margin-top: 262px;   */
+    margin-top: 162px;
     float:right;
 }
 
@@ -472,7 +479,7 @@ form
 {
     float: left;
     position: relative;
-    margin: 53px 0 0 169px;         /* Ori: margin: 153px 0 0 169px;    */
+    margin: 80px 0 0 169px;
     width: 200px;
     height: 120px;
 }
@@ -489,7 +496,7 @@ form
 
 }
 
-/* =================== main.ascx ============================================================ */
+/* =================== main.cshtml ============================================================ */
 
 
 .datum
@@ -508,63 +515,21 @@ form
     color:rgb(96,93,92);        /* #605d5c = color:rgb(96,93,92); */
 }
 
-
-
-.Datum2
-{
-    padding: 50px 0 0px 65px;
-    font-size: 40px;
-    color: rgb(127,127,127);
-}
-
-
 .Ueberschrift
 {
     color: rgb(38,71,150);
      /* margin: 20px 0 0 100px; */
     padding: 40px 0 40px 0;
               /*     font-family: Arial, Helvetica; sans-serif; */
-    font-size: 60px;
-
+    font-size: 114px;
+    font-weight:bold;
     text-align:center;
 }
 
 .Img1
 {
-  width:1080px;
+  width:100%;
 }
-
-.Img2                              /* Lupe */
-{
-  width:50px;
-  margin: 10px 0 -7px 0;
-}
-
-.Suchfeld
-{
-                       /*   position:absolute; --- nur Testeinstellung! --- */
-                       /*   top:10px; --- nur Testeinstellung! ---              top:0px;   top:780px;          */
-                       /*   left:100px; --- nur Testeinstellung! --- */
-}
-
-
-.Suchfeld2
-{
-   background:rgb(230,230,230);
-   height: 70px;
-   border-radius: 15px;
-   border:solid rgb(80,80,80) 2px;
-
-}
-
-
-.Suchfeld3
-{
-   color:rgb(100,100,100);
-   font-size: 44px;
-}
-
-
 
 
 
@@ -573,6 +538,14 @@ form
 
 .userinput                                            /* ------ Tastaturbreite Alle ------ */
 {
+   height: 475px;
+  /*
+    position:absolute;
+    top:1050px;
+    width:100%;
+        text-align: center;
+        background: rgb(255,255,200);
+   */
                     /*  temporär wieder deaktiviert: margin: 0 50px 0 117px;   PM   */
                   /*   background: rgb(255,255,0);   PM   */
 }
@@ -637,6 +610,7 @@ form
 {
      background-color:rgb(255,255,255);         /* Test */
      text-align:center;
+     margin-bottom:30px;
 }
 
 #ctl08_vc_ctl13_txtFind             /* +++ Textanzeige, innen */
@@ -646,10 +620,10 @@ form
      color: rgb(0,0,0);
      text-align:center;
 
-     width: 842px;
+     width: 938px;         /*  842px; */
      height:70px;
 
-     margin:50px 0 30px 7px;
+     margin:50px 0 0px 7px;     /*  50px 0 30px 7px  */
       border:solid black 2px;
       border-radius:7px;
 }
@@ -660,6 +634,7 @@ form
 .resultspace
 {
      margin:50px 0 40px 0;
+     height: 500px;
      text-align:center;
      /* width: 500px;    height: 230px;  */
 
@@ -667,9 +642,9 @@ form
 
 .results div>div
 {
-     margin:0 0 18px 80px;
+     margin:0 0 18px 73px;                 /* 0 0 18px 80px;  */
      font-size: 28px;
-     width: 920px;
+     width: 938px;
      height: 36px;
      background-color: rgb(240, 240, 240);
      border: 2px solid rgb(170,170,170);
@@ -694,6 +669,43 @@ form
 
 
 /* ------------------ ListABC.ascx ----------------------- */
+
+.linie1
+{
+    width: 100%;
+    height: 12px;
+    margin: 42px 0 48px 0;
+    background:#7f7f7f;                             /* rgb(38,71,150); */
+}
+
+.text1
+{
+   color:rgb(60,60,60);
+   /*  background-color:rgb(235,235,200);        */
+   font-size:24px;
+   margin: 45px 200px 0 69px;
+    /* text-align:center;  */
+}
+
+
+ /*
+.text2
+{
+   color:rgb(80,80,80);
+   font-size:36px;
+   margin: 45px 200px 0 69px;
+}
+ */
+
+
+.text3
+{
+   color:rgb(80,80,80);
+   font-size:46px;
+   margin: 70px 200px 0 69px;
+}
+
+
 
 .Schnellzugr
 {
@@ -737,10 +749,114 @@ form
 }
 
 
+#ToggleHandicap
+{  /*
+   color:rgb(60,60,60);
+   font-size:22px;
+   margin-top:20px;
+   margin-left:69px;
+   padding: 6px 10px 3px 10px;
+
+     background-color: rgb(240, 240, 240);
+     border: 2px solid rgb(170,170,170);
+     border-radius: 7px;
+         width: 100px;
+    height:100px;
+    background: url(Button_Rollstuhlfahrer.png) no-repeat center;
+         background-size: 88px auto;
+    */
+
+}
+
+
+.rollst
+{
+    background-color: rgb(230, 255, 240);
+    width: 150px;
+    height:150px;
+    background: url(Button_Rollstuhlfahrer.png) no-repeat center;
+    background-size: 88px auto;
+
+    position:absolute;  bottom: 97px; left:33px;
+}
+
+
+
+a.start2
+{
+    display: block;                 /*  block  */
+    width: 110px;
+    height: 110px;      /*  62px;*/
+    /* background-color: green; */
+    background: url(HomeButton-2_grau_kl.png) no-repeat center;         /* background: url(btn_start.png) no-repeat center; */
+     /* background-size: 99px 99px; */
+}
+
+
+.position1
+{
+    margin: 0 0 0 25px;
+    position:absolute;  top: 320px; right:45px;
+}
+
+.position2
+{
+    position:absolute;  bottom: 116px; right:45px;
+}
+
+.position3a
+{
+    position:absolute;  top: 335px; right:170px;            /* 160 */
+}
+
+.position3b
+{
+    position:absolute;  top: 330px; right:45px;
+}
+
+.position4a
+{
+    position:absolute;  bottom: 255px; right:170px;            /* 160 */
+}
+
+.position4b
+{
+    position:absolute;  bottom: 250px; right:45px;
+}
+
+
+.position5a
+{
+    margin: 0 0 0 25px;
+    position:absolute;  top: 320px; right:60px;
+}
+
+.position5b
+{
+    margin: 0 0 0 25px;
+    position:absolute;  bottom: 120px; right:60px;
+}
+
+.position6
+{
+    position:absolute;  bottom: 100px; left:45px;                        /* bottom: 250px */
+}
+
+
 /* show .handicap-only only in handicapped mode */
 .handicap-only {
     display: none;
 }
 .handicapped .handicap-only {
-    display: inherit;
+    display: inherit;         /* display: inherit; */
+}
+
+.handicapped #ToggleHandicap
+{
+    display: none;
+}
+
+.abstand1
+{
+    margin-top:200px;
 }

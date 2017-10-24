@@ -1,0 +1,78 @@
+@using Stolltec.Forms.Model
+@{
+    var cat = Request["cat"];
+    var cat_name = Request["name"];
+    var Model = new FormsModel(this);
+    var data = from x in Model.DataSource("source")
+                    where x["cat_id"].ToString() == cat
+                    select x;
+
+    Page.Home = Model.NavigateHome();
+    Layout = "Layout.cshtml";
+}
+
+<h1>@cat_name</h1>
+
+<a href="@Page.Home" class="start2" />
+
+<ul id="divScroll">
+  @{
+  var letters = new List<char>();
+  char? firstChar = null;
+  foreach (var x in data) {
+    <li class="item">
+      @{
+        var c1 = x.Resolved("list_term1").ToString().ToUpper().FirstOrDefault();
+        if (c1 != firstChar) {
+          firstChar = c1;
+          letters.Add(c1);
+          <a id="@("anchor" + c1)"></a>
+        }
+      }
+      <a href="@Model.Navigate("Details.cshtml", new { id = x.Resolved("id") })">
+        <div class="col1">
+          <h2>@x.Resolved("list_term1")</h2>
+          <h3>@x.Resolved("list_term2")</h3>
+        </div>
+        <div class="col2">
+          @x.Resolved("list_house") <br />
+          @x.Resolved("list_level") <br />
+          @x.Resolved("list_entrance")
+	    </div>
+    </a>
+  </li>
+}}
+</ul>
+
+<div class="scrollbar">
+    <div class="scrollup" id="btnUp">
+    </div>
+    <div class="scrolldown" id="btnDown">
+    </div>
+</div>
+
+@if ((string)Model.Style["list_options"].FieldInstance.Value == "anchor") {
+  <ul class="Schnellzugr">
+    @foreach (char a in letters) {
+      <li><a href="@("#anchor" + a)" >@a</a></li>
+    }
+  </ul>
+}
+
+<img id="hand" class="hand" src="hand1.png" />
+
+<a href="@Page.Home" class="start2" />
+
+<script type="text/javascript">
+$(document).ready(function() {
+    var el = $("#divScroll").get(0);
+    if (el) el.scrollTop = 575;
+    
+    var scroll = $("#divScroll").customScroll({
+        up: $("#btnUp"),
+        down: $("#btnDown"),
+        disabledCssClass: "disabled",
+        scrollStep: 500
+    });	
+});
+</script>

@@ -1,0 +1,54 @@
+﻿@using Stolltec.Forms.Model
+@{
+    // Encoding: UTF-8 ÄÖÜ
+    var Model = new FormsModel(this);
+    Page.Home = Model.NavigateHome();
+    Layout = "Layout.cshtml";
+}
+
+<a href="@Page.Home" class="start2">home</a>
+
+<ul class="results"></ul>
+
+<input id="txtFind" />
+
+<div id="keyboard">
+    @{
+        var type = (string)Model.Style["search_options"].FieldInstance.Value;
+        var keyboard = (type == "abc") ? 
+                new string[] { "ABCDEFGHIJ","KLMNOPQRST","UVWXYZÄÖÜß" } : 
+                new string[] { "QWERTZUIOPÜ","ASDFGHJKLÖÄ","YXCVBNM" };
+    }
+    <div>
+         @foreach (var c in "1234567890") { <a role="button">@c</a> }
+    </div>
+    <div>
+        @foreach (var c in keyboard[0]) { <a role="button">@c</a> }
+    </div>
+    <div>
+        @foreach (var c in keyboard[1]) { <a role="button">@c</a> }
+    </div>
+    <div>
+        @foreach (var c in keyboard[2]) { <a role="button">@c</a> }
+    </div>
+    <div>
+        <a role="button">-</a>
+        <a data-key=" " role="button">&nbsp;</a>
+        <a data-key="&#13;" role="button">Entf</a>
+    </div>
+</div>
+
+<a href="@Page.Home" class="start">home</a>
+
+
+<script type="text/javascript">
+$(document).ready(function () {
+
+    $("ul.results").findResult({
+        url: "@Html.Raw(Model.Navigate("SearchResults.cshtml", new { findValue  = "~find~", type=type }))",
+        param: { find: "#txtFind" }
+    });
+
+    $("#keyboard a").keyboard({ textbox: "#txtFind" });
+});
+</script>

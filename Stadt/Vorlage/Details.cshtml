@@ -10,40 +10,40 @@
     Layout = "Layout.cshtml";
 }
 
+<div class="detail">
 @if(data == null) {
     <span>Nicht gefunden</span>
 } else {
-    <div class="hd1">
-        <h1>@data.Resolved("cat_name")</h1>
-    </div>
+    <h1>@data.Resolved("cat_name")</h1>
+    
+    <a class="back" href="javascript: window.history.back()">Back</a>
+    <a class="home" href="@Page.Home">Home</a>
 
-    <a class="back" href="javascript: window.history.back()">back</a>
-    <a class="start2" href="@Page.Home">reset</a>
-
-    <div class="dd1">
+    <div class="content">
         <h2>@data.Resolved("detail_term1")</h2>
         <h3>@data.Resolved("detail_term2")</h3>
-        <p class="d1">
+        <p>
             @data.Resolved("detail_house"),
             @data.Resolved("detail_level")
             @data.Resolved("detail_entrance")
         </p>
-        <p class="d2">
+        <p>
             @if (!data.Empty("detail_phone")) {<text>Fon: @data.Resolved("detail_phone")</text>}
             @if (!data.Empty("detail_email")) {<text>E-mail: @data.Resolved("detail_email")</text>}
         </p>
-        <p class="d3">
+        <p>
             @data.Resolved("detail_info")
         </p>
-</div>
+    </div>
 
-<div class="dd2">
-    @if (!data.Empty("detail_map")) {<img src="@data.DataFileHandler("detail_map")" alt="map"/>}
-</div>
+    if (!data.Empty("detail_map")) {<img src="@data.DataFileHandler("detail_map")" alt="map"/>}
 }
 
-<img id="hand" class="hand" src="hand1.png" />
+<footer>
+<img class="hand" src="hand1.png" />
 
 
-<a class="back" href="javascript: window.history.back()">back</a>
-<a class="start2" href="@Page.Home">reset</a>
+<a class="back" href="javascript: window.history.back()">Back</a>
+<a class="home" href="@Page.Home">Home</a>
+</footer>
+</div>

@@ -76,10 +76,53 @@
                     }, 1000* settings.pauseOnStart);
             }
             animateOnce();
-        });
+        });        
+    };
+    
+    $.fn.customScroll = function (options) {
+        var settings = $.extend({
+            // These are the defaults.
+            up: null, /* up button */
+            down: null, /* down button */
+            disabledCssClass: "disabled",
+            scrollStep: 100, /* px */
+            animateTime: 1000 /* ms */
+        }, options);
 
+        var scroll = $(this);
+        var scrollPos = scroll.scrollTop();
+        if (!scrollPos)
+            scrollPos = 0;
         
-    }
+        var obj = {
+            update: function() {
+                var max = scroll.prop("scrollHeight") - scroll.innerHeight();
+                $(settings.up).toggleClass(settings.disabledCssClass, scrollPos <= 0);
+                $(settings.down).toggleClass(settings.disabledCssClass, scrollPos >= max);
+            },
+            doScroll: function(dir) {
+                scrollPos = scrollPos + dir * settings.scrollStep;
+                var max = scroll.prop("scrollHeight") - scroll.innerHeight();
+                if (scrollPos <= 0) {
+                    scrollPos = 0;
+                } else if (scrollPos >= max) {
+                    scrollPos = max;
+                }
+                this.update();
+                scroll.animate({ scrollTop: scrollPos }, settings.animateTime);  
+            }
+        };
+        
+        $(settings.up).click(function() {
+            obj.doScroll(-1);
+        });
+        $(settings.down).click(function() {
+            obj.doScroll(1);
+        });
+            
+        obj.update();
+        return obj;
+    };
 
     
     $.fn.partialView = function (options) {

@@ -8,21 +8,21 @@
     Layout = "Layout.cshtml";
 }
 
+<div class="main">
 <h1>Suchen & Finden</h1>
 
-<img class="Img1" alt="header" src="header1.jpg" />
+<img class="header" alt="header" src="header1.jpg" />
 
-<ul class="dm1">
+<ul>
 @foreach (var x in data) {
     <li>
         <a href="@Model.Navigate("List.cshtml", new { name=x.Resolved("cat_name"), cat = x.Resolved("cat_id") })">@x.Resolved("cat_name")</a>
     </li>
 }
-@Model.Style["cat_options"].FieldInstance.Value
 @if ((string)Model.Style["cat_options"].FieldInstance.Value == "search") {
   <li class="search_mock">
     <a href="@Model.Navigate("Search.cshtml")">
-      <span> Suchen &nbsp;&nbsp;&nbsp;</span>
+      <span> Suchen</span>
       <img alt="Suche" src="Lupe.png" />
     </a>
   </li>
@@ -31,4 +31,7 @@
 }
 </ul>
 
-<img id="hand" class="hand" src="hand1.png" />
+<footer>
+<img class="hand" src="hand1.png" />
+</footer>
+</div>

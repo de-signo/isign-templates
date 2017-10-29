@@ -1,0 +1,193 @@
+﻿/* Encoding: UTF-8 ÄÖÜ */
+
+html { height: 100%;}
+
+body
+{
+	/* fill complete frame (required) */
+    height: 100%;
+	/*overflow:hidden;*/
+    margin: 0; 
+	padding: 0; 
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background-color: white;
+}
+
+h1, h2, h3, p
+{
+    font-weight: normal;
+    text-decoration: none;
+    font-variant: normal;
+    padding: 0;
+    margin: 0;
+}
+
+h1
+{
+    font-size:  67px;
+    line-height: 72px;
+    color: #4E5D6B;
+}
+
+ul {
+    list-style-type: none;
+    padding:0;
+    clear:both;
+}
+li {
+    padding: 3%;
+    margin: 0 auto;
+}
+li>a {
+    display: block;
+    text-decoration: none;
+    background: linear-gradient(to bottom, rgb(139,177,222), rgb(0,123,192));
+    border-radius: 15px;
+    color: #e5e5e5;
+    text-align: center;
+    font-size: 40px;
+    padding: 15px; 
+}
+
+
+a.anchor {
+    background-color:inherit;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    border: 0 none;
+}
+
+a.home, a.back {
+    display:block;
+    height: 99px;
+    width: 99px;
+    margin: 20px;
+    float:right;
+    font-size: 0;
+}
+a.home
+{
+    background: transparent url(home.png) no-repeat center;
+}
+a.back 
+{
+    background: transparent url(back.png) no-repeat center;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+footer .hand 
+{
+    width: 10%;
+    margin-left: 3%;
+}
+
+/* main.cshtml */
+.main>h1 
+{
+    margin: 0 3%;
+    float:left;
+}
+.main img.header {
+    width:100%;
+}
+
+.main li>a
+{
+    height: 44px;
+    line-height: 100%;
+}
+
+
+.main li.search_mock>a
+{
+  background:rgb(230,230,230);
+  height: 40px;
+  line-height: 40px;
+  border:solid rgb(80,80,80) 2px;
+  color:rgb(100,100,100);
+}
+
+.main li.search_mock>a img
+{
+  width:50px;
+  margin: -5px 0 -7px 0;
+}
+
+/* list.cshtml */
+.list>h1 
+{
+    margin: 0 3%;
+    float:left;
+}
+
+.list ul.hooks li 
+{
+    float:left;
+}
+.list ul.hooks li>a
+{
+    width: 48px;
+}
+
+/* search.cshtml */
+.search input
+{
+    display: block;
+    width: 94%;
+    font-size: 40px;
+    margin: 0 auto;
+
+}
+
+.search #keyboard 
+{
+    margin: 0 3%;
+}
+
+.search #keyboard a
+{
+    display: inline-block;
+    text-decoration: none;
+    background: linear-gradient(to bottom, rgb(139,177,222), rgb(0,123,192));
+    border-radius: 15px;
+    color: #e5e5e5;
+    text-align: center;
+    font-size: 25px;
+    line-height: 50px;
+    margin: 5px;
+    width: 50px;
+    height: 50px;
+}
+.search #keyboard a.space
+{
+    width: 200px;
+}
+
+
+
+/* details.cshtml */
+.detail>h1 
+{
+    margin: 0 3%;
+    float:left;
+}
+
+.detail .content 
+{
+    clear:both;
+    margin: 0 3%;
+}
+
+.detail .map 
+{
+    width: 100%;
+}

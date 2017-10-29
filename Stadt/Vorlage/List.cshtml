@@ -11,9 +11,10 @@
     Layout = "Layout.cshtml";
 }
 
+<div class="list">
 <h1>@cat_name</h1>
 
-<a href="@Page.Home" class="start2" />
+<a href="@Page.Home" class="home">Home</a>
 
 <ul id="divScroll">
   @{
@@ -26,7 +27,7 @@
         if (c1 != firstChar) {
           firstChar = c1;
           letters.Add(c1);
-          <a id="@("anchor" + c1)"></a>
+          <a id="@("anchor" + c1)" class="anchor"></a>
         }
       }
       <a href="@Model.Navigate("Details.cshtml", new { id = x.Resolved("id") })">
@@ -52,16 +53,18 @@
 </div>
 
 @if ((string)Model.Style["list_options"].FieldInstance.Value == "anchor") {
-  <ul class="Schnellzugr">
+  <ul class="hooks">
     @foreach (char a in letters) {
-      <li><a href="@("#anchor" + a)" >@a</a></li>
+      <li><a href="@("#anchor" + a)">@a</a></li>
     }
   </ul>
 }
 
-<img id="hand" class="hand" src="hand1.png" />
+<footer>
+<img class="hand" src="hand1.png" />
 
-<a href="@Page.Home" class="start2" />
+<a href="@Page.Home" class="home">Home</a>
+</footer>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -76,3 +79,4 @@ $(document).ready(function() {
     });	
 });
 </script>
+</div>

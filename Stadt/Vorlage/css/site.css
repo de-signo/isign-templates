@@ -5,8 +5,8 @@ html { height: 100%;}
 body
 {
 	/* fill complete frame (required) */
-    height: 100%;
-	/*overflow:hidden;*/
+    height: 100%;  /* height: 1920px; */
+	overflow:hidden;             
     margin: 0; 
 	padding: 0; 
 
@@ -22,24 +22,49 @@ h1, h2, h3, p
     font-variant: normal;
     padding: 0;
     margin: 0;
+    line-height: 1.5em;
+    color: #4E5D6B;
 }
 
 h1
 {
-    font-size:  67px;
+    font-size:  40px;
     line-height: 72px;
-    color: #4E5D6B;
 }
+
+h2
+{
+    font-size:  35px;
+    /* color:red; */
+}
+
+h3
+{
+    font-size:  30px;
+    /* color:blue; */
+}
+
+p
+{
+    font-size:  25px;
+    /* color:rgb(204, 0, 255); */
+}
+
+
+
+
 
 ul {
     list-style-type: none;
     padding:0;
     clear:both;
 }
+
 li {
-    padding: 3%;
+    padding: 2% 10% 3% 10%;
     margin: 0 auto;
 }
+
 li>a {
     display: block;
     text-decoration: none;
@@ -47,8 +72,10 @@ li>a {
     border-radius: 15px;
     color: #e5e5e5;
     text-align: center;
-    font-size: 40px;
-    padding: 15px; 
+    font-size: 48px;
+    padding: 20px 15px 15px 15px;
+    height:100px;
+
 }
 
 
@@ -64,48 +91,195 @@ a.home, a.back {
     display:block;
     height: 99px;
     width: 99px;
-    margin: 20px;
-    float:right;
     font-size: 0;
-}
-a.home
-{
     background: transparent url(home.png) no-repeat center;
+             /* &&& border:solid 1px red; */
 }
+
+
+
 a.back 
 {
     background: transparent url(back.png) no-repeat center;
+    background-size: 88px auto;
+    text-decoration: none;     
 }
 
-footer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+
+a.handicap {
+    display:block;
+    height: 99px;
+    width: 99px;
+    font-size: 0;
+    background: url(Button_Rollstuhlfahrer.png) no-repeat center;
+                /*  &&& border:solid 1px red;  */
+    background-size: 88px auto;
+    text-decoration: none;        
 }
 
-footer .hand 
+.back1
+{   
+    position:absolute; 
+    top: 285px;
+    right: 16%; 
+    height: 99px; 
+    width: 99px; 
+            /* &&& border:solid 6px blue; */
+}
+
+
+.back2
+{   
+    position:absolute; 
+    bottom: 1%;  /*  top: 1500px */
+    right: 16%;
+    height: 99px; 
+    width: 99px; 
+
+            /* border:solid 6px rgb(2, 106, 204); */
+}
+
+.handicap
+{   
+    position:absolute; 
+    bottom: 1%;
+    left: 4%; 
+    height: 99px; 
+    width: 99px; 
+            /* &&& border:solid 6px blue; */
+}
+
+
+.home1
+{   
+    position:absolute; 
+    top: 285px;
+    right: 4%; 
+    height: 99px; 
+    width: 99px; 
+            /* border:solid 6px blue; */
+}
+
+.home2
+{   
+    position:absolute; 
+    bottom: 1%;  /*  top: 1500px */
+    right: 4%;
+    height: 99px; 
+    width: 99px; 
+
+            /* border:solid 6px rgb(2, 106, 204); */
+}
+
+
+
+
+
+.hand {    
+            text-align:center;
+            margin-top: 30px;
+    }
+
+.hand2 {
+
+    position:absolute; 
+    top: 540px;
+    right: 65px;
+}
+
+.hand3 {
+    
+    text-align:center;
+    margin-top: 50px;
+    }
+
+
+.scrollbar                              /* - - - Scrollbar - - - */
 {
-    width: 10%;
-    margin-left: 3%;
+    position:absolute; 
+    top: 800px;
+    right: 5%;
+
+    height: 170px;
+    width: 70px;
+    margin: 0 auto;
+    background: #e5e5e5;
 }
 
-/* main.cshtml */
+.scrollbar .scrollup
+{
+    height: 70px;
+    width: 70px;
+    background-image: url(btn_scrollup.png);
+}
+
+.scrollbar .scrollup.disable_scroll
+{
+    background-image: url(btn_scrollup_d.png);
+}
+
+.scrollbar .scrolldown
+{
+    margin-top: 30px;
+    height: 70px;
+    width: 70px;
+    background-image: url(btn_scrolldown.png);
+}
+.scrollbar .scrolldown.disable_scroll
+{
+    background-image: url(btn_scrolldown_d.png);
+}
+
+
+
+
+
+footer                 /*  ng */
+{   
+    background-color:rgb(255,20,20);
+}
+
+
+
+
+
+
+/* ++++++++++++++  main.cshtml ++++++++++++++ */
 .main>h1 
 {
     margin: 0 3%;
     float:left;
 }
+
 .main img.header {
     width:100%;
+    margin-bottom: 30px;
 }
 
 .main li>a
 {
-    height: 44px;
+    height: 55px;
     line-height: 100%;
+    background: linear-gradient(to bottom, rgb(139,177,222), rgb(0,123,192));
+    
 }
 
+        /*  - - - Farbunterscheidung , nicht anwendbar - - -  */
+        /*
+        .main li:nth-child(2)>a {
+            background: linear-gradient(to bottom, rgb(139,177,222), rgb(207, 254, 0));
+            
+        }
+        */
+
+.Ueberschrift 
+{
+font-size: 110px;
+color:rgb(0, 60, 150);
+text-align:center;
+height:150px;
+padding-top: 16px;
+}
 
 .main li.search_mock>a
 {
@@ -122,23 +296,167 @@ footer .hand
   margin: -5px 0 -7px 0;
 }
 
-/* list.cshtml */
+/* ++++++++++++++ list.cshtml ++++++++++++++  */
+
+.header1
+{
+
+    height:204px;
+    border-bottom: solid 12px #7f7f7f;
+    border-top: solid 12px #7f7f7f;
+    background: url(header2.jpg) no-repeat right;            /* Bild Header */
+    color:rgb(0,255,0); 
+    font-size:40px;                  
+}
+
+
+
+.header1 div
+{          
+    color: #4E5D6B;      /* Text Header */
+    font-size:46px; 
+    padding: 70px 0 0 30px;
+                    
+}
+
+
+.Scrollbereich                                /* Scrollbereich */
+{   
+     margin-top: 220px;    /* margin-top: 100px; */
+     max-height: 1130px;
+     overflow:scroll;     /*  scroll-y; funkt. nicht mit Firefox? */            
+}
+
+#divScroll                          
+{   
+    /* color: red; 
+       background: yellow;
+    */   
+
+                    
+}
+
+.divScroll li                                /* Scrollbereich 2 */
+{   
+    padding: 23px 200px 15px 60px;       
+            color: red;      
+
+            background: rgb(224, 255, 224);
+                      
+}
+
+.auflistung1
+{
+     
+    font-size:30px;
+    color:rgb(255,255,255);  
+            /*  background:rgb(100,50,100);   */
+    height: 72px;
+    overflow:hidden;  
+    line-height:  1em;        /* line-height:  1em; */
+    vertical-align:middle;         
+}
+
+.auflistung2
+{
+    font-size:22px;
+    color:rgb(255,255,255); 
+            /* background:rgb(0,80,0);   */
+                  
+    height: 30px;
+    overflow:hidden;   
+}
+
+.col1   
+{ 
+    width: 490px;
+    float:left;
+            /* background:rgb(0,50,0);   */
+}
+
+
+
+.col2
+{
+    float:right;
+    width:275px;
+    font-size:15px;
+    color:rgb(255,255,255);
+            /* background:rgb(100,100,100);  */ 
+    line-height:  1.6em;     
+}
+
+
+.col1>h2, .col1>h3         /*  Test */
+{
+    font-size:30px;
+            /*  line-height: 22px;  */
+    font-weight: normal;
+    color:rgb(225,255,255);
+}
+
+
+                
+
+.schnellzugriff1          /* - - - - - Schnellzugriff oben - - - - - */
+{ 
+    position:absolute;    
+    top: 245px;
+    left:55px;
+    width:820px; 
+                /* background:green; */
+    padding-top:-60px;
+}
+
+.schnellzugriff2          /* - - - - - Schnellzugriff unten - - - - - */
+{ 
+    margin:10px 50px 0 55px;
+    width:820px;     
+                    /* background:yellow; */
+}
+
+.Text_Schnellzugriff
+{
+    font-size:18px;
+            /*  line-height: 22px;  */
+    color:rgb(60,60,60);
+    margin: 0px 0 -7px 4px;
+    padding: 20px 0 0 0;
+            /* background:yellow; */
+   
+}
+
 .list>h1 
 {
-    margin: 0 3%;
-    float:left;
+    margin: 0 3%; 
+    float:left; 
+    
 }
-
+                             
 .list ul.hooks li 
-{
-    float:left;
-}
-.list ul.hooks li>a
-{
-    width: 48px;
+{ 
+
+    float:left;  /*  float:left;   */
+    margin:0; 
+    padding:3px; 
+                /* &&& background:rgb(191, 235, 255);   */
 }
 
-/* search.cshtml */
+.list ul.hooks li>a                     /* Schnellzugriff Tasten */
+{
+    width: 30px;  /* width: 48px; */
+    height: 30px;  
+        color:rgb(255,255,255);
+        padding:10px 15px 22px 15px;
+        font-size: 35px;  
+        background: rgb(120,120,120); 
+        border:solid 1px rgb(0,0,0);   
+        
+}
+
+
+
+/* ++++++++++++++ search.cshtml +++++++++++++ */
 .search input
 {
     display: block;
@@ -173,8 +491,13 @@ footer .hand
 }
 
 
+/* ++++++++++++++ details.cshtml ++++++++++++++  */
 
-/* details.cshtml */
+.detail 
+{
+    margin-top: 2%;
+}
+
 .detail>h1 
 {
     margin: 0 3%;
@@ -191,3 +514,19 @@ footer .hand
 {
     width: 100%;
 }
+
+
+.map 
+{
+    width: 100%;
+}
+
+
+.map2 
+{
+    margin: 60px 0 0 0;       
+        height:695px;       /* später ggf. löschen (nur für Marl-Sinsen) */
+    background:rgb(230,230,230);  
+    width: 100%;
+}
+

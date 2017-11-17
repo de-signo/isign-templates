@@ -9,29 +9,29 @@
 }
 
 <div class="main">
-<h1>Suchen & Finden</h1>
+    <div class="Ueberschrift">Suchen &amp; Finden</div>
 
-<img class="header" alt="header" src="header1.jpg" />
+    <img class="header" alt="header" src="header1.jpg" />
 
-<ul>
-@foreach (var x in data) {
-    <li>
-        <a href="@Model.Navigate("List.cshtml", new { name=x.Resolved("cat_name"), cat = x.Resolved("cat_id") })">@x.Resolved("cat_name")</a>
-    </li>
-}
-@if ((string)Model.Style["cat_options"].FieldInstance.Value == "search") {
-  <li class="search_mock">
-    <a href="@Model.Navigate("Search.cshtml")">
-      <span> Suchen</span>
-      <img alt="Suche" src="Lupe.png" />
-    </a>
-  </li>
-} else {
-    <!-- Search disabled -->
-}
-</ul>
+    <ul>
+        @foreach (var x in data) {
+            <li>
+                <a href="@Model.Navigate("List.cshtml", new { name=x.Resolved("cat_name"), cat = x.Resolved("cat_id") })">@x.Resolved("cat_name")</a>
+            </li>
+        }
+        @if ((string)Model.Style["cat_options"].FieldInstance.Value == "search") {
+        <li class="search_mock">
+            <a href="@Model.Navigate("Search.cshtml")">
+            <span> Suchen</span>
+            <img alt="Suche" src="Lupe.png" />
+            </a>
+        </li>
+        } else {
+            <!-- Search disabled -->
+        }
+    </ul>
 
-<footer>
-<img class="hand" src="hand1.png" />
-</footer>
+   
+    <div class="hand"> <img src="hand1.png" /></div>
+    
 </div>

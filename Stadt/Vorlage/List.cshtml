@@ -11,72 +11,120 @@
     Layout = "Layout.cshtml";
 }
 
-<div class="list">
-<h1>@cat_name</h1>
+<div class="list" data-category="@cat">
 
-<a href="@Page.Home" class="home">Home</a>
-
-<ul id="divScroll">
-  @{
-  var letters = new List<char>();
-  char? firstChar = null;
-  foreach (var x in data) {
-    <li class="item">
+  <div class="header1">           <!-- - - - -  Header  - - - - - -->
+      <div>@cat_name</div>     
+  </div>
+  
+  <div class="Scrollbereich">
+    <ul class="divScroll">          <!-- - - - -  Bereich Auflistung  - - - - - -->
       @{
-        var c1 = x.Resolved("list_term1").ToString().ToUpper().FirstOrDefault();
-        if (c1 != firstChar) {
-          firstChar = c1;
-          letters.Add(c1);
-          <a id="@("anchor" + c1)" class="anchor"></a>
-        }
+      var letters = new List<char>();
+      char? firstChar = null;
+      foreach (var x in data) {
+        <li class="item">
+          @{
+            var c1 = x.Resolved("list_term1").ToString().ToUpper().FirstOrDefault();
+            if (c1 != firstChar) {
+              firstChar = c1;
+              letters.Add(c1);
+              <a id="@("anchor" + c1)" class="anchor"></a>
+            }
+          }
+          <a href="@Model.Navigate("Details.cshtml", new { id = x.Resolved("id") })">
+            <div class="col1">
+              <div class="auflistung1">@x.Resolved("list_term1")</div>
+              <div class="auflistung2">@x.Resolved("list_term2")</div>
+            </div>
+            <div class="col2">
+            Geb&#228ude  @x.Resolved("list_house") <br />
+              Ebene @x.Resolved("list_level") <br />
+            Eingang @x.Resolved("list_entrance")
+            </div>
+        </a>
+      </li>
+    }}
+    </ul>
+  </div>
+
+
+  <div class="home1">                                    <!-- - - - -  Home Button oben  - - - - - --> 
+      <a href="@Page.Home" class="home">Home</a>      
+  </div>
+
+
+
+  <img class="hand2" src="hand1.png" />
+
+
+  <div class="scrollbar">                             <!-- - - - -  Scrollleiste  - - - - - -->
+      <div class="scrollup" id="btnUp">
+      </div>
+      <div class="scrolldown" id="btnDown">
+      </div>
+  </div>
+
+
+                                                      <!-- - - - -  Schnellzugriff  oben - - - - -  -->
+                                                      <!-- - - - -  wg. Fehlermeldung nur hier positionierbar und damit nur absolut positionierbar -->
+  <div class="schnellzugriff1"> 
+      <div class="Text_Schnellzugriff"> Bitte den Anfangsbuchstaben des gesuchten Begriffs w&auml;hlen  </div>                                                 
+      @if ((string)Model.Style["list_options"].FieldInstance.Value == "anchor") {
+        <ul class="hooks">
+          @foreach (char a in letters) {
+            <li><a href="@("#anchor" + a)">@a</a></li>
+          }
+        </ul>
       }
-      <a href="@Model.Navigate("Details.cshtml", new { id = x.Resolved("id") })">
-        <div class="col1">
-          <h2>@x.Resolved("list_term1")</h2>
-          <h3>@x.Resolved("list_term2")</h3>
-        </div>
-        <div class="col2">
-          @x.Resolved("list_house") <br />
-          @x.Resolved("list_level") <br />
-          @x.Resolved("list_entrance")
-	    </div>
-    </a>
-  </li>
-}}
-</ul>
+  </div> 
 
-<div class="scrollbar">
-    <div class="scrollup" id="btnUp">
-    </div>
-    <div class="scrolldown" id="btnDown">
-    </div>
-</div>
+                                                     <!-- - - - -  Schnellzugriff  unten - - - - - -->
+  <div class="schnellzugriff2"> 
+      <div class="Text_Schnellzugriff"> Bitte den Anfangsbuchstaben des gesuchten Begriffs w&auml;hlen  </div>                                                  
+      @if ((string)Model.Style["list_options"].FieldInstance.Value == "anchor") {
+        <ul class="hooks">
+          @foreach (char a in letters) {
+            <li><a href="@("#anchor" + a)">@a</a></li>
+          }
+        </ul>
+      }
+  </div> 
 
-@if ((string)Model.Style["list_options"].FieldInstance.Value == "anchor") {
-  <ul class="hooks">
-    @foreach (char a in letters) {
-      <li><a href="@("#anchor" + a)">@a</a></li>
-    }
-  </ul>
-}
 
-<footer>
-<img class="hand" src="hand1.png" />
 
-<a href="@Page.Home" class="home">Home</a>
-</footer>
+  <div>                             <!-- - - - -  Behinderte Button unten  - - - - - --> 
+      <a href="@Page.Home" class="handicap">Handicap</a>    
+  </div>
 
-<script type="text/javascript">
-$(document).ready(function() {
-    var el = $("#divScroll").get(0);
-    if (el) el.scrollTop = 575;
-    
-    var scroll = $("#divScroll").customScroll({
-        up: $("#btnUp"),
-        down: $("#btnDown"),
-        disabledCssClass: "disabled",
-        scrollStep: 500
-    });	
-});
-</script>
+  <div class="home2">                             <!-- - - - -  Home Button unten  - - - - - --> 
+      <a href="@Page.Home" class="home">Home</a>    
+  </div>
+
+
+
+
+
+
+
+
+
+  <footer>                                 
+  </footer>
+
+
+
+  <script type="text/javascript">
+  $(document).ready(function() {
+      var el = $("#divScroll").get(0);
+      if (el) el.scrollTop = 575;
+      
+      var scroll = $("#divScroll").customScroll({
+          up: $("#btnUp"),
+          down: $("#btnDown"),
+          disabledCssClass: "disabled",
+          scrollStep: 500
+      });	
+  });
+  </script>
 </div>

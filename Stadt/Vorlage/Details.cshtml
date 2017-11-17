@@ -10,25 +10,36 @@
     Layout = "Layout.cshtml";
 }
 
-<div class="detail">
+
+<div class="header1">           <!-- - - - -  Header  - - - - - -->
+      <div>@data.Resolved("cat_name")</div>     
+</div>
+  
+
+<div class="detail">                <!-- - - - -  Detail Inhalt  - - - - - -->
 @if(data == null) {
     <span>Nicht gefunden</span>
 } else {
-    <h1>@data.Resolved("cat_name")</h1>
+    <!-- <h1>@data.Resolved("cat_name")yyy</h1> -->
     
-    <a class="back" href="javascript: window.history.back()">Back</a>
-    <a class="home" href="@Page.Home">Home</a>
+    <div class="back1"> 
+        <a class="back" href="javascript: window.history.back()">Back</a>
+    </div>
+    <div class="home1">                                    <!-- - - - -  Home Button oben  - - - - - --> 
+             <a href="@Page.Home" class="home">Home</a>      
+    </div>
+    <!-- <a class="home" href="@Page.Home">Home</a>  -->
 
-    <div class="content">
+    <div class="content">                                   <!-- - - - -  Texte oben  - - - - - --> 
         <h2>@data.Resolved("detail_term1")</h2>
         <h3>@data.Resolved("detail_term2")</h3>
         <p>
-            @data.Resolved("detail_house"),
-            @data.Resolved("detail_level")
+            @data.Resolved("detail_house"),<br>
+            @data.Resolved("detail_level")<br>
             @data.Resolved("detail_entrance")
         </p>
         <p>
-            @if (!data.Empty("detail_phone")) {<text>Fon: @data.Resolved("detail_phone")</text>}
+            @if (!data.Empty("detail_phone")) {<text>Fon: @data.Resolved("detail_phone")<br> </text>}
             @if (!data.Empty("detail_email")) {<text>E-mail: @data.Resolved("detail_email")</text>}
         </p>
         <p>
@@ -36,14 +47,32 @@
         </p>
     </div>
 
-    if (!data.Empty("detail_map")) {<img src="@data.DataFileHandler("detail_map")" alt="map"/>}
+    if (!data.Empty("detail_map")) 
+        {
+           <div class="map2">   <img src="@data.DataFileHandler("detail_map")" alt="Lageplan"/> </div>
+        }
 }
 
-<footer>
-<img class="hand" src="hand1.png" />
 
 
-<a class="back" href="javascript: window.history.back()">Back</a>
-<a class="home" href="@Page.Home">Home</a>
-</footer>
+
+        
 </div>
+
+<div class="hand3">  
+    <img class="hand" src="hand1.png" />    <!-- - - - -  benötigt?  - - - - - --> 
+</div>
+
+
+<div class="back2">                             <!-- - - - -  Back Button unten  - - - - - --> 
+    <a class="back" href="javascript: window.history.back()">Back</a>
+</div>
+
+<div class="home2">                             <!-- - - - -  Home Button unten  - - - - - --> 
+    <a href="@Page.Home" class="home">Home</a>    
+</div>
+
+<div class="QR-Code">   <img src="xyz" alt="QR-Code"/> </div>
+
+
+<footer> </footer>

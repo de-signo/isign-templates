@@ -457,13 +457,36 @@ padding-top: 16px;
 
 
 /* ++++++++++++++ search.cshtml +++++++++++++ */
+
+
+.divScrollsearch li                                /* Scrollbereich Search */
+{   
+    padding: 23px 8.5% 15px 7.5%;       
+            color: red;      
+
+            background: rgb(224, 255, 224);
+                      
+}
+
+
+
 .search input
 {
     display: block;
-    width: 94%;
-    font-size: 40px;
-    margin: 0 auto;
 
+  
+        /* width: 82%; */
+            /* padding: 0% 4% 0% 4%; */
+    font-size: 40px;
+    margin: 0 0 0 7.5%;  /* margin: 0 auto;  */
+    width: 83.5%; 
+
+}
+                    /* Keyboard */
+#keyboard 
+{
+                /* margin: 0px 0 0 50px; */
+    padding: 2% 0% 3% 4%;
 }
 
 .search #keyboard 
@@ -482,8 +505,8 @@ padding-top: 16px;
     font-size: 25px;
     line-height: 50px;
     margin: 5px;
-    width: 50px;
-    height: 50px;
+    width: 78px;         /*  65  50px */
+    height: 78px;        /*  50px */
 }
 .search #keyboard a.space
 {

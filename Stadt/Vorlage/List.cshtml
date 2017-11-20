@@ -116,15 +116,21 @@
 
   <script type="text/javascript">
   $(document).ready(function() {
-      var el = $("#divScroll").get(0);
-      if (el) el.scrollTop = 575;
-      
-      var scroll = $("#divScroll").customScroll({
-          up: $("#btnUp"),
-          down: $("#btnDown"),
-          disabledCssClass: "disabled",
-          scrollStep: 500
-      });	
+    var el = $("#divScroll").get(0);
+    if (el) el.scrollTop = 575;
+
+    $(".schnellzugriff2").hide();
+    $("a.handicap").click(function(e) {
+      $(".schnellzugriff2").toggle();
+      e.preventDefault();
+    });
+
+    var scroll = $("#divScroll").customScroll({
+      up: $("#btnUp"),
+      down: $("#btnDown"),
+      disabledCssClass: "disabled",
+      scrollStep: 500
+    });	
   });
   </script>
 </div>

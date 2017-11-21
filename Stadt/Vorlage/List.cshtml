@@ -4,8 +4,9 @@
     var cat_name = Request["name"];
     var Model = new FormsModel(this);
     var data = from x in Model.DataSource("source")
-                    where x["cat_id"].ToString() == cat
-                    select x;
+                where x["cat_id"].ToString() == cat
+                orderby x.Resolved("list_term1").ToString()
+                select x;
 
     Page.Home = Model.NavigateHome();
     Layout = "Layout.cshtml";
@@ -72,8 +73,12 @@
       <div class="Text_Schnellzugriff"> Bitte den Anfangsbuchstaben des gesuchten Begriffs w&auml;hlen  </div>                                                 
       @if ((string)Model.Style["list_options"].FieldInstance.Value == "anchor") {
         <ul class="hooks">
-          @foreach (char a in letters) {
-            <li><a href="@("#anchor" + a)">@a</a></li>
+          @for (char a = 'A'; a <= 'Z'; a++) {
+            if (letters.Contains(a)) {
+              <li><a href="@("#anchor" + a)">@a</a></li>
+            } else {
+              <li class="disabled">@a</li>
+            }
           }
         </ul>
       }
@@ -84,8 +89,12 @@
       <div class="Text_Schnellzugriff"> Bitte den Anfangsbuchstaben des gesuchten Begriffs w&auml;hlen  </div>                                                  
       @if ((string)Model.Style["list_options"].FieldInstance.Value == "anchor") {
         <ul class="hooks">
-          @foreach (char a in letters) {
-            <li><a href="@("#anchor" + a)">@a</a></li>
+          @for (char a = 'A'; a <= 'Z'; a++) {
+            if (letters.Contains(a)) {
+              <li><a href="@("#anchor" + a)">@a</a></li>
+            } else {
+              <li class="disabled">@a</li>
+            }
           }
         </ul>
       }

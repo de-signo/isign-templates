@@ -68,7 +68,7 @@
 
 
                                                       <!-- - - - -  Schnellzugriff  oben - - - - -  -->
-                                                      <!-- - - - -  wg. Fehlermeldung nur hier positionierbar und damit nur absolut positionierbar -->
+                                                      
   <div class="schnellzugriff1"> 
       <div class="Text_Schnellzugriff"> Bitte den Anfangsbuchstaben des gesuchten Begriffs w&auml;hlen  </div>                                                 
       @if ((string)Model.Style["list_options"].FieldInstance.Value == "anchor") {
@@ -77,7 +77,7 @@
             if (letters.Contains(a)) {
               <li><a href="@("#anchor" + a)">@a</a></li>
             } else {
-              <li class="disabled">@a</li>
+              <li class="disabled1"> <div class="Buttons-Schnellzugr"> @a </div></li>  
             }
           }
         </ul>
@@ -93,7 +93,7 @@
             if (letters.Contains(a)) {
               <li><a href="@("#anchor" + a)">@a</a></li>
             } else {
-              <li class="disabled">@a</li>
+              <li class="disabled1"> <div class="Buttons-Schnellzugr"> @a </div></li>  
             }
           }
         </ul>

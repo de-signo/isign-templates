@@ -61,7 +61,7 @@ ul {
 }
 
 li {
-    padding: 2% 10% 3% 10%;
+    padding: 2% 10% 2% 10%;
     margin: 0 auto;
 }
 
@@ -73,8 +73,8 @@ li>a {
     color: #e5e5e5;
     text-align: center;
     font-size: 48px;
-    padding: 20px 15px 15px 15px;
-    height:100px;
+    padding: 18px 15px 15px 15px;
+    height:90px;
 
 }
 
@@ -350,8 +350,8 @@ padding-top: 16px;
      
     font-size:30px;
     color:rgb(255,255,255);  
-            /*  background:rgb(100,50,100);   */
-    height: 72px;
+          /*  background:rgb(100,50,100);   */
+    height: 65px;           /* height: 72px;  */
     overflow:hidden;  
     line-height:  1em;        /* line-height:  1em; */
     vertical-align:middle;         
@@ -380,10 +380,11 @@ padding-top: 16px;
 {
     float:right;
     width:275px;
-    font-size:15px;
+    font-size:18px;
     color:rgb(255,255,255);
             /* background:rgb(100,100,100);  */ 
-    line-height:  1.6em;     
+    line-height:  1.6em; 
+       
 }
 
 
@@ -402,15 +403,17 @@ padding-top: 16px;
 { 
     position:absolute;    
     top: 245px;
-    left:55px;
+    left:59px;
     width:820px; 
-                /* background:green; */
+             
     padding-top:-60px;
+    /* margin-left: 4px; */
+
 }
 
 .schnellzugriff2          /* - - - - - Schnellzugriff unten - - - - - */
 { 
-    margin:10px 50px 0 55px;
+    margin:10px 50px 0 59px;
     width:820px;     
                     /* background:yellow; */
 }
@@ -437,21 +440,64 @@ padding-top: 16px;
 { 
 
     float:left;  /*  float:left;   */
-    margin:0; 
-    padding:3px; 
-                /* &&& background:rgb(191, 235, 255);   */
+    margin:2px 5px 6px 0px;  /*  margin:2px;   */ 
+    padding:0; /* padding:0px 3px 3px 3px;     padding:3px;   */
+                                 /* &&& background:rgb(191, 235, 255);   */
 }
 
 .list ul.hooks li>a                     /* Schnellzugriff Tasten */
 {
-    width: 30px;  /* width: 48px; */
+    width: 30px;  
     height: 30px;  
-        color:rgb(255,255,255);
-        padding:10px 15px 22px 15px;
-        font-size: 35px;  
-        background: rgb(120,120,120); 
-        border:solid 1px rgb(0,0,0);   
+    color:rgb(255,255,255);
+    padding:8px 13px 18px 12px;     /* 10px 15px 22px 15px;  */
+    font-size: 35px;  
+    background: rgb(120,120,120); 
+    border:solid 1px rgb(0,0,0); 
+    border-radius: 10px;                                    /* border-radius: 5px; */
         
+}
+
+.disabled1 
+{
+    color:rgb(200,255,200); 
+    background: rgb(100,120,120); 
+    font-size: 35px; 
+    border:solid 1px rgb(0,0,0);
+    border-radius: 10px;
+                        width: 30px;  
+                        height: 30px; 
+                        padding:25px;  /* padding:10px 15px 22px 15px; */
+    display:inline-block;                   
+   
+}
+
+.hooks .disabled1 
+ {
+
+    width: 55px;  /* width: 30px; */
+    height: 56px; /* height: 30px;  */ 
+    color:rgb(160, 160, 160); 
+                        padding:50px; margin: 20px;  
+    font-size: 35px; 
+    text-align: center;
+                        vertical-align: bottom;
+    background: rgb(200,200,200); 
+    margin: 15px 0 0 0;
+        /* border:solid 1px rgb(44, 0, 148);    */
+}
+
+.list .hooks .disabled1 div
+{
+    padding-top:0px;
+    margin-top: 8px;  
+}
+
+.Buttons-Schnellzugr
+{
+            display:inline-block; 
+            padding:20px 0px 20px 0px; margin:20px 0px 0px 0px;
+
 }
 
 
@@ -459,16 +505,33 @@ padding-top: 16px;
 /* ++++++++++++++ search.cshtml +++++++++++++ */
 
 
-.divScrollsearch li                                /* Scrollbereich Search */
+
+
+
+.divScrollsearch                                
+{   
+    margin-top: 16%;       
+}
+
+.divScrollsearch li                               /* Scrollbereich Search */
 {   
     padding: 23px 8.5% 15px 7.5%;       
-            color: red;      
+            color: red;
+                  
 
-            background: rgb(224, 255, 224);
+            /*  background: rgb(224, 255, 224); */
                       
 }
 
-
+.divScrollsearch li>a                                
+{   
+    font-size: 42px;
+    line-height: 1em;
+    height:45px;    /* height:70px;               */
+     
+            /*  background: rgb(224, 255, 224); */
+                      
+}
 
 .search input
 {
@@ -478,14 +541,13 @@ padding-top: 16px;
         /* width: 82%; */
             /* padding: 0% 4% 0% 4%; */
     font-size: 40px;
-    margin: 0 0 0 7.5%;  /* margin: 0 auto;  */
+    margin: 6% 0 0 7.5%;  /* margin: 0 auto;  */
     width: 83.5%; 
 
 }
-                    /* Keyboard */
+
 #keyboard 
 {
-                /* margin: 0px 0 0 50px; */
     padding: 2% 0% 3% 4%;
 }
 
@@ -502,16 +564,54 @@ padding-top: 16px;
     border-radius: 15px;
     color: #e5e5e5;
     text-align: center;
-    font-size: 25px;
-    line-height: 50px;
+    font-size: 40px;
+    line-height: 1.9em;          /* line-height: 50px; */
     margin: 5px;
     width: 78px;         /*  65  50px */
     height: 78px;        /*  50px */
 }
+
+.Tastatur_untere_Reihe
+{
+    margin-left: 93px;     /*  margin-left: 185px; */
+
+}
+
+
 .search #keyboard a.space
 {
-    width: 200px;
+    width: 541px;           /*  width: 356px; */
 }
+
+.search #keyboard .Tastatur_untere_Reihe a
+{
+    font-size: 35px;
+    line-height: 2em;          
+}
+
+
+/*
+.search #keyboard .Taste_Entf2
+{
+    font-size: 15px;   
+    color:cyan; 
+    margin-top:-20px;
+
+}
+
+.Taste_Entf1, .Taste_Entf2 div
+{
+    font-size: 15px;   
+    
+  color:yellow; 
+
+}
+*/
+
+
+/*
+
+ */
 
 
 /* ++++++++++++++ details.cshtml ++++++++++++++  */
@@ -553,3 +653,29 @@ padding-top: 16px;
     width: 100%;
 }
 
+
+
+
+
+/* --------------------- QR-Code: - für zukünftige Projekte - hier nicht benötigt (deshalb außerhalb platziert -------------------  */
+
+.QR-Code {
+    
+       position:absolute;    
+       bottom: -100px;
+       right:-100px;    
+       width: 1px; 
+       height:1px;        
+}
+
+/* -----  korrekte Version für den oberen Bereich:  */
+/* 
+.QR-Code {
+    
+       position:absolute;    
+       top: 420px;
+       right:78px;    
+       width:150px; 
+       height:150px;
+     }   
+  */  

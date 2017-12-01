@@ -125,7 +125,7 @@
 
   <script type="text/javascript">
   $(document).ready(function() {
-    var el = $("#divScroll").get(0);
+    var el = $(".divScroll").get(0);
     if (el) el.scrollTop = 575;
 
     $(".schnellzugriff2").hide();
@@ -134,7 +134,7 @@
       e.preventDefault();
     });
 
-    var scroll = $("#divScroll").customScroll({
+    var scroll = $(".divScroll").customScroll({
       up: $("#btnUp"),
       down: $("#btnDown"),
       disabledCssClass: "disabled",

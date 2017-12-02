@@ -5,13 +5,12 @@ html { height: 100%;}
 body
 {
 	/* fill complete frame (required) */
-    height: 100%;  /* height: 1920px; */
+    height: 100%;
 	overflow:hidden;             
     margin: 0; 
 	padding: 0; 
 
     font-family: Arial, Helvetica, sans-serif;
-
     background-color: white;
 }
 
@@ -35,24 +34,17 @@ h1
 h2
 {
     font-size:  35px;
-    /* color:red; */
 }
 
 h3
 {
     font-size:  30px;
-    /* color:blue; */
 }
 
 p
 {
     font-size:  25px;
-    /* color:rgb(204, 0, 255); */
 }
-
-
-
-
 
 ul {
     list-style-type: none;
@@ -78,7 +70,6 @@ li>a {
 
 }
 
-
 a.anchor {
     background-color:inherit;
     height: 0;
@@ -93,10 +84,7 @@ a.home, a.back {
     width: 99px;
     font-size: 0;
     background: transparent url(home.png) no-repeat center;
-             /* &&& border:solid 1px red; */
 }
-
-
 
 a.back 
 {
@@ -104,7 +92,6 @@ a.back
     background-size: 88px auto;
     text-decoration: none;     
 }
-
 
 a.handicap {
     display:block;
@@ -124,19 +111,15 @@ a.handicap {
     right: 16%; 
     height: 99px; 
     width: 99px; 
-            /* &&& border:solid 6px blue; */
 }
-
 
 .back2
 {   
     position:absolute; 
-    bottom: 1%;  /*  top: 1500px */
+    bottom: 1%;
     right: 16%;
     height: 99px; 
     width: 99px; 
-
-            /* border:solid 6px rgb(2, 106, 204); */
 }
 
 .handicap
@@ -145,10 +128,8 @@ a.handicap {
     bottom: 1%;
     left: 4%; 
     height: 99px; 
-    width: 99px; 
-            /* &&& border:solid 6px blue; */
+    width: 99px;
 }
-
 
 .home1
 {   
@@ -157,44 +138,39 @@ a.handicap {
     right: 4%; 
     height: 99px; 
     width: 99px; 
-            /* border:solid 6px blue; */
 }
 
 .home2
 {   
     position:absolute; 
-    bottom: 1%;  /*  top: 1500px */
+    bottom: 1%;
     right: 4%;
     height: 99px; 
     width: 99px; 
-
-            /* border:solid 6px rgb(2, 106, 204); */
 }
 
+.hand 
+{
+    text-align:center;
+    margin-top: 30px;
+}
 
-
-
-
-.hand {    
-            text-align:center;
-            margin-top: 30px;
-    }
-
-.hand2 {
+.hand2 
+{
 
     position:absolute; 
     top: 540px;
     right: 65px;
 }
 
-.hand3 {
-    
+.hand3
+{
     text-align:center;
     margin-top: 50px;
-    }
+}
 
 
-.scrollbar                              /* - - - Scrollbar - - - */
+.scrollbar
 {
     position:absolute; 
     top: 800px;
@@ -230,18 +206,10 @@ a.handicap {
     background-image: url(btn_scrolldown_d.png);
 }
 
-
-
-
-
-footer                 /*  ng */
+footer
 {   
     background-color:rgb(255,20,20);
 }
-
-
-
-
 
 
 /* ++++++++++++++  main.cshtml ++++++++++++++ */
@@ -264,21 +232,13 @@ footer                 /*  ng */
     
 }
 
-        /*  - - - Farbunterscheidung , nicht anwendbar - - -  */
-        /*
-        .main li:nth-child(2)>a {
-            background: linear-gradient(to bottom, rgb(139,177,222), rgb(207, 254, 0));
-            
-        }
-        */
-
 .Ueberschrift 
 {
-font-size: 110px;
-color:rgb(0, 60, 150);
-text-align:center;
-height:150px;
-padding-top: 16px;
+    font-size: 110px;
+    color:rgb(0, 60, 150);
+    text-align:center;
+    height:150px;
+    padding-top: 16px;
 }
 
 .main li.search_mock>a
@@ -304,65 +264,46 @@ padding-top: 16px;
     height:204px;
     border-bottom: solid 12px #7f7f7f;
     border-top: solid 12px #7f7f7f;
-    background: url(header2.jpg) no-repeat right;            /* Bild Header */
+    background: url(header2.jpg) no-repeat right;
     color:rgb(0,255,0); 
     font-size:40px;                  
 }
 
-
-
 .header1 div
 {          
-    color: #4E5D6B;      /* Text Header */
+    color: #4E5D6B;
     font-size:46px; 
     padding: 70px 0 0 53px;
                     
 }
 
-
-.Scrollbereich                                /* Scrollbereich */
+.Scrollbereich
 {   
-     margin-top: 220px;    /* margin-top: 100px; */
+     margin-top: 220px;
      max-height: 1130px;
-     overflow:scroll;     /*  scroll-y; funkt. nicht mit Firefox? */            
+     overflow:scroll;
 }
 
-#divScroll                          
-{   
-    /* color: red; 
-       background: yellow;
-    */   
-
-                    
-}
-
-.divScroll li                                /* Scrollbereich 2 */
+.divScroll li
 {   
     padding: 23px 200px 15px 60px;       
-            color: red;      
-
-            /*  >>> background: rgb(224, 255, 224);  */
-                      
+    color: red;      
 }
 
 .auflistung1
 {
-     
-    font-size:30px;
-    color:rgb(255,255,255);  
-          /*  background:rgb(100,50,100);   */
-    height: 65px;           /* height: 72px;  */
-    overflow:hidden;  
-    line-height:  1em;        /* line-height:  1em; */
-    vertical-align:middle;         
+    font-size: 30px;
+    color: rgb(255,255,255);  
+    height: 65px;
+    overflow: hidden;  
+    line-height: 1em;
+    vertical-align: middle;         
 }
 
 .auflistung2
 {
     font-size:22px;
-    color:rgb(255,255,255); 
-            /* background:rgb(0,80,0);   */
-                  
+    color:rgb(255,255,255);       
     height: 30px;
     overflow:hidden;   
 }
@@ -371,10 +312,7 @@ padding-top: 16px;
 { 
     width: 490px;
     float:left;
-            /* background:rgb(0,50,0);   */
 }
-
-
 
 .col2
 {
@@ -382,80 +320,62 @@ padding-top: 16px;
     width:275px;
     font-size:18px;
     color:rgb(255,255,255);
-            /* background:rgb(100,100,100);  */ 
     line-height:  1.6em; 
-       
 }
 
-
-.col1>h2, .col1>h3         /*  Test */
+.col1>h2, .col1>h3
 {
     font-size:30px;
-            /*  line-height: 22px;  */
     font-weight: normal;
     color:rgb(225,255,255);
 }
 
-
-                
-
-.schnellzugriff1          /* - - - - - Schnellzugriff oben - - - - - */
+.schnellzugriff1
 { 
     position:absolute;    
     top: 245px;
     left:59px;
     width:820px; 
-             
     padding-top:-60px;
-    /* margin-left: 4px; */
-
 }
 
-.schnellzugriff2          /* - - - - - Schnellzugriff unten - - - - - */
+.schnellzugriff2
 { 
     margin:10px 50px 0 59px;
     width:820px;     
-                    /* background:yellow; */
 }
 
 .Text_Schnellzugriff
 {
     font-size:18px;
-            /*  line-height: 22px;  */
     color:rgb(60,60,60);
     margin: 0px 0 -7px 4px;
     padding: 20px 0 0 0;
-            /* background:yellow; */
-   
 }
 
 .list>h1 
 {
     margin: 0 3%; 
-    float:left; 
-    
+    float:left;  
 }
                              
 .list ul.hooks li 
 { 
-
-    float:left;  /*  float:left;   */
-    margin:2px 5px 6px 0px;  /*  margin:2px;   */ 
-    padding:0; /* padding:0px 3px 3px 3px;     padding:3px;   */
-                                 /* &&& background:rgb(191, 235, 255);   */
+    float:left;
+    margin:2px 5px 6px 0px;
+    padding:0;
 }
 
-.list ul.hooks li>a                     /* Schnellzugriff Tasten */
+.list ul.hooks li>a
 {
     width: 30px;  
     height: 30px;  
     color:rgb(255,255,255);
-    padding:8px 13px 18px 12px;     /* 10px 15px 22px 15px;  */
+    padding:8px 13px 18px 12px;
     font-size: 35px;  
     background: rgb(120,120,120); 
     border:solid 1px rgb(0,0,0); 
-    border-radius: 10px;                                    /* border-radius: 5px; */
-        
+    border-radius: 10px;
 }
 
 .disabled1 
@@ -465,26 +385,24 @@ padding-top: 16px;
     font-size: 35px; 
     border:solid 1px rgb(0,0,0);
     border-radius: 10px;
-                        width: 30px;  
-                        height: 30px; 
-                        padding:25px;  /* padding:10px 15px 22px 15px; */
+    width: 30px;  
+    height: 30px; 
+    padding:25px;
     display:inline-block;                   
-   
 }
 
 .hooks .disabled1 
  {
 
-    width: 55px;  /* width: 30px; */
-    height: 56px; /* height: 30px;  */ 
+    width: 55px;
+    height: 56px;
     color:rgb(160, 160, 160); 
-                        padding:50px; margin: 20px;  
+    padding:50px; margin: 20px;  
     font-size: 35px; 
     text-align: center;
-                        vertical-align: bottom;
+    vertical-align: bottom;
     background: rgb(200,200,200); 
     margin: 15px 0 0 0;
-        /* border:solid 1px rgb(44, 0, 148);    */
 }
 
 .list .hooks .disabled1 div
@@ -495,55 +413,37 @@ padding-top: 16px;
 
 .Buttons-Schnellzugr
 {
-            display:inline-block; 
-            padding:20px 0px 20px 0px; margin:20px 0px 0px 0px;
-
+    display:inline-block; 
+    padding:20px 0px 20px 0px; margin:20px 0px 0px 0px;
 }
 
 
 
 /* ++++++++++++++ search.cshtml +++++++++++++ */
-
-
-
-
-
 .divScrollsearch                                
 {   
     margin-top: 16%;       
 }
 
-.divScrollsearch li                               /* Scrollbereich Search */
+.divScrollsearch li
 {   
     padding: 23px 8.5% 15px 7.5%;       
-            color: red;
-                  
-
-            /*  background: rgb(224, 255, 224); */
-                      
+    color: red;
 }
 
 .divScrollsearch li>a                                
 {   
     font-size: 42px;
     line-height: 1em;
-    height:45px;    /* height:70px;               */
-     
-            /*  background: rgb(224, 255, 224); */
-                      
+    height:45px;               
 }
 
 .search input
 {
     display: block;
-
-  
-        /* width: 82%; */
-            /* padding: 0% 4% 0% 4%; */
     font-size: 40px;
-    margin: 6% 0 0 7.5%;  /* margin: 0 auto;  */
+    margin: 6% 0 0 7.5%;
     width: 83.5%; 
-
 }
 
 #keyboard 
@@ -590,32 +490,7 @@ padding-top: 16px;
 }
 
 
-/*
-.search #keyboard .Taste_Entf2
-{
-    font-size: 15px;   
-    color:cyan; 
-    margin-top:-20px;
-
-}
-
-.Taste_Entf1, .Taste_Entf2 div
-{
-    font-size: 15px;   
-    
-  color:yellow; 
-
-}
-*/
-
-
-/*
-
- */
-
-
 /* ++++++++++++++ details.cshtml ++++++++++++++  */
-
 .detail 
 {
     margin-top: 2%;
@@ -641,53 +516,31 @@ padding-top: 16px;
 .content h2
 {
     font-size: 42px;
-        
 }
 
 .content h3
 {
     font-size: 32px;
-       
 }
-
 
 .map 
 {
     width: 100%;
 }
 
-
 .map2 
 {
     margin: 60px 0 0 0;       
-        height:695px;       /* später ggf. löschen (nur für Marl-Sinsen) */
+    height:695px;
     background:rgb(230,230,230);  
     width: 100%;
 }
 
-
-
-
-
 /* --------------------- QR-Code: - für zukünftige Projekte - hier nicht benötigt (deshalb außerhalb platziert -------------------  */
-
 .QR-Code {
-    
-       position:absolute;    
-       bottom: -100px;
-       right:-100px;    
-       width: 1px; 
-       height:1px;        
+    position:absolute;    
+    bottom: -100px;
+    right:-100px;    
+    width: 1px; 
+    height:1px;        
 }
-
-/* -----  korrekte Version für den oberen Bereich:  */
-/* 
-.QR-Code {
-    
-       position:absolute;    
-       top: 420px;
-       right:78px;    
-       width:150px; 
-       height:150px;
-     }   
-  */  

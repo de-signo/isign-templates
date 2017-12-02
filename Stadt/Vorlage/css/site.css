@@ -189,7 +189,7 @@ a.handicap {
     background-image: url(btn_scrollup.png);
 }
 
-.scrollbar .scrollup.disable_scroll
+.scrollbar .scrollup.disabled
 {
     background-image: url(btn_scrollup_d.png);
 }
@@ -201,7 +201,7 @@ a.handicap {
     width: 70px;
     background-image: url(btn_scrolldown.png);
 }
-.scrollbar .scrolldown.disable_scroll
+.scrollbar .scrolldown.disabled
 {
     background-image: url(btn_scrolldown_d.png);
 }
@@ -258,7 +258,7 @@ footer
 
 /* ++++++++++++++ list.cshtml ++++++++++++++  */
 
-.header1
+.list header
 {
 
     height:204px;
@@ -269,28 +269,30 @@ footer
     font-size:40px;                  
 }
 
-.header1 div
+.list header div
 {          
     color: #4E5D6B;
     font-size:46px; 
-    padding: 70px 0 0 53px;
-                    
+    padding: 70px 0 0 53px;              
 }
 
-.Scrollbereich
+.list .divScroll
 {   
      margin-top: 220px;
      max-height: 1130px;
-     overflow:scroll;
+     overflow: hidden;
 }
 
-.divScroll li
+.list .divScroll ul {
+    padding-top: 400px;
+}
+.list .divScroll li
 {   
     padding: 23px 200px 15px 60px;       
     color: red;      
 }
 
-.auflistung1
+.list .auflistung1
 {
     font-size: 30px;
     color: rgb(255,255,255);  
@@ -300,7 +302,7 @@ footer
     vertical-align: middle;         
 }
 
-.auflistung2
+.list .auflistung2
 {
     font-size:22px;
     color:rgb(255,255,255);       
@@ -308,13 +310,13 @@ footer
     overflow:hidden;   
 }
 
-.col1   
+.list .col1   
 { 
     width: 490px;
     float:left;
 }
 
-.col2
+.list .col2
 {
     float:right;
     width:275px;
@@ -323,14 +325,15 @@ footer
     line-height:  1.6em; 
 }
 
-.col1>h2, .col1>h3
+.list .col1>h2, 
+.list .col1>h3
 {
     font-size:30px;
     font-weight: normal;
     color:rgb(225,255,255);
 }
 
-.schnellzugriff1
+.list .schnellzugriff1
 { 
     position:absolute;    
     top: 245px;
@@ -339,13 +342,13 @@ footer
     padding-top:-60px;
 }
 
-.schnellzugriff2
+.list .schnellzugriff2
 { 
     margin:10px 50px 0 59px;
     width:820px;     
 }
 
-.Text_Schnellzugriff
+.list .Text_Schnellzugriff
 {
     font-size:18px;
     color:rgb(60,60,60);

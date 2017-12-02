@@ -13,13 +13,12 @@
 }
 
 <div class="list" data-category="@cat">
-
-  <div class="header1">           <!-- - - - -  Header  - - - - - -->
+  <header>
       <div>@cat_name</div>     
-  </div>
+  </header>
   
-  <div class="Scrollbereich">
-    <ul class="divScroll">          <!-- - - - -  Bereich Auflistung  - - - - - -->
+  <div class="Scrollbereich divScroll">
+    <ul>
       @{
       var letters = new List<char>();
       char? firstChar = null;
@@ -126,7 +125,7 @@
   <script type="text/javascript">
   $(document).ready(function() {
     var el = $(".divScroll").get(0);
-    if (el) el.scrollTop = 575;
+    if (el) el.scrollTop = 400;
 
     $(".schnellzugriff2").hide();
     $("a.handicap").click(function(e) {

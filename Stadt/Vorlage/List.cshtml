@@ -66,11 +66,10 @@
   </div>
 
 
-                                                      <!-- - - - -  Schnellzugriff  oben - - - - -  -->
-                                                      
+  <!-- - - - -  Schnellzugriff  oben - - - - -  -->
+  @if ((string)Model.Style["list_options"].FieldInstance.Value == "anchor") {                                                
   <div class="schnellzugriff1"> 
       <div class="Text_Schnellzugriff"> Bitte den Anfangsbuchstaben des gesuchten Begriffs w&auml;hlen  </div>                                                 
-      @if ((string)Model.Style["list_options"].FieldInstance.Value == "anchor") {
         <ul class="hooks">
           @for (char a = 'A'; a <= 'Z'; a++) {
             if (letters.Contains(a)) {
@@ -80,13 +79,11 @@
             }
           }
         </ul>
-      }
   </div> 
 
-                                                     <!-- - - - -  Schnellzugriff  unten - - - - - -->
+  <!-- - - - -  Schnellzugriff  unten - - - - - -->
   <div class="schnellzugriff2"> 
       <div class="Text_Schnellzugriff"> Bitte den Anfangsbuchstaben des gesuchten Begriffs w&auml;hlen  </div>                                                  
-      @if ((string)Model.Style["list_options"].FieldInstance.Value == "anchor") {
         <ul class="hooks">
           @for (char a = 'A'; a <= 'Z'; a++) {
             if (letters.Contains(a)) {
@@ -96,9 +93,8 @@
             }
           }
         </ul>
-      }
   </div> 
-
+  }
 
 
   <div>                             <!-- - - - -  Behinderte Button unten  - - - - - --> 

@@ -1,0 +1,41 @@
+﻿
+/* redefine defaults */
+* {  margin: 0; padding: 0; border:none; overflow:hidden; }
+    
+body
+{
+	/* fill complete frame (required) */
+    height: 100vh;
+    
+    /* text */
+    font-family: Arial,sans-serif;
+    font-weight: bolder;
+    font-size: 80vh;
+    color: Black;
+    
+    /* background */
+    background-color: #EFEEEE;
+}
+
+/* ticker (db and normal) */
+/*
+div.ticker 
+{
+	width: 100%;
+	height: 100%;
+    position: fixed;
+}
+div.ticker .vspacer 
+{
+	height: 10%;
+}
+div.ticker .marquee 
+{
+    height: 80%;
+}
+div.ticker .scroll 
+{
+    height: 100%;
+	white-space: nowrap;
+}
+*/

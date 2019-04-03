@@ -1,0 +1,31 @@
+@using Stolltec.Forms.Model
+@using System.Web.Optimization
+@{
+    var model = new FormsModel(this);
+    var ds = model.DataSource("source");
+    var data = from x in ds select x["text"];
+    var text = string.Join(" - ", data);
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ticker</title>
+    <link href="@Href("css/site.css")" type="text/css" rel="Stylesheet" />
+</head>
+<body>
+    @Scripts.Render("~/Scripts/jquery", "~/Scripts/forms", "js/jquery.marquee.min.js")
+
+    <div id="ticker">@text</div>
+
+    <script language="javascript" type="text/javascript">
+        $('#ticker').marquee({
+            speed: 180,
+            gap: 50,
+            delayBeforeStart: 0,
+            direction: 'left',
+            duplicated: true
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<StyleList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://stollsoft.de/iSign/v2/Content/Forms/Styles">
+  <style key="custom_ticker" file="Ticker.cshtml" target="Forms2">
+    <names>
+      <name>Laufschrift</name>
+    </names>
+    <fields>
+      <field key="text">
+        <names>
+          <name>Text</name>
+        </names>
+      </field>
+    </fields>
+  </style>
+
+  <style key="custom_dbticker" file="DBTicker.cshtml" target="Forms2">
+    <names>
+      <name>Laufschrift (datengebunden)</name>
+    </names>
+    <fields>
+      <field key="source">
+        <names>
+          <name>Datenquelle</name>
+        </names>
+        <content_class type="DataSource" />
+      </field>
+      <field key="text">
+        <names>
+          <name>Text</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+    </fields>
+  </style>
+
+  <style key="custom_ticker2" file="Ticker2.cshtml" target="Forms2">
+    <names>
+      <name>Laufschrift mit Optionen</name>
+    </names>
+    <fields>
+      <field key="text">
+        <names>
+          <name>Text</name>
+        </names>
+      </field>
+      <field key="font">
+        <names>
+          <name>Schrift</name>
+        </names>
+        <content_class type="TextChoose">
+          <text key="Arial">Arial</text>
+          <text key="Times">Times New Roman</text>
+        </content_class>
+      </field>
+      <field key="color">
+        <names>
+          <name>Schriftfarbe</name>
+        </names>
+        <content_class type="TextChoose">
+          <text key="Black">Schwarz</text>
+          <text key="White">Weiß</text>
+          <text key="Red">Rot</text>
+          <text key="Blue">Blau</text>
+          <text key="Yellow">Gelb</text>
+          <text key="Green">Grün</text>
+        </content_class>
+      </field>
+      <field key="bgcolor">
+        <names>
+          <name>Hintergrund</name>
+        </names>
+        <content_class type="TextChoose">
+          <text key="Black">Schwarz</text>
+          <text key="White">Weiß</text>
+          <text key="Red">Rot</text>
+          <text key="Blue">Blau</text>
+          <text key="Yellow">Gelb</text>
+          <text key="Green">Grün</text>
+        </content_class>
+      </field>
+      <field key="speed">
+        <names>
+          <name>Geschwindigkeit</name>
+        </names>
+        <content_class type="TextChoose">
+          <text key="350">Sehr schnell</text>
+          <text key="260">Schnell</text>
+          <text key="180">Mittel</text>
+          <text key="120">Langsam</text>
+          <text key="80">Sehr langsam</text>
+        </content_class>
+      </field>
+    </fields>
+  </style>
+
+  <style key="custom_dbticker2" file="DBTicker2.cshtml" target="Forms2">
+    <names>
+      <name>Laufschrift mit Optionen (datengebunden)</name>
+    </names>
+    <fields>
+      <field key="source">
+        <names>
+          <name>Datenquelle</name>
+        </names>
+        <content_class type="DataSource" />
+      </field>
+      <field key="text">
+        <names>
+          <name>Text</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+      <field key="font">
+        <names>
+          <name>Schrift</name>
+        </names>
+        <content_class type="TextChoose">
+          <text key="Arial">Arial</text>
+          <text key="Times">Times New Roman</text>
+        </content_class>
+      </field>
+      <field key="color">
+        <names>
+          <name>Schriftfarbe</name>
+        </names>
+        <content_class type="TextChoose">
+          <text key="Black">Schwarz</text>
+          <text key="White">Weiß</text>
+          <text key="Red">Rot</text>
+          <text key="Blue">Blau</text>
+          <text key="Yellow">Gelb</text>
+          <text key="Green">Grün</text>
+        </content_class>
+      </field>
+      <field key="bgcolor">
+        <names>
+          <name>Hintergrund</name>
+        </names>
+        <content_class type="TextChoose">
+          <text key="Black">Schwarz</text>
+          <text key="White">Weiß</text>
+          <text key="Red">Rot</text>
+          <text key="Blue">Blau</text>
+          <text key="Yellow">Gelb</text>
+          <text key="Green">Grün</text>
+        </content_class>
+      </field>
+      <field key="speed">
+        <names>
+          <name>Geschwindigkeit</name>
+        </names>
+        <content_class type="TextChoose">
+          <text key="350">Sehr schnell</text>
+          <text key="260">Schnell</text>
+          <text key="180">Mittel</text>
+          <text key="120">Langsam</text>
+          <text key="80">Sehr langsam</text>
+        </content_class>
+      </field>
+    </fields>
+  </style>
+</StyleList>

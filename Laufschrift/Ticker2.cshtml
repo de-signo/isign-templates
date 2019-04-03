@@ -1,0 +1,34 @@
+@using Stolltec.Forms.Model
+@using System.Web.Optimization
+@{
+    var model = new FormsModel(this);
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ticker</title>
+    <link href="@Href("css/site.css")" type="text/css" rel="Stylesheet" />
+    <style type="text/css">
+        body {
+            font-family: @model.Style["font"].FieldInstance.Value;
+            color: @model.Style["color"].FieldInstance.Value;
+            background-color: @model.Style["bgcolor"].FieldInstance.Value;
+        }
+    </style>
+</head>
+<body>
+    @Scripts.Render("~/Scripts/jquery", "~/Scripts/forms", "js/jquery.marquee.min.js")
+
+    <div id="ticker">@model.Style["text"].Value</div>
+
+    <script language="javascript" type="text/javascript">
+        $('#ticker').marquee({
+            speed: @model.Style["speed"].FieldInstance.Value,
+            gap: 50,
+            delayBeforeStart: 0,
+            direction: 'left',
+            duplicated: true
+        });
+    </script>
+</body>
+</html>

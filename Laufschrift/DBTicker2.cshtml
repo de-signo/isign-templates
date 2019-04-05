@@ -26,13 +26,22 @@
     <div id="ticker">@text</div>
 
     <script language="javascript" type="text/javascript">
-        $('#ticker').marquee({
-            speed: @model.Style["speed"].FieldInstance.Value,
-            gap: 50,
-            delayBeforeStart: 0,
-            direction: 'left',
-            duplicated: false
-        });
+        var mq = null;
+        function create() {
+            if (mq) {
+                mq.marquee('destroy');
+                mq = null;
+            }
+            mq = $('#ticker').marquee({
+                speed: @model.Style["speed"].FieldInstance.Value,
+                gap: 50,
+                delayBeforeStart: 0,
+                direction: 'left',
+                duplicated: false
+            });
+        }
+        $(window).resize(create);
+        create();
     </script>
 </body>
 </html>

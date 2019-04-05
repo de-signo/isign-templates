@@ -15,13 +15,23 @@
     <div id="ticker">@model.Style["text"].Value</div>
     
     <script language="javascript" type="text/javascript">
-        $('#ticker').marquee({
-            speed: 180,
-            gap: 50,
-            delayBeforeStart: 0,
-            direction: 'left',
-            duplicated: false
-        });
+        var mq = null;
+        function create() {
+            if (mq) {
+                mq.marquee('destroy');
+                mq = null;
+            }
+            mq = $('#ticker').marquee({
+                speed: 180,
+                gap: 50,
+                delayBeforeStart: 0,
+                direction: 'left',
+                duplicated: false
+            });
+        }
+        create();
+        $(window).resize(create);
+        
     </script>
 </body>
 </html>

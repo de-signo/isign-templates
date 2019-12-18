@@ -16,13 +16,13 @@
 
     <script type="text/javascript">
     $(document).ready(function() {
-            ContentController.resumeOnClick(true);
+            //ContentController.resumeOnClick(true);
 
             $("body")
             .disableSelect()
             .clickBlanking({ timeout:500 })
             .autoReset({ timeout: 40000, navigateUrl:"@Html.Raw(Page.Home)", reset: function() {
-              ContentController.isPaused(true);
+              //ContentController.isPaused(true);
             }});
             
             var hammertime = new Hammer(document.body, {});

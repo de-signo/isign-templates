@@ -90,17 +90,15 @@
         }, options);
 
         var scroll = $(this);
-        var scrollPos = scroll.scrollTop();
-        if (!scrollPos)
-            scrollPos = 0;
-        
         var obj = {
             update: function() {
                 var max = scroll.prop("scrollHeight") - scroll.innerHeight();
+                var scrollPos = scroll.scrollTop();
                 $(settings.up).toggleClass(settings.disabledCssClass, scrollPos <= 0);
                 $(settings.down).toggleClass(settings.disabledCssClass, scrollPos >= max);
             },
             doScroll: function(dir) {
+                var scrollPos = scroll.scrollTop();
                 scrollPos = scrollPos + dir * settings.scrollStep;
                 var max = scroll.prop("scrollHeight") - scroll.innerHeight();
                 if (scrollPos <= 0) {

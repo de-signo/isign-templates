@@ -13,7 +13,6 @@ body
     font-family: Arial, Helvetica, sans-serif;
     background-color: white;
 }
-.header1 div{}
 
 h1, h2, h3, p
 {
@@ -261,18 +260,20 @@ footer
 
 /* ++++++++++++++ list.cshtml ++++++++++++++  */
 
-.list header
+.list header,
+.list header1
 {
 
     height:204px;
     border-bottom: solid 12px #7f7f7f;
     border-top: solid 12px #7f7f7f;
-    background: url(header2.jpg) no-repeat right;
-    color:rgb(0,255,0); 
+    background: url(header2.png) no-repeat right;
+    color:grey; 
     font-size:40px;                  
 }
 
 .list header div
+
 {          
     color: #4E5D6B;
     font-size:46px; 
@@ -502,6 +503,25 @@ footer
 }
 
 
+
+
+/*+++++++++++++++ Header ++++++++++++++++++++++ */
+
+
+.header1{
+    height: 204px;
+    border-bottom: solid 12px #7f7f7f;
+    border-top: solid 12px #7f7f7f;
+    background: url(header2.png) no-repeat right;
+   
+    
+}
+.header1 div{
+    color: #4E5D6B;
+    font-size:46px; 
+    padding: 70px 0 0 53px; 
+
+}
 /* ++++++++++++++ details.cshtml ++++++++++++++  */
 .detail 
 {

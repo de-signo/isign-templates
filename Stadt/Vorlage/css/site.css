@@ -53,7 +53,7 @@ ul {
 }
 
 li {
-    padding: 2% 10% 2% 10%;
+    padding: 2% 15% 2% 15%;
     margin: 0 auto;
 }
 
@@ -180,7 +180,7 @@ a.handicap {
     height: 170px;
     width: 70px;
     margin: 0 auto;
-    background: #e5e5e5;
+    
 }
 
 .scrollbar .scrollup
@@ -427,7 +427,8 @@ footer
 .Buttons-Schnellzugr
 {
     display:inline-block; 
-    padding:20px 0px 20px 0px; margin:20px 0px 0px 0px;
+    padding:20px 0px 20px 0px; 
+    margin:20px 0px 0px 0px;
 }
 
 
@@ -473,9 +474,10 @@ footer
 {
     display: inline-block;
     text-decoration: none;
-    background: linear-gradient(to bottom, rgb(139,177,222), rgb(0,123,192));
+    background:  #B2B2B2;
+    box-shadow: 3px 3px 3px lightgrey;
     border-radius: 15px;
-    color: #e5e5e5;
+    color: #FFFFFF;
     text-align: center;
     font-size: 40px;
     line-height: 1.9em;          /* line-height: 50px; */

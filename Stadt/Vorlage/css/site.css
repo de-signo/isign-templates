@@ -562,11 +562,16 @@ footer
 
 .map2 
 {
-    margin: 60px 0 0 0;       
+    margin: 60px 0 0 90px;       
     height:695px;
-    background:rgb(230,230,230);  
+    background:white;  
     width: 100%;
-}
+    
+} 
+content img{
+        width: 80%;
+        padding-left: 10%;
+    }
 
 /* --------------------- QR-Code: - für zukünftige Projekte - hier nicht benötigt (deshalb außerhalb platziert -------------------  */
 .QR-Code {

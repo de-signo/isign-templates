@@ -140,6 +140,7 @@ a.handicap {
     right: 4%; 
     height: 99px; 
     width: 99px; 
+    width: 150%;
 }
 
 .home2
@@ -156,22 +157,18 @@ a.handicap {
     position: absolute;
     top: 1250px;
     left: 87%;
-    width: 20%;
+    
    
 }
 
 .hand2 
 {
-
-    position:absolute; 
-    top: 540px;
-    right: 65px;
+    display: none;
 }
 
 .hand3
 {
-    text-align:center;
-    margin-top: 50px;
+    display: none;
 }
 
 

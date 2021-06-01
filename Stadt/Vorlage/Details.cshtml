@@ -3,7 +3,7 @@
     var id = Request["id"];
     var Model = new FormsModel(this);
     var data = (from x in Model.DataSource("source")
-                where (string)x["id"] == id
+                where x["id"].ToString() == id
                 select x).FirstOrDefault();
 
     Page.Home = Model.NavigateHome();

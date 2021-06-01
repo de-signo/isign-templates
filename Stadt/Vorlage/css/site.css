@@ -61,7 +61,7 @@ li {
 li>a {
     display: block;
     text-decoration: none;
-    background:  rgb(214,0,28);
+    background: #034990;
     box-shadow: 5px 5px 5px lightgrey;
     border-radius: 15px;
     color: white;
@@ -156,6 +156,7 @@ a.handicap {
     position: absolute;
     top: 1250px;
     left: 87%;
+    width: 20%;
    
 }
 
@@ -212,7 +213,7 @@ a.handicap {
 
 footer
 {   
-    background-color:rgb(255,20,20);
+    background-color:#034990;
 }
 
 
@@ -232,7 +233,7 @@ footer
 {
     height: 55px;
     line-height: 100%;
-    background:  rgb(214,0,28);
+    background:  #034990;
     box-shadow: 5px 5px 5px lightgrey;
     
 }

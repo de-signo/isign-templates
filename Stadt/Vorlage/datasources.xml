@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<exportData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://stolltec.com/2012/iSign/ExternalDataSourceExport.xsd">
-  <dataSource id="ee399722-8238-4fb3-ba66-e571c54a4234" name="csv" dataProvider="csv" executeOnServer="true" cacheTime="PT20M">
-    <parameter name="file" value="C:\Datenimport\Stadt Navigation\routenplaner.csv" />
-    <parameter name="encoding" value="Windows-1252" />
-    <parameter name="enableFileAccess" value="True" />
-  </dataSource>
-</exportData>

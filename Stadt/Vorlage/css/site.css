@@ -294,7 +294,7 @@ footer
     text-align: left;
     padding-left: 40px;
     color: rgb(255,255,255);  
-    height: 65px;
+    width: 100%;
     overflow: hidden;  
     line-height: 1.5em;
     vertical-align: middle;         

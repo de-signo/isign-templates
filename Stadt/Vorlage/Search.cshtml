@@ -26,20 +26,18 @@
     <div id="keyboard">
         @{
             var type = (string)Model.Style["search_options"].FieldInstance.Value;
-            var keyboard = (type == "abc") ? 
-                    new string[] { "ABCDEFGHIJ","KLMNOPQRST","UVWXYZÄÖÜß" } : 
-                    new string[] { "QWERTZUIOPÜ","ASDFGHJKLÖÄ","YXCVBNM" };
+            var keyboard = new string[] { "QWERTZUIOPÜ","ASDFGHJKLÖÄ","YXCVBNM" };
         }
-        <div>
+        <div class="reihe01">
             @foreach (var c in "1234567890") { <a role="button">@c</a> }
         </div>
-        <div>
+        <div class="reihe02">
             @foreach (var c in keyboard[0]) { <a role="button">@c</a> }
         </div>
-        <div>
+        <div class="reihe03">
             @foreach (var c in keyboard[1]) { <a role="button">@c</a> }
         </div>
-        <div>
+        <div class="reihe04">
             @foreach (var c in keyboard[2]) { <a role="button">@c</a> }
         </div>
         <div class="Tastatur_untere_Reihe">

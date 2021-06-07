@@ -454,12 +454,31 @@ footer
 
 #keyboard 
 {
-    padding: 2% 0% 3% 4%;
+    padding: 2% 5% 2% 5%;
+    width: 100%;
+
+
 }
+/* ++++++++++++++ Tastenreihen zentral ausgerichtet +++++++++++++ */
+.reihe01
+{
+    padding: 0.5% 9%;
+}
+.reihe02,
+.reihe03
+{
+    padding: 0.5% 5%;
+
+}
+.reihe04
+{
+    padding: 0.5% 20%;
+}
+/* ++++++++++++++ Tastenreihen zentral ausgerichtet +++++++++++++ */
 
 .search #keyboard 
 {
-    margin: 0 3%;
+    margin: 0;
 }
 
 .search #keyboard a
@@ -471,16 +490,16 @@ footer
     border-radius: 15px;
     color: #FFFFFF;
     text-align: center;
-    font-size: 40px;
-    line-height: 1.9em;          /* line-height: 50px; */
+    font-size: 38px;
+    line-height: 1.7em;          /* line-height: 50px; */
     margin: 5px;
-    width: 78px;         /*  65  50px */
-    height: 78px;        /*  50px */
+    width: 65px;         /*  65  50px */
+    height: 65px;        /*  50px */
 }
 
 .Tastatur_untere_Reihe
 {
-    margin-left: 93px;     /*  margin-left: 185px; */
+    margin: 0.5% 12%;     /*  margin-left: 185px; */
 
 }
 

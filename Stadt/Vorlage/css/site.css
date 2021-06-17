@@ -50,19 +50,21 @@ ul {
     list-style-type: none;
     padding:0;
     clear:both;
+    padding-top: 10px;
 }
 
 li {
-    padding: 2% 10% 2% 10%;
+    padding: 1% 20% 2% 20%;
     margin: 0 auto;
 }
 
 li>a {
     display: block;
     text-decoration: none;
-    background: linear-gradient(to bottom, rgb(139,177,222), rgb(0,123,192));
+    background: #034990;
+    box-shadow: 5px 5px 5px lightgrey;
     border-radius: 15px;
-    color: #e5e5e5;
+    color: white;
     text-align: center;
     font-size: 48px;
     padding: 18px 15px 15px 15px;
@@ -109,8 +111,6 @@ a.handicap {
     position:absolute; 
     top: 285px;
     right: 16%; 
-    height: 99px; 
-    width: 99px; 
 }
 
 .back2
@@ -118,8 +118,6 @@ a.handicap {
     position:absolute; 
     bottom: 1%;
     right: 16%;
-    height: 99px; 
-    width: 99px; 
 }
 
 .handicap
@@ -136,8 +134,6 @@ a.handicap {
     position:absolute; 
     top: 285px;
     right: 4%; 
-    height: 99px; 
-    width: 99px; 
 }
 
 .home2
@@ -145,28 +141,25 @@ a.handicap {
     position:absolute; 
     bottom: 1%;
     right: 4%;
-    height: 99px; 
-    width: 99px; 
 }
 
 .hand 
 {
-    text-align:center;
-    margin-top: 30px;
+    position: absolute;
+    top: 1250px;
+    left: 87%;
+    
+   
 }
 
 .hand2 
 {
-
-    position:absolute; 
-    top: 540px;
-    right: 65px;
+    display: none;
 }
 
 .hand3
 {
-    text-align:center;
-    margin-top: 50px;
+    display: none;
 }
 
 
@@ -179,7 +172,7 @@ a.handicap {
     height: 170px;
     width: 70px;
     margin: 0 auto;
-    background: #e5e5e5;
+    
 }
 
 .scrollbar .scrollup
@@ -208,7 +201,7 @@ a.handicap {
 
 footer
 {   
-    background-color:rgb(255,20,20);
+    background-color:#034990;
 }
 
 
@@ -221,14 +214,15 @@ footer
 
 .main img.header {
     width:100%;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 .main li>a
 {
     height: 55px;
     line-height: 100%;
-    background: linear-gradient(to bottom, rgb(139,177,222), rgb(0,123,192));
+    background:  #034990;
+    box-shadow: 5px 5px 5px lightgrey;
     
 }
 
@@ -258,18 +252,20 @@ footer
 
 /* ++++++++++++++ list.cshtml ++++++++++++++  */
 
-.list header
+.list header,
+.list header1
 {
 
     height:204px;
     border-bottom: solid 12px #7f7f7f;
     border-top: solid 12px #7f7f7f;
-    background: url(header2.jpg) no-repeat right;
-    color:rgb(0,255,0); 
+    background: url(header2.png) no-repeat right;
+    color:grey; 
     font-size:40px;                  
 }
 
 .list header div
+
 {          
     color: #4E5D6B;
     font-size:46px; 
@@ -294,17 +290,21 @@ footer
 
 .list .auflistung1
 {
-    font-size: 30px;
+    font-size: 35px;
+    text-align: left;
+    padding-left: 40px;
     color: rgb(255,255,255);  
-    height: 65px;
+    width: 100%;
     overflow: hidden;  
-    line-height: 1em;
+    line-height: 1.5em;
     vertical-align: middle;         
 }
 
 .list .auflistung2
 {
-    font-size:22px;
+    font-size:25px;
+    text-align: left;
+    padding-left: 40px;
     color:rgb(255,255,255);       
     height: 30px;
     overflow:hidden;   
@@ -312,17 +312,19 @@ footer
 
 .list .col1   
 { 
-    width: 490px;
+    width: 500px;
     float:left;
 }
 
 .list .col2
 {
     float:right;
-    width:275px;
-    font-size:18px;
+    width:200px;
+    font-size:25px;
+    text-align: left;
+    padding-left: 10px;
     color:rgb(255,255,255);
-    line-height:  1.6em; 
+    line-height:  1.2em; 
 }
 
 .list .col1>h2, 
@@ -417,7 +419,8 @@ footer
 .Buttons-Schnellzugr
 {
     display:inline-block; 
-    padding:20px 0px 20px 0px; margin:20px 0px 0px 0px;
+    padding:20px 0px 20px 0px; 
+    margin:20px 0px 0px 0px;
 }
 
 
@@ -451,32 +454,52 @@ footer
 
 #keyboard 
 {
-    padding: 2% 0% 3% 4%;
+    padding: 2% 5% 2% 5%;
+    width: 100%;
+
+
 }
+/* ++++++++++++++ Tastenreihen zentral ausgerichtet +++++++++++++ */
+.reihe01
+{
+    padding: 0.5% 9%;
+}
+.reihe02,
+.reihe03
+{
+    padding: 0.5% 5%;
+
+}
+.reihe04
+{
+    padding: 0.5% 20%;
+}
+/* ++++++++++++++ Tastenreihen zentral ausgerichtet +++++++++++++ */
 
 .search #keyboard 
 {
-    margin: 0 3%;
+    margin: 0;
 }
 
 .search #keyboard a
 {
     display: inline-block;
     text-decoration: none;
-    background: linear-gradient(to bottom, rgb(139,177,222), rgb(0,123,192));
+    background:  #B2B2B2;
+    box-shadow: 3px 3px 3px lightgrey;
     border-radius: 15px;
-    color: #e5e5e5;
+    color: #FFFFFF;
     text-align: center;
-    font-size: 40px;
-    line-height: 1.9em;          /* line-height: 50px; */
+    font-size: 38px;
+    line-height: 1.7em;          /* line-height: 50px; */
     margin: 5px;
-    width: 78px;         /*  65  50px */
-    height: 78px;        /*  50px */
+    width: 65px;         /*  65  50px */
+    height: 65px;        /*  50px */
 }
 
 .Tastatur_untere_Reihe
 {
-    margin-left: 93px;     /*  margin-left: 185px; */
+    margin: 0.5% 12%;     /*  margin-left: 185px; */
 
 }
 
@@ -493,6 +516,25 @@ footer
 }
 
 
+
+
+/*+++++++++++++++ Header ++++++++++++++++++++++ */
+
+
+.header1{
+    height: 204px;
+    border-bottom: solid 12px #7f7f7f;
+    border-top: solid 12px #7f7f7f;
+    background: url(header2.png) no-repeat right;
+   
+    
+}
+.header1 div{
+    color: #4E5D6B;
+    font-size:46px; 
+    padding: 70px 0 0 53px; 
+
+}
 /* ++++++++++++++ details.cshtml ++++++++++++++  */
 .detail 
 {
@@ -533,11 +575,16 @@ footer
 
 .map2 
 {
-    margin: 60px 0 0 0;       
+    margin: 60px 0 0 90px;       
     height:695px;
-    background:rgb(230,230,230);  
+    background:white;  
     width: 100%;
-}
+    
+} 
+content img{
+        width: 80%;
+        padding-left: 10%;
+    }
 
 /* --------------------- QR-Code: - für zukünftige Projekte - hier nicht benötigt (deshalb außerhalb platziert -------------------  */
 .QR-Code {

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<StyleList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://stollsoft.de/iSign/v2/Content/Forms/Styles">
+  <style key="raumbelegun2021"
+         file="index.cshtml"
+         preview="assets/preview.png"
+         interactive="false" target="chromium">
+    <names>
+      <name culture="de">Raumbelegung</name>
+    </names>
+    <fields>
+      <field key="s">
+        <names>
+          <name>Datenquelle</name>
+        </names>
+        <content_class type="DataSource" />
+      </field>
+      <field key="title">
+        <names>
+          <name>Titel</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+    </fields>
+  </style>
+</StyleList>

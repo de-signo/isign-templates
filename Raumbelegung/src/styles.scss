@@ -1,0 +1,26 @@
+@import "./styles/mixins.scss";
+
+/*
+ * this file defines global styles
+ */
+
+html
+{
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1.4vh;
+}
+body
+{
+  margin: 0;
+  color: $color-primary-fg;
+  background-color: $color-primary-bg;
+}
+
+header
+{
+  height: 13vh;
+  line-height: 13vh;
+  text-align: center;
+  font-size: 2vh;
+}

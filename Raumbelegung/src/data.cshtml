@@ -1,0 +1,8 @@
+@using Newtonsoft.Json
+@{
+  Response.ContentType = "application/json";
+  var model = new FormsModel(this);
+  var ds = model.DataSource("s");
+  var s = JsonConvert.SerializeObject(ds.Take(1));
+}
+@s

@@ -1,0 +1,25 @@
+<header>
+  <img src="assets/logo.svg" />
+</header>
+<main *ngIf="current; else elseBlock">
+  <section class="left">
+    <h2>{{ current.date }}</h2>
+    <p>{{ current.from }} - {{ current.to }} Uhr</p>
+  </section>
+  <section class="right">
+    <h1>{{ current.title }}</h1>
+    <h3>{{ current.subtitle }}</h3>
+    <p>
+      Teilnehmer:
+    </p>
+    <ul>
+      <li *ngFor="let p of current.participants">
+        {{ p }}
+      </li>
+    </ul>
+  </section>
+</main>
+<ng-template #elseBlock>
+  <main>
+  </main>
+</ng-template>

@@ -1,0 +1,6 @@
+
+main {
+  display: flex;
+  &>section.left { flex: 30%; }
+  &>section.right { flex: 70%; }
+}

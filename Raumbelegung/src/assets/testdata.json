@@ -1,8 +1,7 @@
 {
   "title": "Veranstaltung",
   "subtitle": "Hans Ludwigs Tombola",
-  "date": "22.07.2021",
-  "from": "21:00",
-  "to": "00:00",
+  "from": 1625580000,
+  "to": 1625680000,
   "participants": ["Günter Grass", "Wolfgang Goethe", "Friedrich Schiller", "Mephisto"]
 }

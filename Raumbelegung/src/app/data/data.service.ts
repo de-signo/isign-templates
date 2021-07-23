@@ -15,6 +15,6 @@ export class DataService {
   load(): Observable<Booking>
   {
     const jsonFile = `${environment.dataServiceUrl}`;
-    return this.http.get<Booking>(jsonFile);
+    return this.http.get<Booking>(jsonFile + window.location.search);
   }
 }

@@ -18,7 +18,31 @@
         <names>
           <name>Titel</name>
         </names>
-        <content_class bind="Column" parentField="source" type="TextFree" />
+        <content_class bind="Column" parentField="s" type="TextFree" />
+      </field>
+      <field key="subtitle">
+        <names>
+          <name>Sub-Titel</name>
+        </names>
+        <content_class bind="Column" parentField="s" type="TextFree" />
+      </field>
+      <field key="date">
+        <names>
+          <name>Datum</name>
+        </names>
+        <content_class bind="Column" parentField="s" type="TextFree" />
+      </field>
+      <field key="to">
+        <names>
+          <name>Bis</name>
+        </names>
+        <content_class bind="Column" parentField="s" type="TextFree" />
+      </field>
+       <field key="participants">
+        <names>
+          <name>Teilnehmer</name>
+        </names>
+        <content_class bind="Column" parentField="s" type="TextFree" />
       </field>
     </fields>
   </style>

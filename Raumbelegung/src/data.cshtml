@@ -1,8 +1,25 @@
 @using Newtonsoft.Json
+@using Stolltec.Forms.Model
 @{
   Response.ContentType = "application/json";
   var model = new FormsModel(this);
   var ds = model.DataSource("s");
-  var s = JsonConvert.SerializeObject(ds.Take(1));
+  var booking = ds.FirstOrDefault();
 }
-@s
+@if (booking == null) {
+  <text>null</text>
+}
+else {
+  var from = booking["from"];
+  var dtFrom = from is DateTime ? (DateTime)from : DateTime.Parse(from.ToString());
+  var to = booking["to"];
+  var dtTo = to is DateTime ? (DateTime)to : DateTime.Parse(to.ToString());
+  var epoch = new DateTime(1970, 1, 1);
+  @Html.Raw(JsonConvert.SerializeObject(new {
+    title = booking["title"],
+    subtitle = booking["subtitle"],
+    from = dtFrom.Subtract(epoch).TotalSeconds,
+    to = dtTo.Subtract(epoch).TotalSeconds,
+    participants = (booking["participants"] as string ?? "").Split(';')
+  }));
+}

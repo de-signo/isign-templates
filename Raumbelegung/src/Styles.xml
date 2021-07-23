@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <StyleList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://stollsoft.de/iSign/v2/Content/Forms/Styles">
-  <style key="raumbelegun2021"
+  <style key="raumbelegung2021A"
          file="index.cshtml"
          preview="assets/preview.png"
          interactive="false" target="chromium">
@@ -26,7 +26,7 @@
         </names>
         <content_class bind="Column" parentField="s" type="TextFree" />
       </field>
-      <field key="date">
+      <field key="from">
         <names>
           <name>Datum</name>
         </names>
@@ -39,6 +39,64 @@
         <content_class bind="Column" parentField="s" type="TextFree" />
       </field>
        <field key="participants">
+        <names>
+          <name>Teilnehmer</name>
+        </names>
+        <content_class bind="Column" parentField="s" type="TextFree" />
+      </field>
+    </fields>
+  </style>
+  <style key="raumbelegung2021B"
+         file="index.cshtml"
+         preview="assets/preview.png"
+         interactive="false" target="chromium">
+    <names>
+      <name culture="de">Raumbelegung Datum Uhrzeit getrennt</name>
+    </names>
+    <fields>
+      <field key="s">
+        <names>
+          <name>Datenquelle</name>
+        </names>
+        <content_class type="DataSource" />
+      </field>
+      <field key="title">
+        <names>
+          <name>Titel</name>
+        </names>
+        <content_class bind="Column" parentField="s" type="TextFree" />
+      </field>
+      <field key="subtitle">
+        <names>
+          <name>Sub-Titel</name>
+        </names>
+        <content_class bind="Column" parentField="s" type="TextFree" />
+      </field>
+      <field key="datefrom">
+        <names>
+          <name>Datum von</name>
+        </names>
+        <content_class bind="Column" parentField="s" type="TextFree" />
+      </field>
+      <field key="from">
+        <names>
+          <name>Zeit von</name>
+        </names>
+        <content_class bind="Column" parentField="s" type="TextFree" />
+      </field>
+      <field key="dateto">
+        <names>
+          <name>Datum bis</name>
+        </names>
+        <content_class bind="Column" parentField="s" type="TextFree" />
+      </field>
+      <field key="to">
+        <names>
+          <name>Zeit bis</name>
+        </names>
+        <content_class bind="Column" parentField="s" type="TextFree" />
+      </field>
+      <field key="participants">
         <names>
           <name>Teilnehmer</name>
         </names>

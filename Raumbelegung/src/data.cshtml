@@ -1,7 +1,28 @@
 @using Newtonsoft.Json
 @using Stolltec.Forms.Model
+@functions{
+  readonly DateTime epoch = new DateTime(1970, 1, 1);
+
+  DateTime ReadDate(RowModel booking, char mode, string name)
+  {
+    if (mode == 'B')
+    {
+      var time = booking[name];
+      var date = booking["date" + name];
+      return
+        (date is DateTime ? (DateTime)date : DateTime.Parse(date.ToString())) +
+        (time is TimeSpan ? (TimeSpan)time : TimeSpan.Parse(time.ToString()));
+    }
+    else
+    {
+      var dt = booking[name];
+      return dt is DateTime ? (DateTime)dt : DateTime.Parse(dt.ToString());
+    }
+  }
+}
 @{
   Response.ContentType = "application/json";
+  var mode = Request.Params["s"].Last();
   var model = new FormsModel(this);
   var ds = model.DataSource("s");
   var booking = ds.FirstOrDefault();
@@ -10,16 +31,13 @@
   <text>null</text>
 }
 else {
-  var from = booking["from"];
-  var dtFrom = from is DateTime ? (DateTime)from : DateTime.Parse(from.ToString());
-  var to = booking["to"];
-  var dtTo = to is DateTime ? (DateTime)to : DateTime.Parse(to.ToString());
-  var epoch = new DateTime(1970, 1, 1);
+  var from = ReadDate(booking, mode, "from");
+  var to = ReadDate(booking, mode, "to");
   @Html.Raw(JsonConvert.SerializeObject(new {
     title = booking["title"],
     subtitle = booking["subtitle"],
-    from = dtFrom.Subtract(epoch).TotalSeconds,
-    to = dtTo.Subtract(epoch).TotalSeconds,
+    from = from.Subtract(epoch).TotalSeconds,
+    to = to.Subtract(epoch).TotalSeconds,
     participants = (booking["participants"] as string ?? "").Split(';')
   }));
 }

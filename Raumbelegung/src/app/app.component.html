@@ -1,15 +1,15 @@
 <header>
-  <img src="assets/logo.svg" />
+  <img src="assets/logo.png" />
 </header>
 <main *ngIf="current; else elseBlock">
   <section class="left">
-    <h2>{{ 1000 * current.from | date : 'shortDate' }}</h2>
+    <h2>{{ 1000 * current.from | date : 'dd.MM.yyyy' }}</h2>
     <p>{{ 1000 * current.from | date : 'shortTime' }} - {{ 1000 * current.to | date : 'shortTime' }} Uhr</p>
   </section>
   <section class="right">
     <h1>{{ current.title }}</h1>
     <h3>{{ current.subtitle }}</h3>
-    <p>
+    <p *ngIf="current.participants && current.participants.length > 0">
       Teilnehmer:
     </p>
     <ul>

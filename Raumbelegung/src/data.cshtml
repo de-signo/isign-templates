@@ -33,11 +33,13 @@
 else {
   var from = ReadDate(booking, mode, "from");
   var to = ReadDate(booking, mode, "to");
+  var bp = booking["participants"] as string;
+  var participants = String.IsNullOrEmpty(bp) ? new string[0] : bp.Split(';');
   @Html.Raw(JsonConvert.SerializeObject(new {
     title = booking["title"],
     subtitle = booking["subtitle"],
     from = from.Subtract(epoch).TotalSeconds,
     to = to.Subtract(epoch).TotalSeconds,
-    participants = (booking["participants"] as string ?? "").Split(';')
+    participants = participants
   }));
 }

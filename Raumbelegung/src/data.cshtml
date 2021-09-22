@@ -1,0 +1,45 @@
+@using Newtonsoft.Json
+@using Stolltec.Forms.Model
+@functions{
+  readonly DateTime epoch = new DateTime(1970, 1, 1);
+
+  DateTime ReadDate(RowModel booking, char mode, string name)
+  {
+    if (mode == 'B')
+    {
+      var time = booking[name];
+      var date = booking["date" + name];
+      return
+        (date is DateTime ? (DateTime)date : DateTime.Parse(date.ToString())) +
+        (time is TimeSpan ? (TimeSpan)time : TimeSpan.Parse(time.ToString()));
+    }
+    else
+    {
+      var dt = booking[name];
+      return dt is DateTime ? (DateTime)dt : DateTime.Parse(dt.ToString());
+    }
+  }
+}
+@{
+  Response.ContentType = "application/json";
+  var mode = Request.Params["s"].Last();
+  var model = new FormsModel(this);
+  var ds = model.DataSource("s");
+  var booking = ds.FirstOrDefault();
+}
+@if (booking == null) {
+  <text>null</text>
+}
+else {
+  var from = ReadDate(booking, mode, "from");
+  var to = ReadDate(booking, mode, "to");
+  var bp = booking["participants"] as string;
+  var participants = String.IsNullOrEmpty(bp) ? new string[0] : bp.Split(';');
+  @Html.Raw(JsonConvert.SerializeObject(new {
+    title = booking["title"],
+    subtitle = booking["subtitle"],
+    from = from.Subtract(epoch).TotalSeconds,
+    to = to.Subtract(epoch).TotalSeconds,
+    participants = participants
+  }));
+}

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <StyleList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://stollsoft.de/iSign/v2/Content/Forms/Styles">
-  <style key="custom_ticker" file="Ticker.cshtml" target="Forms2">
+  <style key="custom_ticker" file="Ticker.cshtml" target="chromium">
     <names>
       <name>Laufschrift</name>
     </names>
@@ -13,7 +13,7 @@
     </fields>
   </style>
 
-  <style key="custom_dbticker" file="DBTicker.cshtml" target="Forms2">
+  <style key="custom_dbticker" file="DBTicker.cshtml" target="chromium">
     <names>
       <name>Laufschrift (datengebunden)</name>
     </names>
@@ -33,7 +33,7 @@
     </fields>
   </style>
 
-  <style key="custom_ticker2" file="Ticker2.cshtml" target="Forms2">
+  <style key="custom_ticker2" file="Ticker2.cshtml" target="chromium">
     <names>
       <name>Laufschrift mit Optionen</name>
     </names>
@@ -93,7 +93,7 @@
     </fields>
   </style>
 
-  <style key="custom_dbticker2" file="DBTicker2.cshtml" target="Forms2">
+  <style key="custom_dbticker2" file="DBTicker2.cshtml" target="chromium">
     <names>
       <name>Laufschrift mit Optionen (datengebunden)</name>
     </names>

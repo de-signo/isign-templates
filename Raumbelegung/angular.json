@@ -26,6 +26,8 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
+            "optimization": false,
+            "sourceMap": true,
             "assets": [
               "src/data.cshtml",
               "src/Styles.xml",

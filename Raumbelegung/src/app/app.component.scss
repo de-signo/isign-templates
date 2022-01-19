@@ -65,6 +65,7 @@ section.right {
 
     flex-shrink: 1;
     overflow: auto;
+    scroll-behavior: smooth;
     li {
       padding: 1.5vh 0 0vh 0.5vw;
     }

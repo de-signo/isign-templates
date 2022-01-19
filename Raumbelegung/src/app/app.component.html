@@ -11,7 +11,7 @@
   <p *ngIf="current.participants && current.participants.length > 0">
     Teilnehmer:
   </p>
-  <ul>
+  <ul #scrollcontainer>
     <li *ngFor="let p of current.participants">
       {{ p }}
     </li>

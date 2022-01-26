@@ -1,0 +1,15 @@
+@using Newtonsoft.Json
+@using Stolltec.Forms.Model
+@{
+  /*
+   * this is here for reference, touch is disabled in environment file.
+   * To enable scoring, change touchServiceUrl to "touch.cshtml" and
+   * change the behavior of data.cshtml to return scores.
+   */
+  Response.ContentType = "application/json";
+  var model = new FormsModel(this);
+  var id = Request["id"];
+  var Model = new FormsModel(this);
+  Model.DataSource("source").Touch(id);
+}
+@Html.Raw(JsonConvert.SerializeObject(true))

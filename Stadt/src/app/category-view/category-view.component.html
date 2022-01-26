@@ -1,0 +1,16 @@
+
+<img class="header" alt="header" src="assets/img/header1.png" />
+
+<ul class="btns">
+  <li *ngFor="let x of data.categories; index as i">
+    <a [routerLink]="['/', i]" queryParamsHandling="preserve">{{ x.name }}</a>
+  </li>
+  <li *ngIf="enableSearch" class="search_mock">
+    <a routerLink="search" queryParamsHandling="preserve">
+      <span>Suchen</span>
+      <img alt="Suche" src="assets/img/Lupe.png" />
+    </a>
+  </li>
+</ul>
+
+<img class="hand" src="assets/img/hand1.gif" />

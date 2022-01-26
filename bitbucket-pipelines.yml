@@ -16,5 +16,7 @@ pipelines:
             - npm install
             - cd Raumbelegung
             - npm run zip
+            - cd ../Stadt
+            - npm run zip
           artifacts:
             - dist/*

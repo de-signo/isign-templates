@@ -1,0 +1,24 @@
+
+<header>Suchen</header>
+
+<nav>
+  <a routerLink="/" queryParamsHandling="preserve" class="home">Home</a>
+</nav>
+
+<ul class="results btns">
+  <li *ngFor="let item of results">
+    <a [routerLink]="['/', item.index.cat, item.index.item]" queryParamsHandling="preserve">{{item.term1}}</a>
+  </li>
+</ul>
+
+<input #txtFind (keyup)="txtFind.value = txtFind.value.toUpperCase(); updateFind()"/>
+
+<div id="keyboard">
+  <div *ngFor="let row of keyboard">
+    <a *ngFor="let key of row" role="button" [class]="key.class" (click)="keyPress(key)" [innerHTML]="key.display"></a>
+  </div>
+</div>
+
+<footer>
+  <a routerLink="/" queryParamsHandling="preserve" class="home">Home</a>
+</footer>

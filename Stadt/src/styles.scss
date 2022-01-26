@@ -1,0 +1,89 @@
+@import "./styles/mixins.scss";
+
+/*
+ * this file defines global styles
+ */
+
+html
+{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.4vh;
+}
+
+body {
+  background-color: $color-primary-bg;
+  color: $color-primary-fg;
+
+  margin: 0;
+	padding: 0;
+
+  /* disable select */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* button list (global for category, list and search) */
+ul.btns {
+  list-style-type: none;
+  padding: 10px 0 0 0;
+
+  li {
+    margin: 1% 0 2% 0;
+  }
+
+  li>a {
+    display: block;
+    text-decoration: none;
+    background: $color-btn-primary-bg;
+    box-shadow: 5px 5px 5px $color-btn-primary-shadow;
+    border-radius: 15px;
+    color: $color-btn-primary-fg;
+  }
+}
+
+/* header (list and detail) */
+header {
+  height: 204px;
+  border-bottom: solid 12px $color-header-border;
+  border-top: solid 12px $color-header-border;
+  background: url(assets/img/header2.png) no-repeat right;
+  font-size:46px;
+  padding: 0 0 0 53px;
+  line-height: 204px;
+}
+
+/* navigation (home, back) */
+a.home
+{
+  @include nav-link;
+  background: transparent url(assets/img/home.png) no-repeat center / contain;
+}
+
+a.back
+{
+  @include nav-link;
+  background: transparent url(assets/img/back.png) no-repeat center / contain;
+}
+
+nav, footer {
+  padding: 1vh 60px;
+  &>.handicap {
+    float: left;
+    margin: 0 4vw 0 0;
+  }
+  &>a {
+    float: right;
+    margin: 0 0 0 4vw;
+  }
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}

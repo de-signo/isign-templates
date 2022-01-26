@@ -1,0 +1,33 @@
+@using Newtonsoft.Json
+@using Stolltec.Forms.Model
+@using System.Linq
+@{
+  Response.ContentType = "application/json";
+  var model = new FormsModel(this);
+  var source = model.DataSource("source");
+  var count = source.Count();
+  
+  var clientList = source.Select((x, i) => new {
+    cat = x["cat"],
+    item = new {
+      term1 = x["term1"],
+      term2 = x["term2"],
+      house = x["house"],
+      level = x["level"],
+      room = x["room"],
+      info = x["info"],
+      phone = x["phone"],
+      email = x["email"],
+      map = Href(x.DataFileHandler("map")),
+      favorits = count - i
+    }
+  });
+
+  var results = from x in clientList
+                group x by x.cat into z
+                select new {
+                  name = z.Key,
+                  items = z.Select(y => y.item).OrderBy(y => y.term1)
+                };
+}
+@Html.Raw(JsonConvert.SerializeObject(results))

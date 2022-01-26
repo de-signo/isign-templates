@@ -3,6 +3,7 @@
   "name": "standardvorlagen",
   "private": true,
   "workspaces": [
-    "Raumbelegung"
+    "Raumbelegung",
+    "Stadt"
   ]
 }

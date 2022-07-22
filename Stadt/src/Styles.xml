@@ -3,7 +3,7 @@
 
 
   <style key="Stadt4.0" file="index.cshtml"
-         interactive="true" target="Forms2" preview="assets/img/preview.png">
+         interactive="true" target="chromium" preview="assets/img/preview.png">
     <names>
       <name culture="de">Stadt</name>
     </names>

@@ -1,0 +1,66 @@
+@import "../../styles/mixins.scss";
+
+ul.btns
+{
+  width: 84%;
+  margin: 8vh auto 0 auto;
+  
+  li>a
+  {
+    text-align: center;
+    font-size: 42px;
+    line-height: 78px;
+    height: 78px;
+  }
+}
+
+input
+{
+  display: block;
+  font-size: 40px;
+  margin: 6% auto 0 auto;
+  width: 84%;
+  border: none;
+  border-bottom: solid 1px $color-primary-fg;
+}
+
+
+#keyboard
+{
+  width: 84%;
+  margin: 2% auto;
+  padding: 0;
+  text-align: center;
+
+  &>div
+  {
+    padding: 0.5% 0;
+  }
+
+  a
+  {
+    display: inline-block;
+    text-decoration: none;
+    background:  $color-btn-secondary-bg;
+    box-shadow: 3px 3px 3px $color-btn-secondary-shadow;
+    border-radius: 15px;
+    color: $color-btn-secondary-fg;
+    text-align: center;
+    font-size: 38px;
+    line-height: 65px;
+    margin: 5px;
+    width: 65px;
+    height: 65px;
+  }
+
+  a.space
+  {
+    width: 541px;
+  }
+
+  &>:nth-child(5) a
+  {
+    font-size: 35px;
+    line-height: 2em;
+  }
+}

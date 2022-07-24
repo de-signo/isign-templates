@@ -1,0 +1,42 @@
+
+img.header
+{
+  width:100%;
+  margin-bottom: 40px;
+}
+
+/* button list (extends styles.scss) */
+.btns
+{
+  width: 60%;
+  margin: 0 auto;
+
+  li>a
+  {
+    text-align: center;
+    font-size: 48px;
+    height: 88px;
+    line-height: 88px;
+  }
+
+  li.search_mock>a
+  {
+    background:rgb(230,230,230);
+    height: 84px;
+    border:solid rgb(80,80,80) 2px;
+    color:rgb(100,100,100);
+
+    img
+    {
+      width:50px;
+      margin: -5px 0 -7px 0;
+    }
+  }
+}
+
+.hand
+{
+  position: absolute;
+  top: 1250px;
+  left: 87%;
+}

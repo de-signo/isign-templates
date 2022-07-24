@@ -1,0 +1,25 @@
+/* define colors here */
+$color-primary-fg: #4E5D6B;
+$color-primary-bg: #ffffff;
+$color-header-border: #7f7f7f;
+
+/* primary buttons */
+$color-btn-primary-bg: #034990;
+$color-btn-primary-fg: white;
+$color-btn-primary-shadow: lightgrey;
+
+/* secondary buttons */
+$color-btn-secondary-bg: rgb(120,120,120);;
+$color-btn-secondary-fg: white;
+$color-btn-secondary-shadow: lightgrey;
+$color-btn-secondary-disabled-fg: rgb(160, 160, 160);
+$color-btn-secondary-disabled-bg: rgb(200,200,200);
+
+@mixin nav-link() {
+  display:block;
+  height: 99px;
+  width: 99px;
+  font-size: 0;
+  text-decoration: none;
+  background-size: contain;
+}

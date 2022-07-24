@@ -1,5 +1,5 @@
 {
-  "name": "raumbelegung",
+  "name": "stadt",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "zip": "ng build --configuration production && cd ../dist/raumbelegung && bestzip ../raumbelegung.zip *"
+    "zip": "ng build --configuration production && cd ../dist/stadt && bestzip ../stadt.zip *"
   },
   "private": true,
   "dependencies": {
@@ -17,6 +17,9 @@
     "@angular/core": "^13",
     "@angular/platform-browser": "^13",
     "@angular/platform-browser-dynamic": "^13",
+    "@angular/router": "^13",
+    "@ng-idle/core": "^11.1.0",
+    "fuzzysort": "^1.1.4",
     "rxjs": "~6.6.7",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

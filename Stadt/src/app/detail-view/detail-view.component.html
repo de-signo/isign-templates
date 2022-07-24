@@ -1,0 +1,35 @@
+<header>{{ category?.name }}</header>
+
+<nav>
+  <a routerLink="/" queryParamsHandling="preserve" class="home">Home</a>
+  <a class="back" href="javascript: window.history.back()">Back</a>
+</nav>
+
+<article *ngIf="!item">
+  <span>Nicht gefunden</span>
+</article>
+<article *ngIf="item">
+  <div class="content">
+    <h2>{{ item.term1 }}</h2>
+    <h3>{{ item.term2 }}</h3>
+    <p>
+      {{ item.house }}<br>
+      {{ item.level }}<br>
+      {{ item.room }}
+    </p>
+    <p>
+      <ng-template *ngIf="item.phone">Fon: {{item.phone}}")<br></ng-template>
+      <ng-template *ngIf="item.email">E-mail: {{item.email}}")</ng-template>
+    </p>
+    <p>
+      {{ item.info }}
+    </p>
+  </div>
+
+  <img *ngIf="item.map" class="map" [src]="item.map" alt="Lageplan"/>
+</article>
+
+<footer>
+  <a routerLink="/" queryParamsHandling="preserve" class="home">Home</a>
+  <a class="back" href="javascript: window.history.back()">Back</a>
+</footer>

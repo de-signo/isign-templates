@@ -1,0 +1,48 @@
+<header>{{ category.name }}</header>
+
+<nav>
+  <a routerLink="/" queryParamsHandling="preserve" class="home">Home</a>
+</nav>
+
+<div *ngIf="enableAnchors" class="hooks">
+  <div>Bitte den Anfangsbuchstaben des gesuchten Begriffs w&auml;hlen</div>
+  <ul class="hooks">
+    <li *ngFor="let a of hooks | keyvalue" [ngClass]="{'disabled1': !a.value}">
+      <a *ngIf="a.value" (click)="scrollTo(a.key)">{{a.key}}</a>
+      <span *ngIf="!a.value" class="Buttons-Schnellzugr">{{a.key}}</span>
+    </li>
+  </ul>
+</div>
+
+<div class="scroll-area" #divScroll>
+  <ul class="btns">
+    <li *ngFor="let item of items; index as i" class="item">
+      <a [routerLink]="[i]" queryParamsHandling="preserve" [id]="item.hook ? 'anchor' + item.hook : null">
+        <span>{{ item.term1 }}</span>
+        <span>{{ item.term2 }}</span>
+        <span>{{ item.house }}</span>
+        <span>{{ item.level }}</span>
+        <span>{{ item.room }}</span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<div class="scrollbar">
+  <div class="scrollup" id="btnUp" (click)="divScroll.scrollTop = divScroll.scrollTop - 500" [ngClass]="{'disabled': divScroll.scrollTop == 0}"></div>
+  <div class="scrolldown" id="btnDown" (click)="divScroll.scrollTop = divScroll.scrollTop + 500" [ngClass]="{'disabled': divScroll.scrollTop == divScroll.scrollHeight - divScroll.clientHeight}"></div>
+</div>
+
+<footer>
+  <div *ngIf="enableAnchors && handicapped" class="hooks">
+    <div>Bitte den Anfangsbuchstaben des gesuchten Begriffs w&auml;hlen</div>
+    <ul>
+      <li *ngFor="let a of hooks | keyvalue" [ngClass]="{'disabled1': !a.value}">
+        <a *ngIf="a.value" (click)="scrollTo(a.key)">{{a.key}}</a>
+        <span *ngIf="!a.value" class="Buttons-Schnellzugr">{{a.key}}</span>
+      </li>
+    </ul>
+  </div>
+  <a *ngIf="enableAnchors" (click)="handicapped = !handicapped" class="handicap">Handicap</a>
+  <a routerLink="/" queryParamsHandling="preserve" class="home">Home</a>
+</footer>

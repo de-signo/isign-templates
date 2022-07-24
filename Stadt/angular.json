@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "raumbelegung": {
+    "stadt": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "../dist/raumbelegung",
+            "optimization": false,
+            "sourceMap": true,
+            "outputPath": "../dist/stadt",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -73,18 +75,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "raumbelegung:build"
+            "browserTarget": "stadt:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "raumbelegung:build:production"
+              "browserTarget": "stadt:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "raumbelegung:build"
+            "browserTarget": "stadt:build"
           }
         },
         "test": {
@@ -121,16 +123,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "raumbelegung:serve"
+            "devServerTarget": "stadt:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "raumbelegung:serve:production"
+              "devServerTarget": "stadt:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "raumbelegung"
+  "defaultProject": "stadt"
 }

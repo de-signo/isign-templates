@@ -2,6 +2,7 @@
 <img class="header" alt="header" src="assets/img/header1.png" />
 
 <ul class="btns">
+  <li class="space"></li>
   <li *ngFor="let x of data.categories; index as i">
     <a [routerLink]="['/', i]" queryParamsHandling="preserve">{{ x.name }}</a>
   </li>
@@ -11,6 +12,7 @@
       <img alt="Suche" src="assets/img/Lupe.png" />
     </a>
   </li>
+  <li class="space"></li>
 </ul>
 
 <img class="hand" src="assets/img/hand1.gif" />

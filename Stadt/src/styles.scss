@@ -29,11 +29,7 @@ body {
 /* button list (global for category, list and search) */
 ul.btns {
   list-style-type: none;
-  padding: 10px 0 0 0;
-
-  li {
-    margin: 1% 0 2% 0;
-  }
+  padding: 0;
 
   li>a {
     display: block;

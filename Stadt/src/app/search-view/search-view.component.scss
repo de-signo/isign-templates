@@ -4,7 +4,9 @@ ul.btns
 {
   width: 84%;
   margin: 8vh auto 0 auto;
-  
+  li {
+    margin: 1% 0 2% 0;
+  }
   li>a
   {
     text-align: center;

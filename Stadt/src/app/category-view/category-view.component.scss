@@ -1,8 +1,18 @@
 
+:host {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
 img.header
 {
-  width:100%;
-  margin-bottom: 40px;
+  max-width: 100%;
 }
 
 /* button list (extends styles.scss) */
@@ -11,18 +21,27 @@ img.header
   width: 60%;
   margin: 0 auto;
 
+  display: flex;
+  flex-direction: column;
+  gap: 3%;
+
+  li {
+    flex: 1 1 auto;
+  }
+
   li>a
   {
-    text-align: center;
     font-size: 48px;
-    height: 88px;
-    line-height: 88px;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   li.search_mock>a
   {
     background:rgb(230,230,230);
-    height: 84px;
     border:solid rgb(80,80,80) 2px;
     color:rgb(100,100,100);
 

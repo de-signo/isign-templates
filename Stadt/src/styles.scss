@@ -64,22 +64,3 @@ a.back
   @include nav-link;
   background: transparent url(assets/img/back.png) no-repeat center / contain;
 }
-
-nav, footer {
-  padding: 1vh 60px;
-  &>.handicap {
-    float: left;
-    margin: 0 4vw 0 0;
-  }
-  &>a {
-    float: right;
-    margin: 0 0 0 4vw;
-  }
-}
-
-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}

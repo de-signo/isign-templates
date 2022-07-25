@@ -34,3 +34,22 @@ article
   margin: 60px 0 0 0;
   width: 100%;
 }
+
+nav, footer {
+  padding: 1vh 60px;
+  &>.handicap {
+    float: left;
+    margin: 0 4vw 0 0;
+  }
+  &>a {
+    float: right;
+    margin: 0 0 0 4vw;
+  }
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}

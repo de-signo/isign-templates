@@ -1,17 +1,50 @@
 @import "../../styles/mixins.scss";
 
+:host {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 60px 60px 60px;
+
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  grid-template-columns: 1fr auto;
+  gap: 20px 60px;
+
+  header {
+    grid-column: 1/3;
+    grid-row: 1;
+    margin: 0 -60px;
+  }
+  .hooks {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .scroll-area {
+    grid-column: 1;
+    grid-row: 3;
+  }
+  footer {
+    grid-column: 1;
+    grid-row: 4;
+  }
+  nav {
+    grid-column: 2;
+    grid-row: 2/5;
+  }
+}
 
 .scroll-area
 {
-  margin-top: 20px;
-  max-height: 1130px;
   overflow: hidden;
   scroll-behavior: smooth;
 }
 
 .btns
 {
-  margin: 400px 200px 0 60px;
+  margin-top: 400px; /* for handicapped */
   li
   {
     margin: 23px 0 15px 0;
@@ -67,27 +100,20 @@
   }
 }
 
-footer>.hooks
-{
-  margin: 0 0 20px 0;
-}
 .hooks {
-  width:820px;
-  margin: 0 200px 0 60px;
+  max-width: 800px;
   
   &>div /* text */
   {
-      font-size:18px;
-      color:rgb(60,60,60);
-      margin: 0px 0 -7px 4px;
-      padding: 20px 0 0 0;
+    font-size:18px;
+    color:rgb(60,60,60);
   }
 
   ul
   {
     list-style-type: none;
     padding: 0;
-    margin: 10px 0 0 0;
+    margin: 3px 0 0 0;
   }
   li {
     display:inline-block;
@@ -123,12 +149,26 @@ a.handicap {
   background: url(../../assets/img/Button_Rollstuhlfahrer.png) no-repeat center / contain;
 }
 
+nav {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+
+  align-items: center;
+  justify-items: center;
+
+  .nav-top {
+    grid-row:1;
+  }
+  .scrollbar {
+    grid-row: 2;
+  }
+  &>* {
+    grid-row: 3;
+  }
+}
+
 .scrollbar
 {
-  position:absolute;
-  top: 800px;
-  right: 5%;
-
   div
   {
     height: 70px;

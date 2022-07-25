@@ -3,6 +3,7 @@
 
 <nav>
   <a routerLink="/" queryParamsHandling="preserve" class="home">Home</a>
+  <a routerLink="/" queryParamsHandling="preserve" class="home nav-next">Home</a>
 </nav>
 
 <ul class="results btns">
@@ -18,7 +19,3 @@
     <a *ngFor="let key of row" role="button" [class]="key.class" (click)="keyPress(key)" [innerHTML]="key.display"></a>
   </div>
 </div>
-
-<footer>
-  <a routerLink="/" queryParamsHandling="preserve" class="home">Home</a>
-</footer>

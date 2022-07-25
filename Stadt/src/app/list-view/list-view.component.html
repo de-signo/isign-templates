@@ -1,14 +1,14 @@
 <header>{{ category.name }}</header>
 
 <nav>
-  <a routerLink="/" queryParamsHandling="preserve" class="home nav-top">Home</a>
+  <a routerLink="/" queryParamsHandling="preserve" class="home">Home</a>
 
-  <div class="scrollbar">
+  <div class="scrollbar nav-next">
     <div class="scrollup" id="btnUp" (click)="divScroll.scrollTop = divScroll.scrollTop - 500" [ngClass]="{'disabled': divScroll.scrollTop == 0}"></div>
     <div class="scrolldown" id="btnDown" (click)="divScroll.scrollTop = divScroll.scrollTop + 500" [ngClass]="{'disabled': divScroll.scrollTop == divScroll.scrollHeight - divScroll.clientHeight}"></div>
   </div>
 
-  <a routerLink="/" queryParamsHandling="preserve" class="home">Home</a>
+  <a routerLink="/" queryParamsHandling="preserve" class="home nav-next">Home</a>
 </nav>
 
 <div *ngIf="enableAnchors" class="hooks">

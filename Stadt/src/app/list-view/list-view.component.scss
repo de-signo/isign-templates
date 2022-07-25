@@ -149,24 +149,6 @@ a.handicap {
   background: url(../../assets/img/Button_Rollstuhlfahrer.png) no-repeat center / contain;
 }
 
-nav {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-
-  align-items: center;
-  justify-items: center;
-
-  .nav-top {
-    grid-row:1;
-  }
-  .scrollbar {
-    grid-row: 2;
-  }
-  &>* {
-    grid-row: 3;
-  }
-}
-
 .scrollbar
 {
   div

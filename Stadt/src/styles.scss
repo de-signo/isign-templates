@@ -64,3 +64,14 @@ a.back
   @include nav-link;
   background: transparent url(assets/img/back.png) no-repeat center / contain;
 }
+
+nav {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+
+  .nav-next {
+    margin-top: auto;
+  }
+}

@@ -3,6 +3,9 @@
 <nav>
   <a routerLink="/" queryParamsHandling="preserve" class="home">Home</a>
   <a class="back" href="javascript: window.history.back()">Back</a>
+
+  <a routerLink="/" queryParamsHandling="preserve" class="home nav-next">Home</a>
+  <a class="back" href="javascript: window.history.back()">Back</a>
 </nav>
 
 <article *ngIf="!item">
@@ -28,8 +31,3 @@
 
   <img *ngIf="item.map" class="map" [src]="item.map" alt="Lageplan"/>
 </article>
-
-<footer>
-  <a routerLink="/" queryParamsHandling="preserve" class="home">Home</a>
-  <a class="back" href="javascript: window.history.back()">Back</a>
-</footer>

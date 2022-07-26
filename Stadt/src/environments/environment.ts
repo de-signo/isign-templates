@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  checkData: true,
   config: "assets/config.dev.json",
   dataImportServiceUrl: "assets/dataimport.json",
   touchServiceUrl: ""

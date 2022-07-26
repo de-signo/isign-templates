@@ -1,9 +1,9 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Category, Item, ItemWithIndex } from './app-data.model';
+import { TreeEntity, Item } from './app-data.model';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
 import * as fuzzysort from 'fuzzysort';
 import { ConfigService } from './config.service';
 import { IAppConfig, IDataImportItemSource, IFileItemSource, IFixedItemSource } from './app-config.model';
@@ -15,9 +15,8 @@ import { IAppConfig, IDataImportItemSource, IFileItemSource, IFixedItemSource } 
 export class DataService implements OnDestroy {
   private config: IAppConfig|null = null;
 
-  private categoriesSubject = new BehaviorSubject<Category[]>([]);
-  public categories = this.categoriesSubject.asObservable();
-  private items: ItemWithIndex[] = [];
+  private treeSubject = new BehaviorSubject<TreeEntity[]>([]);
+  public tree = this.treeSubject.asObservable();
   private subscriptions: Subscription[] = [];
 
   constructor(private http: HttpClient, private configSvc: ConfigService)
@@ -39,7 +38,7 @@ export class DataService implements OnDestroy {
     const config = this.config;
     if (!config) return;
 
-    let cats: Category[] = [];
+    let cats: TreeEntity[] = [];
     for (const src of config.sources) {
       switch (src.type) {
         case "file":
@@ -56,45 +55,48 @@ export class DataService implements OnDestroy {
           break;
       }
     }
-    this.categoriesSubject.next(cats);
+
+    // set path and parent
+    TreeOperations.walkTree(cats, (te, state) => {
+      const path = [...state.path, te.name];
+      te.parent = state.parent;
+      te.path = path;
+      return {parent: te, path: path};
+    }, {parent: <TreeEntity|undefined>undefined, path: <string[]>[]});
+    this.treeSubject.next(cats);
   }
 
-  private async loadFileSource(source: IFileItemSource, cats: Category[]): Promise<void> {
+  private async loadFileSource(source: IFileItemSource, cats: TreeEntity[]): Promise<void> {
     const jsonFile = source.url;
-    const data = await this.http.get<Category[]>(jsonFile + window.location.search).toPromise();
-    this.mergeCategories(cats, data);
+    const data = await this.http.get<TreeEntity[]>(jsonFile + window.location.search).toPromise();
+    if (environment.checkData && !TreeOperations.isTreeValid(data))
+      throw `File source from '${jsonFile}' did not return a valid tree`;
+    TreeOperations.mergeTree(cats, data);
   }
 
-  private async loadDataImportSource(source: IDataImportItemSource, cats: Category[]): Promise<void> {
+  private async loadDataImportSource(source: IDataImportItemSource, cats: TreeEntity[]): Promise<void> {
     const serviceUrl = environment.dataImportServiceUrl;
     const items = await this.http.get<Item[]>(serviceUrl + window.location.search + `&ds=${source.dataSourceKey}`).toPromise();
-    this.mergeCategories(cats, [{ name: source.category, items: items}]);
+    const tree = items.map(it => ({name: it.term1, item: it, children: [], parent: undefined, path: undefined, favorit: undefined, search: source.search}));
+    TreeOperations.mergeTree(cats, [{ name: source.category, children: tree, item: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined}]);
   }
 
-  private loadFixedSource(source: IFixedItemSource, cats: Category[]) {
-    this.mergeCategories(cats, [{ name: source.category, items: source.items}]);
+  private loadFixedSource(source: IFixedItemSource, cats: TreeEntity[]) {
+    if (environment.checkData && !TreeOperations.isTreeValid(source.tree))
+      throw `Fixed source does not contain a valid tree`;
+    TreeOperations.mergeTree(cats, source.tree);
   }
 
-  private mergeCategories(cats: Category[], newCats: Category[]) {
-    for (const nc of newCats)
-    {
-      let cat = cats.find(c => c.name == nc.name);
-      if (cat) {
-        cat.items = cat.items.concat(nc.items);
-      } else {
-        cat = { name: nc.name, items: nc.items};
-        cats.push(cat);
-      }
-    }
+  getEntity(path: string[]): Observable<TreeEntity|undefined> {
+    return this.tree.pipe(
+      map(tree => TreeOperations.findPath(tree, path))
+    );
   }
 
-  getCategory(index: number): Observable<Category> {
-    return this.categories.pipe(
-      map(cats => cats[index]));
-  }
-
-  touch(id: string): Observable<boolean>
+  touch(entity: TreeEntity): Observable<boolean>
   {
+    if (!entity.path) return of (false);
+    var id = entity.path.join("/");
     const jsonFile = environment.touchServiceUrl;
     if (jsonFile)
       return this.http.get<boolean>(jsonFile + window.location.search, { params: {id: id}});
@@ -102,26 +104,80 @@ export class DataService implements OnDestroy {
       return of(false);
   }
 
-  getSearchResults(find: string, count: number): Observable<ItemWithIndex[]> {
-    let dataObs = this.items.length != 0 ? of(this.items) : 
-      this.categories.pipe(
-        /* add item index */
-        map(cats => cats
-          .reduce((acc, cur, catIndex) => {
-              let list = cur.items ? cur.items.map((c, itemIndex) => new ItemWithIndex(c, {cat: catIndex, item: itemIndex })) : [];
-              return acc.concat(list);
-            }, [] as ItemWithIndex[])
-          .sort((a, b)=> (a.favorit ?? 0) - (b.favorit ?? 0))
-        ));
-    
-    return dataObs.pipe(
+  private readonly searchSource = this.tree.pipe(
+    /* flatten */
+    map(tree => {
+      let list: TreeEntity[] = [];
+      TreeOperations.walkTree<void>(tree, (te, _) => { if (te.search) { list.push(te); }}, undefined);
+      return list;
+    }),
+    /* sort by favorit score */
+    map(list => list
+      .sort((a, b)=> (a.favorit ?? 0) - (b.favorit ?? 0))
+    ),
+    shareReplay()
+  );
+
+  getSearchResults(find: string, count: number): Observable<TreeEntity[]> {
+    return this.searchSource.pipe(
       /* filter */
       map(items => {
-        let res = fuzzysort.go(find, items, { limit: count, keys: ['term1', 'term2'] }).map(r => r.obj);
+        let res = fuzzysort.go(find, items, { limit: count, keys: ['name'] }).map(r => r.obj);
         let favC = count - res.length;
-        let fav = favC > 0 ? items.splice(0, favC) : [];
+        let fav = favC > 0 ? items.slice(0, favC) : [];
         return res.concat(fav);
       })
-    );
+    );  
+  }
+}
+
+export class TreeOperations {
+  static mergeTree(tree: TreeEntity[], newTree: TreeEntity[]) {
+    for (const nt of newTree)
+    {
+      let entity = tree.find(c => c.name == nt.name);
+      if (entity) {
+        if (nt.children)
+        {
+          if (entity.children)
+            this.mergeTree(entity.children, nt.children);
+          else
+            entity.children = nt.children;
+        }
+        if (!entity.item)
+          entity.item = nt.item;
+        else
+          Object.assign(entity.item, nt.item);
+      } else {
+        tree.push(nt);
+      }
+    }
+  }
+
+  static walkTree<T>(tree: TreeEntity[], action: (te: TreeEntity, state: T)=>T, state: T) {
+    for (const te of tree) {
+      const newState = action(te, state);
+      if (te.children)
+        this.walkTree(te.children, action, newState);
+    }
+  }
+
+  static findPath(tree: TreeEntity[]|undefined, path: string|string[]) : TreeEntity|undefined {
+    if (typeof path === 'string')
+      path = path.split("/");
+
+    let te: TreeEntity|undefined = undefined;
+    for (const name of path) {
+      if (!tree)
+        return undefined;
+
+      te = tree.find(te => te.name == name);
+      tree = te?.children;
+    }
+    return te;
+  }
+
+  static isTreeValid(tree: TreeEntity[]): boolean {
+    return Array.isArray(tree);
   }
 }

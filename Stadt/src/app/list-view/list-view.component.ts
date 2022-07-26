@@ -1,8 +1,8 @@
 import { ViewportScroller } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, ViewChild, } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild, } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { timer } from 'rxjs';
-import { Category, Item } from '../data/app-data.model';
+import { Item, TreeEntity } from '../data/app-data.model';
 import { DataService } from '../data/data.service';
 
 @Component({
@@ -10,10 +10,10 @@ import { DataService } from '../data/data.service';
   templateUrl: './list-view.component.html',
   styleUrls: ['./list-view.component.scss']
 })
-export class ListViewComponent implements AfterViewInit {
+export class ListViewComponent implements OnInit, AfterViewInit {
   enableAnchors = false;
-  category: Category = new Category();
-  items: ItemWithHook[] = [];
+  @Input() entity: TreeEntity|undefined;
+  items: ItemViewModel[] = [];
   hooks: {[a: string]: boolean} = {};
   handicapped = false;
 
@@ -24,18 +24,13 @@ export class ListViewComponent implements AfterViewInit {
   showScrolldown = true;
   @ViewChild("divScroll") divScroll!: ElementRef<HTMLElement>;
 
-  constructor(svc: DataService, route: ActivatedRoute, public scroller: ViewportScroller) {
+  constructor(route: ActivatedRoute, public scroller: ViewportScroller) {
     route.queryParams.subscribe(
       params => this.enableAnchors = !!params["s/hooks"]);
-    route.params.subscribe(
-      data => {
-        const categoryId = data["cat"];
-        svc.getCategory(categoryId).subscribe(
-          data => { this.category = data; this.buildItems(this.category.items); },
-          error => console.error(error)
-        );
-      }
-    );
+  }
+
+  ngOnInit(): void {
+    this.buildItems(this.entity);
   }
 
   ngAfterViewInit() {
@@ -65,8 +60,8 @@ export class ListViewComponent implements AfterViewInit {
     }
   }
 
-  buildItems(items: Item[]) {
-    if (!items) {
+  buildItems(listItem: TreeEntity|undefined) {
+    if (!listItem) {
       this.hooks = {};
       this.items = [];
       return;
@@ -75,16 +70,16 @@ export class ListViewComponent implements AfterViewInit {
     let hooks = abc.reduce((h, a) => ({...h, [a]: false}), {}) as {[id:string]:boolean};
 
     let last = "";
-    this.items = items.map(i => {
-      let ih = new ItemWithHook(i);
-      let h = i.term1[0].toUpperCase();
+    this.items = listItem.children?.map(i => {
+      let ih = new ItemViewModel(i);
+      let h = i.name[0].toUpperCase();
       if (h != last) {
         last = h;
         ih.hook = h;
         hooks[h] = true;
       }
       return ih;
-    });
+    }) ?? [];
     this.hooks = hooks;
   }
 
@@ -93,10 +88,16 @@ export class ListViewComponent implements AfterViewInit {
   }
 }
 
-class ItemWithHook extends Item {
-  constructor(item: Item) {
-    super();
+class ItemViewModel implements TreeEntity {
+  constructor(item: TreeEntity) {
     Object.assign(this, item);
   }
+  parent: TreeEntity | undefined;
+  name: string = "";
+  children: TreeEntity[] | undefined;
+  item!: Item;
+  path: string[] | undefined;
+  favorit: number | undefined;
+  search: true | undefined;
   hook: string|null = null;
 }

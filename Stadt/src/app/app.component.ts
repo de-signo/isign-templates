@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { DEFAULT_INTERRUPTSOURCES, Idle } from '@ng-idle/core';
 import { Subscription, timer } from 'rxjs';
-import { Category } from './data/app-data.model';
 import { DataService } from './data/data.service';
 
 @Component({
@@ -26,11 +25,8 @@ export class AppComponent  implements OnInit, OnDestroy {
     idle.watch();
   }
 
-  current: Category[] = [];
-
   ngOnInit(): void {
     this.subscriptions.push(timer(60 * 60 * 1000, 60* 60 * 1000).subscribe(_ => this.dataService.refresh()));
-    this.subscriptions.push(this.dataService.categories.subscribe(cats => this.current = cats));
   }
 
   ngOnDestroy(): void {

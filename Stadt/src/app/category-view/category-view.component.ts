@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Category } from '../data/app-data.model';
 import { DataService } from '../data/data.service';
 
 @Component({

@@ -1,4 +1,4 @@
-import { Item } from "./app-data.model";
+import { Item, TreeEntity } from "./app-data.model";
 
 
 export interface IItemSource {
@@ -8,13 +8,13 @@ export interface IItemSource {
 
 export interface IFixedItemSource extends IItemSource {
   type: "fixed";
-  category: string;
-  items: Item[];
+  tree: TreeEntity[];
 }
 
 export interface IDataImportItemSource extends IItemSource {
   type: "dataimport";
   category: string;
+  search: true|undefined;
   dataSourceKey: string;  // field key of data import
 }
 

@@ -1,6 +1,6 @@
 import { APP_INITIALIZER, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
+import { Route, RouterModule, UrlMatchResult, UrlSegment, UrlSegmentGroup } from '@angular/router';
 import { AppComponent } from './app.component';
 import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -11,11 +11,25 @@ import { DetailViewComponent } from './detail-view/detail-view.component';
 import { SearchViewComponent } from './search-view/search-view.component';
 import { NgIdleModule } from '@ng-idle/core';
 import { ConfigService } from './data/config.service';
+import { SelectViewComponent } from './select-view/select-view.component';
 
 registerLocaleData(localeDe);
 
 export function initializeApp(appConfig: ConfigService) {
   return () => appConfig.load();
+}
+
+function pathMatcher(segments: UrlSegment[], group: UrlSegmentGroup, route: Route) : UrlMatchResult|null {
+  // match any route but empty
+  if (segments.length > 0) {
+    return {
+      consumed: segments,
+      posParams: {
+        path: new UrlSegment(segments.join("/"), {})
+      }
+    };
+  }
+  return null;
 }
 
 @NgModule({
@@ -24,17 +38,17 @@ export function initializeApp(appConfig: ConfigService) {
     CategoryViewComponent,
     ListViewComponent,
     DetailViewComponent,
-    SearchViewComponent
+    SearchViewComponent,
+    SelectViewComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot([
+      {path: "", component: CategoryViewComponent},
       {path: "index.cshtml", component: CategoryViewComponent},
       {path: "search", component: SearchViewComponent},
-      {path: ":cat/:item", component: DetailViewComponent},
-      {path: ":cat", component: ListViewComponent},
-      {path: "**", component: CategoryViewComponent}
+      {matcher: pathMatcher, component: SelectViewComponent}
     ]),
     NgIdleModule.forRoot()
   ],

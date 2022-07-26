@@ -1,7 +1,16 @@
 
-export class Category {
-  name: string = "";
-  items: Item[] = [];
+export interface TreeEntity {
+  name: string;
+  children: TreeEntity[]|undefined;
+  item: Item|undefined;
+
+  // function
+  search: true|undefined
+  favorit: number|undefined;
+
+  // tree structure
+  path: string[]|undefined;
+  parent: TreeEntity|undefined;
 }
 
 export class Item {
@@ -15,15 +24,4 @@ export class Item {
   email: string = "";
   map: string = "";
   info: string = "";
-  favorit: number = 0;
-}
-
-export class ItemWithIndex extends Item {
-  constructor(item: Item, index: {cat: number, item: number}) {
-    super();
-    Object.assign(this, item);
-    this.index = index;
-  }
-
-  index!: {cat: number, item: number};
 }

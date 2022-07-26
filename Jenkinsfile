@@ -59,6 +59,14 @@ pipeline {
       }
     }
 
+    stage('test-stadt') {
+      steps {
+        dir('Stadt') {
+          bat 'ng test --karma-config karma.conf.srv.js'
+        }
+      }
+    }
+
     stage('build-stadt') {
       steps {
         dir('Stadt') {

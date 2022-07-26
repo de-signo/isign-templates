@@ -1,4 +1,4 @@
-<header>{{ category?.name }}</header>
+<header>{{ entity?.parent?.name }}</header>
 
 <nav>
   <a routerLink="/" queryParamsHandling="preserve" class="home">Home</a>
@@ -8,26 +8,26 @@
   <a class="back" href="javascript: window.history.back()">Back</a>
 </nav>
 
-<article *ngIf="!item">
+<article *ngIf="!entity">
   <span>Nicht gefunden</span>
 </article>
-<article *ngIf="item">
+<article *ngIf="entity?.item">
   <div class="content">
-    <h2>{{ item.term1 }}</h2>
-    <h3>{{ item.term2 }}</h3>
+    <h2>{{ entity?.item?.term1 }}</h2>
+    <h3>{{ entity?.item?.term2 }}</h3>
     <p>
-      {{ item.house }}<br>
-      {{ item.level }}<br>
-      {{ item.room }}
+      {{ entity?.item?.house }}<br>
+      {{ entity?.item?.level }}<br>
+      {{ entity?.item?.room }}
     </p>
     <p>
-      <ng-template *ngIf="item.phone">Fon: {{item.phone}}")<br></ng-template>
-      <ng-template *ngIf="item.email">E-mail: {{item.email}}")</ng-template>
+      <ng-template *ngIf="entity?.item?.phone">Fon: {{entity?.item?.phone}}")<br></ng-template>
+      <ng-template *ngIf="entity?.item?.email">E-mail: {{entity?.item?.email}}")</ng-template>
     </p>
     <p>
-      {{ item.info }}
+      {{ entity?.item?.info }}
     </p>
   </div>
 
-  <img *ngIf="item.map" class="map" [src]="item.map" alt="Lageplan"/>
+  <img *ngIf="entity?.item?.map" class="map" [src]="entity?.item?.map" alt="Lageplan"/>
 </article>

@@ -9,6 +9,7 @@
   
   var clientList = source.Select((x, i) => new {
     cat = x["cat"],
+    favorit = count - i,
     item = new {
       term1 = x["term1"],
       term2 = x["term2"],
@@ -18,8 +19,7 @@
       info = x["info"],
       phone = x["phone"],
       email = x["email"],
-      map = Href(x.DataFileHandler("map")),
-      favorits = count - i
+      map = Href(x.DataFileHandler("map"))
     }
   });
 
@@ -27,7 +27,12 @@
                 group x by x.cat into z
                 select new {
                   name = z.Key,
-                  items = z.Select(y => y.item).OrderBy(y => y.term1)
+                  children = z.Select(y => new {
+                    name = y.item.term1,
+                    favorit = y.favorit,
+                    search = true,
+                    item = y.item
+                  }).OrderBy(y => y.name)
                 };
 }
 @Html.Raw(JsonConvert.SerializeObject(results))

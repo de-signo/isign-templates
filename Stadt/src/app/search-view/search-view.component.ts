@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Item, ItemWithIndex } from '../data/app-data.model';
+import { TreeEntity } from '../data/app-data.model';
 import { DataService } from '../data/data.service';
 
 @Component({
@@ -12,7 +12,7 @@ export class SearchViewComponent implements OnInit {
   keyboard: Key[][] = [];
   @ViewChild("txtFind") txtFind!: ElementRef;
 
-  results: ItemWithIndex[] = [];
+  results: TreeEntity[] = [];
 
   constructor(route: ActivatedRoute, private svc: DataService) {
     route.queryParams.subscribe(params =>

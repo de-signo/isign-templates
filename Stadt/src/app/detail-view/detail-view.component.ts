@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Category, Item } from '../data/app-data.model';
+import { Item, TreeEntity } from '../data/app-data.model';
 import { DataService } from '../data/data.service';
 
 @Component({
@@ -9,24 +9,12 @@ import { DataService } from '../data/data.service';
   styleUrls: ['./detail-view.component.scss']
 })
 export class DetailViewComponent implements OnInit {
-  category: Category|null = null;
-  item: Item|null = null;
-  constructor(private svc: DataService, route: ActivatedRoute) {
-    route.params.subscribe(
-      data => {
-        const categoryId = data["cat"];
-        const itemId = data["item"];
-        svc.getCategory(categoryId).subscribe(
-          data => { this.category = data; this.item = data.items[itemId] },
-          error => console.error(error)
-        );
-      }
-    );
-  }
+  @Input() entity: TreeEntity|undefined;
+  constructor(private svc: DataService) { }
 
   ngOnInit(): void {
-    if (this.item)
-      this.svc.touch(this.item.id).subscribe(
+    if (this.entity)
+      this.svc.touch(this.entity).subscribe(
         data => {},
         error => console.error(error)
       );

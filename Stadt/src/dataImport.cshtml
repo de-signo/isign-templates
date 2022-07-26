@@ -1,0 +1,23 @@
+@using Newtonsoft.Json
+@using Stolltec.Forms.Model
+@using System.Linq
+@{
+  /*
+   * this service retuns the data of a iSign DataImport.
+   * The fields are mapped according to style definition
+   * No furter processing
+   */
+  Response.ContentType = "application/json";
+  var dsField = Request["ds"]; // data source field key
+  var model = new FormsModel(this);
+  var source = model.DataSource(dsField);
+
+  var fields = model.Style.StyleItem.Fields
+    .Where(f => f.ContentClass.ParentFieldKey == dsField)
+    .Select(f => f.Key)
+    .Distinct()
+    .ToList();
+
+  var results = source.Select(row => fields.ToDictionary(f => f, f => row.Raw(f))).ToList();
+}
+@Html.Raw(JsonConvert.SerializeObject(results))

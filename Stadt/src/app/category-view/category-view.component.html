@@ -3,7 +3,7 @@
 
 <ul class="btns">
   <li class="space"></li>
-  <li *ngFor="let x of data.categories; index as i">
+  <li *ngFor="let x of data.categories | async; index as i">
     <a [routerLink]="['/', i]" queryParamsHandling="preserve">{{ x.name }}</a>
   </li>
   <li *ngIf="enableSearch" class="search_mock">

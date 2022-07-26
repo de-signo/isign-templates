@@ -1,0 +1,8 @@
+{
+  "sources": [
+    {
+      "type": "file",
+      "url": "data.cshtml"
+    }
+  ]
+}

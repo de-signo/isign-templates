@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
-  dataServiceUrl: "data.cshtml",
+  config: "assets/config.json",
+  dataImportServiceUrl: "dataImport.cshtml",
   touchServiceUrl: ""
 };

@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  dataServiceUrl: "assets/testdata.json",
+  config: "assets/config.dev.json",
+  dataImportServiceUrl: "assets/dataimport.json",
   touchServiceUrl: ""
 };
 

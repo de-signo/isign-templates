@@ -1,44 +1,96 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Category, ItemWithIndex } from './app-data.model';
+import { Category, Item, ItemWithIndex } from './app-data.model';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import * as fuzzysort from 'fuzzysort';
+import { ConfigService } from './config.service';
+import { IAppConfig, IDataImportItemSource, IFileItemSource, IFixedItemSource } from './app-config.model';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class DataService {
-  public categories: Category[] = [];
+export class DataService implements OnDestroy {
+  private config: IAppConfig|null = null;
+
+  private categoriesSubject = new BehaviorSubject<Category[]>([]);
+  public categories = this.categoriesSubject.asObservable();
   private items: ItemWithIndex[] = [];
+  private subscriptions: Subscription[] = [];
 
-  constructor(private http: HttpClient)
-  {}
-
-  load(): Observable<Category[]>
+  constructor(private http: HttpClient, private configSvc: ConfigService)
   {
-    const jsonFile = environment.dataServiceUrl;
-    return this.http.get<Category[]>(jsonFile + window.location.search)
-      .pipe(tap(data => {
-        this.categories = data;
-        this.items = [];
-      }));
+    this.subscriptions.push(this.configSvc.settings.subscribe(config => {
+      this.config = config;
+      return this.refresh();
+    }));
   }
 
-  getCategories(): Observable<Category[]> {
-    if (this.categories.length == 0)
-      return this.load();
-    else
-      return of(this.categories);
+  ngOnDestroy(): void {
+    for (const sub of this.subscriptions) {
+      sub.unsubscribe();
+    }
+    this.subscriptions = [];
+  }
+
+  public async refresh(): Promise<void> {
+    const config = this.config;
+    if (!config) return;
+
+    let cats: Category[] = [];
+    for (const src of config.sources) {
+      switch (src.type) {
+        case "file":
+          await this.loadFileSource(src, cats);
+          break;
+        case "dataimport":
+          await this.loadDataImportSource(src, cats);
+          break;
+        case "fixed":
+          this.loadFixedSource(src, cats);
+          break;
+        default:
+          console.error(`Source type '${(<any>src).type}' is not supported`);
+          break;
+      }
+    }
+    this.categoriesSubject.next(cats);
+  }
+
+  private async loadFileSource(source: IFileItemSource, cats: Category[]): Promise<void> {
+    const jsonFile = source.url;
+    const data = await this.http.get<Category[]>(jsonFile + window.location.search).toPromise();
+    this.mergeCategories(cats, data);
+  }
+
+  private async loadDataImportSource(source: IDataImportItemSource, cats: Category[]): Promise<void> {
+    const serviceUrl = environment.dataImportServiceUrl;
+    const items = await this.http.get<Item[]>(serviceUrl + window.location.search + `&ds=${source.dataSourceKey}`).toPromise();
+    this.mergeCategories(cats, [{ name: source.category, items: items}]);
+  }
+
+  private loadFixedSource(source: IFixedItemSource, cats: Category[]) {
+    this.mergeCategories(cats, [{ name: source.category, items: source.items}]);
+  }
+
+  private mergeCategories(cats: Category[], newCats: Category[]) {
+    for (const nc of newCats)
+    {
+      let cat = cats.find(c => c.name == nc.name);
+      if (cat) {
+        cat.items = cat.items.concat(nc.items);
+      } else {
+        cat = { name: nc.name, items: nc.items};
+        cats.push(cat);
+      }
+    }
   }
 
   getCategory(index: number): Observable<Category> {
-    if (this.categories.length > index)
-      return of(this.categories[index]);
-    else
-      return this.load().pipe(map(cats => cats[index]));
+    return this.categories.pipe(
+      map(cats => cats[index]));
   }
 
   touch(id: string): Observable<boolean>
@@ -50,10 +102,9 @@ export class DataService {
       return of(false);
   }
 
-
   getSearchResults(find: string, count: number): Observable<ItemWithIndex[]> {
     let dataObs = this.items.length != 0 ? of(this.items) : 
-      this.getCategories().pipe(
+      this.categories.pipe(
         /* add item index */
         map(cats => cats
           .reduce((acc, cur, catIndex) => {

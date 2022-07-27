@@ -1,4 +1,7 @@
 {
+  "list": {
+    "defaultItemView": "item-detail"
+  },
   "sources": [
     {
       "type": "file",

@@ -1,21 +1,23 @@
 import { ViewportScroller } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild, } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild, } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { timer } from 'rxjs';
-import { Item, TreeEntity } from '../data/app-data.model';
-import { DataService } from '../data/data.service';
+import { Subscription, timer } from 'rxjs';
+import { Item, TreeEntity, TreeReference } from '../data/app-data.model';
+import { ConfigService } from '../data/config.service';
+import { DataService, TreeOperations } from '../data/data.service';
 
 @Component({
   selector: 'app-list-view',
   templateUrl: './list-view.component.html',
   styleUrls: ['./list-view.component.scss']
 })
-export class ListViewComponent implements OnInit, AfterViewInit {
+export class ListViewComponent implements OnInit, OnDestroy, AfterViewInit {
   enableAnchors = false;
   @Input() entity: TreeEntity|undefined;
-  items: ItemViewModel[] = [];
+  children: ItemViewModel[] = [];
   hooks: {[a: string]: boolean} = {};
   handicapped = false;
+  defaultItemView: 'name'|'item-detail'|undefined;
 
   // scroll
   readonly handicappedScrollOffset: number = 500;
@@ -24,9 +26,19 @@ export class ListViewComponent implements OnInit, AfterViewInit {
   showScrolldown = true;
   @ViewChild("divScroll") divScroll!: ElementRef<HTMLElement>;
 
-  constructor(route: ActivatedRoute, public scroller: ViewportScroller) {
-    route.queryParams.subscribe(
-      params => this.enableAnchors = !!params["s/hooks"]);
+  subscriptions: Subscription[] = [];
+  constructor(route: ActivatedRoute, config: ConfigService, public scroller: ViewportScroller) {
+    this.subscriptions.push(route.queryParams.subscribe(
+      params => this.enableAnchors = !!params["s/hooks"]));
+    this.subscriptions.push(config.settings.subscribe(
+      settings => this.defaultItemView = settings?.list?.defaultItemView
+    ));
+  }
+
+  ngOnDestroy(): void {
+    for (const sub of this.subscriptions)
+      sub.unsubscribe();
+    this.subscriptions = [];
   }
 
   ngOnInit(): void {
@@ -63,14 +75,14 @@ export class ListViewComponent implements OnInit, AfterViewInit {
   buildItems(listItem: TreeEntity|undefined) {
     if (!listItem) {
       this.hooks = {};
-      this.items = [];
+      this.children = [];
       return;
     }
     const abc = [...'ABCDEFGHIJKLMNOPQRSTUVWXYZ']; 
     let hooks = abc.reduce((h, a) => ({...h, [a]: false}), {}) as {[id:string]:boolean};
 
     let last = "";
-    this.items = listItem.children?.map(i => {
+    this.children = listItem.children?.map(i => {
       let ih = new ItemViewModel(i);
       let h = i.name[0].toUpperCase();
       if (h != last) {
@@ -92,6 +104,7 @@ class ItemViewModel implements TreeEntity {
   constructor(item: TreeEntity) {
     Object.assign(this, item);
   }
+  listItemView: 'name' | 'item-detail' | undefined;
   parent: TreeEntity | undefined;
   name: string = "";
   children: TreeEntity[] | undefined;
@@ -99,5 +112,7 @@ class ItemViewModel implements TreeEntity {
   path: string[] | undefined;
   favorit: number | undefined;
   search: true | undefined;
+
+  // view model
   hook: string|null = null;
 }

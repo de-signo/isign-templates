@@ -22,19 +22,19 @@ describe('DataService', () => {
 describe('TreeOperations', () => {
   it('merge tree', () => {
     const tree1: TreeEntity[] = [
-      { name: "t1", item: undefined, children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined },
+      { name: "t1", item: undefined, children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined },
       { name: "t2", item: undefined, children: [
-        { name: "t21", item: undefined, children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined },
-        { name: "t12", item: <any>({ term1: "t12term"}), children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined },
-      ], parent: undefined, path: undefined, favorit: undefined, search: undefined }
+        { name: "t21", item: undefined, children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined },
+        { name: "t12", item: <any>({ term1: "t12term"}), children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined },
+      ], parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined }
     ];
 
     const tree2: TreeEntity[] = [
       { name: "t2", item: undefined, children: [
-        { name: "t21", item: undefined, children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined },
-        { name: "t12", item: <any>({ term1: "t12termb", term2: "t12term2"}), children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined },
-      ], parent: undefined, path: undefined, favorit: undefined, search: undefined },
-      { name: "t3", item: undefined, children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined },
+        { name: "t21", item: undefined, children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined },
+        { name: "t12", item: <any>({ term1: "t12termb", term2: "t12term2"}), children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined },
+      ], parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined },
+      { name: "t3", item: undefined, children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined },
     ];
 
     TreeOperations.mergeTree(tree1, tree2);
@@ -46,11 +46,11 @@ describe('TreeOperations', () => {
 
   it('find path in tree', () => {
     const tree1: TreeEntity[] = [
-      { name: "t1", item: undefined, children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined },
+      { name: "t1", item: undefined, children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined },
       { name: "t2", item: undefined, children: [
-        { name: "t21", item: undefined, children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined },
-        { name: "t22", item: <any>({ term1: "t22term"}), children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined },
-      ], parent: undefined, path: undefined, favorit: undefined, search: undefined }
+        { name: "t21", item: undefined, children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined },
+        { name: "t22", item: <any>({ term1: "t22term"}), children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined },
+      ], parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined }
     ];
 
     let t1 = TreeOperations.findPath(tree1, ["t2"]);

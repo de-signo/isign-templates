@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
+import { ConfigService } from '../data/config.service';
 import { DataService } from '../data/data.service';
 
 import { ListViewComponent } from './list-view.component';
@@ -10,12 +11,16 @@ describe('ListViewComponent', () => {
   let fixture: ComponentFixture<ListViewComponent>;
   let fakeActivatedRoute = {
     queryParams: of(convertToParamMap({ }))};
+  let fakeConfig = {
+    settings: of({})
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ListViewComponent ],
       providers: [
         { provide: ActivatedRoute, useValue: fakeActivatedRoute },
+        { provide: ConfigService, useValue: fakeConfig }
       ]
     })
     .compileComponents();

@@ -15,6 +15,7 @@ export interface IDataImportItemSource extends IItemSource {
   type: "dataimport";
   category: string;
   search: true|undefined;
+  listItemView: 'name'|'item-detail'|undefined;
   dataSourceKey: string;  // field key of data import
 }
 
@@ -23,6 +24,11 @@ export interface IFileItemSource extends IItemSource {
   url: string;
 }
 
+export interface IListOptions {
+  defaultItemView: 'name'|'item-detail'|undefined;
+}
+
 export interface IAppConfig {
+  list: IListOptions|undefined;
   sources: (IFileItemSource|IDataImportItemSource|IFixedItemSource)[];
 }

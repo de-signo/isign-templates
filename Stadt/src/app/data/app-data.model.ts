@@ -4,6 +4,9 @@ export interface TreeEntity {
   children: TreeEntity[]|undefined;
   item: Item|undefined;
 
+  // view
+  listItemView: 'name'|'item-detail'|undefined;
+
   // function
   search: true|undefined
   favorit: number|undefined;

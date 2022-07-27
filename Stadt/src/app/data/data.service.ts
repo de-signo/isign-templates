@@ -77,8 +77,8 @@ export class DataService implements OnDestroy {
   private async loadDataImportSource(source: IDataImportItemSource, cats: TreeEntity[]): Promise<void> {
     const serviceUrl = environment.dataImportServiceUrl;
     const items = await this.http.get<Item[]>(serviceUrl + window.location.search + `&ds=${source.dataSourceKey}`).toPromise();
-    const tree = items.map(it => ({name: it.term1, item: it, children: [], parent: undefined, path: undefined, favorit: undefined, search: source.search}));
-    TreeOperations.mergeTree(cats, [{ name: source.category, children: tree, item: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined}]);
+    const tree = items.map(it => ({name: it.term1, item: it, children: [], parent: undefined, path: undefined, favorit: undefined, search: source.search, listItemView: undefined}));
+    TreeOperations.mergeTree(cats, [{ name: source.category, children: tree, item: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: source.listItemView}]);
   }
 
   private loadFixedSource(source: IFixedItemSource, cats: TreeEntity[]) {

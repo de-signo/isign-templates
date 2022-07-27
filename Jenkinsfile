@@ -63,6 +63,7 @@ pipeline {
       steps {
         dir('Stadt') {
           bat 'ng test --karma-config karma.conf.srv.js'
+          junit testResults: "karma-results\\**\\*.xml", keepLongStdio: true
         }
       }
     }

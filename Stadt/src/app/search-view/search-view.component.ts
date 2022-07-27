@@ -1,5 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { TreeEntity } from '../data/app-data.model';
 import { DataService } from '../data/data.service';
 
@@ -8,24 +9,31 @@ import { DataService } from '../data/data.service';
   templateUrl: './search-view.component.html',
   styleUrls: ['./search-view.component.scss']
 })
-export class SearchViewComponent implements OnInit {
+export class SearchViewComponent implements OnInit, OnDestroy {
   keyboard: Key[][] = [];
   @ViewChild("txtFind") txtFind!: ElementRef;
 
   results: TreeEntity[] = [];
+  private subscriptions: Subscription[] = [];
 
   constructor(route: ActivatedRoute, private svc: DataService) {
-    route.queryParams.subscribe(params =>
+    this.subscriptions.push(route.queryParams.subscribe(params =>
       {
         let type = params["s/search"];
         this.loadKeyboard(type);
-      });
+      }));
   }
 
   ngOnInit(): void {
     this.updateFind();
   }
 
+  ngOnDestroy(): void {
+    for (const sub of this.subscriptions) {
+      sub.unsubscribe();
+    }
+    this.subscriptions = [];
+  }
   loadKeyboard(type: string) {
     switch(type.toLowerCase()) {
       case "q":

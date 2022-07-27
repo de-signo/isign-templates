@@ -17,6 +17,7 @@ export class DataService implements OnDestroy {
 
   private treeSubject = new BehaviorSubject<TreeEntity[]>([]);
   public tree = this.treeSubject.asObservable();
+  private fillUpSearchResults = false;
   private subscriptions: Subscription[] = [];
 
   constructor(private http: HttpClient, private configSvc: ConfigService)
@@ -119,13 +120,23 @@ export class DataService implements OnDestroy {
   );
 
   getSearchResults(find: string, count: number): Observable<TreeEntity[]> {
+    const fillUpResults = this.config?.search?.fillUpResults ?? true;
+    const showFavorits = this.config?.search?.showFavorits ?? true;
+
     return this.searchSource.pipe(
       /* filter */
       map(items => {
-        let res = fuzzysort.go(find, items, { limit: count, keys: ['name'] }).map(r => r.obj);
-        let favC = count - res.length;
-        let fav = favC > 0 ? items.slice(0, favC) : [];
-        return res.concat(fav);
+        if (!find) {
+          return showFavorits ? items.slice(0, count) : [];
+        }
+        else {
+          let res = fuzzysort.go(find, items, { limit: count, keys: ['name'] }).map(r => r.obj);
+          if (!fillUpResults)
+            return res;
+          let favC = count - res.length;
+          let fav = favC > 0 ? items.slice(0, favC) : [];
+          return res.concat(fav);
+        }
       })
     );  
   }

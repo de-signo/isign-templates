@@ -28,7 +28,13 @@ export interface IListOptions {
   defaultItemView: 'name'|'item-detail'|undefined;
 }
 
+export interface ISearchOptions {
+  showFavorits: boolean|undefined;
+  fillUpResults: boolean|undefined;
+}
+
 export interface IAppConfig {
   list: IListOptions|undefined;
+  search: ISearchOptions|undefined;
   sources: (IFileItemSource|IDataImportItemSource|IFixedItemSource)[];
 }

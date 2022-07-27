@@ -2,6 +2,10 @@
   "list": {
     "defaultItemView": "name"
   },
+  "search": {
+    "showFavorits": true,
+    "fillUpResults": true
+  },
   "sources": [
     {
       "type": "fixed",

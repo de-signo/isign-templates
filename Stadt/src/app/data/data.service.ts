@@ -1,13 +1,12 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { TreeEntity, Item } from './app-data.model';
+import { TreeEntity, Item, TreeReference } from './app-data.model';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import * as fuzzysort from 'fuzzysort';
 import { ConfigService } from './config.service';
 import { IAppConfig, IDataImportItemSource, IFileItemSource, IFixedItemSource } from './app-config.model';
-
 
 @Injectable({
   providedIn: 'root'
@@ -143,37 +142,49 @@ export class DataService implements OnDestroy {
 }
 
 export class TreeOperations {
-  static mergeTree(tree: TreeEntity[], newTree: TreeEntity[]) {
+  static isTreeReference(tree: TreeEntity|TreeReference): tree is TreeReference {
+    return "referencePath" in tree;
+  }
+
+  static mergeTree(tree: (TreeEntity|TreeReference)[], newTree: (TreeEntity|TreeReference)[]) {
     for (const nt of newTree)
     {
-      let entity = tree.find(c => c.name == nt.name);
-      if (entity) {
-        if (nt.children)
-        {
-          if (entity.children)
-            this.mergeTree(entity.children, nt.children);
+      if (this.isTreeReference(nt)) {
+        let ref = <TreeReference>tree.find(c => this.isTreeReference(c) && this.pathEqual(c.referencePath, nt.referencePath));
+        if (!ref)
+          tree.push(ref);
+      }
+      else {
+        let entity = <TreeEntity>tree.find(c => !this.isTreeReference(c) && c.name == nt.name);
+        if (entity) {
+          if (nt.children)
+          {
+            if (entity.children)
+              this.mergeTree(entity.children, nt.children);
+            else
+              entity.children = nt.children;
+          }
+          if (!entity.item)
+            entity.item = nt.item;
           else
-            entity.children = nt.children;
+            Object.assign(entity.item, nt.item);
+        } else {
+          tree.push(nt);
         }
-        if (!entity.item)
-          entity.item = nt.item;
-        else
-          Object.assign(entity.item, nt.item);
-      } else {
-        tree.push(nt);
       }
     }
   }
 
-  static walkTree<T>(tree: TreeEntity[], action: (te: TreeEntity, state: T)=>T, state: T) {
+  static walkTree<T>(tree: (TreeEntity|TreeReference)[], action: (te: TreeEntity, state: T)=>T, state: T) {
     for (const te of tree) {
+      if (this.isTreeReference(te)) continue;
       const newState = action(te, state);
       if (te.children)
         this.walkTree(te.children, action, newState);
     }
   }
 
-  static findPath(tree: TreeEntity[]|undefined, path: string|string[]) : TreeEntity|undefined {
+  static findPath(tree: (TreeEntity|TreeReference)[]|undefined, path: string|string[]) : TreeEntity|undefined {
     if (typeof path === 'string')
       path = path.split("/");
 
@@ -182,12 +193,21 @@ export class TreeOperations {
       if (!tree)
         return undefined;
 
-      te = tree.find(te => te.name == name);
+      te = <TreeEntity>tree.find(te => !this.isTreeReference(te) && te.name == name);
       tree = te?.children;
     }
     return te;
   }
 
+  static pathEqual(p1: string|string[], p2: string|string[]): boolean {
+    if (typeof p1 == typeof p2)
+      return p1 == p2;
+    else {
+      const sp1 = typeof p1 == 'string' ? p1 : p1.join("/");
+      const sp2 = typeof p2 == 'string' ? p2 : p2.join("/");
+      return sp1 == sp2;
+    }
+  }
   static isTreeValid(tree: TreeEntity[]): boolean {
     return Array.isArray(tree);
   }

@@ -1,7 +1,7 @@
 
 export interface TreeEntity {
   name: string;
-  children: TreeEntity[]|undefined;
+  children: (TreeEntity|TreeReference)[]|undefined;
   item: Item|undefined;
 
   // view
@@ -14,6 +14,10 @@ export interface TreeEntity {
   // tree structure
   path: string[]|undefined;
   parent: TreeEntity|undefined;
+}
+
+export interface TreeReference {
+  referencePath: string[]|string;
 }
 
 export class Item {

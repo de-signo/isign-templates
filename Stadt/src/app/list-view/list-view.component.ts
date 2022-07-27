@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription, timer } from 'rxjs';
 import { Item, TreeEntity, TreeReference } from '../data/app-data.model';
 import { ConfigService } from '../data/config.service';
-import { DataService, TreeOperations } from '../data/data.service';
+import { TreeOperations } from '../data/data.service';
 
 @Component({
   selector: 'app-list-view',
@@ -14,6 +14,7 @@ import { DataService, TreeOperations } from '../data/data.service';
 export class ListViewComponent implements OnInit, OnDestroy, AfterViewInit {
   enableAnchors = false;
   @Input() entity: TreeEntity|undefined;
+  @Input() tree: (TreeEntity|TreeReference)[]|undefined;
   children: ItemViewModel[] = [];
   hooks: {[a: string]: boolean} = {};
   handicapped = false;
@@ -82,16 +83,20 @@ export class ListViewComponent implements OnInit, OnDestroy, AfterViewInit {
     let hooks = abc.reduce((h, a) => ({...h, [a]: false}), {}) as {[id:string]:boolean};
 
     let last = "";
-    this.children = listItem.children?.map(i => {
-      let ih = new ItemViewModel(i);
-      let h = i.name[0].toUpperCase();
-      if (h != last) {
-        last = h;
-        ih.hook = h;
-        hooks[h] = true;
-      }
-      return ih;
-    }) ?? [];
+    this.children = listItem.children
+      ?.map(child => TreeOperations.isTreeReference(child) ? TreeOperations.findPath(this.tree, child.referencePath) : child)
+      ?.filter(i => i != undefined)
+      ?.map(i => {
+        const item = <TreeEntity>i;
+        let ih = new ItemViewModel(item);
+        let h = item.name[0].toUpperCase();
+        if (h != last) {
+          last = h;
+          ih.hook = h;
+          hooks[h] = true;
+        }
+        return ih;
+      }) ?? [];
     this.hooks = hooks;
   }
 

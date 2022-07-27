@@ -1,6 +1,6 @@
 import { APP_INITIALIZER, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { Route, RouterModule, UrlMatchResult, UrlSegment, UrlSegmentGroup } from '@angular/router';
+import { ActivatedRouteSnapshot, BaseRouteReuseStrategy, Route, RouteReuseStrategy, RouterModule, UrlMatchResult, UrlSegment, UrlSegmentGroup } from '@angular/router';
 import { AppComponent } from './app.component';
 import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -32,6 +32,13 @@ function pathMatcher(segments: UrlSegment[], group: UrlSegmentGroup, route: Rout
   return null;
 }
 
+class CustomReuseStrategy extends BaseRouteReuseStrategy {
+  public shouldReuseRoute(future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean {
+    // when navigating form list-view to list-view, don not reuse it!
+    return false;
+  }
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +65,8 @@ function pathMatcher(segments: UrlSegment[], group: UrlSegmentGroup, route: Rout
     ConfigService,
     { provide: APP_INITIALIZER,
       useFactory: initializeApp,
-      deps: [ConfigService], multi: true }
+      deps: [ConfigService], multi: true },
+    {provide: RouteReuseStrategy, useClass: CustomReuseStrategy}
   ]
 })
 export class AppModule { }

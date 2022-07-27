@@ -1,2 +1,2 @@
-<app-list-view *ngIf="entity?.children?.length" [entity]="entity"></app-list-view>
+<app-list-view *ngIf="entity?.children?.length" [entity]="entity" [tree]="tree"></app-list-view>
 <app-detail-view *ngIf="entity && !entity?.children?.length" [entity]="entity"></app-detail-view>

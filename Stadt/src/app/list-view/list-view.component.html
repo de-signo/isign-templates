@@ -24,7 +24,7 @@
 <div class="scroll-area" #divScroll>
   <ul class="btns" [ngStyle]="{'margin-top.px' : handicappedScrollOffset}">
     <li *ngFor="let item of children" class="item">
-      <a [routerLink]="[item.name]" queryParamsHandling="preserve" [id]="item.hook ? 'anchor' + item.hook : null"
+      <a [routerLink]="['/'].concat(item.path ?? [])" queryParamsHandling="preserve" [id]="item.hook ? 'anchor' + item.hook : null"
         [ngSwitch]="item.listItemView ?? defaultItemView" [class]="'listitemview-' + (item.listItemView ?? defaultItemView)">
         <ng-container *ngSwitchCase="'item-detail'">
           <span>{{ item.item.term1 }}</span>

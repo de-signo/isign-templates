@@ -11,7 +11,7 @@ import { DataService, TreeOperations } from '../data/data.service';
 export class SelectViewComponent implements OnDestroy{
   entity: TreeEntity|undefined;
   private path: string[] = [];
-  private tree: TreeEntity[] = [];
+  tree: TreeEntity[] = [];
 
   private subscriptions: Subscription[] = [];
 

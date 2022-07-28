@@ -13,6 +13,7 @@
         "name": "Mitarbeiter*in",
         "children": [
           {
+            "id": "max",
             "name": "Max Müller",
             "search": true,
             "listItemView": "item-detail",
@@ -28,6 +29,7 @@
             }
           },
           {
+            "id": "bert",
             "name": "Bert Büchner",
             "search": true,
             "listItemView": "item-detail",
@@ -54,8 +56,8 @@
             "name": "Führerschein",
             "search": true,
             "children": [
-              { "referencePath": ["Mitarbeiter*in", "Max Müller"] },
-              { "referencePath": ["Mitarbeiter*in", "Bert Büchner"] }
+              { "referencePath": ["Mitarbeiter*in", "max"] },
+              { "referencePath": ["Mitarbeiter*in", "bert"] }
             ]
           },
           {

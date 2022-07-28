@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { TreeEntity, TreeReference } from './app-data.model';
+import { ThinTreeEntity, TreeEntity, TreeReference } from './app-data.model';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -77,7 +77,7 @@ export class DataService implements OnDestroy {
   private static findEntityWhereItemHasId(tree: (TreeEntity|TreeReference)[], referenceId: string): TreeReference|undefined {
     let result: TreeReference|undefined;
     TreeOperations.walkTree<boolean>(tree, (te, state) => {
-      if (!state && te?.item?.id == referenceId) {
+      if (!state && te?.id == referenceId) {
         result = { referencePath: te.path! }
         return true;
       }
@@ -90,20 +90,20 @@ export class DataService implements OnDestroy {
     const serviceUrl = environment.dataImportServiceUrl;
     const items = await this.http.get<any[]>(serviceUrl + window.location.search + `&ds=${source.dataSourceKey}`).toPromise();
 
-    let children: (TreeEntity|TreeReference)[];
+    let children: (ThinTreeEntity|TreeReference)[];
     switch (source.mapTo) {
       case 'group-with-reference-id':
         // items: { name: string, referenceId: string }
         children = Object.entries(DataService.groupBy(items.filter(i => !!i.name && !!i.referenceId), i => i.name))
-          .map(grp => (<TreeEntity>{name: grp[0], item: undefined, children: grp[1].map(i => DataService.findEntityWhereItemHasId(cats, i.referenceId)).filter(e => !!e), parent: undefined, path: undefined, favorit: undefined, search: source.search, listItemView: source.listItemView}));
+          .map(grp => (<ThinTreeEntity>{name: grp[0], item: undefined, children: grp[1].map(i => DataService.findEntityWhereItemHasId(cats, i.referenceId)).filter(e => !!e), favorit: undefined, search: source.search, listItemView: source.listItemView}));
         break;
       case 'leaf-item':
       default:
         // items: Item[]
-        children = items.map(it => ({name: it.term1, item: it, children: [], parent: undefined, path: undefined, favorit: undefined, search: source.search, listItemView: source.listItemView}));
+        children = items.map(it => ({id: it.id ?? it.term1, name: it.term1, item: it, children: [], favorit: undefined, search: source.search, listItemView: source.listItemView}));
         break;
     }
-    TreeOperations.mergeTree(cats, [{ name: source.category, children: children, item: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined}]);
+    TreeOperations.mergeTree(cats, [{ id: source.category, name: source.category, children: children, item: undefined, favorit: undefined, search: undefined, listItemView: undefined}]);
   }
 
   private loadFixedSource(source: IFixedItemSource, cats: TreeEntity[]) {
@@ -167,11 +167,11 @@ export class DataService implements OnDestroy {
 }
 
 export class TreeOperations {
-  static isTreeReference(tree: TreeEntity|TreeReference): tree is TreeReference {
+  static isTreeReference(tree: ThinTreeEntity|TreeReference): tree is TreeReference {
     return "referencePath" in tree;
   }
 
-  static mergeTree(tree: (TreeEntity|TreeReference)[], newTree: (TreeEntity|TreeReference)[], parent: TreeEntity|undefined=undefined, path: string[]=[]) {
+  static mergeTree(tree: (TreeEntity|TreeReference)[], newTree: (ThinTreeEntity|TreeReference)[], parent: TreeEntity|undefined=undefined, path: string[]=[]) {
     for (const nt of newTree)
     {
       if (this.isTreeReference(nt)) {
@@ -187,7 +187,7 @@ export class TreeOperations {
             if (entity.children)
               this.mergeTree(entity.children, nt.children, entity, [...path, entity.name]);
             else
-              entity.children = nt.children;
+              entity.children = this.makeChildrenFat(nt.children, entity);
           }
           if (!entity.item)
             entity.item = nt.item;
@@ -195,21 +195,30 @@ export class TreeOperations {
             Object.assign(entity.item, nt.item);
         } else {
           // set path and parent (complete subtree)
-          nt.parent = parent;
-          nt.path = [...path, nt.name];
-          if (nt.children) {
-            TreeOperations.walkTree(nt.children, (te, parent) => {
-              if (!parent.path)
-                throw "Algoritm error";
-              te.parent = parent;
-              te.path = [...parent.path, te.name];
-              return te;
-            }, nt);
+          const fatNt = <TreeEntity>nt;
+          fatNt.id ??= fatNt.name; // id must be set!
+          fatNt.parent = parent;
+          fatNt.path = [...path, fatNt.id];
+          if (fatNt.children) {
+            this.makeChildrenFat(fatNt.children, fatNt);
           }
-          tree.push(nt);
+          tree.push(fatNt);
         }
       }
     }
+  }
+
+  private static makeChildrenFat(thinTree: (ThinTreeEntity|TreeReference)[], parent: TreeEntity): (TreeEntity|TreeReference)[] {
+    const tree = <(TreeEntity|TreeReference)[]>thinTree;
+    TreeOperations.walkTree(tree, (te, parent) => {
+      if (!parent.path)
+        throw "Algoritm error";
+      te.id ??= te.name; // id must be set!
+      te.parent = parent;
+      te.path = [...parent.path, te.id];
+      return te;
+    }, parent);
+    return tree;
   }
 
   static walkTree<T>(tree: (TreeEntity|TreeReference)[], action: (te: TreeEntity, state: T)=>T, state: T) {
@@ -226,11 +235,11 @@ export class TreeOperations {
       path = path.split("/");
 
     let te: TreeEntity|undefined = undefined;
-    for (const name of path) {
+    for (const id of path) {
       if (!tree)
         return undefined;
 
-      te = <TreeEntity>tree.find(te => !this.isTreeReference(te) && te.name == name);
+      te = <TreeEntity>tree.find(te => !this.isTreeReference(te) && te.id == id);
       tree = te?.children;
     }
     return te;

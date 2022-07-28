@@ -10,6 +10,7 @@
   var clientList = source.Select((x, i) => new {
     cat = x["cat"],
     favorit = count - i,
+    id = x["id"],
     item = new {
       term1 = x["term1"],
       term2 = x["term2"],
@@ -28,6 +29,7 @@
                 select new {
                   name = z.Key,
                   children = z.Select(y => new {
+                    id = y.id,
                     name = y.item.term1,
                     favorit = y.favorit,
                     search = true,

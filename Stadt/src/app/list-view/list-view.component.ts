@@ -109,6 +109,7 @@ class ItemViewModel implements TreeEntity {
   constructor(item: TreeEntity) {
     Object.assign(this, item);
   }
+  id: string = "";
   listItemView: 'name' | 'item-detail' | undefined;
   parent: TreeEntity | undefined;
   name: string = "";

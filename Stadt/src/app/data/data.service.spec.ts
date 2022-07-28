@@ -2,7 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { DataService, TreeOperations } from './data.service';
-import { TreeEntity } from './app-data.model';
+import { ThinTreeEntity, TreeEntity } from './app-data.model';
 
 describe('DataService', () => {
   let service: DataService;
@@ -22,22 +22,22 @@ describe('DataService', () => {
 describe('TreeOperations', () => {
   it('merge tree', () => {
     const tree1: TreeEntity[] = [
-      { name: "t1", item: undefined, children: undefined, parent: undefined, path: ["t1"], favorit: undefined, search: undefined, listItemView: undefined },
-      { name: "t2", item: undefined, children: [
-        { name: "t21", item: undefined, children: undefined, parent: undefined, path: ["t2", "t21"], favorit: undefined, search: undefined, listItemView: undefined },
-        { name: "t12", item: <any>({ term1: "t12term"}), children: undefined, parent: undefined, path:  ["t2", "t12"], favorit: undefined, search: undefined, listItemView: undefined },
+      { id: "t1", name: "t1", item: undefined, children: undefined, parent: undefined, path: ["t1"], favorit: undefined, search: undefined, listItemView: undefined },
+      { id: "t2", name: "t2", item: undefined, children: [
+        { id: "t21", name: "t21", item: undefined, children: undefined, parent: undefined, path: ["t2", "t21"], favorit: undefined, search: undefined, listItemView: undefined },
+        { id: "t12", name: "t12", item: <any>({ term1: "t12term"}), children: undefined, parent: undefined, path:  ["t2", "t12"], favorit: undefined, search: undefined, listItemView: undefined },
       ], parent: undefined, path:  ["t2"], favorit: undefined, search: undefined, listItemView: undefined }
     ];
 
-    const tree2: TreeEntity[] = [
-      { name: "t2", item: undefined, children: [
-        { name: "t21", item: undefined, children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined },
-        { name: "t12", item: <any>({ term1: "t12termb", term2: "t12term2"}), children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined },
-        { name: "t23", item: <any>({ term1: "t23termb", term2: "t23term2"}), children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined },
-      ], parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined },
-      { name: "t3", item: undefined, children: [
-        { name: "t31", item: undefined, children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined },
-      ], parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined },
+    const tree2: ThinTreeEntity[] = [
+      { id: undefined, name: "t2", item: undefined, children: [
+        { id: undefined, name: "t21", item: undefined, children: undefined, favorit: undefined, search: undefined, listItemView: undefined },
+        { id: undefined, name: "t12", item: <any>({ term1: "t12termb", term2: "t12term2"}), children: undefined, favorit: undefined, search: undefined, listItemView: undefined },
+        { id: undefined, name: "t23", item: <any>({ term1: "t23termb", term2: "t23term2"}), children: undefined, favorit: undefined, search: undefined, listItemView: undefined },
+      ], favorit: undefined, search: undefined, listItemView: undefined },
+      { id: undefined, name: "t3", item: undefined, children: [
+        { id: undefined, name: "t31", item: undefined, children: undefined, favorit: undefined, search: undefined, listItemView: undefined },
+      ], favorit: undefined, search: undefined, listItemView: undefined },
     ];
 
     TreeOperations.mergeTree(tree1, tree2);
@@ -60,22 +60,22 @@ describe('TreeOperations', () => {
 
   it('find path in tree', () => {
     const tree1: TreeEntity[] = [
-      { name: "t1", item: undefined, children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined },
-      { name: "t2", item: undefined, children: [
-        { name: "t21", item: undefined, children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined },
-        { name: "t22", item: <any>({ term1: "t22term"}), children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined },
+      { id: "1", name: "t1", item: undefined, children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined },
+      { id: "2", name: "t2", item: undefined, children: [
+        { id: "21", name: "t21", item: undefined, children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined },
+        { id: "22", name: "t22", item: <any>({ term1: "t22term"}), children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined },
       ], parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined }
     ];
 
-    let t1 = TreeOperations.findPath(tree1, ["t2"]);
+    let t1 = TreeOperations.findPath(tree1, ["2"]);
     expect(t1).toBeTruthy();
-    let t22 = TreeOperations.findPath(tree1, ["t2", "t22"]);
+    let t22 = TreeOperations.findPath(tree1, ["2", "22"]);
     expect(t22).toBeTruthy();
     expect(t22?.item?.term1).toBe("t22term");
   })
 
   it('isTreeReference', () => {
-    const te = { name: "t1", item: undefined, children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined };
+    const te = { id: "t1", name: "t1", item: undefined, children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined };
     const tr = { referencePath: "t1" };
 
     expect(TreeOperations.isTreeReference(te)).toBeFalse();
@@ -84,10 +84,10 @@ describe('TreeOperations', () => {
 
   it('walk tree', () => {
     const tree1: TreeEntity[] = [
-      { name: "t1", item: undefined, children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined },
-      { name: "t2", item: undefined, children: [
+      { id: "t1", name: "t1", item: undefined, children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined },
+      { id: "t2", name: "t2", item: undefined, children: [
         { referencePath: "t1" },
-        { name: "t22", item: <any>({ term1: "t22term"}), children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined },
+        { id: "t22", name: "t22", item: <any>({ term1: "t22term"}), children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined },
       ], parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined }
     ];
 

@@ -5,6 +5,7 @@ import { Subscription, timer } from 'rxjs';
 import { Item, TreeEntity, TreeReference } from '../data/app-data.model';
 import { ConfigService } from '../data/config.service';
 import { TreeOperations } from '../data/data.service';
+import { ViewModelService } from '../data/view-model.service';
 
 @Component({
   selector: 'app-list-view',
@@ -19,6 +20,7 @@ export class ListViewComponent implements OnInit, OnDestroy, AfterViewInit {
   hooks: {[a: string]: boolean} = {};
   handicapped = false;
   defaultItemView: 'name'|'item-detail'|undefined;
+  showBack = false;
 
   // scroll
   readonly handicappedScrollOffset: number = 500;
@@ -28,7 +30,8 @@ export class ListViewComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild("divScroll") divScroll!: ElementRef<HTMLElement>;
 
   subscriptions: Subscription[] = [];
-  constructor(route: ActivatedRoute, private router: Router, config: ConfigService, public scroller: ViewportScroller) {
+  constructor(route: ActivatedRoute, private router: Router, config: ConfigService,
+    private vm: ViewModelService, public scroller: ViewportScroller) {
     this.subscriptions.push(route.queryParams.subscribe(
       params => this.enableAnchors = !!params["s/hooks"]));
     this.subscriptions.push(config.settings.subscribe(
@@ -52,6 +55,7 @@ export class ListViewComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     }
     this.buildItems(this.entity);
+    this.showBack = this.vm.history.length > 1;
   }
 
   ngAfterViewInit() {

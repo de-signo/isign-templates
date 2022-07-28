@@ -3,6 +3,7 @@ import { ActivatedRoute, convertToParamMap, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { ConfigService } from '../data/config.service';
 import { DataService } from '../data/data.service';
+import { ViewModelService } from '../data/view-model.service';
 
 import { ListViewComponent } from './list-view.component';
 
@@ -15,6 +16,9 @@ describe('ListViewComponent', () => {
   let fakeConfig = {
     settings: of({})
   };
+  let fakeVM = {
+    history: []
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -22,7 +26,8 @@ describe('ListViewComponent', () => {
       providers: [
         { provide: ActivatedRoute, useValue: fakeActivatedRoute },
         { provide: Router, useValue: fakeRouter },
-        { provide: ConfigService, useValue: fakeConfig }
+        { provide: ConfigService, useValue: fakeConfig },
+        { provide: ViewModelService, useValue: fakeVM }
       ]
     })
     .compileComponents();

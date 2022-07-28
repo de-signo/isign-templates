@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { DEFAULT_INTERRUPTSOURCES, Idle } from '@ng-idle/core';
 import { Subscription, timer } from 'rxjs';
 import { DataService } from './data/data.service';
+import { ViewModelService } from './data/view-model.service';
 
 @Component({
   selector: 'app-root',
@@ -13,13 +14,13 @@ import { DataService } from './data/data.service';
 export class AppComponent  implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
 
-  constructor(private dataService: DataService, idle: Idle, router: Router) {
+  constructor(private dataService: DataService, idle: Idle, private vm: ViewModelService) {
     idle.setIdle(20);
     idle.setTimeout(20);
     idle.setInterrupts(DEFAULT_INTERRUPTSOURCES);
 
     idle.onTimeout.subscribe(() => {
-      router.navigate(["/"], { queryParamsHandling:"preserve" });
+      this.vm.reset();
       idle.watch();
     });
     idle.watch();

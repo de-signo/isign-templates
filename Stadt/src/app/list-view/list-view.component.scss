@@ -73,6 +73,8 @@
       &>span
       {
         overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
 
       &>span:nth-child(1)

@@ -105,7 +105,8 @@ export class ListViewComponent implements OnInit, OnDestroy, AfterViewInit {
         if (h != last) {
           last = h;
           ih.hook = h;
-          hooks[h] = true;
+          if (hooks[h] == false)
+            hooks[h] = true;
         }
         return ih;
       }) ?? [];

@@ -74,6 +74,14 @@
               { "referencePath": ["Mitarbeiter*in", "max"] },
               { "referencePath": ["Mitarbeiter*in", "bert"] }
             ]
+          },
+          {
+            "name": "101 Nacht",
+            "search": true,
+            "children": [
+              { "referencePath": ["Mitarbeiter*in", "max"] },
+              { "referencePath": ["Mitarbeiter*in", "bert"] }
+            ]
           }
         ]}
       ]

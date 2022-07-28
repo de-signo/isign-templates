@@ -49,10 +49,20 @@ header {
   height: 204px;
   border-bottom: solid 12px $color-header-border;
   border-top: solid 12px $color-header-border;
-  background: url(assets/img/header2.png) no-repeat right;
   font-size:46px;
   padding: 0 0 0 53px;
-  line-height: 204px;
+
+  display: flex;
+
+  span {
+    flex: 1 1 auto;
+    align-self: center;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 }
 
 /* navigation (home, back) */

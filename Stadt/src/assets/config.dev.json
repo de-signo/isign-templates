@@ -69,7 +69,11 @@
           },
           {
             "name": "Sehr Langer Begriff mit Umbruch in die zweite Zeile und danach wir abgeschnitten mit Ellipse.",
-            "search": true
+            "search": true,
+            "children": [
+              { "referencePath": ["Mitarbeiter*in", "max"] },
+              { "referencePath": ["Mitarbeiter*in", "bert"] }
+            ]
           }
         ]}
       ]

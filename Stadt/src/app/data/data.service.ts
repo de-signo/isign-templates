@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { TreeEntity, Item, TreeReference } from './app-data.model';
+import { TreeEntity, TreeReference } from './app-data.model';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -16,7 +16,6 @@ export class DataService implements OnDestroy {
 
   private treeSubject = new BehaviorSubject<TreeEntity[]>([]);
   public tree = this.treeSubject.asObservable();
-  private fillUpSearchResults = false;
   private subscriptions: Subscription[] = [];
 
   constructor(private http: HttpClient, private configSvc: ConfigService)
@@ -56,13 +55,6 @@ export class DataService implements OnDestroy {
       }
     }
 
-    // set path and parent
-    TreeOperations.walkTree(cats, (te, state) => {
-      const path = [...state.path, te.name];
-      te.parent = state.parent;
-      te.path = path;
-      return {parent: te, path: path};
-    }, {parent: <TreeEntity|undefined>undefined, path: <string[]>[]});
     this.treeSubject.next(cats);
   }
 
@@ -73,12 +65,45 @@ export class DataService implements OnDestroy {
       throw `File source from '${jsonFile}' did not return a valid tree`;
     TreeOperations.mergeTree(cats, data);
   }
+  
+  private static groupBy<T>(array: T[], predicate: (v: T) => string) : {[key: string]: T[]} {
+    // https://stackoverflow.com/questions/14446511/most-efficient-method-to-groupby-on-an-array-of-objects
+    return array.reduce((acc, value) => {
+      (acc[predicate(value)] ||= []).push(value);
+      return acc;
+    }, {} as { [key: string]: T[] });
+  }
+
+  private static findEntityWhereItemHasId(tree: (TreeEntity|TreeReference)[], referenceId: string): TreeReference|undefined {
+    let result: TreeReference|undefined;
+    TreeOperations.walkTree<boolean>(tree, (te, state) => {
+      if (!state && te?.item?.id == referenceId) {
+        result = { referencePath: te.path! }
+        return true;
+      }
+      return false;
+    } , false);
+    return result;
+  }
 
   private async loadDataImportSource(source: IDataImportItemSource, cats: TreeEntity[]): Promise<void> {
     const serviceUrl = environment.dataImportServiceUrl;
-    const items = await this.http.get<Item[]>(serviceUrl + window.location.search + `&ds=${source.dataSourceKey}`).toPromise();
-    const tree = items.map(it => ({name: it.term1, item: it, children: [], parent: undefined, path: undefined, favorit: undefined, search: source.search, listItemView: undefined}));
-    TreeOperations.mergeTree(cats, [{ name: source.category, children: tree, item: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: source.listItemView}]);
+    const items = await this.http.get<any[]>(serviceUrl + window.location.search + `&ds=${source.dataSourceKey}`).toPromise();
+
+    let children: (TreeEntity|TreeReference)[];
+    switch (source.mapTo) {
+      case 'group-with-reference-id':
+        // items: { name: string, referenceId: string }
+        children = Object.entries(DataService.groupBy(items.filter(i => !!i.name && !!i.referenceId), i => i.name))
+          .map(grp => (<TreeEntity>{name: grp[0], item: undefined, children: grp[1].map(i => DataService.findEntityWhereItemHasId(cats, i.referenceId)).filter(e => !!e), parent: undefined, path: undefined, favorit: undefined, search: source.search, listItemView: source.listItemView}));
+        break;
+      case 'leaf-item':
+      default:
+        // items: Item[]
+        children = items.map(it => ({name: it.term1, item: it, children: [], parent: undefined, path: undefined, favorit: undefined, search: source.search, listItemView: source.listItemView}));
+        break;
+    }
+    TreeOperations.mergeTree(cats, [{ name: source.category, children: children, item: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined}]);
   }
 
   private loadFixedSource(source: IFixedItemSource, cats: TreeEntity[]) {
@@ -146,7 +171,7 @@ export class TreeOperations {
     return "referencePath" in tree;
   }
 
-  static mergeTree(tree: (TreeEntity|TreeReference)[], newTree: (TreeEntity|TreeReference)[]) {
+  static mergeTree(tree: (TreeEntity|TreeReference)[], newTree: (TreeEntity|TreeReference)[], parent: TreeEntity|undefined=undefined, path: string[]=[]) {
     for (const nt of newTree)
     {
       if (this.isTreeReference(nt)) {
@@ -160,7 +185,7 @@ export class TreeOperations {
           if (nt.children)
           {
             if (entity.children)
-              this.mergeTree(entity.children, nt.children);
+              this.mergeTree(entity.children, nt.children, entity, [...path, entity.name]);
             else
               entity.children = nt.children;
           }
@@ -169,6 +194,18 @@ export class TreeOperations {
           else
             Object.assign(entity.item, nt.item);
         } else {
+          // set path and parent (complete subtree)
+          nt.parent = parent;
+          nt.path = [...path, nt.name];
+          if (nt.children) {
+            TreeOperations.walkTree(nt.children, (te, parent) => {
+              if (!parent.path)
+                throw "Algoritm error";
+              te.parent = parent;
+              te.path = [...parent.path, te.name];
+              return te;
+            }, nt);
+          }
           tree.push(nt);
         }
       }

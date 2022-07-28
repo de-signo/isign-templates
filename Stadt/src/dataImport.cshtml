@@ -5,6 +5,7 @@
   /*
    * this service retuns the data of a iSign DataImport.
    * The fields are mapped according to style definition
+   * field prefix "datasource-" is removed
    * No furter processing
    */
   Response.ContentType = "application/json";
@@ -14,10 +15,10 @@
 
   var fields = model.Style.StyleItem.Fields
     .Where(f => f.ContentClass.ParentFieldKey == dsField)
-    .Select(f => f.Key)
+    .Select(f => new { Key = f.Key, Json = f.Key.StartsWith(dsField + "-") ? f.Key.Substring(dsField.Length + 1) : f.Key })
     .Distinct()
     .ToList();
 
-  var results = source.Select(row => fields.ToDictionary(f => f, f => row.Raw(f))).ToList();
+  var results = source.Select(row => fields.ToDictionary(f => f.Json, f => row.Raw(f.Key))).ToList();
 }
 @Html.Raw(JsonConvert.SerializeObject(results))

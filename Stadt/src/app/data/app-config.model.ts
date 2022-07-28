@@ -16,6 +16,7 @@ export interface IDataImportItemSource extends IItemSource {
   category: string;
   search: true|undefined;
   listItemView: 'name'|'item-detail'|undefined;
+  mapTo: 'leaf-item'|'group-with-reference-id'|undefined;
   dataSourceKey: string;  // field key of data import
 }
 

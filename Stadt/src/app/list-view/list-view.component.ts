@@ -1,6 +1,6 @@
 import { ViewportScroller } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild, } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, timer } from 'rxjs';
 import { Item, TreeEntity, TreeReference } from '../data/app-data.model';
 import { ConfigService } from '../data/config.service';
@@ -28,7 +28,7 @@ export class ListViewComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild("divScroll") divScroll!: ElementRef<HTMLElement>;
 
   subscriptions: Subscription[] = [];
-  constructor(route: ActivatedRoute, config: ConfigService, public scroller: ViewportScroller) {
+  constructor(route: ActivatedRoute, private router: Router, config: ConfigService, public scroller: ViewportScroller) {
     this.subscriptions.push(route.queryParams.subscribe(
       params => this.enableAnchors = !!params["s/hooks"]));
     this.subscriptions.push(config.settings.subscribe(
@@ -43,6 +43,14 @@ export class ListViewComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
+    if (this.entity?.children?.length == 1) {
+      const child1 = this.entity.children[0];
+      const target = TreeOperations.isTreeReference(child1) ? TreeOperations.findPath(this.tree, child1.referencePath) : child1;
+      if (target) {
+        this.router.navigate(['/'].concat(target.path ?? []), { replaceUrl: true });
+        return
+      }
+    }
     this.buildItems(this.entity);
   }
 

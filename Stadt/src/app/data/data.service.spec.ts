@@ -36,7 +36,7 @@ describe('TreeOperations', () => {
         { id: undefined, name: "t23", item: <any>({ term1: "t23termb", term2: "t23term2"}), children: undefined, favorit: undefined, search: undefined, listItemView: undefined },
       ], favorit: undefined, search: undefined, listItemView: undefined },
       { id: undefined, name: "t3", item: undefined, children: [
-        { id: undefined, name: "t31", item: undefined, children: undefined, favorit: undefined, search: undefined, listItemView: undefined },
+        { id: undefined, name: "t3/1", item: undefined, children: undefined, favorit: undefined, search: undefined, listItemView: undefined },
       ], favorit: undefined, search: undefined, listItemView: undefined },
     ];
 
@@ -50,7 +50,7 @@ describe('TreeOperations', () => {
     // check path
     expect(tree1[2].path).toEqual(["t3"]);
     expect((<TreeEntity>tree1[1].children?.[2])?.path).toEqual(["t2", "t23"]);
-    expect((<TreeEntity>tree1[2].children?.[0])?.path).toEqual(["t3", "t31"]);
+    expect((<TreeEntity>tree1[2].children?.[0])?.path).toEqual(["t3", "t3-1"]);
 
     // check parent
     expect(tree1[2].parent).toBe(undefined);
@@ -63,13 +63,13 @@ describe('TreeOperations', () => {
       { id: "1", name: "t1", item: undefined, children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined },
       { id: "2", name: "t2", item: undefined, children: [
         { id: "21", name: "t21", item: undefined, children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined },
-        { id: "22", name: "t22", item: <any>({ term1: "t22term"}), children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined },
+        { id: "2/2", name: "t22", item: <any>({ term1: "t22term"}), children: undefined, parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined },
       ], parent: undefined, path: undefined, favorit: undefined, search: undefined, listItemView: undefined }
     ];
 
     let t1 = TreeOperations.findPath(tree1, ["2"]);
     expect(t1).toBeTruthy();
-    let t22 = TreeOperations.findPath(tree1, ["2", "22"]);
+    let t22 = TreeOperations.findPath(tree1, ["2", "2-2"]);
     expect(t22).toBeTruthy();
     expect(t22?.item?.term1).toBe("t22term");
   })

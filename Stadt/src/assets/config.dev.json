@@ -53,7 +53,7 @@
         "name": "Stichwortsuche",
         "children": [
           {
-            "name": "Führerschein",
+            "name": "Führerschein 1/2",
             "search": true,
             "children": [
               { "referencePath": ["Mitarbeiter*in", "max"] },

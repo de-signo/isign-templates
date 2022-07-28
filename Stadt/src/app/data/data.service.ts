@@ -198,7 +198,7 @@ export class TreeOperations {
           const fatNt = <TreeEntity>nt;
           fatNt.id ??= fatNt.name; // id must be set!
           fatNt.parent = parent;
-          fatNt.path = [...path, fatNt.id];
+          fatNt.path = [...path, this.normalizePathComponent(fatNt.id)];
           if (fatNt.children) {
             this.makeChildrenFat(fatNt.children, fatNt);
           }
@@ -208,6 +208,10 @@ export class TreeOperations {
     }
   }
 
+  private static normalizePathComponent(id: string): string {
+    return id.replace(/\//, "-");
+  }
+
   private static makeChildrenFat(thinTree: (ThinTreeEntity|TreeReference)[], parent: TreeEntity): (TreeEntity|TreeReference)[] {
     const tree = <(TreeEntity|TreeReference)[]>thinTree;
     TreeOperations.walkTree(tree, (te, parent) => {
@@ -215,7 +219,7 @@ export class TreeOperations {
         throw "Algoritm error";
       te.id ??= te.name; // id must be set!
       te.parent = parent;
-      te.path = [...parent.path, te.id];
+      te.path = [...parent.path, this.normalizePathComponent(te.id)];
       return te;
     }, parent);
     return tree;
@@ -235,11 +239,11 @@ export class TreeOperations {
       path = path.split("/");
 
     let te: TreeEntity|undefined = undefined;
-    for (const id of path) {
+    for (const component of path) {
       if (!tree)
         return undefined;
 
-      te = <TreeEntity>tree.find(te => !this.isTreeReference(te) && te.id == id);
+      te = <TreeEntity>tree.find(te => !this.isTreeReference(te) && this.normalizePathComponent(te.id) == component);
       tree = te?.children;
     }
     return te;

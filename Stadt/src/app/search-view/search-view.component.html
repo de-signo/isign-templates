@@ -11,7 +11,7 @@
 
 <ul class="results btns">
   <li *ngFor="let item of results">
-    <a [routerLink]="['/'].concat(item.path ?? [])" queryParamsHandling="preserve">{{item.name}}</a>
+    <a [routerLink]="['/'].concat(item.path ?? [])" queryParamsHandling="preserve"><span>{{item.name}}</span></a>
   </li>
 </ul>
 

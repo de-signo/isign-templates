@@ -27,6 +27,11 @@ img.header
 
   li {
     flex: 1 1 auto;
+    &:not(.space) {
+      // base height for flex-grow (required to size .search_mock equally)
+      height: 58px;
+      box-sizing: border-box;
+    }
   }
 
   li>a
@@ -47,9 +52,19 @@ img.header
     a {
       color:rgb(100,100,100);
     }
-    img {
-      width:50px;
-      margin: -5px 0 -7px 0;
+
+    a {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      justify-items: center;
+
+      span {
+        grid-column: 2;
+      }
+      img {
+        grid-column: 3;
+        width:50px;
+      }
     }
   }
 }

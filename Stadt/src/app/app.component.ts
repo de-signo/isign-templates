@@ -1,4 +1,4 @@
-import { OnInit } from '@angular/core';
+import { HostListener, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { DEFAULT_INTERRUPTSOURCES, Idle } from '@ng-idle/core';
@@ -34,5 +34,13 @@ export class AppComponent  implements OnInit {
       data => this.current = data,
       error => console.error(error)
     );
+  }
+
+  @HostListener("touchstart", ["$event"])
+  touchHandler(event: any) {
+    if(event.touches.length > 1) {
+        // prevent mult touch
+        event.preventDefault();
+    }
   }
 }

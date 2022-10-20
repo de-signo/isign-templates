@@ -1,0 +1,9 @@
+<header>
+  <h1>{{ style.header }}</h1>
+  <span class="time">
+    {{ now | date : 'shortTime' }} Uhr&nbsp;&nbsp;&nbsp;&nbsp;{{ now | date : 'dd.MM.yyyy' }}
+  </span>
+  <img src="assets/logo.png" />
+</header>
+
+<app-calendar [hourFrom]="7" [hourTo]="21" [dateFrom]="dayFrom" [dateTo]="dayTo" [items]="current"></app-calendar>

@@ -17,5 +17,7 @@ pipelines:
             - npm run zip
             - cd ../Stadt
             - npm run zip
+            - cd ../Calendar
+            - npm run zip
           artifacts:
             - dist/*

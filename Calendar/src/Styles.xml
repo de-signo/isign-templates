@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<StyleList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://stollsoft.de/iSign/v2/Content/Forms/Styles">
+
+  <style key="std_calendar_2022" file="index.cshtml"
+         interactive="true" preview="assets/preview.png">
+    <names>
+      <name culture="de">Kalenderansicht</name>
+    </names>
+
+    <fields>
+      <field key="header">
+        <names>
+          <name>Überschrift</name>
+        </names>
+      </field>
+
+      <field key="source">
+        <names>
+          <name>Datenquelle</name>
+        </names>
+        <content_class type="DataSource" />
+      </field>
+
+      <field key="begin">
+        <names>
+          <name>Beginn</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+
+      <field key="end">
+        <names>
+          <name>Ende</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+
+      <field key="name1">
+        <names>
+          <name>Bezeichnung 1</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+
+      <field key="name2">
+        <names>
+          <name>Bezeichnung 2</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+
+      <field key="info1">
+        <names>
+          <name>Info 1</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+
+      <field key="info2">
+        <names>
+          <name>Info 2</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+
+      <field key="info3">
+        <names>
+          <name>Info 3</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+
+    </fields>
+  </style>
+
+</StyleList>

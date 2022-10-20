@@ -3,6 +3,7 @@
   "name": "standardvorlagen",
   "private": true,
   "workspaces": [
+    "Calendar",
     "Raumbelegung",
     "Stadt"
   ]

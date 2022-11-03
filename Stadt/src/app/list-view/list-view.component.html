@@ -26,7 +26,7 @@
   </ul>
 </div>
 
-<div class="scroll-area" #divScroll>
+<div class="scroll-area" #divScroll (scroll)="updateScrollTop()">
   <ul class="btns" [ngStyle]="{'margin-top.px' : handicappedScrollOffset}">
     <li *ngFor="let item of children" class="item">
       <a [routerLink]="['/'].concat(item.path ?? [])" queryParamsHandling="preserve" [id]="item.hook ? 'anchor' + item.hook : null"

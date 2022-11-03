@@ -69,12 +69,20 @@ export class ListViewComponent implements OnInit, OnDestroy, AfterViewInit {
     const el = this.divScroll.nativeElement;
     const max = el.scrollHeight - el.clientHeight;
     var st = this.scrollTop + dir * 500;
-    this.scrollTop = Math.max(0, Math.min(max, st));
-    this.showScrollup = this.scrollTop != 0;
-    this.showScrolldown = this.scrollTop != max;
+    const scrollTop = Math.max(0, Math.min(max, st));
 
     // cannot use binding / change detection for this, because it is updated by view
-    el.scrollTop = this.scrollTop;
+    el.scrollTop = scrollTop;
+  }
+
+  updateScrollTop() {
+    // scolltop can change by external events and this.scrollTo
+    // we use smooth scolling, this scrolltop can change frequently
+    const el = this.divScroll.nativeElement;
+    const max = el.scrollHeight - el.clientHeight;
+    this.scrollTop = el.scrollTop;
+    this.showScrollup = this.scrollTop != 0;
+    this.showScrolldown = this.scrollTop != max;
   }
 
   showHandicapped(): void {

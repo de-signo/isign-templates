@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "zip": "ng build --configuration production && cd ../dist/stadt && bestzip ../calendar.zip *"
+    "zip": "ng build --configuration production && cd ../dist/calendar && bestzip ../calendar.zip *"
   },
   "private": true,
   "dependencies": {

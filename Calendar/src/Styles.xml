@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <StyleList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://stollsoft.de/iSign/v2/Content/Forms/Styles">
 
-  <style key="std_calendar_2022" file="index.cshtml"
+  <style key="std_calendar_2022" file="index.cshtml" target="chromium"
          interactive="true" preview="assets/preview.png">
     <names>
       <name culture="de">Kalenderansicht</name>

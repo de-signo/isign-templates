@@ -17,7 +17,9 @@ registerLocaleData(localeDe);
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot([])
+    RouterModule.forRoot([
+      {path: "**", component: AppComponent}
+    ])
   ],
   bootstrap: [AppComponent],
   providers: [

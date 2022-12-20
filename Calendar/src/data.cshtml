@@ -7,8 +7,8 @@
   var source = model.DataSource("source");
   
   var results = source.Select((x, i) => new {
-    begin = x["begin"],
-    end = x["end"],
+    begin = (x["begin"] is DateTime ? (DateTime)x["begin"] : DateTime.Parse((string)x["begin"])).ToString("R"),
+    end = (x["end"] is DateTime ? (DateTime)x["end"] : DateTime.Parse((string)x["end"])).ToString("R"),
     name1 = x["name1"],
     name2 = x["name2"],
     info1 = x["info1"],

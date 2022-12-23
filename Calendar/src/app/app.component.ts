@@ -6,6 +6,7 @@ import { ItemViewModel } from './calendar/calendar.component';
 import { Item } from './data/app-data.model';
 import { DataService } from './data/data.service';
 import { StyleService } from './style.service';
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -13,14 +14,50 @@ import { StyleService } from './style.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent  implements OnInit {
-  dayTo: Date;
-  dayFrom: Date;
+  dayTo: Date = new Date();
+  dayFrom: Date = new Date();
+  hourFrom = 0;
+  hourTo = 23; // inklusive
   now: Date = new Date();
+  days = "1";
 
-  constructor(private dataService: DataService, public style: StyleService) {
-    const now = new Date();
-    this.dayTo = new Date(now.getFullYear(), now.getMonth(), now.getDate() + (6 - now.getDay()));   // Sunday
-    this.dayFrom = new Date(now.getFullYear(), now.getMonth(), now.getDate() + (1 - now.getDay())); // Monday
+  constructor(private dataService: DataService, public style: StyleService, route: ActivatedRoute) {
+    route.queryParams.subscribe((params) => {
+      this.days = params["s/days"] ?? "1";
+      this.hourFrom = parseInt(params["s/startt"] ?? "0");
+      this.hourTo = parseInt(params["s/endt"] ?? "24") - 1;
+      this.setup();
+    });
+  }
+
+  private setup() {
+    const now = this.now;
+    var dayStart: number;
+    var dayEnd: number;
+    switch (this.days) {
+      default:
+        dayStart = now.getDay();
+        dayEnd = dayStart + parseInt(this.days) - 1;
+        break;
+      case "MO-FR":
+        dayStart = 1;
+        dayEnd = 5;
+        break;
+      case "MO-SA":
+        dayStart = 1;
+        dayEnd = 6;
+        break;
+      case "MO-SO":
+        dayStart = 1;
+        dayEnd = 7;
+        break;
+      case "SO-SA":
+        dayStart = 0;
+        dayEnd = 6;
+        break;
+    }
+    this.dayTo = new Date(now.getFullYear(), now.getMonth(), now.getDate() + (dayEnd - now.getDay()));
+    this.dayFrom = new Date(now.getFullYear(), now.getMonth(), now.getDate() + (dayStart - now.getDay()));
   }
 
   current: ItemViewModel[] = [];
@@ -34,6 +71,7 @@ export class AppComponent  implements OnInit {
     );
 
     // update current time
+    this.now = new Date()
     timer(0, 15000).subscribe(
       _ => this.now = new Date()
     );

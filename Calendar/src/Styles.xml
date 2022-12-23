@@ -14,6 +14,41 @@
         </names>
       </field>
 
+      <field key="days">
+        <names>
+          <name>Wochentage</name>
+        </names>
+        <content_class type="TextChoose">
+          <text key="1">1 Tag</text>
+          <text key="MO-FR">MO-FR</text>
+          <text key="MO-SA">MO-SA</text>
+          <text key="MO-SO">MO-SO</text>
+          <text key="SO-MO">SO-MO</text>
+        </content_class>
+      </field>
+      <field key="startt">
+        <names>
+          <name>Startzeit</name>
+        </names>
+        <content_class type="TextChoose">
+          <text key="0">0</text>
+          <text key="7">7</text>
+          <text key="8">8</text>
+          <text key="9">9</text>
+        </content_class>
+      </field>
+      <field key="endt">
+        <names>
+          <name>Endzeit</name>
+        </names>
+        <content_class type="TextChoose">
+          <text key="16">16</text>
+          <text key="18">18</text>
+          <text key="20">20</text>
+          <text key="22">22</text>
+          <text key="24">24</text>
+        </content_class>
+      </field>
       <field key="source">
         <names>
           <name>Datenquelle</name>

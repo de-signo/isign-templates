@@ -66,6 +66,14 @@ pipeline {
         }
       }
     }
+
+    stage('build-calendar') {
+      steps {
+        dir('Calendar') {
+          bat 'npm run zip'
+        }
+      }
+    }
   }
 
   post {

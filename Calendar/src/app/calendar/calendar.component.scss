@@ -1,0 +1,80 @@
+
+table
+{
+  width: 100%;
+  table-layout:fixed;
+  border-collapse: collapse; /* single border */
+  border:0;
+  empty-cells: show; /* show top level cell (borders!) */
+  padding: 0;
+  margin: 0;
+  border-spacing: 0;
+}
+
+th
+{
+  background-color:rgb(235,235,235);
+  border: solid 2px  rgb(0,0,0);
+}
+th:first-child
+{
+  width: 80px;
+}
+
+
+td
+{
+  /* Compensate padding in border element */
+  padding: 0 0;
+  position: relative;
+}
+
+td:first-child
+{
+  padding: 0 5px;
+  text-align: right;
+  vertical-align: top;
+  border: none;
+  width: 50px;
+}
+
+td>div>div:first-child
+{
+  /* Cell border */
+  border: solid 1px #888888;
+  background-color:transparent;
+  position: absolute;
+  left: 0;
+  right: 0px;
+  top: 0;
+  bottom: 0;
+}
+
+td
+{
+  height: 42px;
+}
+
+
+td > div
+{
+  position: relative;
+  height: 42px;
+}
+
+.item
+{
+  /* positioning */
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+hr
+{
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-top: -1px; /* compensate height of now marker */
+}

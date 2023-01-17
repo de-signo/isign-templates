@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<StyleList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://stollsoft.de/iSign/v2/Content/Forms/Styles">
+
+  <style key="std_calendar_2022" file="index.cshtml" target="chromium"
+         interactive="true" preview="assets/preview.png">
+    <names>
+      <name culture="de">Kalenderansicht</name>
+    </names>
+
+    <fields>
+      <field key="header">
+        <names>
+          <name>Überschrift</name>
+        </names>
+      </field>
+
+      <field key="days">
+        <names>
+          <name>Wochentage</name>
+        </names>
+        <content_class type="TextChoose">
+          <text key="1">1 Tag</text>
+          <text key="MO-FR">MO-FR</text>
+          <text key="MO-SA">MO-SA</text>
+          <text key="MO-SO">MO-SO</text>
+          <text key="SO-MO">SO-MO</text>
+        </content_class>
+      </field>
+      <field key="startt">
+        <names>
+          <name>Startzeit</name>
+        </names>
+        <content_class type="TextChoose">
+          <text key="0">0</text>
+          <text key="7">7</text>
+          <text key="8">8</text>
+          <text key="9">9</text>
+        </content_class>
+      </field>
+      <field key="endt">
+        <names>
+          <name>Endzeit</name>
+        </names>
+        <content_class type="TextChoose">
+          <text key="16">16</text>
+          <text key="18">18</text>
+          <text key="20">20</text>
+          <text key="22">22</text>
+          <text key="24">24</text>
+        </content_class>
+      </field>
+      <field key="source">
+        <names>
+          <name>Datenquelle</name>
+        </names>
+        <content_class type="DataSource" />
+      </field>
+
+      <field key="begin">
+        <names>
+          <name>Beginn</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+
+      <field key="end">
+        <names>
+          <name>Ende</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+
+      <field key="name1">
+        <names>
+          <name>Bezeichnung 1</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+
+      <field key="name2">
+        <names>
+          <name>Bezeichnung 2</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+
+      <field key="info1">
+        <names>
+          <name>Info 1</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+
+      <field key="info2">
+        <names>
+          <name>Info 2</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+
+      <field key="info3">
+        <names>
+          <name>Info 3</name>
+        </names>
+        <content_class bind="Column" parentField="source" type="TextFree" />
+      </field>
+
+    </fields>
+  </style>
+
+</StyleList>

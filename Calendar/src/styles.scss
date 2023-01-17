@@ -1,0 +1,88 @@
+@import "./styles/mixins.scss";
+
+html
+{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.4vh;
+}
+
+body {
+  background-color: $color-primary-bg;
+  color: $color-primary-fg;
+
+  margin: 0;
+  padding: 0;
+
+  /* disable select */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+header
+{
+  color: $color-header-fg;
+  background-color: $color-header-bg;
+
+  padding: 5px 0 0 20px;
+  height: 90px;
+
+  img
+  {
+    position:absolute; right:30px; top: 15px;
+  }
+
+
+  .time
+  {
+    font-size: 15pt;
+    padding:0 0 0 -10px;
+  }
+
+
+  h1
+  {
+    display: inline;
+    margin: 0;
+    font-size: 60pt;
+  }
+
+}
+
+
+
+app-calendar {
+  .item
+  {
+    /* item, not calendar related */
+    background-color:rgb(200,200,250);
+    color:rgb(0,0,0);
+    border:solid black 2px;
+
+    opacity: 1;
+    overflow: hidden;
+    padding-top:2px;
+    font-size:12px;
+    text-align:center;
+
+    z-index: 60;
+
+    &>div {
+      padding:2px;
+    }
+    &>div:first-child {
+      font-size:12px;
+      font-weight:bold;
+    }
+  }
+
+  hr
+  {
+    border: solid 1px red;
+    z-index: 99;
+    opacity: 0.5;
+  }
+}

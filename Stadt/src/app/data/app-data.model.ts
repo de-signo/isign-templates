@@ -1,6 +1,6 @@
 
 export interface ThinTreeEntity {
-  id: string|undefined;   // unique id for referencing
+  id: string|number|undefined;   // unique id for referencing
   name: string;           // name for display
   children: (ThinTreeEntity|TreeReference)[]|undefined;
   item: Item|undefined;
@@ -14,7 +14,7 @@ export interface ThinTreeEntity {
 }
 
 export interface TreeEntity extends ThinTreeEntity {
-  id: string;
+  id: string|number;
   children: (TreeEntity|TreeReference)[]|undefined;
 
   // tree structure

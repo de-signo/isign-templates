@@ -208,7 +208,9 @@ export class TreeOperations {
     }
   }
 
-  private static normalizePathComponent(id: string): string {
+  private static normalizePathComponent(id: string|number): string {
+    if (typeof(id) == 'number')
+      return id.toString();
     return id.replace(/\//, "-");
   }
 

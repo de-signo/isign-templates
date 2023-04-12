@@ -3,8 +3,8 @@
 </header>
 <main *ngIf="current; else elseBlock">
   <section class="left">
-    <h2>{{ 1000 * current.from | date : 'dd.MM.yyyy' }}</h2>
-    <p>{{ 1000 * current.from | date : 'shortTime' }} - {{ 1000 * current.to | date : 'shortTime' }} Uhr</p>
+    <h2>{{ current.from | date : 'dd.MM.yyyy' }}</h2>
+    <p>{{ current.from | date : 'shortTime' }} - {{ current.to | date : 'shortTime' }} Uhr</p>
   </section>
   <section class="right">
     <h1>{{ current.title }}</h1>

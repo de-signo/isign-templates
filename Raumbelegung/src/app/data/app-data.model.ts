@@ -1,8 +1,8 @@
 
-export class Booking {
-  title: string = "";
-  subtitle: string = "";
-  from: number = 0;
-  to: number = 0;
-  participants: string[] = [];
+export interface Booking {
+  title: string;
+  subtitle: string;
+  from: string;
+  to: string;
+  participants: string[];
 }

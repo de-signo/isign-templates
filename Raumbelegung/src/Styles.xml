@@ -26,6 +26,12 @@
         </names>
         <content_class bind="Column" parentField="s" type="TextFree" />
       </field>
+      <field key="participants">
+        <names>
+          <name>Teilnehmer</name>
+        </names>
+        <content_class bind="Column" parentField="s" type="TextFree" />
+      </field>
       <field key="from">
         <names>
           <name>Datum</name>
@@ -38,11 +44,14 @@
         </names>
         <content_class bind="Column" parentField="s" type="TextFree" />
       </field>
-       <field key="participants">
+      <field key="tz">
         <names>
-          <name>Teilnehmer</name>
+          <name>Import Zeitzone</name>
         </names>
-        <content_class bind="Column" parentField="s" type="TextFree" />
+        <content_class type="TextChoose">
+          <text key="srv">Serverzeit</text>
+          <text key="utc">Weltzeit (UTC)</text>
+        </content_class>
       </field>
     </fields>
   </style>
@@ -72,6 +81,12 @@
         </names>
         <content_class bind="Column" parentField="s" type="TextFree" />
       </field>
+      <field key="participants">
+        <names>
+          <name>Teilnehmer</name>
+        </names>
+        <content_class bind="Column" parentField="s" type="TextFree" />
+      </field>
       <field key="datefrom">
         <names>
           <name>Datum von</name>
@@ -96,11 +111,14 @@
         </names>
         <content_class bind="Column" parentField="s" type="TextFree" />
       </field>
-      <field key="participants">
+      <field key="tz">
         <names>
-          <name>Teilnehmer</name>
+          <name>Import Zeitzone</name>
         </names>
-        <content_class bind="Column" parentField="s" type="TextFree" />
+        <content_class type="TextChoose">
+          <text key="srv">Serverzeit</text>
+          <text key="utc">Weltzeit (UTC)</text>
+        </content_class>
       </field>
     </fields>
   </style>

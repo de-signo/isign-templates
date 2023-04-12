@@ -1,22 +1,21 @@
 @using Newtonsoft.Json
 @using Stolltec.Forms.Model
+@using System.Globalization
 @functions{
-  readonly DateTime epoch = new DateTime(1970, 1, 1);
-
-  DateTime ReadDate(RowModel booking, char mode, string name)
+  DateTime ReadDate(RowModel booking, char mode, string name, DateTimeStyles flags)
   {
     if (mode == 'B')
     {
       var time = booking[name];
       var date = booking["date" + name];
       return
-        (date is DateTime ? (DateTime)date : DateTime.Parse(date.ToString())) +
+        (date is DateTime ? (DateTime)date : DateTime.Parse(date.ToString(), null, flags)) +
         (time is TimeSpan ? (TimeSpan)time : TimeSpan.Parse(time.ToString()));
     }
     else
     {
       var dt = booking[name];
-      return dt is DateTime ? (DateTime)dt : DateTime.Parse(dt.ToString());
+      return dt is DateTime ? (DateTime)dt : DateTime.Parse(dt.ToString(), null, flags);
     }
   }
 }
@@ -31,15 +30,27 @@
   <text>null</text>
 }
 else {
-  var from = ReadDate(booking, mode, "from");
-  var to = ReadDate(booking, mode, "to");
+  DateTimeStyles parseFlags;
+  switch((string)model.Style["tz"].FieldInstance.Value)
+  {
+    case "srv":
+      // Alredy in local time zone.
+      parseFlags = DateTimeStyles.AssumeLocal;
+      break;
+    default:
+    case "utc":
+      parseFlags = DateTimeStyles.AssumeUniversal;
+      break;
+  }
+  var from = ReadDate(booking, mode, "from", parseFlags);
+  var to = ReadDate(booking, mode, "to", parseFlags);
   var bp = booking["participants"] as string;
   var participants = String.IsNullOrEmpty(bp) ? new string[0] : bp.Split(';');
   @Html.Raw(JsonConvert.SerializeObject(new {
     title = booking["title"],
     subtitle = booking["subtitle"],
-    from = from.Subtract(epoch).TotalSeconds,
-    to = to.Subtract(epoch).TotalSeconds,
+    from = from.ToString("o", CultureInfo.InvariantCulture),
+    to = to.ToString("o", CultureInfo.InvariantCulture),
     participants = participants
   }));
 }

@@ -1,4 +1,4 @@
-import { OnInit } from '@angular/core';
+import { ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Component } from '@angular/core';
 import { timer } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
@@ -11,6 +11,9 @@ import { DataService } from './data/data.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent  implements OnInit {
+  @ViewChild('scrollcontainer') scrollcontainer !: ElementRef;
+  scrollingState : "down"|"downdelay"|"up"|"updelay" = "downdelay";
+  scrollingCounter = 0;
   constructor(private dataService: DataService) {}
 
   current: Booking | null = null;
@@ -22,5 +25,52 @@ export class AppComponent  implements OnInit {
       data => this.current = data,
       error => console.error(error)
     );
+
+    timer(0, 50).subscribe(
+      _ => {
+        if (!this.scrollcontainer) return;
+        const scrollHeight = this.scrollcontainer.nativeElement.scrollHeight;
+        const clientHeight = this.scrollcontainer.nativeElement.clientHeight;
+        const maxScroll = scrollHeight - clientHeight;
+        var top = this.scrollcontainer.nativeElement.scrollTop;
+        switch (this.scrollingState) {
+          case "down": {
+            const scrollStep = clientHeight / 5 / (1000 / 50); // 5 seconds for one time height
+            top += scrollStep;
+            if (top > maxScroll) {
+              top = maxScroll;
+              this.scrollingState = "downdelay";
+              this.scrollingCounter = 2 * (1000 / 50); // 2 seconds
+            }
+            break;
+          }
+          case "downdelay": {
+            top = maxScroll;
+            this.scrollingCounter--;
+            if (this.scrollingCounter <= 0)
+              this.scrollingState = "up";
+              break;
+          }
+          case "up": {
+            const scrollStep = clientHeight / 1 / (1000 / 50); // 1 second for one time height
+            top -= scrollStep;
+            if (top <= 0) {
+              top = 0;
+              this.scrollingState = "updelay";
+              this.scrollingCounter = 2 * (1000 / 50); // 2 seconds
+            }
+            break;
+          }
+          case "updelay": {
+            top = 0;
+            this.scrollingCounter--;
+            if (this.scrollingCounter <= 0)
+              this.scrollingState = "down";
+              break;
+          }
+        }
+        this.scrollcontainer.nativeElement.scrollTop = top;
+      }
+    )
   }
 }

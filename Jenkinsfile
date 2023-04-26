@@ -59,6 +59,15 @@ pipeline {
       }
     }
 
+    stage('test-stadt') {
+      steps {
+        dir('Stadt') {
+          bat 'ng test --karma-config karma.conf.srv.js'
+          junit testResults: "karma-results\\**\\*.xml", keepLongStdio: true
+        }
+      }
+    }
+
     stage('build-stadt') {
       steps {
         dir('Stadt') {

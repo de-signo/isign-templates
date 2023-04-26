@@ -1,8 +1,20 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Idle } from '@ng-idle/core';
+import { NEVER, of } from 'rxjs';
 import { AppComponent } from './app.component';
+import { DataService } from './data/data.service';
 
 describe('AppComponent', () => {
+  let fakeData = { };
+  let fakeIdle = {
+    setIdle: (x: number) => {},
+    setTimeout: (x: number) => {},
+    setInterrupts: (x: number) => {},
+    onTimeout: NEVER,
+    watch: () => {}
+  };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
@@ -11,6 +23,10 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
+      providers: [
+        { provide: DataService, useValue: fakeData },
+        { provide: Idle, useValue: fakeIdle }
+      ]
     }).compileComponents();
   });
 
@@ -18,18 +34,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'vhs-schwetzingen'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('vhs-schwetzingen');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('vhs-schwetzingen app is running!');
   });
 });

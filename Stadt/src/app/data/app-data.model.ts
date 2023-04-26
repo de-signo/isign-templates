@@ -1,11 +1,32 @@
 
-export class Category {
-  name: string = "";
-  items: Item[] = [];
+export interface ThinTreeEntity {
+  id: string|number|undefined;   // unique id for referencing
+  name: string;           // name for display
+  children: (ThinTreeEntity|TreeReference)[]|undefined;
+  item: Item|undefined;
+
+  // view
+  listItemView: 'name'|'item-detail'|undefined;
+
+  // function
+  search: true|undefined
+  favorit: number|undefined;
+}
+
+export interface TreeEntity extends ThinTreeEntity {
+  id: string|number;
+  children: (TreeEntity|TreeReference)[]|undefined;
+
+  // tree structure
+  path: string[]|undefined;
+  parent: TreeEntity|undefined;
+}
+
+export interface TreeReference {
+  referencePath: string[]|string;
 }
 
 export class Item {
-  id: string = "";
   term1: string = "";
   term2: string = "";
   house: string = "";
@@ -15,15 +36,4 @@ export class Item {
   email: string = "";
   map: string = "";
   info: string = "";
-  favorit: number = 0;
-}
-
-export class ItemWithIndex extends Item {
-  constructor(item: Item, index: {cat: number, item: number}) {
-    super();
-    Object.assign(this, item);
-    this.index = index;
-  }
-
-  index!: {cat: number, item: number};
 }

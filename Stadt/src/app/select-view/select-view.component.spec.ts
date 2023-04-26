@@ -3,18 +3,18 @@ import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 import { DataService } from '../data/data.service';
 
-import { SearchViewComponent } from './search-view.component';
+import { SelectViewComponent } from './select-view.component';
 
-describe('SearchViewComponent', () => {
-  let component: SearchViewComponent;
-  let fixture: ComponentFixture<SearchViewComponent>;
+describe('SelectViewComponent', () => {
+  let component: SelectViewComponent;
+  let fixture: ComponentFixture<SelectViewComponent>;
   let fakeActivatedRoute = {
-    queryParams: of(convertToParamMap({ }))};
-  let fakeData = { getSearchResults: (s: string) => of([]) };
+    params: of(convertToParamMap({ }))};
+  let fakeData = { tree: of([]) };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SearchViewComponent ],
+      declarations: [ SelectViewComponent ],
       providers: [
         { provide: ActivatedRoute, useValue: fakeActivatedRoute },
         { provide: DataService, useValue: fakeData }
@@ -24,7 +24,7 @@ describe('SearchViewComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SearchViewComponent);
+    fixture = TestBed.createComponent(SelectViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

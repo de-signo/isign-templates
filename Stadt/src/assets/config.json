@@ -1,0 +1,11 @@
+{
+  "list": {
+    "defaultItemView": "item-detail"
+  },
+  "sources": [
+    {
+      "type": "file",
+      "url": "data.cshtml"
+    }
+  ]
+}

@@ -1,5 +1,8 @@
 
-<header>Suchen</header>
+<header>
+  <span>Suchen</span>
+  <img src="assets/img/header2.png" />
+</header>
 
 <nav>
   <a routerLink="/" queryParamsHandling="preserve" class="home">Home</a>
@@ -8,7 +11,7 @@
 
 <ul class="results btns">
   <li *ngFor="let item of results">
-    <a [routerLink]="['/', item.index.cat, item.index.item]" queryParamsHandling="preserve">{{item.term1}}</a>
+    <a [routerLink]="['/'].concat(item.path ?? [])" queryParamsHandling="preserve"><span>{{item.name}}</span></a>
   </li>
 </ul>
 

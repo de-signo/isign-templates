@@ -1,14 +1,19 @@
-<header>{{ category.name }}</header>
+<header>
+  <span>{{ entity?.name }}</span>
+  <img src="assets/img/header2.png" />
+</header>
 
 <nav>
   <a routerLink="/" queryParamsHandling="preserve" class="home">Home</a>
+  <a *ngIf="showBack" class="back" href="javascript: window.history.back()">Back</a>
 
   <div class="scrollbar nav-next">
-    <div class="scrollup" id="btnUp" (click)="divScroll.scrollTop = divScroll.scrollTop - 500" [ngClass]="{'disabled': divScroll.scrollTop == 0}"></div>
-    <div class="scrolldown" id="btnDown" (click)="divScroll.scrollTop = divScroll.scrollTop + 500" [ngClass]="{'disabled': divScroll.scrollTop == divScroll.scrollHeight - divScroll.clientHeight}"></div>
+    <div class="scrollup" id="btnUp" (click)="scroll(-1)" [ngClass]="{'disabled': !showScrollup }"></div>
+    <div class="scrolldown" id="btnDown" (click)="scroll(1)" [ngClass]="{'disabled': !showScrolldown }"></div>
   </div>
 
   <a routerLink="/" queryParamsHandling="preserve" class="home nav-next">Home</a>
+  <a *ngIf="showBack" class="back" href="javascript: window.history.back()">Back</a>
 </nav>
 
 <div *ngIf="enableAnchors" class="hooks">
@@ -21,15 +26,21 @@
   </ul>
 </div>
 
-<div class="scroll-area" #divScroll>
-  <ul class="btns">
-    <li *ngFor="let item of items; index as i" class="item">
-      <a [routerLink]="[i]" queryParamsHandling="preserve" [id]="item.hook ? 'anchor' + item.hook : null">
-        <span>{{ item.term1 }}</span>
-        <span>{{ item.term2 }}</span>
-        <span>{{ item.house }}</span>
-        <span>{{ item.level }}</span>
-        <span>{{ item.room }}</span>
+<div class="scroll-area" #divScroll (scroll)="updateScrollTop()">
+  <ul class="btns" [ngStyle]="{'margin-top.px' : handicappedScrollOffset}">
+    <li *ngFor="let item of children" class="item">
+      <a [routerLink]="['/'].concat(item.path ?? [])" queryParamsHandling="preserve" [id]="item.hook ? 'anchor' + item.hook : null"
+        [ngSwitch]="item.listItemView ?? defaultItemView" [class]="'listitemview-' + (item.listItemView ?? defaultItemView)">
+        <ng-container *ngSwitchCase="'item-detail'">
+          <span>{{ item.item.term1 }}</span>
+          <span>{{ item.item.term2 }}</span>
+          <span>{{ item.item.house }}</span>
+          <span>{{ item.item.level }}</span>
+          <span>{{ item.item.room }}</span>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+          <span>{{ item.name }}</span>
+        </ng-container>
       </a>
     </li>
   </ul>
@@ -45,5 +56,5 @@
       </li>
     </ul>
   </div>
-  <a *ngIf="enableAnchors && !handicapped" (click)="handicapped = !handicapped" class="handicap">Handicap</a>
+  <a *ngIf="enableAnchors && !handicapped" (click)="showHandicapped()" class="handicap">Handicap</a>
 </footer>

@@ -8,8 +8,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ConfigService {
-  private settingsSubject: BehaviorSubject<IAppConfig|null> = new BehaviorSubject<IAppConfig|null>(null);
-  settings: Observable<IAppConfig|null> = this.settingsSubject.asObservable();
+  private settingsSubject: BehaviorSubject<IAppConfig|undefined> = new BehaviorSubject<IAppConfig|undefined>(undefined);
+  settings: Observable<IAppConfig|undefined> = this.settingsSubject.asObservable();
   constructor(private http: HttpClient) {}
 
   async load() : Promise<void> {

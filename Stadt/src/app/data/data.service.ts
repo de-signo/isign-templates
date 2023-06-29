@@ -12,7 +12,7 @@ import { IAppConfig, IDataImportItemSource, IFileItemSource, IFixedItemSource } 
   providedIn: 'root'
 })
 export class DataService implements OnDestroy {
-  private config: IAppConfig|null = null;
+  private config: IAppConfig|undefined = undefined;
 
   private treeSubject = new BehaviorSubject<TreeEntity[]>([]);
   public tree = this.treeSubject.asObservable();
@@ -21,7 +21,7 @@ export class DataService implements OnDestroy {
   constructor(private http: HttpClient, private configSvc: ConfigService)
   {
     this.subscriptions.push(this.configSvc.settings.subscribe(config => {
-      this.config = config;
+      this.config = config
       return this.refresh();
     }));
   }
@@ -61,7 +61,7 @@ export class DataService implements OnDestroy {
   private async loadFileSource(source: IFileItemSource, cats: TreeEntity[]): Promise<void> {
     const jsonFile = source.url;
     const data = await this.http.get<TreeEntity[]>(jsonFile + window.location.search).toPromise();
-    if (environment.checkData && !TreeOperations.isTreeValid(data))
+    if (data == undefined || environment.checkData && !TreeOperations.isTreeValid(data))
       throw `File source from '${jsonFile}' did not return a valid tree`;
     TreeOperations.mergeTree(cats, data);
   }
@@ -89,7 +89,8 @@ export class DataService implements OnDestroy {
   private async loadDataImportSource(source: IDataImportItemSource, cats: TreeEntity[]): Promise<void> {
     const serviceUrl = environment.dataImportServiceUrl;
     const items = await this.http.get<any[]>(serviceUrl + window.location.search + `&ds=${source.dataSourceKey}`).toPromise();
-
+    if (items == undefined)
+      throw new Error("dataimport service failed.");
     let children: (ThinTreeEntity|TreeReference)[];
     switch (source.mapTo) {
       case 'group-with-reference-id':

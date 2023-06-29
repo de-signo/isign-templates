@@ -7,7 +7,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "zip": "ng build --configuration production && cd ../dist/raumbelegung && bestzip ../raumbelegung.zip *"
+    "zip": "ng build --configuration production && cd ../dist/raumbelegung && bestzip ../raumbelegung_%version%.zip *"
   },
   "private": true,
   "dependencies": {

@@ -85,6 +85,14 @@ pipeline {
         }
       }
     }
+
+    stage('build-time') {
+      steps {
+        dir('time') {
+          bat 'npm run zip'
+        }
+      }
+    }
   }
 
   post {

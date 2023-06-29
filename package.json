@@ -5,6 +5,7 @@
   "workspaces": [
     "Calendar",
     "Raumbelegung",
-    "Stadt"
+    "Stadt",
+    "time"
   ]
 }

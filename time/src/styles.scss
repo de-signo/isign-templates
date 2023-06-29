@@ -1,0 +1,30 @@
+
+html {
+  font-family: sans-serif;
+}
+
+app-root {
+  text-align: center;
+
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  border: solid 2vh red;
+  margin: 2vh;
+
+  container-type: size;
+
+  display: grid;
+  align-content: space-evenly;
+}
+
+span:first-child {
+  font-size: 30cqw;
+}
+
+span:nth-child(2) {
+  font-size: 10cqw;
+}

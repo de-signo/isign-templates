@@ -4,6 +4,7 @@
   "private": true,
   "workspaces": [
     "Calendar",
+    "door1",
     "Raumbelegung",
     "Stadt",
     "time"

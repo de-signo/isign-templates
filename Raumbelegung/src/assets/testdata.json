@@ -1,7 +1,7 @@
 {
-  "title": "Veranstaltung",
-  "subtitle": "Hans Ludwigs Tombola",
+  "title": "Fortbildung",
+  "subtitle": "Neue Medien für Schriftsteller",
   "from": "2021-06-30T19:30:00.0000000+02:00",
   "to": "2021-06-30T23:00:00.0000000+02:00",
-  "participants": ["Günter Grass", "Wolfgang Goethe", "Friedrich Schiller", "Franz Kafka", "Wilhelm Busch", "Heinrich Hein", "Mephisto", "Faust", "Siegfrid", "Der Drache", "Sauron", "Perry Rhodan"]
+  "participants": ["Astrid Lindgren", "Gaby Hauptmann", "Johann Wolfgang von Goethe", "Friedrich Schiller", "Franz Kafka", "Wilhelm Busch"]
 }

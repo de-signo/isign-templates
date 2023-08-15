@@ -22,7 +22,9 @@ pipeline {
         bat 'ng --version'
 
         script {
-          currentBuild.description = bat(returnStdout: true, script:"@git describe --tags --dirty").trim()
+          def version = bat(returnStdout: true, script:"@git describe --tags --dirty").trim()
+          currentBuild.description = version
+          env["VERSION"] = version
         }
       }
     }

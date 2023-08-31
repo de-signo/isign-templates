@@ -1,5 +1,52 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <StyleList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://stollsoft.de/iSign/v2/Content/Forms/Styles">
+  <style key="raumbelegung2021_free"
+         file="index.cshtml"
+         preview="assets/preview.png"
+         interactive="false" target="chromium">
+    <names>
+      <name culture="de">Raumbelegung (Freitext)</name>
+    </names>
+    <fields>
+      <field key="title">
+        <names>
+          <name>Titel</name>
+        </names>
+        <content_class type="TextFree" />
+      </field>
+      <field key="subtitle">
+        <names>
+          <name>Sub-Titel</name>
+        </names>
+        <content_class type="TextFree" />
+      </field>
+      <field key="participants">
+        <names>
+          <name>Teilnehmer</name>
+        </names>
+        <content_class type="TextFree" />
+      </field>
+      <field key="date">
+        <names>
+          <name>Datum</name>
+        </names>
+        <content_class type="TextFree" />
+      </field>
+      <field key="from">
+        <names>
+          <name>Von</name>
+        </names>
+        <content_class type="TextFree" />
+      </field>
+      <field key="to">
+        <names>
+          <name>Bis</name>
+        </names>
+        <content_class type="TextFree" />
+      </field>
+    </fields>
+  </style>
+
   <style key="raumbelegung2021A"
          file="index.cshtml"
          preview="assets/preview.png"

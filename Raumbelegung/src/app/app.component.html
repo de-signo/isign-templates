@@ -2,8 +2,8 @@
   <img src="assets/logo.png" />
 </header>
 <section class="left" *ngIf="current">
-  <h2>{{ current.from | date : 'dd.MM.yyyy' }}</h2>
-  <p>{{ current.from | date : 'shortTime' }} - {{ current.to | date : 'shortTime' }} Uhr</p>
+  <h2>{{ current.date }}</h2>
+  <p>{{ current.from }} - {{ current.to }}</p>
 </section>
 <section class="right" *ngIf="current">
   <h1>{{ current.title }}</h1>

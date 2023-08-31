@@ -2,7 +2,7 @@ import { ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Component } from '@angular/core';
 import { timer } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
-import { Booking } from './data/app-data.model';
+import { BookingViewModel } from './data/app-data.model';
 import { DataService } from './data/data.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class AppComponent  implements OnInit {
   scrollingCounter = 0;
   constructor(private dataService: DataService) {}
 
-  current: Booking | null = null;
+  current: BookingViewModel | null = null;
 
   ngOnInit(): void {
     timer(0, 10 * 1000).pipe(

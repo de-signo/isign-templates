@@ -16,7 +16,7 @@ import { HomeIconDirective } from './directives/home-icon.directive';
 import { BackIconDirective } from './directives/back-icon.directive';
 import { DownIconDirective } from './directives/down-icon.directive';
 import { UpIconDirective } from './directives/up-icon.directive';
-
+import { TemplateClickModule, TouchClickDirective } from 'isign-templates';
 registerLocaleData(localeDe);
 
 export function initializeApp(appConfig: ConfigService) {
@@ -65,7 +65,8 @@ class CustomReuseStrategy extends BaseRouteReuseStrategy {
       {path: "search", component: SearchViewComponent},
       {matcher: pathMatcher, component: SelectViewComponent}
     ]),
-    NgIdleModule.forRoot()
+    NgIdleModule.forRoot(),
+    TemplateClickModule.forRoot()
   ],
   bootstrap: [AppComponent],
   providers: [

@@ -18,6 +18,7 @@
     "@angular/platform-browser-dynamic": "^16.1.3",
     "@angular/router": "^16.1.3",
     "@ng-idle/core": "^13.0.0",
+    "isign-templates": "file:../dist/isign-templates",
     "fuzzysort": "^2.0.4",
     "rxjs": "~7.8.1",
     "tslib": "^2.3.0",

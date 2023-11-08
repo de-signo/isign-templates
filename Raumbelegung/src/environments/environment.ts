@@ -25,8 +25,9 @@
 
 export const environment = {
   production: false,
-  dataServiceUrl: "assets/testdata.json"
-  //dataServiceUrl: "data.cshtml"
+
+  // use undefined for default (in development mode the demo data files will be used)
+  wellKnownISignUrl: "assets/test-services"
 };
 
 /*

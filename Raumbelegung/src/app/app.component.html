@@ -24,7 +24,7 @@
 </header>
 <section class="left" *ngIf="current">
   <h2>{{ current.date }}</h2>
-  <p>{{ current.from }} - {{ current.to }}</p>
+  <p>{{ current.from }} <ng-container *ngIf="current.from && current.to" >-</ng-container> {{ current.to }}</p>
 </section>
 <section class="right" *ngIf="current">
   <h1>{{ current.title }}</h1>

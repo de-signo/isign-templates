@@ -20,8 +20,8 @@
  */
 
 import { EventEmitter, Injectable } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { Booking, BookingViewModel } from "./app-data.model";
+import { BookingViewModel } from "./app-data.model";
+import { TemplateInstance, TemplateService } from "@isign/forms-templates";
 
 @Injectable({
   providedIn: "root",
@@ -30,22 +30,22 @@ export class StyleService {
  
   style: StyleFreeModel|StyleDbModel = new StyleFreeModel();
   updated = new EventEmitter();
+  template: TemplateInstance;
 
-  constructor() {
-    const queryString = window.location.search;
-    const params = new URLSearchParams(queryString);
+  constructor(ts: TemplateService) {
+    const tmpl = this.template = ts.getTemplate();
 
-    const key = params.get("s") ?? "";
+    const key = tmpl.key;
     switch (key) {
       default:
       case "raumbelegung2021_free":
         const stylef = new StyleFreeModel();
-        stylef.title = params.get("s/title") ?? "";
-        stylef.subtitle = params.get("s/subtitle") ?? "";
-        stylef.participants = (params.get("s/participants") ?? "").split(",");
-        stylef.date = params.get("s/date") ?? "";
-        stylef.from = params.get("s/from") ?? "";
-        stylef.to = params.get("s/to") ?? "";
+        stylef.title = tmpl.parameters["title"] ?? "";
+        stylef.subtitle = tmpl.parameters["subtitle"] ?? "";
+        stylef.participants = tmpl.parameters["participants"]?.split(",") ?? [];
+        stylef.date = tmpl.parameters["date"] ?? "";
+        stylef.from = tmpl.parameters["from"] ?? "";
+        stylef.to = tmpl.parameters["to"] ?? "";
         this.style = stylef;
         break;
       case "raumbelegung2021A":

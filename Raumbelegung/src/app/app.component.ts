@@ -21,7 +21,7 @@
 
 import { ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Component } from '@angular/core';
-import { timer } from 'rxjs';
+import { from, timer } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 import { BookingViewModel } from './data/app-data.model';
 import { DataService } from './data/data.service';
@@ -42,10 +42,10 @@ export class AppComponent  implements OnInit {
   ngOnInit(): void {
     timer(0, 10 * 1000).pipe(
       mergeMap(() => this.dataService.load())
-    ).subscribe(
-      data => this.current = data,
-      error => console.error(error)
-    );
+    ).subscribe({
+      next: data => this.current = data,
+      error: error => console.error("Failed to load data.", error)
+    });
 
     timer(0, 50).subscribe(
       _ => {

@@ -20,36 +20,52 @@
  */
 
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { Booking, BookingViewModel } from './app-data.model';
-import { HttpClient } from '@angular/common/http';
-import { Observable, map, of } from 'rxjs';
+import { BookingViewModel } from './app-data.model';
 import { StyleService } from './style.service';
+import { DataImportService } from '@isign/isign-services';
+import { Observable, map, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  static data: Booking;
-  constructor(private http: HttpClient, private style: StyleService)
+  constructor(private style: StyleService, private dataImport: DataImportService)
   {}
 
-  load(): Observable<BookingViewModel>
+  load(): Observable<BookingViewModel|null>
   {
     const style = this.style.style;
     if (style.key == "raumbelegung2021_free") {
       return of(style);
     } else {
-      const jsonFile = `${environment.dataServiceUrl}`;
-      return this.http.get<Booking>(jsonFile + window.location.search)
-        .pipe(map(booking => ({
-            title: booking.title,
-            subtitle: booking.subtitle,
-            participants: booking.participants,
-            date: new Date(booking.from).toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' }),
-            from: new Date(booking.from).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }),
-            to: new Date(booking.to).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }) + " Uhr"
-        })));
+      const diId = this.style.template.parameters["s"];
+      if (!diId)
+        throw Error("Data source id is missing.");
+
+      return this.dataImport.getDataTable(diId)
+        .pipe(
+          map(table => {
+            if (!table?.length) {
+              return null;
+            }
+            const bookings = this.style.template.bindDataTable(table.slice(0,1), 
+              {
+                title: { field: "title", default: "" },
+                subtitle: { field: "subtitile", default: "" },
+                participants: { field: "participants", convert: (v:any) => v?.split(",")},
+                from: { field: "from", default: "" },
+                to: { field: "to", default: "" }
+              });
+            const booking = bookings[0];
+            return {
+                title: booking.title,
+                subtitle: booking.subtitle,
+                participants: booking.participants,
+                date: new Date(booking.from).toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' }),
+                from: new Date(booking.from).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }),
+                to: new Date(booking.to).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }) + " Uhr"
+            };
+        }));
     }
   }
 }

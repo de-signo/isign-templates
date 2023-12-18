@@ -1,0 +1,40 @@
+<h1>iSign Test Template</h1>
+
+<div>
+  This is a simple testing component. It is used to test and demonstrate the communication
+  between a template and the isign player.
+</div>
+
+<div *ngIf="!onPlayer" class="warn">
+  No player detected. This page won't be functional.  
+</div>
+
+<div *ngIf="onPlayer">
+  Player detected.<br />
+  ID: {{displayId}}<br />
+  Parameters: {{parameters | json}}
+</div>
+
+<fieldset>
+  <legend>Pause</legend>
+
+  <button (click)="pauseTest()">Pause for 3 seconds</button>
+</fieldset>
+
+<fieldset>
+  <legend>Write log</legend>
+
+  <button (click)="writeLog()">Write a nice log message</button>
+</fieldset>
+
+<fieldset>
+  <legend>Print something</legend>
+
+  <button (click)="print()">Print something</button>
+</fieldset>
+
+<fieldset>
+  <legend>Input test</legend>
+
+  <textarea fixedfocus></textarea>
+</fieldset>

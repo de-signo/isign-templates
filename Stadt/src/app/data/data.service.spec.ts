@@ -93,7 +93,7 @@ describe('TreeOperations', () => {
 
     let list: string[] = [];
     TreeOperations.walkTree<void>(tree1, (te, state) => {
-      list.push(te.name);
+      list.push(te.name ?? "");
     }, undefined);
     expect(list).toEqual(["t1", "t2", "t22"]);
   })

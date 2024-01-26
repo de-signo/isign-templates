@@ -1,7 +1,7 @@
 
 export interface ThinTreeEntity {
   id: string|number|undefined;   // unique id for referencing
-  name: string;           // name for display
+  name: string|undefined;           // name for display
   children: (ThinTreeEntity|TreeReference)[]|undefined;
   item: Item|undefined;
 

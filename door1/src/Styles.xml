@@ -7,6 +7,18 @@
       <name culture="de">Türschild</name>
     </names>
     <fields>
+      <field key="style">
+        <names>
+          <name>Stil</name>
+        </names>
+        <content_class type="TextChoose">
+          <text key="t1">Typ 1</text>
+          <text key="t2">Typ 2</text>
+          <text key="t3">Typ 3</text>
+          <text key="t4">Typ 4</text>
+          <text key="t5">Typ 5</text>
+        </content_class>
+      </field>
       <field key="header">
         <names>
           <name>Bezeichnung</name>
@@ -37,6 +49,12 @@
         </names>
         <content_class type="TextFree" />
       </field>
+      <field key="footer">
+        <names>
+          <name>Fußzeile</name>
+        </names>
+        <content_class type="TextFree" />
+      </field>
     </fields>
   </style>
 
@@ -47,6 +65,18 @@
       <name culture="de">Türschild (datengebunden)</name>
     </names>
     <fields>
+      <field key="style">
+        <names>
+          <name>Stil</name>
+        </names>
+        <content_class type="TextChoose">
+          <text key="t1">Typ 1</text>
+          <text key="t2">Typ 2</text>
+          <text key="t3">Typ 3</text>
+          <text key="t4">Typ 4</text>
+          <text key="t5">Typ 5</text>
+        </content_class>
+      </field>
       <field key="roomId">
         <names>
           <name>Raum</name>
@@ -75,6 +105,12 @@
       <field key="names">
         <names>
           <name>Namen</name>
+        </names>
+        <content_class bind="Column" parentField="ds" type="TextFree" />
+      </field>
+      <field key="footer">
+        <names>
+          <name>Fußzeile</name>
         </names>
         <content_class bind="Column" parentField="ds" type="TextFree" />
       </field>

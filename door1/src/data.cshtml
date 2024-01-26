@@ -13,6 +13,7 @@
     .Where(row => row.Raw("room") == filterId)
     .Select(row => {
       header = row.Raw("header"),
+      footer = row.Raw("footer"),
       names = ((row.Raw("names") as string) ?? "").Split(',')
     }).ToList();
 }

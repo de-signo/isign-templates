@@ -18,6 +18,7 @@ export class DataService {
     if (style.key == "std_door1_free") {
       return new Promise(resolve => resolve({
         header: style.header,
+        footer: style.footer,
         names: style.names
       }));
     }

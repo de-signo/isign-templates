@@ -19,6 +19,8 @@ export class StyleService {
       case "std_door1_free":
         const stylef = new StyleFreeModel();
         stylef.header = params.get("s/header") ?? "";
+        stylef.footer = params.get("s/footer") ?? "";
+        stylef.style = <any>params.get("s/style") ?? "";
         stylef.names = [
           params.get("s/name1") ?? "",
           params.get("s/name2") ?? "",
@@ -29,6 +31,7 @@ export class StyleService {
         break;
       case "std_door1_db":
         const styled = new StyleDbModel();
+        styled.style = <any>params.get("s/style") ?? "";
         this.style = styled;
         break;
     }
@@ -37,14 +40,18 @@ export class StyleService {
 
 export interface StyleModel {
   key: "std_door1_free" | "std_door1_db";
+  style: "t1"|"t2"|"t3"|"t4"|"t5";
 }
 
 export class StyleFreeModel implements StyleModel {
   key: "std_door1_free" = "std_door1_free";
+  style: "t1"|"t2"|"t3"|"t4"|"t5" = "t1";
   header: string = ""
+  footer: string = ""
   names: string[] = [];
 }
 
 export class StyleDbModel implements StyleModel {
   key: "std_door1_db" = "std_door1_db";
+  style: "t1"|"t2"|"t3"|"t4"|"t5" = "t1";
 }

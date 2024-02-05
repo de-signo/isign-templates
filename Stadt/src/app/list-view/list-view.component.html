@@ -4,16 +4,16 @@
 </header>
 
 <nav>
-  <a routerLink="/" queryParamsHandling="preserve" class="home">Home</a>
-  <a *ngIf="showBack" class="back" href="javascript: window.history.back()">Back</a>
+  <a routerLink="/" queryParamsHandling="preserve" class="home" homeIcon></a>
+  <a *ngIf="showBack" class="back" href="javascript: window.history.back()" backIcon></a>
 
   <div class="scrollbar nav-next">
-    <div class="scrollup" id="btnUp" (click)="scroll(-1)" [ngClass]="{'disabled': !showScrollup }"></div>
-    <div class="scrolldown" id="btnDown" (click)="scroll(1)" [ngClass]="{'disabled': !showScrolldown }"></div>
+    <div class="scrollup" id="btnUp" (click)="scroll(-1)" [ngClass]="{'disabled': !showScrollup }" upIcon></div>
+    <div class="scrolldown" id="btnDown" (click)="scroll(1)" [ngClass]="{'disabled': !showScrolldown }" downIcon></div>
   </div>
 
-  <a routerLink="/" queryParamsHandling="preserve" class="home nav-next">Home</a>
-  <a *ngIf="showBack" class="back" href="javascript: window.history.back()">Back</a>
+  <a routerLink="/" queryParamsHandling="preserve" class="home nav-next" homeIcon></a>
+  <a *ngIf="showBack" class="back" href="javascript: window.history.back()" backIcon></a>
 </nav>
 
 <div *ngIf="enableAnchors" class="hooks">

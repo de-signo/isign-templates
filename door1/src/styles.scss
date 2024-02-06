@@ -35,7 +35,7 @@ li {
 
 footer {
   text-align: center;
-  font-size: 0.5rem;
+  font-size: 0.7rem;
   padding: 2vh 2vw;
 }
 
@@ -67,10 +67,8 @@ footer {
   }
 }
 
-
 .style-t2 {
   h1 {
-    text-align: right;
     margin: 10vh 0 0 15vw;
     padding: 1vh 10vw 1vh 0;
     border-bottom: solid 0.5vh;
@@ -82,8 +80,31 @@ footer {
 
 }
 
-
 .style-t3 {
+  h1 {
+    margin: 10vh 10vw 0 10vw;
+  }
+
+  li {
+    margin: 0 10vw;
+  }
+}
+
+.style-t4 {
+  h1 {
+    text-align: center;
+    margin: 0;
+    padding: 8vh 10vw 2vh 10vw;
+    border-bottom: solid 0.5vh;
+  }
+
+  li {
+    text-align: center;
+    margin: 0 10vw;
+  }
+}
+
+.style-t5 {
   h1 {
     text-align: left;
     margin: 10vh 10vw 0 20vw;
@@ -106,34 +127,6 @@ footer {
 
   li {
     font-weight: bold;
-    margin: 0 10vw;
-  }
-}
-
-
-.style-t4 {
-  h1 {
-    text-align: center;
-    margin: 10vh 10vw 0 10vw;
-  }
-
-  li {
-    text-align: center;
-    margin: 0 10vw;
-  }
-}
-
-
-.style-t5 {
-  h1 {
-    text-align: center;
-    margin: 0;
-    padding: 8vh 10vw 2vh 10vw;
-    border-bottom: solid 0.5vh;
-  }
-
-  li {
-    text-align: center;
     margin: 0 10vw;
   }
 }

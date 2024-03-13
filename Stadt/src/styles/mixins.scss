@@ -1,19 +1,34 @@
-/* define colors here */
-$color-primary-fg: #4E5D6B;
-$color-primary-bg: #ffffff;
-$color-header-border: #7f7f7f;
+:root {
+  /* define colors here */
+  --color-primary-fg: #4E5D6B;
+  --color-primary-bg: #ffffff;
+  --color-header-border: #7f7f7f;
 
-/* primary buttons */
-$color-btn-primary-bg: #034990;
-$color-btn-primary-fg: white;
-$color-btn-primary-shadow: lightgrey;
+  /* primary buttons */
+  --color-btn-primary-bg: #034990;
+  --color-btn-primary-fg: white;
+  --color-btn-primary-shadow: lightgrey;
 
-/* secondary buttons */
-$color-btn-secondary-bg: rgb(120,120,120);;
-$color-btn-secondary-fg: white;
-$color-btn-secondary-shadow: lightgrey;
-$color-btn-secondary-disabled-fg: rgb(160, 160, 160);
-$color-btn-secondary-disabled-bg: rgb(200,200,200);
+  /* secondary buttons */
+  --color-btn-secondary-bg: rgb(120, 120, 120);
+  --color-btn-secondary-fg: white;
+  --color-btn-secondary-shadow: lightgrey;
+  --color-btn-secondary-disabled-fg: rgb(160, 160, 160);
+  --color-btn-secondary-disabled-bg: rgb(200, 200, 200);
+}
+
+/* scss variables for legacy use */
+$color-primary-fg: var(--color-primary-fg);
+$color-primary-bg: var(--color-primary-bg);
+$color-header-border: var(--color-header-border);
+$color-btn-primary-bg: var(--color-btn-primary-bg);
+$color-btn-primary-fg: var(--color-btn-primary-fg);
+$color-btn-primary-shadow: var(--color-btn-primary-shadow);
+$color-btn-secondary-bg: var(--color-btn-secondary-bg);
+$color-btn-secondary-fg: var(--color-btn-secondary-fg);
+$color-btn-secondary-shadow: var(--color-btn-secondary-shadow);
+$color-btn-secondary-disabled-fg: var(--color-btn-secondary-disabled-fg);
+$color-btn-secondary-disabled-bg: var(--color-brn-secondary-disabled-bg);
 
 @mixin nav-link() {
   display:block;

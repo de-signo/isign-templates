@@ -4,11 +4,11 @@
 </header>
 
 <nav>
-  <a routerLink="/" queryParamsHandling="preserve" class="home">Home</a>
-  <a class="back" href="javascript: window.history.back()">Back</a>
+  <a routerLink="/" queryParamsHandling="preserve" class="home" homeIcon></a>
+  <a class="back" href="javascript: window.history.back()" backIcon></a>
 
-  <a routerLink="/" queryParamsHandling="preserve" class="home nav-next">Home</a>
-  <a class="back" href="javascript: window.history.back()">Back</a>
+  <a routerLink="/" queryParamsHandling="preserve" class="home nav-next" homeIcon></a>
+  <a class="back" href="javascript: window.history.back()" backIcon></a>
 </nav>
 
 <article *ngIf="!entity">

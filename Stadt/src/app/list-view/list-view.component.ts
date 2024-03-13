@@ -109,7 +109,7 @@ export class ListViewComponent implements OnInit, OnDestroy, AfterViewInit {
       ?.map(i => {
         const item = <TreeEntity>i;
         let ih = new ItemViewModel(item);
-        let h = item.name[0].toUpperCase();
+        let h = item.name?.[0]?.toUpperCase() ?? "";
         if (h != last) {
           last = h;
           ih.hook = h;

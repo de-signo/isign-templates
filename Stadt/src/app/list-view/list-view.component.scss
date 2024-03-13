@@ -168,11 +168,6 @@
   }
 }
 
-a.handicap {
-  @include nav-link;
-  background: url(../../assets/img/Button_Rollstuhlfahrer.png) no-repeat center / contain;
-}
-
 .scrollbar
 {
   div
@@ -182,23 +177,26 @@ a.handicap {
     margin: 30px 0;
   }
 
-  .scrollup
-  {
-    background-image: url(../../assets/img/btn_scrollup.png);
+  @mixin scroll-btn {
+    box-sizing: border-box;
+    padding: 5px;
+    border-radius: 15px;
+    background-color: var(--color-btn-secondary-bg);
+    fill: var(--color-btn-secondary-fg);
+    box-shadow: 3px 3px 3px var(--color-btn-secondary-shadow);
+    &.disabled {
+      opacity: 0.5;
+      box-shadow: none;
+    }
   }
 
-  .scrollup.disabled
+  .scrollup
   {
-    background-image: url(../../assets/img/btn_scrollup_d.png);
+    @include scroll-btn();
   }
 
   .scrolldown
   {
-    background-image: url(../../assets/img/btn_scrolldown.png);
-  }
-
-  .scrolldown.disabled
-  {
-    background-image: url(../../assets/img/btn_scrolldown_d.png);
+    @include scroll-btn();
   }
 }

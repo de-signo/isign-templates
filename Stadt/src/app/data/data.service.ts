@@ -186,7 +186,7 @@ export class TreeOperations {
           if (nt.children)
           {
             if (entity.children)
-              this.mergeTree(entity.children, nt.children, entity, [...path, entity.name]);
+              this.mergeTree(entity.children, nt.children, entity, [...path, entity.name ?? ""]);
             else
               entity.children = this.makeChildrenFat(nt.children, entity);
           }
@@ -197,7 +197,7 @@ export class TreeOperations {
         } else {
           // set path and parent (complete subtree)
           const fatNt = <TreeEntity>nt;
-          fatNt.id ??= fatNt.name; // id must be set!
+          fatNt.id ??= fatNt.name ?? ""; // id must be set!
           fatNt.parent = parent;
           fatNt.path = [...path, this.normalizePathComponent(fatNt.id)];
           if (fatNt.children) {
@@ -220,7 +220,7 @@ export class TreeOperations {
     TreeOperations.walkTree(tree, (te, parent) => {
       if (!parent.path)
         throw "Algoritm error";
-      te.id ??= te.name; // id must be set!
+      te.id ??= te.name ?? ""; // id must be set!
       te.parent = parent;
       te.path = [...parent.path, this.normalizePathComponent(te.id)];
       return te;

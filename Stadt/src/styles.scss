@@ -69,13 +69,23 @@ header {
 a.home
 {
   @include nav-link;
-  background: transparent url(assets/img/home.png) no-repeat center / contain;
+  fill: var(--color-btn-secondary-bg);
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 50%;
+  border: solid 6px var(--color-btn-secondary-bg);
+  box-shadow: 3px 3px 3px var(--color-btn-secondary-shadow);
 }
 
 a.back
 {
   @include nav-link;
-  background: transparent url(assets/img/back.png) no-repeat center / contain;
+  fill: var(--color-btn-secondary-bg);
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 50%;
+  border: solid 6px var(--color-btn-secondary-bg);
+  box-shadow: 3px 3px 3px var(--color-btn-secondary-shadow);
 }
 
 nav {

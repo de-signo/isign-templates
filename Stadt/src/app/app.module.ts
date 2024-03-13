@@ -12,6 +12,10 @@ import { SearchViewComponent } from './search-view/search-view.component';
 import { NgIdleModule } from '@ng-idle/core';
 import { ConfigService } from './data/config.service';
 import { SelectViewComponent } from './select-view/select-view.component';
+import { HomeIconDirective } from './directives/home-icon.directive';
+import { BackIconDirective } from './directives/back-icon.directive';
+import { DownIconDirective } from './directives/down-icon.directive';
+import { UpIconDirective } from './directives/up-icon.directive';
 
 registerLocaleData(localeDe);
 
@@ -46,7 +50,11 @@ class CustomReuseStrategy extends BaseRouteReuseStrategy {
     ListViewComponent,
     DetailViewComponent,
     SearchViewComponent,
-    SelectViewComponent
+    SelectViewComponent,
+    BackIconDirective,
+    DownIconDirective,
+    HomeIconDirective,
+    UpIconDirective
   ],
   imports: [
     BrowserModule,

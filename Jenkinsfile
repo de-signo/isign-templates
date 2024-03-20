@@ -85,6 +85,22 @@ pipeline {
         }
       }
     }
+
+    stage('build-door1') {
+      steps {
+        dir('door1') {
+          bat 'npm run zip'
+        }
+      }
+    }
+
+    stage('build-time') {
+      steps {
+        dir('time') {
+          bat 'npm run zip'
+        }
+      }
+    }
   }
 
   post {

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<StyleList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://stollsoft.de/iSign/v2/Content/Forms/Styles">
+  <style key="std_door1_free"
+         file="index.html"
+         interactive="false" target="chromium">
+    <names>
+      <name culture="de">Türschild</name>
+    </names>
+    <fields>
+      <field key="style">
+        <names>
+          <name>Stil</name>
+        </names>
+        <content_class type="TextChoose">
+          <text key="t1">Typ 1</text>
+          <text key="t2">Typ 2</text>
+          <text key="t3">Typ 3</text>
+          <text key="t4">Typ 4</text>
+          <text key="t5">Typ 5</text>
+        </content_class>
+      </field>
+      <field key="header">
+        <names>
+          <name>Bezeichnung</name>
+        </names>
+        <content_class type="TextFree" />
+      </field>
+      <field key="name1">
+        <names>
+          <name>Name 1</name>
+        </names>
+        <content_class type="TextFree" />
+      </field>
+      <field key="name2">
+        <names>
+          <name>Name 2</name>
+        </names>
+        <content_class type="TextFree" />
+      </field>
+      <field key="name3">
+        <names>
+          <name>Name 3</name>
+        </names>
+        <content_class type="TextFree" />
+      </field>
+      <field key="name4">
+        <names>
+          <name>Name 4</name>
+        </names>
+        <content_class type="TextFree" />
+      </field>
+      <field key="footer">
+        <names>
+          <name>Fußzeile</name>
+        </names>
+        <content_class type="TextFree" />
+      </field>
+    </fields>
+  </style>
+
+  <style key="std_door1_db"
+         file="index.html"
+         interactive="false" target="chromium">
+    <names>
+      <name culture="de">Türschild (datengebunden)</name>
+    </names>
+    <fields>
+      <field key="style">
+        <names>
+          <name>Stil</name>
+        </names>
+        <content_class type="TextChoose">
+          <text key="t1">Typ 1</text>
+          <text key="t2">Typ 2</text>
+          <text key="t3">Typ 3</text>
+          <text key="t4">Typ 4</text>
+          <text key="t5">Typ 5</text>
+        </content_class>
+      </field>
+      <field key="roomId">
+        <names>
+          <name>Raum</name>
+        </names>
+        <content_class type="TextFree" />
+      </field>
+
+      <field key="ds">
+        <names>
+          <name>Datenquelle</name>
+        </names>
+        <content_class type="DataSource" />
+      </field>
+      <field key="room">
+        <names>
+          <name>Raum</name>
+        </names>
+        <content_class bind="Column" parentField="ds" type="TextFree" />
+      </field>
+      <field key="header">
+        <names>
+          <name>Bezeichnung</name>
+        </names>
+        <content_class bind="Column" parentField="ds" type="TextFree" />
+      </field>
+      <field key="names">
+        <names>
+          <name>Namen</name>
+        </names>
+        <content_class bind="Column" parentField="ds" type="TextFree" />
+      </field>
+      <field key="footer">
+        <names>
+          <name>Fußzeile</name>
+        </names>
+        <content_class bind="Column" parentField="ds" type="TextFree" />
+      </field>
+    </fields>
+  </style>
+</StyleList>

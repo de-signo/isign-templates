@@ -5,13 +5,13 @@
 </header>
 
 <nav>
-  <a routerLink="/" queryParamsHandling="preserve" class="home" homeIcon></a>
-  <a routerLink="/" queryParamsHandling="preserve" class="home nav-next" homeIcon></a>
+  <a routerLink="/" queryParamsHandling="preserve" class="home" homeIcon touchClick></a>
+  <a routerLink="/" queryParamsHandling="preserve" class="home nav-next" homeIcon touchClick></a>
 </nav>
 
 <ul class="results btns">
   <li *ngFor="let item of results">
-    <a [routerLink]="['/'].concat(item.path ?? [])" queryParamsHandling="preserve"><span>{{item.name}}</span></a>
+    <a [routerLink]="['/'].concat(item.path ?? [])" queryParamsHandling="preserve" touchClick><span>{{item.name}}</span></a>
   </li>
 </ul>
 
@@ -19,6 +19,6 @@
 
 <div id="keyboard">
   <div *ngFor="let row of keyboard">
-    <a *ngFor="let key of row" role="button" [class]="key.class" (click)="keyPress(key)" [innerHTML]="key.display"></a>
+    <a *ngFor="let key of row" role="button" [class]="key.class" (click)="keyPress(key)" [innerHTML]="key.display" touchClick></a>
   </div>
 </div>

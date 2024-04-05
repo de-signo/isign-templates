@@ -53,6 +53,23 @@ pipeline {
       }
     }
 
+    stage('test-libs') {
+      steps {
+        dir('lib') {
+          bat 'ng test --karma-config karma.conf.srv.js'
+          junit testResults: "karma-results\\**\\*.xml", keepLongStdio: true
+        }
+      }
+    }
+
+    stage('build-libs') {
+      steps {
+        dir('lib') {
+          bat 'ng build'
+        }
+      }
+    }
+
     stage('build-raumbelegung') {
       steps {
         dir('Raumbelegung') {

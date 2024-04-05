@@ -4,10 +4,10 @@
 <ul class="btns">
   <li class="space"></li>
   <li *ngFor="let x of data.tree | async">
-    <a [routerLink]="['/'].concat(x.path ?? [])" queryParamsHandling="preserve">{{ x.name }}</a>
+    <a [routerLink]="['/'].concat(x.path ?? [])" queryParamsHandling="preserve" touchClick>{{ x.name }}</a>
   </li>
   <li *ngIf="enableSearch" class="search_mock">
-    <a routerLink="search" queryParamsHandling="preserve">
+    <a routerLink="search" queryParamsHandling="preserve" touchClick>
       <span>Suchen</span>
       <img alt="Suche" src="assets/img/Lupe.png" />
     </a>

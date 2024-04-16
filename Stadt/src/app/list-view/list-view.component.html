@@ -47,7 +47,7 @@
 </div>
 
 <footer>
-  <div *ngIf="enableAnchors && handicapped" class="hooks">
+  <div *ngIf="enableAnchors" class="hooks">
     <div>Bitte den Anfangsbuchstaben des gesuchten Begriffs w&auml;hlen</div>
     <ul>
       <li *ngFor="let a of hooks | keyvalue" [ngClass]="{'disabled1': !a.value}">
@@ -56,5 +56,4 @@
       </li>
     </ul>
   </div>
-  <a *ngIf="enableAnchors && !handicapped" (click)="showHandicapped()" class="handicap" touchClick>Handicap</a>
 </footer>

@@ -21,6 +21,7 @@
 
 
 export interface BookingViewModel {
+  qr: string;
   title: string;
   subtitle: string;
   date: string;

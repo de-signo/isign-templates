@@ -28,13 +28,68 @@
 html
 {
   font-family: Arial, sans-serif;
-  font-weight: 700;
   font-size: 2vh;
 }
 
 body
 {
   margin: 0;
+
+  /* fill full screen */
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  /* center content */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  /* colos */
   color: $color-primary-fg;
   background-color: $color-primary-bg;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+h2 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin:0;
+}
+
+h3 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+h4 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+  color: #DE392D;
+}
+
+
+qrcode {
+  /* overwrite style by angularx/qrcode */
+  position: relative;
+  display: block;
+  aspect-ratio: 1;
+  div.qrcode {
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100% !important;
+      height: 100% !important;
+    }
+  }
 }

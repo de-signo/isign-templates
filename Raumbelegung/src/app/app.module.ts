@@ -25,6 +25,7 @@ import { AppComponent } from './app.component';
 import { registerLocaleData } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TemplateBaseRefModule, TemplateModule } from "@isign/forms-templates";
+import { QRCodeModule } from 'angularx-qrcode';
 import { DataImportApiModule, ServiceInfoInterceptor, ISignServicesModule } from "@isign/isign-services";
 import localeDe from '@angular/common/locales/de';
 import { environment } from 'src/environments/environment';
@@ -47,6 +48,7 @@ registerLocaleData(localeDe);
     ISignServicesModule.forRoot(environment.wellKnownISignUrl, "auto"),
     BrowserModule,
     HttpClientModule,
+    QRCodeModule
   ],
   bootstrap: [AppComponent],
   providers: [

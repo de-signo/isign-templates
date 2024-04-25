@@ -48,23 +48,51 @@ export class DataService {
             if (!table?.length) {
               return null;
             }
-            const bookings = this.style.template.bindDataTable(table.slice(0,1), 
-              {
-                title: { field: "title", default: "" },
-                subtitle: { field: "subtitile", default: "" },
-                participants: { field: "participants", convert: (v:any) => v?.split(",")},
-                from: { field: "from", default: "" },
-                to: { field: "to", default: "" }
-              });
-            const booking = bookings[0];
-            return {
-                title: booking.title,
-                subtitle: booking.subtitle,
-                participants: booking.participants,
-                date: new Date(booking.from).toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' }),
-                from: new Date(booking.from).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }),
-                to: new Date(booking.to).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }) + " Uhr"
-            };
+
+            switch (style.key) {
+              case "raumbelegung2021A":
+                const bookingsA = this.style.template.bindDataTable(table.slice(0,1), 
+                {
+                  qr: { field: "qr", default: "" },
+                  title: { field: "title", default: "" },
+                  subtitle: { field: "subtitile", default: "" },
+                  participants: { field: "participants", convert: (v:any) => v?.split(",")},
+                  from: { field: "from", default: "" },
+                  to: { field: "to", default: "" }
+                });
+                const bookingA = bookingsA[0];
+                return {
+                    qr: bookingA.qr,
+                    title: bookingA.title,
+                    subtitle: bookingA.subtitle,
+                    participants: bookingA.participants,
+                    date: new Date(bookingA.from).toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' }),
+                    from: new Date(bookingA.from).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }),
+                    to: new Date(bookingA.to).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }) + " Uhr"
+                };
+              case "raumbelegung2021B":
+                const bookingsB = this.style.template.bindDataTable(table.slice(0,1), 
+                {
+                  qr: { field: "qr", default: "" },
+                  title: { field: "title", default: "" },
+                  subtitle: { field: "subtitile", default: "" },
+                  participants: { field: "participants", convert: (v:any) => v?.split(",")},
+                  datefrom: { field: "datefrom", default: "" },
+                  from: { field: "from", default: "" },
+                  dateto: { field: "dateto", default: "" },
+                  to: { field: "to", default: "" }
+                });
+                const bookingB = bookingsB[0];
+                return {
+                    qr: bookingB.qr,
+                    title: bookingB.title,
+                    subtitle: bookingB.subtitle,
+                    participants: bookingB.participants,
+                    date: new Date(bookingB.datefrom).toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' }),
+                    from: new Date(bookingB.from).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }),
+                    to: new Date(bookingB.to).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }) + " Uhr"
+                };
+          }
         }));
     }
   }

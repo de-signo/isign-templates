@@ -40,6 +40,7 @@ export class StyleService {
       default:
       case "raumbelegung2021_free":
         const stylef = new StyleFreeModel();
+        stylef.qr = tmpl.parameters["qr"] ?? "";
         stylef.title = tmpl.parameters["title"] ?? "";
         stylef.subtitle = tmpl.parameters["subtitle"] ?? "";
         stylef.participants = tmpl.parameters["participants"]?.split(",") ?? [];
@@ -64,6 +65,7 @@ export interface StyleModel {
 
 export class StyleFreeModel implements StyleModel, BookingViewModel {
   key: "raumbelegung2021_free" = "raumbelegung2021_free";
+  qr: string = ""
   title: string = ""
   subtitle: string = ""
   participants: string[] = []

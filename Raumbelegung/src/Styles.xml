@@ -29,6 +29,12 @@
       <name culture="de">Raumbelegung (Freitext)</name>
     </names>
     <fields>
+      <field key="qr">
+        <names>
+          <name>QR-Link</name>
+        </names>
+        <content_class bind="Column" parentField="s" type="TextFree" />
+      </field>
       <field key="title">
         <names>
           <name>Titel</name>
@@ -81,6 +87,12 @@
           <name>Datenquelle</name>
         </names>
         <content_class type="DataSource" />
+      </field>
+      <field key="qr">
+        <names>
+          <name>QR-Link</name>
+        </names>
+        <content_class bind="Column" parentField="s" type="TextFree" />
       </field>
       <field key="title">
         <names>
@@ -136,6 +148,12 @@
           <name>Datenquelle</name>
         </names>
         <content_class type="DataSource" />
+      </field>
+      <field key="qr">
+        <names>
+          <name>QR-Link</name>
+        </names>
+        <content_class bind="Column" parentField="s" type="TextFree" />
       </field>
       <field key="title">
         <names>

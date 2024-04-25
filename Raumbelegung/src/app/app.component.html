@@ -1,40 +1,21 @@
-<!-- 
-  Copyright (C) 2024 DE SIGNO GmbH
-  
-  This program is dual licensed. If you did not license the program under
-  different terms, the following applies:
-  
-  This program is free software: You can redistribute it and/or modify
-  it under the terms of the GNU Affero General Public License as published by
-  the Free Software Foundation, either version 3 of the License, or
-  (at your option) any later version.
-  
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU Affero General Public License for more details.
-  
-  You should have received a copy of the GNU Affero General Public License
-  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-  
- -->
 
-<header>
-  <img src="assets/logo.png" />
-</header>
-<section class="left" *ngIf="current">
-  <h2>{{ current.date }}</h2>
-  <p>{{ current.from }} <ng-container *ngIf="current.from && current.to" >-</ng-container> {{ current.to }}</p>
-</section>
-<section class="right" *ngIf="current">
-  <h1>{{ current.title }}</h1>
-  <h3>{{ current.subtitle }}</h3>
-  <p *ngIf="current.participants && current.participants.length > 0">
-    Teilnehmer:
-  </p>
+<!-- row 1 -->
+<h2 *ngIf="current">{{ current.date }}</h2>
+<h1 *ngIf="current">{{ current.title }}</h1>
+
+<!-- row 2 -->
+<h4 *ngIf="current">{{ current.from }} <ng-container *ngIf="current.from && current.to" >-</ng-container> {{ current.to }}</h4>
+<h3 *ngIf="current">{{ current.subtitle }}</h3>
+
+<!-- row 3 -->
+<qrcode *ngIf="current && current.qr" [qrdata]="current.qr" [width]="256" [errorCorrectionLevel]="'M'" [margin]="0"></qrcode>
+<div *ngIf="current && !current.qr"><!--placeholder--></div>
+
+<section class="participants" *ngIf="current && current.participants && current.participants.length > 0">
   <ul #scrollcontainer>
     <li *ngFor="let p of current.participants">
       {{ p }}
     </li>
   </ul>
 </section>
+

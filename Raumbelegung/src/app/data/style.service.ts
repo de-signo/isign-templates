@@ -27,8 +27,8 @@ import { TemplateInstance, TemplateService } from "@isign/forms-templates";
   providedIn: "root",
 })
 export class StyleService {
- 
-  style: StyleFreeModel|StyleDbModel = new StyleFreeModel();
+
+  style: StyleFreeModel|StyleDbModel;
   updated = new EventEmitter();
   template: TemplateInstance;
 
@@ -36,44 +36,53 @@ export class StyleService {
     const tmpl = this.template = ts.getTemplate();
 
     const key = tmpl.key;
-    switch (key) {
-      default:
-      case "raumbelegung2021_free":
-        const stylef = new StyleFreeModel();
-        stylef.qr = tmpl.parameters["qr"] ?? "";
-        stylef.title = tmpl.parameters["title"] ?? "";
-        stylef.subtitle = tmpl.parameters["subtitle"] ?? "";
-        stylef.participants = tmpl.parameters["participants"]?.split(",") ?? [];
-        stylef.date = tmpl.parameters["date"] ?? "";
-        stylef.from = tmpl.parameters["from"] ?? "";
-        stylef.to = tmpl.parameters["to"] ?? "";
-        this.style = stylef;
-        break;
-      case "raumbelegung2021A":
-      case "raumbelegung2021B":
-        const styled = new StyleDbModel();
-        styled.key = key;
-        this.style = styled;
-        break;
+    if (key === "raumbelegung2021_free" || key === "raumbelegung_2_free") {
+      const stylef: StyleFreeModel = {
+        key: key,
+        qr: tmpl.parameters["qr"] ?? "",
+        title: tmpl.parameters["title"] ?? "",
+        subtitle: tmpl.parameters["subtitle"] ?? "",
+        participants: tmpl.parameters["participants"]?.split(",") ?? [],
+        date: tmpl.parameters["date"] ?? "",
+        from: tmpl.parameters["from"] ?? "",
+        to: tmpl.parameters["to"] ?? "",
+      };
+      this.style = stylef;
+    } else if (
+        key === "raumbelegung2021A" || 
+        key === "raumbelegung2021B" ||
+        key === "raumbelegung_2_A" ||
+        key === "raumbelegung_2_B") {
+      const styled: StyleDbModel = {
+        key: key
+      };
+      this.style = styled;
+    }
+    else {
+      // default (empty)
+      this.style = {
+        key: "raumbelegung2021A"
+      }
     }
   }
 }
 
 export interface StyleModel {
-  key: "raumbelegung2021_free" | "raumbelegung2021A" | "raumbelegung2021B";
+  key: "raumbelegung2021_free" | "raumbelegung2021A" | "raumbelegung2021B" |
+       "raumbelegung_2_free" | "raumbelegung_2_A" | "raumbelegung_2_B";
 }
 
-export class StyleFreeModel implements StyleModel, BookingViewModel {
-  key: "raumbelegung2021_free" = "raumbelegung2021_free";
-  qr: string = ""
-  title: string = ""
-  subtitle: string = ""
-  participants: string[] = []
-  date: string = ""
-  from: string = ""
-  to: string = ""
+export interface StyleFreeModel extends StyleModel, BookingViewModel {
+  key: "raumbelegung2021_free" | "raumbelegung_2_free";
+  qr: string;
+  title: string;
+  subtitle: string;
+  participants: string[];
+  date: string;
+  from: string;
+  to: string;
 }
 
-export class StyleDbModel implements StyleModel {
-  key: "raumbelegung2021A" | "raumbelegung2021B" = "raumbelegung2021A";
+export interface StyleDbModel extends StyleModel {
+  key: "raumbelegung2021A" | "raumbelegung2021B" | "raumbelegung_2_A" | "raumbelegung_2_B";
 }

@@ -9,6 +9,8 @@ Die Vorlage kann lokal getestet werden mit dem Befehl `ng test` wird der Testser
 
 ## Testlinks
 
+EINFACHE
+
 Feste texte
 http://localhost:4200/?s=raumbelegung2021_free&s/qr=test&s/title=title&s/subtitile=subtitle&s/from=from&s/to=to&s/participants=participants
 
@@ -17,3 +19,15 @@ http://localhost:4200/?s=raumbelegung2021A&s/s=test&s/title=title&s/subtitile=su
 
 Mit qr code
 http://localhost:4200/?s=raumbelegung2021A&s/qr=qr&s/s=test&s/title=title&s/subtitile=subtitle&s/from=from&s/to=to&s/participants=participants
+
+
+ZWEIFACHE
+
+Feste texte
+http://localhost:4200/?s=raumbelegung_2_free&s/qr=test&s/title=title&s/subtitile=subtitle&s/from=from&s/to=to
+
+Ohne qr code
+http://localhost:4200/?s=raumbelegung_2_A&s/s=test&s/title=title&s/subtitile=subtitle&s/from=from&s/to=to
+
+Mit qr code
+http://localhost:4200/?s=raumbelegung_2_A&s/qr=qr&s/s=test&s/title=title&s/subtitile=subtitle&s/from=from&s/to=to

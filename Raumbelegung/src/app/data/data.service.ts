@@ -32,11 +32,13 @@ export class DataService {
   constructor(private style: StyleService, private dataImport: DataImportService)
   {}
 
-  load(): Observable<BookingViewModel|null>
+  load(): Observable<BookingViewModel[]|null>
   {
     const style = this.style.style;
-    if (style.key == "raumbelegung2021_free") {
-      return of(style);
+    const key = style.key;
+    if (key == "raumbelegung2021_free"
+     || key == "raumbelegung_2_free") {
+      return of([style]);
     } else {
       const diId = this.style.template.parameters["s"];
       if (!diId)
@@ -49,9 +51,11 @@ export class DataService {
               return null;
             }
 
-            switch (style.key) {
+            const maxCount = (key === "raumbelegung_2_A" || key === "raumbelegung_2_B") ? 2 : 1;
+            switch (key) {
               case "raumbelegung2021A":
-                const bookingsA = this.style.template.bindDataTable(table.slice(0,1), 
+              case "raumbelegung_2_A":
+                return this.style.template.bindDataTable(table.slice(0, maxCount), 
                 {
                   qr: { field: "qr", default: "" },
                   title: { field: "title", default: "" },
@@ -59,19 +63,18 @@ export class DataService {
                   participants: { field: "participants", convert: (v:any) => v?.split(",")},
                   from: { field: "from", default: "" },
                   to: { field: "to", default: "" }
-                });
-                const bookingA = bookingsA[0];
-                return {
-                    qr: bookingA.qr,
-                    title: bookingA.title,
-                    subtitle: bookingA.subtitle,
-                    participants: bookingA.participants,
-                    date: new Date(bookingA.from).toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' }),
-                    from: new Date(bookingA.from).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }),
-                    to: new Date(bookingA.to).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }) + " Uhr"
-                };
+                }).map(bookingA => <BookingViewModel>({
+                  qr: bookingA.qr,
+                  title: bookingA.title,
+                  subtitle: bookingA.subtitle,
+                  participants: bookingA.participants,
+                  date: new Date(bookingA.from).toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' }),
+                  from: new Date(bookingA.from).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }),
+                  to: new Date(bookingA.to).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }) + " Uhr"
+                }));
               case "raumbelegung2021B":
-                const bookingsB = this.style.template.bindDataTable(table.slice(0,1), 
+              case "raumbelegung_2_B":
+                return this.style.template.bindDataTable(table.slice(0, maxCount), 
                 {
                   qr: { field: "qr", default: "" },
                   title: { field: "title", default: "" },
@@ -81,9 +84,7 @@ export class DataService {
                   from: { field: "from", default: "" },
                   dateto: { field: "dateto", default: "" },
                   to: { field: "to", default: "" }
-                });
-                const bookingB = bookingsB[0];
-                return {
+                }).map(bookingB => <BookingViewModel>({
                     qr: bookingB.qr,
                     title: bookingB.title,
                     subtitle: bookingB.subtitle,
@@ -91,7 +92,7 @@ export class DataService {
                     date: new Date(bookingB.datefrom).toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' }),
                     from: new Date(bookingB.from).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }),
                     to: new Date(bookingB.to).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }) + " Uhr"
-                };
+                }));
           }
         }));
     }

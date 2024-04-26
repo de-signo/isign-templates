@@ -33,15 +33,15 @@
     </names>
     <content_class type="TextFree" />
   </field>
-{{/inline}}
-
-{{#*inline "unboundExtendedFields"}}
   <field key="subtitle">
     <names>
       <name>Sub-Titel</name>
     </names>
     <content_class type="TextFree" />
   </field>
+{{/inline}}
+
+{{#*inline "unboundExtendedFields"}}
   <field key="participants">
     <names>
       <name>Teilnehmer</name>
@@ -87,15 +87,15 @@
     </names>
     <content_class bind="Column" parentField="s" type="TextFree" />
   </field>
-{{/inline}}
-
-{{#*inline "dataBoundExtendedFields"}}
   <field key="subtitle">
     <names>
       <name>Sub-Titel</name>
     </names>
     <content_class bind="Column" parentField="s" type="TextFree" />
   </field>
+{{/inline}}
+
+{{#*inline "dataBoundExtendedFields"}}
   <field key="participants">
     <names>
       <name>Teilnehmer</name>
@@ -167,11 +167,11 @@
 <StyleList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://stollsoft.de/iSign/v2/Content/Forms/Styles">
 
   <style key="raumbelegung2021_free"
-         file="index.cshtml"
+         file="index.html"
          preview="assets/preview.png"
          interactive="false" target="chromium">
     <names>
-      <name culture="de">Raumbelegung (Freitext)</name>
+      <name culture="de">Raumbelegung einzeln detailiert (Freitext)</name>
     </names>
     <fields>
       {{> unboundCommonFields }}
@@ -180,11 +180,11 @@
   </style>
 
   <style key="raumbelegung2021A"
-         file="index.cshtml"
+         file="index.html"
          preview="assets/preview.png"
          interactive="false" target="chromium">
     <names>
-      <name culture="de">Raumbelegung</name>
+      <name culture="de">Raumbelegung einzeln detailiert</name>
     </names>
     <fields>
       {{> dataBoundCommonFields}}
@@ -194,15 +194,41 @@
   </style>
 
   <style key="raumbelegung2021B"
-         file="index.cshtml"
+         file="index.html"
          preview="assets/preview.png"
          interactive="false" target="chromium">
     <names>
-      <name culture="de">Raumbelegung Datum Uhrzeit getrennt</name>
+      <name culture="de">Raumbelegung einzeln detailiert, Datum Uhrzeit getrennt</name>
     </names>
     <fields>
       {{> dataBoundCommonFields}}
       {{> dataBoundExtendedFields}}
+      {{> fromToSeparateFields}}
+    </fields>
+  </style>
+
+  <style key="raumbelegung_2_A"
+         file="index.html"
+         preview="assets/preview.png"
+         interactive="false" target="chromium">
+    <names>
+      <name culture="de">Raumbelegung zweifach</name>
+    </names>
+    <fields>
+      {{> dataBoundCommonFields}}
+      {{> fromToCombinedFields}}
+    </fields>
+  </style>
+
+  <style key="raumbelegung_2_B"
+         file="index.html"
+         preview="assets/preview.png"
+         interactive="false" target="chromium">
+    <names>
+      <name culture="de">Raumbelegung zweifach, Datum Uhrzeit getrennt</name>
+    </names>
+    <fields>
+      {{> dataBoundCommonFields}}
       {{> fromToSeparateFields}}
     </fields>
   </style>

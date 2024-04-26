@@ -2,13 +2,14 @@
   "name": "raumbelegung",
   "version": "0.0.0",
   "license": "AGPL",
+  "type": "module",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "zip": "ng build --configuration production && cd ../dist/raumbelegung && bestzip ../raumbelegung_%version%.zip *"
+    "zip": "npx gulp"
   },
   "private": true,
   "dependencies": {
@@ -38,8 +39,13 @@
     "@types/qrcode": "^1.5.5",
     "@typescript-eslint/eslint-plugin": "^5.59.2",
     "@typescript-eslint/parser": "^5.59.2",
-    "bestzip": "^2.1.7",
+    "del": "^7.0.0",
     "eslint": "^8.39.0",
+    "gulp": "^5.0.0",
+    "gulp-git": "^2.10.1",
+    "gulp-rename": "^2.0.0",
+    "gulp-zip": "^6.0.0",
+    "handlebars": "^4.7.8",
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

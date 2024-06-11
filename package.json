@@ -1,6 +1,7 @@
 {
   "version": "1.0.0",
   "name": "standardvorlagen",
+  "license": "AGPL",
   "private": true,
   "workspaces": [
     "Calendar",

@@ -59,7 +59,7 @@ export class DataService {
                 {
                   qr: { field: "qr", default: "" },
                   title: { field: "title", default: "" },
-                  subtitle: { field: "subtitile", default: "" },
+                  subtitle: { field: "subtitle", default: "" },
                   participants: { field: "participants", convert: (v:any) => v?.split(",")},
                   from: { field: "from", default: "" },
                   to: { field: "to", default: "" }
@@ -78,7 +78,7 @@ export class DataService {
                 {
                   qr: { field: "qr", default: "" },
                   title: { field: "title", default: "" },
-                  subtitle: { field: "subtitile", default: "" },
+                  subtitle: { field: "subtitle", default: "" },
                   participants: { field: "participants", convert: (v:any) => v?.split(",")},
                   datefrom: { field: "datefrom", default: "" },
                   from: { field: "from", default: "" },

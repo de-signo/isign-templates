@@ -32,6 +32,33 @@ export class DataService {
   constructor(private style: StyleService, private dataImport: DataImportService)
   {}
 
+  private readDateFromCombinedValue(dateTime: string, timezoneOffset?: number): Date {
+    const originalDate = new Date(dateTime);
+
+    // Convert to local timezone
+    if (!timezoneOffset) {
+      // automatically convert specified timezone to local time
+      timezoneOffset =
+        (new Date().getTimezoneOffset()) - // target tz
+        originalDate.getTimezoneOffset() // source tz
+    }
+    return new Date(originalDate.getTime() - timezoneOffset);
+  }
+
+  private readDateFromSplitValues(date: string, time: string, timezoneOffset?: number): Date {
+    const originalDate = new Date(date);
+    const [hours, minutes, seconds = 0] = time.split(':').map(Number);
+  
+    // Convert to local timezone
+    if (!timezoneOffset) {
+      // automatically convert specified timezone to local time
+      timezoneOffset =
+        (new Date().getTimezoneOffset()) - // target tz
+        originalDate.getTimezoneOffset() // source tz
+    }
+    return new Date(originalDate.getTime() + hours * 3600000 + minutes * 60000 + seconds * 1000 - timezoneOffset);
+  }
+
   load(): Observable<BookingViewModel[]|null>
   {
     const style = this.style.style;
@@ -43,6 +70,12 @@ export class DataService {
       const diId = this.style.template.parameters["s"];
       if (!diId)
         throw Error("Data source id is missing.");
+
+      const tz = this.style.template.parameters["tz"];
+      const timezoneOffset =
+        (tz == "utc") ? new Date().getTimezoneOffset() * 60000 :
+        (tz == "srv") ? 0 :
+        undefined;
 
       return this.dataImport.getDataTable(diId)
         .pipe(
@@ -63,15 +96,17 @@ export class DataService {
                   participants: { field: "participants", convert: (v:any) => v?.split(",")},
                   from: { field: "from", default: "" },
                   to: { field: "to", default: "" }
-                }).map(bookingA => <BookingViewModel>({
+                }).map(bookingA => {
+                  const from = this.readDateFromCombinedValue(bookingA.from, timezoneOffset);
+                  return <BookingViewModel>({
                   qr: bookingA.qr,
                   title: bookingA.title,
                   subtitle: bookingA.subtitle,
                   participants: bookingA.participants,
-                  date: new Date(bookingA.from).toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' }),
-                  from: new Date(bookingA.from).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }),
-                  to: new Date(bookingA.to).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }) + " Uhr"
-                }));
+                  date: from.toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' }),
+                  from: from.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }),
+                  to: this.readDateFromCombinedValue(bookingA.to, timezoneOffset).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }) + " Uhr"
+                })});
               case "raumbelegung2021B":
               case "raumbelegung_2_B":
                 return this.style.template.bindDataTable(table.slice(0, maxCount), 
@@ -84,15 +119,17 @@ export class DataService {
                   from: { field: "from", default: "" },
                   dateto: { field: "dateto", default: "" },
                   to: { field: "to", default: "" }
-                }).map(bookingB => <BookingViewModel>({
+                }).map(bookingB => {
+                  const from = this.readDateFromSplitValues(bookingB.datefrom, bookingB.from, timezoneOffset)
+                  return <BookingViewModel>({
                     qr: bookingB.qr,
                     title: bookingB.title,
                     subtitle: bookingB.subtitle,
                     participants: bookingB.participants,
-                    date: new Date(bookingB.datefrom).toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' }),
-                    from: new Date(bookingB.from).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }),
-                    to: new Date(bookingB.to).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }) + " Uhr"
-                }));
+                    date: from.toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' }),
+                    from: from.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }),
+                    to: this.readDateFromSplitValues(bookingB.dateto, bookingB.to, timezoneOffset).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }) + " Uhr"
+                })});
           }
         }));
     }

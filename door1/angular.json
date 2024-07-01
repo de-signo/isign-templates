@@ -15,11 +15,12 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "../dist/door1",
+            "outputPath": {
+              "base": "../dist/door1"
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -33,7 +34,8 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "browser": "src/main.ts"
           },
           "configurations": {
             "production": {
@@ -55,12 +57,10 @@
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
                 }
-              ],
+              ]
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "door1:build:production"
+              "buildTarget": "door1:build:production"
             },
             "development": {
-              "browserTarget": "door1:build:development"
+              "buildTarget": "door1:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "door1:build"
+            "buildTarget": "door1:build"
           }
         },
         "test": {
@@ -107,5 +107,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

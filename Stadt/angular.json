@@ -18,14 +18,17 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
             "optimization": false,
             "sourceMap": true,
-            "outputPath": "../dist/stadt",
+            "outputPath": {
+              "base": "../dist/stadt"
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
@@ -37,7 +40,8 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "browser": "src/main.ts"
           },
           "configurations": {
             "production": {
@@ -60,8 +64,6 @@
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -80,25 +82,25 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "stadt:build"
+            "buildTarget": "stadt:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "stadt:build:production"
+              "buildTarget": "stadt:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "stadt:build"
+            "buildTarget": "stadt:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": "zone.js",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": [

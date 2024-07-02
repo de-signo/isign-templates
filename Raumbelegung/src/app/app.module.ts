@@ -29,6 +29,7 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { DataImportApiModule, ServiceInfoInterceptor, ISignServicesModule } from "@isign/isign-services";
 import localeDe from '@angular/common/locales/de';
 import { environment } from 'src/environments/environment';
+import { ISignPlayerExtensionsModule } from "@isign/player-extensions";
 
 registerLocaleData(localeDe);
 
@@ -42,6 +43,8 @@ registerLocaleData(localeDe);
     TemplateBaseRefModule.forRoot(),
     // parse the template query
     TemplateModule,
+    // enable player extensions
+    ISignPlayerExtensionsModule,
     // enable date import api client
     DataImportApiModule.forRoot(),
     // use isign service lookup and authentication

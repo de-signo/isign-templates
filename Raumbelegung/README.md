@@ -2,19 +2,32 @@
 
 Dies ist ein Projekt, das mit [Angular CLI](https://github.com/angular/angular-cli) erstellt wurde.
 
-Diese verhält sich unterschiedlich bei devel und production builds. "production" build sind als iSign Vorlage verwendbar. "devel" builds hingegen können mit dem angular development server verwendet werden (ng serve)
 
-## Entwicklung starten
+## Lokale tests
 
- 1. Install.bat ausführen (Installiert notwendige Komponenten)
- 2. Run.bat ausführen (Startet die Seite)
+Die Vorlage kann lokal getestet werden mit dem Befehl `ng test` wird der Testserver gestartet. Unter `assets/test-services` werden die zu verwendenden Server eingtragen. Zu beachten ist, dass der Idenditätsserver für den lokalen Test freigeschaltet werden muss dies geschieht mit dem Befehl `issrvconfig.exe apply default --forms:additionalRedirectUris:0=http://localhost:4200` auf dem Server.
 
-## ZIP zum Verteilen erstellen
+## Testlinks
 
- 1. Build.bat erstellt die ZIP-Datei
- 2. dist/vhs-schwetzingen.zip enthätlt das Ergebnis
+EINFACHE
 
-## Konfiguration
+Feste texte
+http://localhost:4200/?s=raumbelegung2021_free&s/qr=test&s/title=title&s/subtitle=subtitle&s/from=from&s/to=to&s/participants=participants
 
-Die Konfiguration der Seite erfolgt über die config.json Datei. Deren Schema ist in [src/app/config/app-config.model.ts](src/app/config/app-config.model.ts) hinterlegt. In der "devel" Umgebung wird die Datei [src/assets/config/config.dev.json](src/assets/config/config.dev.json) verwendet. In der "production" Umgebung hingegen die Datei [src/assets/config/config.json](src/assets/config/config.json)
+Ohne qr code
+http://localhost:4200/?s=raumbelegung2021A&s/s=test&s/title=title&s/subtitle=subtitle&s/from=from&s/to=to&s/participants=participants
 
+Mit qr code
+http://localhost:4200/?s=raumbelegung2021A&s/qr=qr&s/s=test&s/title=title&s/subtitle=subtitle&s/from=from&s/to=to&s/participants=participants
+
+
+ZWEIFACHE
+
+Feste texte
+http://localhost:4200/?s=raumbelegung_2_free&s/qr=test&s/title=title&s/subtitle=subtitle&s/from=from&s/to=to
+
+Ohne qr code
+http://localhost:4200/?s=raumbelegung_2_A&s/s=test&s/title=title&s/subtitle=subtitle&s/from=from&s/to=to
+
+Mit qr code
+http://localhost:4200/?s=raumbelegung_2_A&s/qr=qr&s/s=test&s/title=title&s/subtitle=subtitle&s/from=from&s/to=to

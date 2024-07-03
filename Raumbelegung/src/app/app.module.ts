@@ -23,22 +23,46 @@ import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { registerLocaleData } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { TemplateBaseRefModule, TemplateModule } from "@isign/forms-templates";
+import { QRCodeModule } from 'angularx-qrcode';
+import { DataImportApiModule, ServiceInfoInterceptor, ISignServicesModule } from "@isign/isign-services";
 import localeDe from '@angular/common/locales/de';
+import { environment } from 'src/environments/environment';
+import { ISignPlayerExtensionsModule } from "@isign/player-extensions";
 
 registerLocaleData(localeDe);
+
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
+    // enable hosting in forms show
+    TemplateBaseRefModule.forRoot(),
+    // parse the template query
+    TemplateModule,
+    // enable player extensions
+    ISignPlayerExtensionsModule,
+    // enable date import api client
+    DataImportApiModule.forRoot(),
+    // use isign service lookup and authentication
+    ISignServicesModule.forRoot(environment.wellKnownISignUrl, "auto"),
     BrowserModule,
     HttpClientModule,
+    QRCodeModule
   ],
   bootstrap: [AppComponent],
   providers: [
-    { provide: LOCALE_ID, useValue: "de-DE" }
+    { provide: LOCALE_ID, useValue: "de-DE" },
+    ...
+    // debug data
+    environment.production || environment.wellKnownISignUrl ? [] : 
+    [
+      // use demo data
+      { provide: HTTP_INTERCEPTORS, useValue: new ServiceInfoInterceptor({services: [ { name: "DataImportApi", url: "assets/dataimport"}]}), multi: true},
+    ]
   ]
 })
 export class AppModule { }

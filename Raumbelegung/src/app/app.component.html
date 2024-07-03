@@ -1,40 +1,39 @@
-<!-- 
-  Copyright (C) 2024 DE SIGNO GmbH
-  
-  This program is dual licensed. If you did not license the program under
-  different terms, the following applies:
-  
-  This program is free software: You can redistribute it and/or modify
-  it under the terms of the GNU Affero General Public License as published by
-  the Free Software Foundation, either version 3 of the License, or
-  (at your option) any later version.
-  
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU Affero General Public License for more details.
-  
-  You should have received a copy of the GNU Affero General Public License
-  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-  
- -->
 
-<header>
-  <img src="assets/logo.png" />
-</header>
-<section class="left" *ngIf="current">
-  <h2>{{ current.date }}</h2>
-  <p>{{ current.from }} - {{ current.to }}</p>
-</section>
-<section class="right" *ngIf="current">
-  <h1>{{ current.title }}</h1>
-  <h3>{{ current.subtitle }}</h3>
-  <p *ngIf="current.participants && current.participants.length > 0">
-    Teilnehmer:
-  </p>
-  <ul #scrollcontainer>
-    <li *ngFor="let p of current.participants">
-      {{ p }}
-    </li>
-  </ul>
-</section>
+<div *ngIf="view == 'single' && current && current.length" class="item">
+  <!-- row 1 -->
+  <h2>{{ current[0].date }}</h2>
+  <h1>{{ current[0].title }}</h1>
+
+  <!-- row 2 -->
+  <h4>{{ current[0].from }} <ng-container *ngIf="current[0].from && current[0].to" >-</ng-container> {{ current[0].to }}</h4>
+  <h3>{{ current[0].subtitle }}</h3>
+
+  <!-- row 3 -->
+  <qrcode *ngIf="current[0].qr" [qrdata]="current[0].qr" [width]="256" [errorCorrectionLevel]="'M'" [margin]="0"></qrcode>
+  <div *ngIf="current[0] && !current[0].qr"><!--placeholder--></div>
+
+  <section class="participants" *ngIf="current[0].participants && current[0].participants.length > 0">
+    <ul #scrollcontainer>
+      <li *ngFor="let p of current[0].participants">
+        {{ p }}
+      </li>
+    </ul>
+  </section>
+</div>
+
+<ng-template [ngIf]="view == 'double' && current && current.length">
+  <h1>{{ currentDate }}</h1>
+  <section>
+    <div *ngFor="let item of current" class="item">
+      <div>
+        <h4>{{ item.from }} <ng-container *ngIf="item.from && item.to" >-</ng-container> {{ item.to }}</h4>
+        <qrcode *ngIf="item.qr" [qrdata]="item.qr" [width]="256" [errorCorrectionLevel]="'M'" [margin]="0"></qrcode>
+      </div>
+
+      <div>
+        <h1>{{ item.title }}</h1>
+        <h3>{{ item.subtitle }}</h3>
+      </div>
+    </div>
+  </section>
+</ng-template>

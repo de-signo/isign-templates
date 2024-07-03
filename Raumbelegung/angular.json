@@ -29,7 +29,6 @@
             "optimization": false,
             "sourceMap": true,
             "assets": [
-              "src/data.cshtml",
               "src/Styles.xml",
               "src/assets"
             ],
@@ -40,10 +39,6 @@
           },
           "configurations": {
             "production": {
-              "index": {
-                "input": "src/index.cshtml",
-                "output": "index.cshtml"
-              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",

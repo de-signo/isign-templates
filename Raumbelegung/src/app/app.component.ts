@@ -19,33 +19,62 @@
  *  
  */
 
-import { ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ElementRef, HostBinding, Inject, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
 import { Component } from '@angular/core';
-import { timer } from 'rxjs';
+import { from, timer } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 import { BookingViewModel } from './data/app-data.model';
 import { DataService } from './data/data.service';
+import { StyleService } from './data/style.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
 })
 export class AppComponent  implements OnInit {
   @ViewChild('scrollcontainer') scrollcontainer !: ElementRef;
   scrollingState : "down"|"downdelay"|"up"|"updelay" = "downdelay";
   scrollingCounter = 0;
-  constructor(private dataService: DataService) {}
 
-  current: BookingViewModel | null = null;
+  view: "single" | "double";  
+  @HostBinding('class.view-single') get enableViewSingle() { return this.view == "single"; }
+  @HostBinding('class.view-double') get enableViewDouble() { return this.view == "double"; }
+
+  currentDate: string;
+
+  constructor(
+    private readonly dataService: DataService,
+    style: StyleService,
+    @Inject(LOCALE_ID) private readonly locale: string
+  ) {
+    var styleKey = style.style.key;
+    switch (styleKey) {
+      case "raumbelegung2021A":
+      case "raumbelegung2021B":
+      case "raumbelegung2021_free":
+        this.view = "single";
+        break;
+      case "raumbelegung_2_A":
+      case "raumbelegung_2_B":
+      case "raumbelegung_2_free":
+        this.view = "double";
+        break;
+    }
+    this.currentDate = new Date().toLocaleDateString(this.locale, { year: 'numeric', month: '2-digit', day: '2-digit' });
+  }
+
+  current: BookingViewModel[] | null = null;
 
   ngOnInit(): void {
     timer(0, 10 * 1000).pipe(
-      mergeMap(() => this.dataService.load())
-    ).subscribe(
-      data => this.current = data,
-      error => console.error(error)
-    );
+      mergeMap(() => {
+        this.currentDate = new Date().toLocaleDateString(this.locale, { year: 'numeric', month: '2-digit', day: '2-digit' });
+        return this.dataService.load();
+      })
+    ).subscribe({
+      next: data => this.current = data,
+      error: error => console.error("Failed to load data.", error)
+    });
 
     timer(0, 50).subscribe(
       _ => {

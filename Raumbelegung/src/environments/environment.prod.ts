@@ -21,5 +21,5 @@
 
 export const environment = {
   production: true,
-  dataServiceUrl: "data.cshtml"
+  wellKnownISignUrl: undefined /* auto */
 };

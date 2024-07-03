@@ -19,7 +19,7 @@
  *  
  */
 
-import { ElementRef, HostBinding, OnInit, ViewChild } from '@angular/core';
+import { ElementRef, HostBinding, Inject, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
 import { Component } from '@angular/core';
 import { from, timer } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
@@ -44,7 +44,8 @@ export class AppComponent  implements OnInit {
 
   constructor(
     private readonly dataService: DataService,
-    style: StyleService
+    style: StyleService,
+    @Inject(LOCALE_ID) private readonly locale: string
   ) {
     var styleKey = style.style.key;
     switch (styleKey) {
@@ -59,7 +60,7 @@ export class AppComponent  implements OnInit {
         this.view = "double";
         break;
     }
-    this.currentDate = new Date().toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' });
+    this.currentDate = new Date().toLocaleDateString(this.locale, { year: 'numeric', month: '2-digit', day: '2-digit' });
   }
 
   current: BookingViewModel[] | null = null;
@@ -67,7 +68,7 @@ export class AppComponent  implements OnInit {
   ngOnInit(): void {
     timer(0, 10 * 1000).pipe(
       mergeMap(() => {
-        this.currentDate = new Date().toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' });
+        this.currentDate = new Date().toLocaleDateString(this.locale, { year: 'numeric', month: '2-digit', day: '2-digit' });
         return this.dataService.load();
       })
     ).subscribe({

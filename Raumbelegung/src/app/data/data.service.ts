@@ -19,7 +19,7 @@
  *  
  */
 
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 import { BookingViewModel } from './app-data.model';
 import { StyleService } from './style.service';
 import { DataImportService } from '@isign/isign-services';
@@ -29,7 +29,10 @@ import { Observable, map, of } from 'rxjs';
   providedIn: 'root'
 })
 export class DataService {
-  constructor(private style: StyleService, private dataImport: DataImportService)
+  constructor(
+    private readonly style: StyleService,
+    private readonly dataImport: DataImportService,
+    @Inject(LOCALE_ID) private readonly locale: string)
   {}
 
   private readDateFromCombinedValue(dateTime: string, timezoneOffset?: number): Date {
@@ -103,9 +106,9 @@ export class DataService {
                   title: bookingA.title,
                   subtitle: bookingA.subtitle,
                   participants: bookingA.participants,
-                  date: from.toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' }),
-                  from: from.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }),
-                  to: this.readDateFromCombinedValue(bookingA.to, timezoneOffset).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }) + " Uhr"
+                  date: from.toLocaleDateString(this.locale, { year: 'numeric', month: '2-digit', day: '2-digit' }),
+                  from: from.toLocaleTimeString(this.locale, { hour: "2-digit", minute: "2-digit" }),
+                  to: this.readDateFromCombinedValue(bookingA.to, timezoneOffset).toLocaleTimeString(this.locale, { hour: "2-digit", minute: "2-digit" }) + " Uhr"
                 })});
               case "raumbelegung2021B":
               case "raumbelegung_2_B":
@@ -126,9 +129,9 @@ export class DataService {
                     title: bookingB.title,
                     subtitle: bookingB.subtitle,
                     participants: bookingB.participants,
-                    date: from.toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' }),
-                    from: from.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }),
-                    to: this.readDateFromSplitValues(bookingB.dateto, bookingB.to, timezoneOffset).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }) + " Uhr"
+                    date: from.toLocaleDateString(this.locale, { year: 'numeric', month: '2-digit', day: '2-digit' }),
+                    from: from.toLocaleTimeString(this.locale, { hour: "2-digit", minute: "2-digit" }),
+                    to: this.readDateFromSplitValues(bookingB.dateto, bookingB.to, timezoneOffset).toLocaleTimeString(this.locale, { hour: "2-digit", minute: "2-digit" }) + " Uhr"
                 })});
           }
         }));

@@ -2,7 +2,7 @@
   "$description": "This file is used to redirect services during development.",
   "services": [
     {
-      "name": "OpenIdAuthority",
+      "name": "//OpenIdAuthority",
       "url": "https://isign8.isigncloud.de/ID"
     },
     {

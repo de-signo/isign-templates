@@ -112,6 +112,15 @@ pipeline {
       }
     }
 
+    stage('test-door1') {
+      steps {
+        dir('door1') {
+          bat 'ng test --karma-config karma.conf.srv.js'
+          junit testResults: "karma-results\\**\\*.xml", keepLongStdio: true
+        }
+      }
+    }
+
     stage('build-door1') {
       steps {
         dir('door1') {

@@ -87,10 +87,13 @@ export class DataService {
               return null;
             }
 
-            const maxCount = (key === "raumbelegung_2_A" || key === "raumbelegung_2_B") ? 2 : 1;
+            const maxCount =
+              (key === "raumbelegung_3_A" || key === "raumbelegung_3_B") ? 3 :
+              (key === "raumbelegung_2_A" || key === "raumbelegung_2_B") ? 2 : 1;
             switch (key) {
               case "raumbelegung2021A":
               case "raumbelegung_2_A":
+              case "raumbelegung_3_A":
                 return this.style.template.bindDataTable(table.slice(0, maxCount), 
                 {
                   qr: { field: "qr", default: "" },
@@ -112,6 +115,7 @@ export class DataService {
                 })});
               case "raumbelegung2021B":
               case "raumbelegung_2_B":
+              case "raumbelegung_3_B":
                 return this.style.template.bindDataTable(table.slice(0, maxCount), 
                 {
                   qr: { field: "qr", default: "" },

@@ -75,12 +75,6 @@
     </names>
     <content_class type="DataSource" />
   </field>
-  <field key="qr">
-    <names>
-      <name>QR-Link</name>
-    </names>
-    <content_class bind="Column" parentField="s" type="TextFree" />
-  </field>
   <field key="title">
     <names>
       <name>Titel</name>
@@ -90,6 +84,15 @@
   <field key="subtitle">
     <names>
       <name>Sub-Titel</name>
+    </names>
+    <content_class bind="Column" parentField="s" type="TextFree" />
+  </field>
+{{/inline}}
+
+{{#*inline "qrField"}}
+  <field key="qr">
+    <names>
+      <name>QR-Link</name>
     </names>
     <content_class bind="Column" parentField="s" type="TextFree" />
   </field>
@@ -189,6 +192,7 @@
     </names>
     <fields>
       {{> dataBoundCommonFields}}
+      {{> qrField}}
       {{> dataBoundExtendedFields}}
       {{> fromToCombinedFields}}
     </fields>
@@ -203,6 +207,7 @@
     </names>
     <fields>
       {{> dataBoundCommonFields}}
+      {{> qrField}}
       {{> dataBoundExtendedFields}}
       {{> fromToSeparateFields}}
     </fields>
@@ -217,6 +222,7 @@
     </names>
     <fields>
       {{> dataBoundCommonFields}}
+      {{> qrField}}
       {{> fromToCombinedFields}}
     </fields>
   </style>
@@ -227,6 +233,39 @@
          interactive="false" target="chromium">
     <names>
       <name culture="de">Raumbelegung zweifach, Datum Uhrzeit getrennt</name>
+    </names>
+    <fields>
+      {{> dataBoundCommonFields}}
+      {{> qrField}}
+      {{> fromToSeparateFields}}
+    </fields>
+  </style>
+
+  <style key="raumbelegung_3_A"
+         file="index.html"
+         preview="assets/preview.png"
+         interactive="false" target="chromium">
+    <names>
+      <name culture="de">Raumbelegung dreifach</name>
+    </names>
+    <fields>
+      {{> dataBoundCommonFields}}
+      {{> fromToCombinedFields}}
+      <field key="glb-qr">
+        <names>
+          <name>QR-Link Kalender</name>
+        </names>
+        <content_class type="TextFree" />
+      </field>
+    </fields>
+  </style>
+
+  <style key="raumbelegung_3_B"
+         file="index.html"
+         preview="assets/preview.png"
+         interactive="false" target="chromium">
+    <names>
+      <name culture="de">Raumbelegung dreifach, Datum Uhrzeit getrennt</name>
     </names>
     <fields>
       {{> dataBoundCommonFields}}

@@ -1,0 +1,21 @@
+<ng-template [ngIf]="items && items.length">
+  <h1>{{ date }}</h1>
+  <section>
+    <div *ngFor="let item of items" class="item">
+      <div>
+        <h4>{{ item.from }} <ng-container *ngIf="item.from && item.to">-</ng-container> {{ item.to }}</h4>
+        <qrcode *ngIf="item.qr" [qrdata]="item.qr" [width]="256" [errorCorrectionLevel]="'M'" [margin]="0"></qrcode>
+      </div>
+
+      <div>
+        <h1>{{ item.title }}</h1>
+        <h3>{{ item.subtitle }}</h3>
+      </div>
+    </div>
+  </section>
+</ng-template>
+
+<article *ngIf="!items || !items.length" style="flex-direction: column;" class="noentry-article">
+  <span>Dieser Raum ist heute frei.</span>
+  <h4>{{date}}</h4>
+</article>

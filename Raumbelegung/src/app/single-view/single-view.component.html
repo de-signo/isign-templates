@@ -1,0 +1,24 @@
+
+<div *ngIf="items && items.length" class="item">
+  <h2>{{ items[0].date }}</h2>
+  <h1>{{ items[0].title }}</h1>
+
+  <h4>{{ items[0].from }} <ng-container *ngIf="items[0].from && items[0].to" >-</ng-container> {{ items[0].to }}</h4>
+  <h3>{{ items[0].subtitle }}</h3>
+
+  <qrcode *ngIf="items[0].qr" [qrdata]="items[0].qr" [width]="256" [errorCorrectionLevel]="'M'" [margin]="0"></qrcode>
+  <div *ngIf="items[0] && !items[0].qr"></div>
+
+  <section class="participants" *ngIf="items[0].participants && items[0].participants.length > 0">
+    <ul #scrollcontainer>
+      <li *ngFor="let p of items[0].participants">
+        {{ p }}
+      </li>
+    </ul>
+  </section>
+</div>
+
+<article *ngIf="!items || !items.length" style="flex-direction: column;" class="noentry-article">
+  <span>Dieser Raum ist heute frei.</span>
+  <h4>{{date}}</h4>
+</article>

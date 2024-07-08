@@ -1,0 +1,119 @@
+@import "../../styles/mixins.scss";
+
+:host {
+  @include fill-parent;
+
+  margin: 2vh 2vw;
+
+  display: grid;
+  grid-template-columns: 80% 1fr;
+  grid-template-rows: 1fr 17%;
+  gap: 2vh 10vw;
+
+  article {
+    grid-column: 1/2;
+    grid-row: 1/2;
+  }
+
+  footer {
+    grid-column: 1/2;
+    grid-row: 2/3;
+  }
+
+  aside {
+    grid-column: 2/3;
+    grid-row: 1/3;
+  }
+}
+
+article {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: start;
+  flex-direction: column;
+
+  border-bottom: solid 1px $color-primary-fg;
+}
+
+footer {
+  display: grid;
+  grid-template-columns: 20vh auto auto;
+  align-items: center;
+
+  & > :nth-child(2) {
+    justify-self: start;
+    grid-column: 2/3;
+  }
+  & > :last-child {
+    justify-self: end;
+    grid-column: 3/4;
+  }
+
+  title {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  position: relative;
+
+  qrcode {
+    position: absolute;
+    bottom: 0;
+    top: 0;
+  }
+}
+
+.date {
+  font-size: 1.2rem;
+}
+
+aside {
+  position: relative;
+}
+
+.timeline {
+  @include fill-parent;
+
+  background-color: black;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  .hour {
+    color: white;
+    z-index: 1;
+    text-align: center;
+  }
+  hr {
+    border-color: white;
+    border-width: 1vh 0 0 0;
+    border-style: solid;
+    z-index: 1;
+  }
+}
+
+.timeline-item {
+  position: absolute;
+  width: 100%;
+
+  background-color: red;
+}
+
+.location-container {
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  flex-direction: column;
+  gap: 25px;
+}
+
+hr {
+  border-color: $color-primary-fg;
+  border-width: 1px 0 0 0;
+  width: 100%;
+
+  &:last-child {
+    display: none;
+  }
+}

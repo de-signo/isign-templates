@@ -1,39 +1,6 @@
 
-<div *ngIf="view == 'single' && current && current.length" class="item">
-  <!-- row 1 -->
-  <h2>{{ current[0].date }}</h2>
-  <h1>{{ current[0].title }}</h1>
-
-  <!-- row 2 -->
-  <h4>{{ current[0].from }} <ng-container *ngIf="current[0].from && current[0].to" >-</ng-container> {{ current[0].to }}</h4>
-  <h3>{{ current[0].subtitle }}</h3>
-
-  <!-- row 3 -->
-  <qrcode *ngIf="current[0].qr" [qrdata]="current[0].qr" [width]="256" [errorCorrectionLevel]="'M'" [margin]="0"></qrcode>
-  <div *ngIf="current[0] && !current[0].qr"><!--placeholder--></div>
-
-  <section class="participants" *ngIf="current[0].participants && current[0].participants.length > 0">
-    <ul #scrollcontainer>
-      <li *ngFor="let p of current[0].participants">
-        {{ p }}
-      </li>
-    </ul>
-  </section>
-</div>
-
-<ng-template [ngIf]="view == 'double' && current && current.length">
-  <h1>{{ currentDate }}</h1>
-  <section>
-    <div *ngFor="let item of current" class="item">
-      <div>
-        <h4>{{ item.from }} <ng-container *ngIf="item.from && item.to" >-</ng-container> {{ item.to }}</h4>
-        <qrcode *ngIf="item.qr" [qrdata]="item.qr" [width]="256" [errorCorrectionLevel]="'M'" [margin]="0"></qrcode>
-      </div>
-
-      <div>
-        <h1>{{ item.title }}</h1>
-        <h3>{{ item.subtitle }}</h3>
-      </div>
-    </div>
-  </section>
-</ng-template>
+<ng-container [ngSwitch]="view">
+  <app-single-view *ngSwitchCase="'single'" [items]="current" [date]="currentDate"></app-single-view>
+  <app-double-view *ngSwitchCase="'double'" [items]="current" [date]="currentDate"></app-double-view>
+  <app-tripple-view *ngSwitchCase="'tripple'" [items]="current" [date]="currentDate" [globalQr]="globalQr"></app-tripple-view>
+</ng-container>

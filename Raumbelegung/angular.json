@@ -20,9 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": {
-              "base": "../dist/raumbelegung"
-            },
+            "outputPath": "../dist/raumbelegung",
             "index": "src/index.html",
             "polyfills": [
               "src/polyfills.ts"
@@ -72,18 +70,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "buildTarget": "raumbelegung:build"
+            "browserTarget": "raumbelegung:build"
           },
           "configurations": {
             "production": {
-              "buildTarget": "raumbelegung:build:production"
+              "browserTarget": "raumbelegung:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "raumbelegung:build"
+            "browserTarget": "raumbelegung:build"
           }
         },
         "test": {
@@ -92,7 +90,6 @@
             "main": "src/test.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
               "src/assets"

@@ -6,6 +6,7 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import localeDe from '@angular/common/locales/de';
 import { CalendarComponent } from './calendar/calendar.component';
 import { RouterModule } from '@angular/router';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 // Register the locale data for German
 registerLocaleData(localeDe);

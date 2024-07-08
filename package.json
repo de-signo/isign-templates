@@ -10,5 +10,10 @@
     "Stadt",
     "time",
     "lib"
-  ]
+  ],
+  "overrides": {
+    "angularx-qrcode": {
+      "@angular/core": "*"
+    }
+  }
 }

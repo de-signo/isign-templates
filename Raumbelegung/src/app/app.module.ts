@@ -23,7 +23,7 @@ import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { registerLocaleData } from '@angular/common';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { TemplateBaseRefModule, TemplateModule } from "@isign/forms-templates";
 import { QRCodeModule } from 'angularx-qrcode';
 import { DataImportApiModule, ServiceInfoInterceptor, ISignServicesModule } from "@isign/isign-services";
@@ -50,12 +50,12 @@ registerLocaleData(localeDe);
     // use isign service lookup and authentication
     ISignServicesModule.forRoot(environment.wellKnownISignUrl, "auto"),
     BrowserModule,
-    HttpClientModule,
     QRCodeModule
   ],
   bootstrap: [AppComponent],
   providers: [
     { provide: LOCALE_ID, useValue: "de-DE" },
+    provideHttpClient(withInterceptorsFromDi()),
     ...
     // debug data
     environment.production || environment.wellKnownISignUrl ? [] : 

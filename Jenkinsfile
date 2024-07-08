@@ -95,10 +95,28 @@ pipeline {
       }
     }
 
+    stage('test-calendar') {
+      steps {
+        dir('Calendar') {
+          bat 'ng test --karma-config karma.conf.srv.js'
+          junit testResults: "karma-results\\**\\*.xml", keepLongStdio: true
+        }
+      }
+    }
+
     stage('build-calendar') {
       steps {
         dir('Calendar') {
           bat 'npm run zip'
+        }
+      }
+    }
+
+    stage('test-door1') {
+      steps {
+        dir('door1') {
+          bat 'ng test --karma-config karma.conf.srv.js'
+          junit testResults: "karma-results\\**\\*.xml", keepLongStdio: true
         }
       }
     }

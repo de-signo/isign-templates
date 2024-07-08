@@ -29,6 +29,9 @@ import { StyleService } from './services/style.service';
   templateUrl: './app.component.html'
 })
 export class AppComponent {
+  title(title: any) {
+    throw new Error('Method not implemented.');
+  }
   header: string = "";
   footer: string = "";
   names: string[] = [];

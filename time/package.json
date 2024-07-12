@@ -8,7 +8,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "zip": "ng build --configuration production && cd ../dist/time && bestzip ../time_%version%.zip *"
+    "zip": "ng build --configuration production && cd ../dist/time/browser && bestzip ../../time_%version%.zip *"
   },
   "private": true,
   "dependencies": {

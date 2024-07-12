@@ -8,7 +8,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "zip": "ng build --configuration production && cd ../dist/stadt && bestzip ../stadt_%version%.zip *"
+    "zip": "ng build --configuration production && cd ../dist/stadt/browser && bestzip ../../stadt_%version%.zip *"
   },
   "private": true,
   "dependencies": {

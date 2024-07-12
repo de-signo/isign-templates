@@ -37,7 +37,7 @@ let spec =
 {
   name: "raumbelegung",
   clean: "../dist/raumbelegung_*.zip",
-  files: ["../dist/raumbelegung/**"],
+  files: ["../dist/raumbelegung/browser/**"],
   templates: ["src/Styles.xml.hbs"],
   templateData: {
     suffix: customersuffix,

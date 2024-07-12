@@ -8,7 +8,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "zip": "ng build --configuration production && cd ../dist/calendar && bestzip ../calendar_%version%.zip *"
+    "zip": "ng build --configuration production && cd ../dist/calendar/browser && bestzip ../../calendar_%version%.zip *"
   },
   "private": true,
   "dependencies": {

@@ -111,12 +111,6 @@
         </names>
         <content_class type="DataSource" />
       </field>
-      <field key="room">
-        <names>
-          <name>Raum</name>
-        </names>
-        <content_class bind="Column" parentField="ds" type="TextFree" />
-      </field>
       <field key="header">
         <names>
           <name>Bezeichnung</name>

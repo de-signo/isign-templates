@@ -65,9 +65,9 @@ export class AppComponent {
       mergeMap(() => data.load())
     ).subscribe({
       next: data => {
-        this.header = data.header;
-        this.footer = data.footer;
-        this.names = data.names;
+        this.header = data?.header ?? "";
+        this.footer = data?.footer ?? "";
+        this.names = data?.names ?? [];
       },
       error: error => console.error(error)
     });

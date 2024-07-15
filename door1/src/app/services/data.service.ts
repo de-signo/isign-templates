@@ -21,31 +21,42 @@
 
 import { Injectable } from '@angular/core';
 import { DoorModel } from './app-data.model';
-import { HttpClient } from '@angular/common/http';
-import { firstValueFrom } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import { StyleService } from './style.service';
-import { environment } from 'src/environments/environment';
+import { DataImportService } from '@isign/isign-services';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  constructor(private http: HttpClient, private style: StyleService)
+  constructor(
+    private dataImport: DataImportService, 
+    private style: StyleService)
   {}
 
-  async load(): Promise<DoorModel> {
+  load(): Observable<DoorModel|null> {
     const style = this.style.style;
 
     if (style.key == "std_door1_free") {
-      return new Promise(resolve => resolve({
+      return of({
         header: style.header,
         footer: style.footer,
         names: style.names
-      }));
+      });
     }
     else {
-      const serviceUrl = environment.dataServiceUrl + window.location.search;
-      return firstValueFrom(this.http.get<DoorModel>(serviceUrl))
+      return this.dataImport.getDataTable(style.datasource).pipe(
+        map(table => {
+          if (!table?.length) {
+            return null;
+          }
+
+          return this.style.template.bindDataTable(table.slice(0, 1), {
+            header: { field: "header", default: "" },
+            footer: { field: "footer", default: "" },
+            names: { field: "names", convert: (v:any) => v?.split(";")}
+          })[0];
+        })); 
     }
   }
 }

@@ -20,7 +20,7 @@
  */
 
 import { EventEmitter, Injectable } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { TemplateInstance, TemplateService } from '@isign/forms-templates';
 
 @Injectable({
   providedIn: "root",
@@ -29,30 +29,31 @@ export class StyleService {
  
   style: StyleFreeModel|StyleDbModel = new StyleFreeModel();
   updated = new EventEmitter();
+  template: TemplateInstance;
 
-  constructor() {
-    const queryString = window.location.search;
-    const params = new URLSearchParams(queryString);
+  constructor(ts: TemplateService) {
+    const tmpl = this.template = ts.getTemplate();
 
-    const key = params.get("s") ?? "";
+    const key = tmpl.key ?? "";
     switch (key) {
       default:
       case "std_door1_free":
         const stylef = new StyleFreeModel();
-        stylef.header = params.get("s/header") ?? "";
-        stylef.footer = params.get("s/footer") ?? "";
-        stylef.style = <any>params.get("s/style") ?? "";
+        stylef.header = tmpl.parameters["header"] ?? "";
+        stylef.footer = tmpl.parameters["footer"] ?? "";
+        stylef.style = <any>tmpl.parameters["style"] ?? "";
         stylef.names = [
-          params.get("s/name1") ?? "",
-          params.get("s/name2") ?? "",
-          params.get("s/name3") ?? "",
-          params.get("s/name4") ?? ""]
+          tmpl.parameters["name1"] ?? "",
+          tmpl.parameters["name2"] ?? "",
+          tmpl.parameters["name3"] ?? "",
+          tmpl.parameters["name4"] ?? ""]
           .filter(item => item !== ""),
         this.style = stylef;
         break;
       case "std_door1_db":
         const styled = new StyleDbModel();
-        styled.style = <any>params.get("s/style") ?? "";
+        styled.style = <any>tmpl.parameters["style"] ?? "";
+        styled.datasource = tmpl.parameters["ds"] ?? "";
         this.style = styled;
         break;
     }
@@ -75,4 +76,5 @@ export class StyleFreeModel implements StyleModel {
 export class StyleDbModel implements StyleModel {
   key: "std_door1_db" = "std_door1_db";
   style: "t1"|"t2"|"t3"|"t4"|"t5" = "t1";
+  datasource: string = "";
 }

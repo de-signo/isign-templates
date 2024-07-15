@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { BookingViewModel } from '../data/app-data.model';
-import { Time } from '@angular/common';
+import { TemplateService } from '@isign/forms-templates';
 
 @Component({
   selector: 'app-tripple-view',
@@ -8,45 +8,49 @@ import { Time } from '@angular/common';
   styleUrls: ['./tripple-view.component.scss']
 })
 export class TrippleViewComponent {
-  @Input() items: BookingViewModel[] = [];
   @Input() date: string = "";
   @Input() globalQr: string = "";
 
+  @Input()
+  get items(): BookingViewModel[] {
+    return this._items;
+  }
 
+  set items(value: BookingViewModel[]) {
+    this._items = value;
+    this.listItems = value.slice(0, 3);
+  }
+
+  private _items: BookingViewModel[] = [];
+  listItems: BookingViewModel[] = [];
   start: number = 8 * 60 * 60;
   end: number = 19 * 60 * 60;
   timelineGapPercent: number = 1.0;
+  hours: string[];
 
-  hours: string[] = [
-    "08:00",
-    "09:00",
-    "10:00",
-    "11:00",
-    "12:00",
-    "13:00",
-    "14:00",
-    "15:00",
-    "16:00",
-    "17:00",
-    "18:00"
-  ];
-  bookings: TimelineItem[] = [
-    {
-      start: 9 * 60 * 60,
-      end: 10 * 60 * 60
-    },
-    {
-      start: 11.5 * 60 * 60,
-      end: 14.25 * 60 * 60
+  constructor(ts: TemplateService) {
+    const tmpl = ts.getTemplate();
+    const startH = Number.parseInt(tmpl.parameters["tlstart"] ?? "0");
+    const endH = Number.parseInt(tmpl.parameters["tlend"] ?? "24");
+    this.hours = TrippleViewComponent.calcHours(startH, endH);
+    this.start = startH * 3600;
+    this.end = endH * 3600;
+  }
+
+  static calcHours(start: number, end: number) {
+    let hours = <string[]>[];
+    for (let hour = start; hour < end; hour++) {
+      hours.push(`${String(hour).padStart(2, '0')}:00`)
     }
-  ];
+    return hours;
+  }
 
   getTimelineStyle(item: TimelineItem) : { [klass: string]: any; } {
     const gapPercent = this.timelineGapPercent;
 
     const allSeconds = this.end - this.start;
-    const topSeconds = item.start - this.start;
-    const bottomSeconds = item.end - this.start;
+    const topSeconds = item.fromSeconds - this.start;
+    const bottomSeconds = item.toSeconds - this.start;
 
     const allGapCount = Math.ceil(allSeconds / 3600) - 1;
     const allPercent = 100 - (gapPercent * allGapCount);
@@ -73,6 +77,6 @@ export class TrippleViewComponent {
 }
 
 interface TimelineItem {
-  start: number;
-  end: number;
+  fromSeconds: number;
+  toSeconds: number
 }

@@ -85,9 +85,8 @@ aside {
     text-align: center;
   }
   hr {
-    border-color: white;
-    border-width: 1vh 0 0 0;
-    border-style: solid;
+    border: none;
+    background-color: white;;
     z-index: 1;
   }
 }

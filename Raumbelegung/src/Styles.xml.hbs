@@ -168,6 +168,41 @@
   </field>
 {{/inline}}
 
+{{#*inline "timelineFields"}}
+  <field key="tlstart">
+    <names>
+      <name>Anfang Zeitleiste</name>
+    </names>
+    <content_class type="TextChoose">
+      <text key="0">00:00 Uhr</text>
+      <text key="6">06:00 Uhr</text>
+      <text key="7">07:00 Uhr</text>
+      <text key="8">08:00 Uhr</text>
+      <text key="9">09:00 Uhr</text>
+      <text key="10">10:00 Uhr</text>
+      <text key="12">12:00 Uhr</text>
+    </content_class>
+  </field>
+  <field key="tlend">
+    <names>
+      <name>Ende Zeitleiste</name>
+    </names>
+    <content_class type="TextChoose">
+      <text key="12">12:00 Uhr</text>
+      <text key="13">13:00 Uhr</text>
+      <text key="14">14:00 Uhr</text>
+      <text key="15">15:00 Uhr</text>
+      <text key="16">16:00 Uhr</text>
+      <text key="17">17:00 Uhr</text>
+      <text key="18">18:00 Uhr</text>
+      <text key="19">19:00 Uhr</text>
+      <text key="20">20:00 Uhr</text>
+      <text key="22">22:00 Uhr</text>
+      <text key="24">24:00 Uhr</text>
+    </content_class>
+  </field>
+{{/inline}}
+
 <StyleList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://stollsoft.de/iSign/v2/Content/Forms/Styles">
 
   <style key="raumbelegung2021_free"
@@ -257,6 +292,7 @@
         </names>
         <content_class type="TextFree" />
       </field>
+      {{> timelineFields}}
     </fields>
   </style>
 
@@ -270,6 +306,7 @@
     <fields>
       {{> dataBoundCommonFields}}
       {{> fromToSeparateFields}}
+      {{> timelineFields}}
     </fields>
   </style>
 </StyleList>

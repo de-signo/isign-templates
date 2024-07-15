@@ -45,6 +45,8 @@ export class StyleService {
         date: tmpl.parameters['date'] ?? '',
         from: tmpl.parameters['from'] ?? '',
         to: tmpl.parameters['to'] ?? '',
+        fromSeconds: 0, // unused
+        toSeconds: 0    // unused
       };
       this.style = stylef;
     } else if (

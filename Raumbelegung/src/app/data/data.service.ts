@@ -87,6 +87,9 @@ export class DataService {
               return null;
             }
 
+            // get today seconds for time of day calculations
+            const today = new Date().setHours(0, 0, 0, 0);
+
             const maxCount =
               (key === "raumbelegung_3_A" || key === "raumbelegung_3_B") ? 3 :
               (key === "raumbelegung_2_A" || key === "raumbelegung_2_B") ? 2 : 1;
@@ -101,9 +104,10 @@ export class DataService {
                   subtitle: { field: "subtitle", default: "" },
                   participants: { field: "participants", convert: (v:any) => v?.split(",")},
                   from: { field: "from", default: "" },
-                  to: { field: "to", default: "" }
+                  to: { field: "to", default: "" },
                 }).map(bookingA => {
                   const from = this.readDateFromCombinedValue(bookingA.from, timezoneOffset);
+                  const to = this.readDateFromCombinedValue(bookingA.to, timezoneOffset);
                   return <BookingViewModel>({
                   qr: bookingA.qr,
                   title: bookingA.title,
@@ -111,7 +115,9 @@ export class DataService {
                   participants: bookingA.participants,
                   date: from.toLocaleDateString(this.locale, { year: 'numeric', month: '2-digit', day: '2-digit' }),
                   from: from.toLocaleTimeString(this.locale, { hour: "2-digit", minute: "2-digit" }),
-                  to: this.readDateFromCombinedValue(bookingA.to, timezoneOffset).toLocaleTimeString(this.locale, { hour: "2-digit", minute: "2-digit" }) + " Uhr"
+                  to: to.toLocaleTimeString(this.locale, { hour: "2-digit", minute: "2-digit" }) + " Uhr",
+                  fromSeconds: (+from - today) / 1000,
+                  toSeconds: (+to - today) / 1000
                 })});
               case "raumbelegung2021B":
               case "raumbelegung_2_B":
@@ -127,7 +133,8 @@ export class DataService {
                   dateto: { field: "dateto", default: "" },
                   to: { field: "to", default: "" }
                 }).map(bookingB => {
-                  const from = this.readDateFromSplitValues(bookingB.datefrom, bookingB.from, timezoneOffset)
+                  const from = this.readDateFromSplitValues(bookingB.datefrom, bookingB.from, timezoneOffset);
+                  const to = this.readDateFromSplitValues(bookingB.dateto, bookingB.to, timezoneOffset);
                   return <BookingViewModel>({
                     qr: bookingB.qr,
                     title: bookingB.title,
@@ -135,7 +142,9 @@ export class DataService {
                     participants: bookingB.participants,
                     date: from.toLocaleDateString(this.locale, { year: 'numeric', month: '2-digit', day: '2-digit' }),
                     from: from.toLocaleTimeString(this.locale, { hour: "2-digit", minute: "2-digit" }),
-                    to: this.readDateFromSplitValues(bookingB.dateto, bookingB.to, timezoneOffset).toLocaleTimeString(this.locale, { hour: "2-digit", minute: "2-digit" }) + " Uhr"
+                    to: to.toLocaleTimeString(this.locale, { hour: "2-digit", minute: "2-digit" }) + " Uhr",
+                    fromSeconds: (+from - today) / 1000,
+                    toSeconds: (+to - today) / 1000
                 })});
           }
         }));

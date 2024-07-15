@@ -1,13 +1,22 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TrippleViewComponent } from './tripple-view.component';
+import { TemplateInstance, TemplateService } from '@isign/forms-templates';
 
 describe('TrippleViewComponent', () => {
   let component: TrippleViewComponent;
   let fixture: ComponentFixture<TrippleViewComponent>;
+  let template: TemplateInstance = {
+    key: "test",
+    parameters: {},
+    bindDataTable: (table, spec) => []
+  };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TrippleViewComponent]
+      declarations: [TrippleViewComponent],
+      providers: [
+        { provide: TemplateService, useValue: { getTemplate: () => template }}
+      ]
     });
     fixture = TestBed.createComponent(TrippleViewComponent);
     component = fixture.componentInstance;
@@ -25,8 +34,8 @@ describe('TrippleViewComponent', () => {
     component.end = 11 * 60 * 60;
     
     const style1 = component.getTimelineStyle({
-      start: 10 * 60 * 60,
-      end: 11 * 60 * 60
+      fromSeconds: 10 * 60 * 60,
+      toSeconds: 11 * 60 * 60
     });
 
     expect(style1['display']).not.toBe('none');
@@ -39,8 +48,8 @@ describe('TrippleViewComponent', () => {
     component.end = 11 * 60 * 60;
     
     const style2 = component.getTimelineStyle({
-      start: 10.5 * 60 * 60,
-      end: 11 * 60 * 60
+      fromSeconds: 10.5 * 60 * 60,
+      toSeconds: 11 * 60 * 60
     });
 
     expect(style2['display']).not.toBe('none');
@@ -53,8 +62,8 @@ describe('TrippleViewComponent', () => {
     component.end = 11 * 60 * 60;
 
     const style3 = component.getTimelineStyle({
-      start: 10 * 60 * 60,
-      end: 10.5 * 60 * 60
+      fromSeconds: 10 * 60 * 60,
+      toSeconds: 10.5 * 60 * 60
     });
 
     expect(style3['display']).not.toBe('none');
@@ -67,8 +76,8 @@ describe('TrippleViewComponent', () => {
     component.end = 14 * 60 * 60;
 
     const style3 = component.getTimelineStyle({
-      start: 12.5 * 60 * 60,
-      end: 13.5 * 60 * 60
+      fromSeconds: 12.5 * 60 * 60,
+      toSeconds: 13.5 * 60 * 60
     });
 
     expect(style3['display']).not.toBe('none');
@@ -81,8 +90,8 @@ describe('TrippleViewComponent', () => {
     component.end = 16 * 60 * 60;
 
     const style3 = component.getTimelineStyle({
-      start: 15.5 * 60 * 60,
-      end: 16.5 * 60 * 60
+      fromSeconds: 15.5 * 60 * 60,
+      toSeconds: 16.5 * 60 * 60
     });
 
     expect(style3['display']).not.toBe('none');
@@ -95,8 +104,8 @@ describe('TrippleViewComponent', () => {
     component.end = 17 * 60 * 60;
 
     const style3 = component.getTimelineStyle({
-      start: 15 * 60 * 60,
-      end: 18 * 60 * 60
+      fromSeconds: 15 * 60 * 60,
+      toSeconds: 18 * 60 * 60
     });
 
     expect(style3['display']).not.toBe('none');
@@ -109,8 +118,8 @@ describe('TrippleViewComponent', () => {
     component.end = 20 * 60 * 60;
 
     const style3 = component.getTimelineStyle({
-      start: 15 * 60 * 60,
-      end: 18 * 60 * 60
+      fromSeconds: 15 * 60 * 60,
+      toSeconds: 18 * 60 * 60
     });
 
     expect(style3['display']).toBe('none');
@@ -121,8 +130,8 @@ describe('TrippleViewComponent', () => {
     component.end = 20 * 60 * 60;
 
     const style3 = component.getTimelineStyle({
-      start: 8 * 60 * 60,
-      end: 9 * 60 * 60
+      fromSeconds: 8 * 60 * 60,
+      toSeconds: 9 * 60 * 60
     });
 
     expect(style3['display']).toBe('none');
@@ -133,8 +142,8 @@ describe('TrippleViewComponent', () => {
     component.end = 9 * 60 * 60;
 
     const style3 = component.getTimelineStyle({
-      start: 8.5 * 60 * 60,
-      end: 8.2 * 60 * 60
+      fromSeconds: 8.5 * 60 * 60,
+      toSeconds: 8.2 * 60 * 60
     });
 
     expect(style3['display']).toBe('none');
@@ -152,8 +161,8 @@ describe('TrippleViewComponent', () => {
     // HOUR 11:  40%
     
     const style1 = component.getTimelineStyle({
-      start: 10.5 * 60 * 60,
-      end: 11.5 * 60 * 60
+      fromSeconds: 10.5 * 60 * 60,
+      toSeconds: 11.5 * 60 * 60
     });
 
     expect(style1['display']).not.toBe('none');
@@ -173,8 +182,8 @@ describe('TrippleViewComponent', () => {
     // HOUR 11:  40%
     
     const style1 = component.getTimelineStyle({
-      start: 11.5 * 60 * 60,
-      end: 12 * 60 * 60
+      fromSeconds: 11.5 * 60 * 60,
+      toSeconds: 12 * 60 * 60
     });
 
     expect(style1['display']).not.toBe('none');

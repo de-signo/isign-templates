@@ -1,5 +1,5 @@
-<article *ngIf="items && items.length">
-  <ng-container *ngFor="let item of items">
+<article *ngIf="listItems && listItems.length">
+  <ng-container *ngFor="let item of listItems">
     <div class="item">
       <h4>
         {{ item.from }}
@@ -21,7 +21,7 @@
   </ng-container>
 </article>
 
-<article *ngIf="!items || !items.length" class="noentry-article">
+<article *ngIf="!listItems || !listItems.length" class="noentry-article">
   <h3>Buche mich!</h3>
   <qrcode class="noentry-qr" *ngIf="globalQr" [qrdata]="globalQr" [width]="256" [errorCorrectionLevel]="'M'"
     [margin]="0"></qrcode>
@@ -29,10 +29,10 @@
 </article>
 
 <footer>
-  <qrcode *ngIf="globalQr && items && items.length" [qrdata]="globalQr" [width]="256" [errorCorrectionLevel]="'M'"
+  <qrcode *ngIf="globalQr && listItems && listItems.length" [qrdata]="globalQr" [width]="256" [errorCorrectionLevel]="'M'"
     [margin]="0">
   </qrcode>
-  <h3 *ngIf="items && items.length">Buche mich!</h3>
+  <h3 *ngIf="listItems && listItems.length">Buche mich!</h3>
   <div class="location-container">
     <h3>Raum Heidelberg</h3>
     <div class="date">{{ date }}</div>
@@ -43,10 +43,10 @@
   <div class="timeline">
     <ng-container *ngFor="let hour of hours">
       <div class="hour">{{ hour }}</div>
-      <hr />
+      <hr [ngStyle]="{'height.%': timelineGapPercent }"/>
     </ng-container>
   </div>
 
-  <div *ngFor="let booking of bookings" class="timeline-item" [ngStyle]="getTimelineStyle(booking)">
+  <div *ngFor="let booking of items" class="timeline-item" [ngStyle]="getTimelineStyle(booking)">
   </div>
 </aside>

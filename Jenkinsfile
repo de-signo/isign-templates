@@ -70,6 +70,15 @@ pipeline {
       }
     }
 
+  stage('test-raumbelegung') {
+      steps {
+        dir('Raumbelegung') {
+          bat 'ng test --karma-config karma.conf.srv.cjs'
+          junit testResults: "karma-results\\**\\*.xml", keepLongStdio: true
+        }
+      }
+    }
+
     stage('build-raumbelegung') {
       steps {
         dir('Raumbelegung') {

@@ -28,4 +28,7 @@ export interface BookingViewModel {
   from: string;
   to: string;
   participants: string[];
+
+  fromSeconds: number;
+  toSeconds: number;
 }

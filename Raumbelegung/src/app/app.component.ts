@@ -21,7 +21,7 @@
 
 import { ElementRef, HostBinding, Inject, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
 import { Component } from '@angular/core';
-import { from, timer } from 'rxjs';
+import { timer } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 import { BookingViewModel } from './data/app-data.model';
 import { DataService } from './data/data.service';
@@ -36,11 +36,9 @@ export class AppComponent  implements OnInit {
   scrollingState : "down"|"downdelay"|"up"|"updelay" = "downdelay";
   scrollingCounter = 0;
 
-  view: "single" | "double";  
-  @HostBinding('class.view-single') get enableViewSingle() { return this.view == "single"; }
-  @HostBinding('class.view-double') get enableViewDouble() { return this.view == "double"; }
-
+  view: "single" | "double" | "tripple";
   currentDate: string;
+  globalQr: string;
 
   constructor(
     private readonly dataService: DataService,
@@ -59,11 +57,16 @@ export class AppComponent  implements OnInit {
       case "raumbelegung_2_free":
         this.view = "double";
         break;
+      case "raumbelegung_3_A":
+      case "raumbelegung_3_B":
+        this.view = "tripple";
+        break;
     }
     this.currentDate = new Date().toLocaleDateString(this.locale, { year: 'numeric', month: '2-digit', day: '2-digit' });
+    this.globalQr = "TODO";
   }
 
-  current: BookingViewModel[] | null = null;
+  current: BookingViewModel[] = []; 
 
   ngOnInit(): void {
     timer(0, 10 * 1000).pipe(
@@ -72,7 +75,7 @@ export class AppComponent  implements OnInit {
         return this.dataService.load();
       })
     ).subscribe({
-      next: data => this.current = data,
+      next: data => this.current = data ?? [],
       error: error => console.error("Failed to load data.", error)
     });
 

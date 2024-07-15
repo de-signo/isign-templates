@@ -12,7 +12,7 @@ Die Vorlage kann lokal getestet werden mit dem Befehl `ng test` wird der Testser
 EINFACHE
 
 Feste texte
-http://localhost:4200/?s=raumbelegung2021_free&s/qr=test&s/title=title&s/subtitle=subtitle&s/from=from&s/to=to&s/participants=participants
+http://localhost:4200/?s=raumbelegung2021_free&s/date=34.34.34&s/qr=test&s/title=title&s/subtitle=subtitle&s/from=from&s/to=to&s/participants=participants
 
 Ohne qr code
 http://localhost:4200/?s=raumbelegung2021A&s/s=test&s/title=title&s/subtitle=subtitle&s/from=from&s/to=to&s/participants=participants
@@ -23,11 +23,17 @@ http://localhost:4200/?s=raumbelegung2021A&s/qr=qr&s/s=test&s/title=title&s/subt
 
 ZWEIFACHE
 
-Feste texte
-http://localhost:4200/?s=raumbelegung_2_free&s/qr=test&s/title=title&s/subtitle=subtitle&s/from=from&s/to=to
-
 Ohne qr code
 http://localhost:4200/?s=raumbelegung_2_A&s/s=test&s/title=title&s/subtitle=subtitle&s/from=from&s/to=to
 
 Mit qr code
 http://localhost:4200/?s=raumbelegung_2_A&s/qr=qr&s/s=test&s/title=title&s/subtitle=subtitle&s/from=from&s/to=to
+
+
+DREIFACHE
+
+Ohne qr code
+http://localhost:4200/?s=raumbelegung_3_A&s/s=test&s/title=title&s/subtitle=subtitle&s/from=from&s/to=to
+
+Mit qr code
+http://localhost:4200/?s=raumbelegung_3_A&s/qr=qr&s/s=test&s/title=title&s/subtitle=subtitle&s/from=from&s/to=to

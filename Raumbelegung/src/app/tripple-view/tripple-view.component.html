@@ -1,0 +1,52 @@
+<article *ngIf="listItems && listItems.length">
+  <ng-container *ngFor="let item of listItems">
+    <div class="item">
+      <h4>
+        {{ item.from }}
+        <ng-container *ngIf="item.from && item.to">-</ng-container>
+        {{ item.to }}
+      </h4>
+      <h1>{{ item.title }}</h1>
+      <h3>{{ item.subtitle }}</h3>
+      <div *ngIf="item && !item.qr"></div>
+      <section class="participants" *ngIf="item.participants && item.participants.length > 0">
+        <ul #scrollcontainer>
+          <li *ngFor="let p of item.participants">
+            {{ p }}
+          </li>
+        </ul>
+      </section>
+    </div>
+    <hr />
+  </ng-container>
+</article>
+
+<article *ngIf="!listItems || !listItems.length" class="noentry-article">
+  <h3>Buche mich!</h3>
+  <qrcode class="noentry-qr" *ngIf="globalQr" [qrdata]="globalQr" [width]="256" [errorCorrectionLevel]="'M'"
+    [margin]="0"></qrcode>
+  <span>Dieser Raum ist heute frei.</span>
+</article>
+
+<footer>
+  <qrcode *ngIf="globalQr && listItems && listItems.length" [qrdata]="globalQr" [width]="256" [errorCorrectionLevel]="'M'"
+    [margin]="0">
+  </qrcode>
+  <h3 *ngIf="listItems && listItems.length">Buche mich!</h3>
+  <div class="location-container">
+    <h3>Raum Heidelberg</h3>
+    <div class="date">{{ date }}</div>
+  </div>
+</footer>
+
+<aside>
+  <div class="timeline">
+    <ng-container *ngFor="let hour of hours">
+      <div class="hour">{{ hour }}</div>
+      <hr [ngStyle]="{'height.%': timelineGapPercent }"/>
+    </ng-container>
+  </div>
+
+  <div *ngFor="let booking of items" class="timeline-item" [ngStyle]="getTimelineStyle(booking)">
+  </div>
+</aside>

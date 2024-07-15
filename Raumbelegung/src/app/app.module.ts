@@ -30,13 +30,19 @@ import { DataImportApiModule, ServiceInfoInterceptor, ISignServicesModule } from
 import localeDe from '@angular/common/locales/de';
 import { environment } from 'src/environments/environment';
 import { ISignPlayerExtensionsModule } from "@isign/player-extensions";
+import { SingleViewComponent } from './single-view/single-view.component';
+import { DoubleViewComponent } from './double-view/double-view.component';
+import { TrippleViewComponent } from './tripple-view/tripple-view.component';
 
 registerLocaleData(localeDe);
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SingleViewComponent,
+    DoubleViewComponent,
+    TrippleViewComponent
   ],
   imports: [
     // enable hosting in forms show

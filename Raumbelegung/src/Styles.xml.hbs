@@ -75,12 +75,6 @@
     </names>
     <content_class type="DataSource" />
   </field>
-  <field key="qr">
-    <names>
-      <name>QR-Link</name>
-    </names>
-    <content_class bind="Column" parentField="s" type="TextFree" />
-  </field>
   <field key="title">
     <names>
       <name>Titel</name>
@@ -90,6 +84,15 @@
   <field key="subtitle">
     <names>
       <name>Sub-Titel</name>
+    </names>
+    <content_class bind="Column" parentField="s" type="TextFree" />
+  </field>
+{{/inline}}
+
+{{#*inline "qrField"}}
+  <field key="qr">
+    <names>
+      <name>QR-Link</name>
     </names>
     <content_class bind="Column" parentField="s" type="TextFree" />
   </field>
@@ -165,6 +168,41 @@
   </field>
 {{/inline}}
 
+{{#*inline "timelineFields"}}
+  <field key="tlstart">
+    <names>
+      <name>Anfang Zeitleiste</name>
+    </names>
+    <content_class type="TextChoose">
+      <text key="0">00:00 Uhr</text>
+      <text key="6">06:00 Uhr</text>
+      <text key="7">07:00 Uhr</text>
+      <text key="8">08:00 Uhr</text>
+      <text key="9">09:00 Uhr</text>
+      <text key="10">10:00 Uhr</text>
+      <text key="12">12:00 Uhr</text>
+    </content_class>
+  </field>
+  <field key="tlend">
+    <names>
+      <name>Ende Zeitleiste</name>
+    </names>
+    <content_class type="TextChoose">
+      <text key="12">12:00 Uhr</text>
+      <text key="13">13:00 Uhr</text>
+      <text key="14">14:00 Uhr</text>
+      <text key="15">15:00 Uhr</text>
+      <text key="16">16:00 Uhr</text>
+      <text key="17">17:00 Uhr</text>
+      <text key="18">18:00 Uhr</text>
+      <text key="19">19:00 Uhr</text>
+      <text key="20">20:00 Uhr</text>
+      <text key="22">22:00 Uhr</text>
+      <text key="24">24:00 Uhr</text>
+    </content_class>
+  </field>
+{{/inline}}
+
 <StyleList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://stollsoft.de/iSign/v2/Content/Forms/Styles">
 
   <style key="raumbelegung2021_free"
@@ -189,6 +227,7 @@
     </names>
     <fields>
       {{> dataBoundCommonFields}}
+      {{> qrField}}
       {{> dataBoundExtendedFields}}
       {{> fromToCombinedFields}}
     </fields>
@@ -203,6 +242,7 @@
     </names>
     <fields>
       {{> dataBoundCommonFields}}
+      {{> qrField}}
       {{> dataBoundExtendedFields}}
       {{> fromToSeparateFields}}
     </fields>
@@ -217,6 +257,7 @@
     </names>
     <fields>
       {{> dataBoundCommonFields}}
+      {{> qrField}}
       {{> fromToCombinedFields}}
     </fields>
   </style>
@@ -230,7 +271,42 @@
     </names>
     <fields>
       {{> dataBoundCommonFields}}
+      {{> qrField}}
       {{> fromToSeparateFields}}
+    </fields>
+  </style>
+
+  <style key="raumbelegung_3_A"
+         file="index.html"
+         preview="assets/preview.png"
+         interactive="false" target="chromium">
+    <names>
+      <name culture="de">Raumbelegung dreifach</name>
+    </names>
+    <fields>
+      {{> dataBoundCommonFields}}
+      {{> fromToCombinedFields}}
+      <field key="glb-qr">
+        <names>
+          <name>QR-Link Kalender</name>
+        </names>
+        <content_class type="TextFree" />
+      </field>
+      {{> timelineFields}}
+    </fields>
+  </style>
+
+  <style key="raumbelegung_3_B"
+         file="index.html"
+         preview="assets/preview.png"
+         interactive="false" target="chromium">
+    <names>
+      <name culture="de">Raumbelegung dreifach, Datum Uhrzeit getrennt</name>
+    </names>
+    <fields>
+      {{> dataBoundCommonFields}}
+      {{> fromToSeparateFields}}
+      {{> timelineFields}}
     </fields>
   </style>
 </StyleList>

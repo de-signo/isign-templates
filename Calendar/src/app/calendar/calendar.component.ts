@@ -21,6 +21,7 @@
 
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { timer } from 'rxjs';
+import { ItemViewModel } from '../data/app-data.model';
 
 @Component({
   selector: 'app-calendar',
@@ -115,13 +116,4 @@ interface DayViewModel {
   date: Date;
   begin: Date;
   end: Date;
-}
-export interface ItemViewModel {
-  begin: Date;
-  end: Date;
-  name1: string;
-  name2: string;
-  info1: string;
-  info2: string;
-  info3: string;
 }

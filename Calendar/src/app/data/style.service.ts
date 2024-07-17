@@ -20,18 +20,33 @@
  */
 
 import { Injectable } from "@angular/core";
-import { environment } from "src/environments/environment";
-import { ActivatedRoute } from "@angular/router";
+import { TemplateInstance, TemplateService } from '@isign/forms-templates';
 
 @Injectable({
   providedIn: "root",
 })
 export class StyleService {
-  header: string = "";
 
-  constructor(route: ActivatedRoute) {
-    route.queryParams.subscribe((params) => {
-      this.header = params["s/header"] ?? "";
-    });
+  style: StyleModel;
+  template: TemplateInstance;
+
+  constructor(ts: TemplateService) {
+    const tmpl = this.template = ts.getTemplate();
+
+    this.style = {
+      header: tmpl.parameters["header"] ?? "1",
+      days: tmpl.parameters["days"] ?? "1",
+      hourFrom: parseInt(tmpl.parameters["startt"] ?? "0"),
+      hourTo: parseInt(tmpl.parameters["endt"] ?? "0"),
+      dataSourceID: tmpl.parameters["source"],
+    };
   }
+}
+
+export interface StyleModel {
+  header: string;
+  hourFrom: number;
+  hourTo: number; // inklusive
+  days: string;
+  dataSourceID?: string;
 }

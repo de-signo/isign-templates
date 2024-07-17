@@ -20,34 +20,40 @@
  */
 
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { Item } from './app-data.model';
-import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { ItemViewModel } from './app-data.model';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { DataImportService } from '@isign/isign-services';
+import { StyleService } from './style.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  private items: Item[] = [];
+  constructor(
+    private readonly dataImport: DataImportService,
+    private readonly style: StyleService) { }
 
-  constructor(private http: HttpClient)
-  {}
+  load(): Observable<ItemViewModel[]> {
 
-  load(): Observable<Item[]>
-  {
-    const jsonFile = environment.dataServiceUrl;
-    return this.http.get<Item[]>(jsonFile + window.location.search)
-      .pipe(tap(data => {
-        this.items = data;
+    if (!this.style.style.dataSourceID)
+      throw Error("Data source id is missing.");
+
+    return this.dataImport.getDataTable(this.style.style.dataSourceID).pipe(
+      map(table => {
+        if (!table?.length) {
+          return [];
+        }
+
+        return this.style.template.bindDataTable(table, {
+          'begin': { field: 'begin', convert: (value: any) => new Date(Date.parse(value)) },
+          'end': { field: 'end', convert: value => new Date(Date.parse(value)) },
+          'name1': { field: 'name1', default: "" },
+          'name2': { field: 'name2', default: "" },
+          'info1': { field: 'info1', default: "" },
+          'info2': { field: 'info2', default: "" },
+          'info3': { field: 'info3', default: "" },
+        });
       }));
-  }
-
-  getItems(): Observable<Item[]> {
-    if (this.items.length == 0)
-      return this.load();
-    else
-      return of(this.items);
   }
 }

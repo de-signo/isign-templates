@@ -24,6 +24,8 @@ import { AppComponent } from './app.component';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideRouter } from '@angular/router';
+import { DataService } from './data/data.service';
+import { StyleService } from './data/style.service';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -34,7 +36,9 @@ describe('AppComponent', () => {
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
-        provideRouter([])
+        provideRouter([]),
+        { provide: DataService, useValue: {} },
+        { provide: StyleService, useValue: {style:{}} }
       ]
     }).compileComponents();
   });

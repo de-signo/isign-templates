@@ -164,12 +164,7 @@ pipeline {
                 body: '''${JELLY_SCRIPT, template="html"}''',
                 mimeType: 'text/html',
                 attachLog: true,
-                attachmentsPattern: 'dist/*.zip',
-                presendScript: '''
-                  recipients = msg.getRecipients(javax.mail.Message.RecipientType.TO)
-                  filtered = recipients.findAll { addr -> addr.toString().contains('@de-signo.de') }
-                  msg.setRecipients(javax.mail.Message.RecipientType.TO, filtered as javax.mail.Address[])
-                '''
+                attachmentsPattern: 'dist/*.zip'
 
       script {
         if (clean.toBoolean()) {

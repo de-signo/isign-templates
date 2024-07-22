@@ -29,8 +29,8 @@
 </article>
 
 <footer>
-  <qrcode *ngIf="globalQr && listItems && listItems.length" [qrdata]="globalQr" [width]="256" [errorCorrectionLevel]="'M'"
-    [margin]="0">
+  <qrcode *ngIf="globalQr && listItems && listItems.length" [qrdata]="globalQr" [width]="256"
+    [errorCorrectionLevel]="'M'" [margin]="0">
   </qrcode>
   <h3 *ngIf="listItems && listItems.length">Buche mich!</h3>
   <div class="location-container">
@@ -42,8 +42,8 @@
 <aside>
   <div class="timeline">
     <ng-container *ngFor="let hour of hours">
-      <div class="hour">{{ hour }}</div>
-      <hr [ngStyle]="{'height.%': timelineGapPercent }"/>
+      <div class="hour" [ngStyle]="{'font-size.em': fontSizeValue}">{{ hour }}</div>
+      <hr [ngStyle]="{'height.%': timelineGapPercent}" />
     </ng-container>
   </div>
 

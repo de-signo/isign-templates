@@ -33,7 +33,7 @@ http://localhost:4200/?s=raumbelegung_2_A&s/qr=qr&s/s=test&s/title=title&s/subti
 DREIFACHE
 
 Ohne qr code
-http://localhost:4200/?s=raumbelegung_3_A&s/s=test&s/title=title&s/subtitle=subtitle&s/from=from&s/to=to
+http://localhost:4200/?s=raumbelegung_3_A&s/s=test&s/title=title&s/subtitle=subtitle&s/from=from&s/to=to&s/tlstart=0&s/tlend=12&s/room=Hamburg
 
 Mit qr code
-http://localhost:4200/?s=raumbelegung_3_A&s/qr=qr&s/s=test&s/title=title&s/subtitle=subtitle&s/from=from&s/to=to
+http://localhost:4200/?s=raumbelegung_3_A&s/qr=qr&s/s=test&s/title=title&s/subtitle=subtitle&s/from=from&s/to=to&s/glb-qr=TEST&s/room=München

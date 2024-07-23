@@ -2,5 +2,5 @@
 <ng-container [ngSwitch]="view">
   <app-single-view *ngSwitchCase="'single'" [items]="current" [date]="currentDate"></app-single-view>
   <app-double-view *ngSwitchCase="'double'" [items]="current" [date]="currentDate"></app-double-view>
-  <app-tripple-view *ngSwitchCase="'tripple'" [items]="current" [date]="currentDate" [globalQr]="globalQr"></app-tripple-view>
+  <app-tripple-view *ngSwitchCase="'tripple'" [items]="current" [date]="currentDate" [globalQr]="globalQr" [roomName]="roomName"></app-tripple-view>
 </ng-container>

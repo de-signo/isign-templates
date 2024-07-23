@@ -45,6 +45,8 @@ export class StyleService {
         date: tmpl.parameters['date'] ?? '',
         from: tmpl.parameters['from'] ?? '',
         to: tmpl.parameters['to'] ?? '',
+        globalQr: tmpl.parameters['glb-qr'] ?? '',
+        roomName: tmpl.parameters['room'] ?? '',
         fromSeconds: 0, // unused
         toSeconds: 0    // unused
       };
@@ -59,12 +61,16 @@ export class StyleService {
     ) {
       const styled: StyleDbModel = {
         key: key,
+        globalQr: tmpl.parameters['glb-qr'] ?? '',
+        roomName: tmpl.parameters['room'] ?? '',
       };
       this.style = styled;
     } else {
       // default (empty)
       this.style = {
         key: 'raumbelegung2021A',
+        globalQr: '',
+        roomName: ''
       };
     }
   }
@@ -91,6 +97,9 @@ export interface StyleFreeModel extends StyleModel, BookingViewModel {
   date: string;
   from: string;
   to: string;
+
+  globalQr: string;
+  roomName: string;
 }
 
 export interface StyleDbModel extends StyleModel {
@@ -101,4 +110,7 @@ export interface StyleDbModel extends StyleModel {
     | 'raumbelegung_2_B'
     | 'raumbelegung_3_A'
     | 'raumbelegung_3_B';
+
+  globalQr: string;
+  roomName: string;  
 }

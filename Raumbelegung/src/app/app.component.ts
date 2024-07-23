@@ -39,14 +39,15 @@ export class AppComponent  implements OnInit {
   view: "single" | "double" | "tripple";
   currentDate: string;
   globalQr: string;
+  roomName: string;
 
   constructor(
     private readonly dataService: DataService,
-    style: StyleService,
+    styleSvc: StyleService,
     @Inject(LOCALE_ID) private readonly locale: string
   ) {
-    var styleKey = style.style.key;
-    switch (styleKey) {
+    const style = styleSvc.style;
+    switch (style.key) {
       case "raumbelegung2021A":
       case "raumbelegung2021B":
       case "raumbelegung2021_free":
@@ -63,7 +64,8 @@ export class AppComponent  implements OnInit {
         break;
     }
     this.currentDate = new Date().toLocaleDateString(this.locale, { year: 'numeric', month: '2-digit', day: '2-digit' });
-    this.globalQr = "TODO";
+    this.globalQr = style.globalQr;
+    this.roomName = style.roomName;
   }
 
   current: BookingViewModel[] = []; 

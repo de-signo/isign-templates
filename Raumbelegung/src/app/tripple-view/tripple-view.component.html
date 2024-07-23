@@ -22,19 +22,19 @@
 </article>
 
 <article *ngIf="!listItems || !listItems.length" class="noentry-article">
-  <h3>Buche mich!</h3>
+  <h3 *ngIf="globalQr">Buche mich!</h3>
   <qrcode class="noentry-qr" *ngIf="globalQr" [qrdata]="globalQr" [width]="256" [errorCorrectionLevel]="'M'"
     [margin]="0"></qrcode>
   <span>Dieser Raum ist heute frei.</span>
 </article>
 
 <footer>
-  <qrcode *ngIf="globalQr && listItems && listItems.length" [qrdata]="globalQr" [width]="256" [errorCorrectionLevel]="'M'"
-    [margin]="0">
+  <qrcode *ngIf="globalQr && listItems && listItems.length" [qrdata]="globalQr" [width]="256"
+    [errorCorrectionLevel]="'M'" [margin]="0">
   </qrcode>
-  <h3 *ngIf="listItems && listItems.length">Buche mich!</h3>
+  <h3 *ngIf="globalQr && listItems && listItems.length">Buche mich!</h3>
   <div class="location-container">
-    <h3>Raum Heidelberg</h3>
+    <h3>{{ roomName }}</h3>
     <div class="date">{{ date }}</div>
   </div>
 </footer>
@@ -42,8 +42,8 @@
 <aside>
   <div class="timeline">
     <ng-container *ngFor="let hour of hours">
-      <div class="hour">{{ hour }}</div>
-      <hr [ngStyle]="{'height.%': timelineGapPercent }"/>
+      <div class="hour" [ngStyle]="{'font-size.em': fontSizeValue}">{{ hour }}</div>
+      <hr [ngStyle]="{'height.%': timelineGapPercent}" />
     </ng-container>
   </div>
 

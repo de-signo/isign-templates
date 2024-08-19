@@ -32,9 +32,8 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
-              "src/data.cshtml",
-              "src/dataImport.cshtml",
               "src/Styles.xml",
+              "src/test-data",
               "src/assets"
             ],
             "styles": [
@@ -45,10 +44,6 @@
           },
           "configurations": {
             "production": {
-              "index": {
-                "input": "src/index.cshtml",
-                "output": "index.cshtml"
-              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -75,6 +70,10 @@
                   "maximumWarning": "6kb",
                   "maximumError": "8kb"
                 }
+              ],
+              "assets": [
+                "src/Styles.xml",
+                "src/assets"
               ]
             }
           }

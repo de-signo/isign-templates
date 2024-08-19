@@ -23,11 +23,13 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ThinTreeEntity, TreeEntity, TreeReference } from './app-data.model';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
+import { BehaviorSubject, lastValueFrom, Observable, of, Subscription } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import * as fuzzysort from 'fuzzysort';
 import { ConfigService } from './config.service';
 import { IAppConfig, IDataImportItemSource, IFileItemSource, IFixedItemSource } from './app-config.model';
+import { DataImportService } from '@isign/isign-services';
+import { TemplateService } from '@isign/forms-templates';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +41,10 @@ export class DataService implements OnDestroy {
   public tree = this.treeSubject.asObservable();
   private subscriptions: Subscription[] = [];
 
-  constructor(private http: HttpClient, private configSvc: ConfigService)
+  constructor(private http: HttpClient,
+    private configSvc: ConfigService,
+    private readonly dataImportSvc: DataImportService,
+    private readonly templateSvc: TemplateService)
   {
     this.subscriptions.push(this.configSvc.settings.subscribe(config => {
       this.config = config
@@ -108,24 +113,86 @@ export class DataService implements OnDestroy {
   }
 
   private async loadDataImportSource(source: IDataImportItemSource, cats: TreeEntity[]): Promise<void> {
-    const serviceUrl = environment.dataImportServiceUrl;
-    const items = await this.http.get<any[]>(serviceUrl + window.location.search + `&ds=${source.dataSourceKey}`).toPromise();
-    if (items == undefined)
-      throw new Error("dataimport service failed.");
-    let children: (ThinTreeEntity|TreeReference)[];
+    const template = this.templateSvc.getTemplate();
+    if (!template)
+      throw new Error("Template not loaded");
+    const dsId = template.parameters[source.dataSourceKey];
+    if (!dsId)
+      throw new Error("Datasource ID is missing");
+    const dataImportObs = this.dataImportSvc.getDataTable(dsId);
+
+    let newTree: (ThinTreeEntity|TreeReference)[];
     switch (source.mapTo) {
       case 'group-with-reference-id':
         // items: { name: string, referenceId: string }
-        children = Object.entries(DataService.groupBy(items.filter(i => !!i.name && !!i.referenceId), i => i.name))
-          .map(grp => (<ThinTreeEntity>{name: grp[0], item: undefined, children: grp[1].map(i => DataService.findEntityWhereItemHasId(cats, i.referenceId)).filter(e => !!e), favorit: undefined, search: source.search, listItemView: source.listItemView}));
+        const itemsObs = dataImportObs.pipe(
+          map(items => template.bindDataTable(items, {
+            name: { field: "name", default: "" },
+            referenceId: { field: "referenceId", default: "" },
+          })),
+          map(items =>
+            Object.entries(DataService.groupBy(items.filter(i => !!i.name && !!i.referenceId), i => i.name))
+            .map(grp => (<ThinTreeEntity>{
+              name: grp[0], item: undefined,
+              children: grp[1]
+                .map(i => DataService.findEntityWhereItemHasId(cats, i.referenceId))
+                .filter(e => !!e), 
+              favorit: undefined, search: source.search, listItemView: source.listItemView})))
+        );
+        newTree = [{ id: source.category, name: source.category, children: await lastValueFrom(itemsObs), item: undefined, favorit: undefined, search: undefined, listItemView: undefined}]
+        break;
+      case 'categories-with-items':
+        // this is the classic import equivalent
+        // items: Item[]
+        const itemsObs1 = dataImportObs.pipe(
+          map(items => template.bindDataTable(items, {
+            category: { field: "cat", default: "" },
+            id: { field: "id", default: "" },
+            term1: { field: "term1", default: "" },
+            term2: { field: "term2", default: "" },
+            house: { field: "house", default: "" },
+            level: { field: "level", default: "" },
+            room: { field: "room", default: "" },
+            info: { field: "info", default: "" },
+            phone: { field: "phone", default: "" },
+            email: { field: "email", default: "" },
+            map: { field: "map", default: "" }
+          })),
+        map(items =>
+          Object.entries(DataService.groupBy(items.filter(i => !!i.category), i => i.category))
+          .map(catGrp => ({
+            // category
+            id: catGrp[0], name: catGrp[0], item: undefined, favorit: undefined, search: undefined, listItemView: undefined,
+            children: catGrp[1].map(
+              // items              
+              it => ({id: it.id ?? it.term1, name: it.term1, item: it, children: [], favorit: undefined, search: source.search, listItemView: source.listItemView}))
+          }))
+        ));
+        newTree = await lastValueFrom(itemsObs1);
         break;
       case 'leaf-item':
       default:
         // items: Item[]
-        children = items.map(it => ({id: it.id ?? it.term1, name: it.term1, item: it, children: [], favorit: undefined, search: source.search, listItemView: source.listItemView}));
+        const itemsObs2 = dataImportObs.pipe(
+          map(items => template.bindDataTable(items, {
+            id: { field: "id", default: "" },
+            term1: { field: "term1", default: "" },
+            term2: { field: "term2", default: "" },
+            house: { field: "house", default: "" },
+            level: { field: "level", default: "" },
+            room: { field: "room", default: "" },
+            info: { field: "info", default: "" },
+            phone: { field: "phone", default: "" },
+            email: { field: "email", default: "" },
+            map: { field: "map", default: "" }
+          })),
+        map(items => 
+          items.map(it => ({id: it.id ?? it.term1, name: it.term1, item: it, children: [], favorit: undefined, search: source.search, listItemView: source.listItemView}))
+        ));
+        newTree = [{ id: source.category, name: source.category, children: await lastValueFrom(itemsObs2), item: undefined, favorit: undefined, search: undefined, listItemView: undefined}]
         break;
     }
-    TreeOperations.mergeTree(cats, [{ id: source.category, name: source.category, children: children, item: undefined, favorit: undefined, search: undefined, listItemView: undefined}]);
+    TreeOperations.mergeTree(cats, newTree);
   }
 
   private loadFixedSource(source: IFixedItemSource, cats: TreeEntity[]) {

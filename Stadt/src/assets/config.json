@@ -4,8 +4,11 @@
   },
   "sources": [
     {
-      "type": "file",
-      "url": "data.cshtml"
+      "type": "dataimport",
+      "mapTo": "categories-with-items",
+      "search": true,
+      "listItemView": "item-detail",
+      "dataSourceKey": "source"
     }
   ]
 }

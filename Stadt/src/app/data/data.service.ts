@@ -118,8 +118,10 @@ export class DataService implements OnDestroy {
       throw new Error("Template not loaded");
     const dsId = template.parameters[source.dataSourceKey];
     if (!dsId)
-      throw new Error("Datasource ID is missing");
+      throw new Error(`Datasource ID is missing for field ${source.dataSourceKey}`);
     const dataImportObs = this.dataImportSvc.getDataTable(dsId);
+
+    const fieldPrefix = source.fieldPrefix ?? "";
 
     let newTree: (ThinTreeEntity|TreeReference)[];
     switch (source.mapTo) {
@@ -127,8 +129,8 @@ export class DataService implements OnDestroy {
         // items: { name: string, referenceId: string }
         const itemsObs = dataImportObs.pipe(
           map(items => template.bindDataTable(items, {
-            name: { field: "name", default: "" },
-            referenceId: { field: "referenceId", default: "" },
+            name: { field: fieldPrefix + "name", default: "" },
+            referenceId: { field: fieldPrefix + "referenceId", default: "" },
           })),
           map(items =>
             Object.entries(DataService.groupBy(items.filter(i => !!i.name && !!i.referenceId), i => i.name))
@@ -146,17 +148,17 @@ export class DataService implements OnDestroy {
         // items: Item[]
         const itemsObs1 = dataImportObs.pipe(
           map(items => template.bindDataTable(items, {
-            category: { field: "cat", default: "" },
-            id: { field: "id", default: "" },
-            term1: { field: "term1", default: "" },
-            term2: { field: "term2", default: "" },
-            house: { field: "house", default: "" },
-            level: { field: "level", default: "" },
-            room: { field: "room", default: "" },
-            info: { field: "info", default: "" },
-            phone: { field: "phone", default: "" },
-            email: { field: "email", default: "" },
-            map: { field: "map", default: "" }
+            category: { field: fieldPrefix + "cat", default: "" },
+            id: { field: fieldPrefix + "id", default: "" },
+            term1: { field: fieldPrefix + "term1", default: "" },
+            term2: { field: fieldPrefix + "term2", default: "" },
+            house: { field: fieldPrefix + "house", default: "" },
+            level: { field: fieldPrefix + "level", default: "" },
+            room: { field: fieldPrefix + "room", default: "" },
+            info: { field: fieldPrefix + "info", default: "" },
+            phone: { field: fieldPrefix + "phone", default: "" },
+            email: { field: fieldPrefix + "email", default: "" },
+            map: { field: fieldPrefix + "map", default: "" }
           })),
         map(items =>
           Object.entries(DataService.groupBy(items.filter(i => !!i.category), i => i.category))
@@ -175,16 +177,16 @@ export class DataService implements OnDestroy {
         // items: Item[]
         const itemsObs2 = dataImportObs.pipe(
           map(items => template.bindDataTable(items, {
-            id: { field: "id", default: "" },
-            term1: { field: "term1", default: "" },
-            term2: { field: "term2", default: "" },
-            house: { field: "house", default: "" },
-            level: { field: "level", default: "" },
-            room: { field: "room", default: "" },
-            info: { field: "info", default: "" },
-            phone: { field: "phone", default: "" },
-            email: { field: "email", default: "" },
-            map: { field: "map", default: "" }
+            id: { field: fieldPrefix + "id", default: "" },
+            term1: { field: fieldPrefix + "term1", default: "" },
+            term2: { field: fieldPrefix + "term2", default: "" },
+            house: { field: fieldPrefix + "house", default: "" },
+            level: { field: fieldPrefix + "level", default: "" },
+            room: { field: fieldPrefix + "room", default: "" },
+            info: { field: fieldPrefix + "info", default: "" },
+            phone: { field: fieldPrefix + "phone", default: "" },
+            email: { field: fieldPrefix + "email", default: "" },
+            map: { field: fieldPrefix + "map", default: "" }
           })),
         map(items => 
           items.map(it => ({id: it.id ?? it.term1, name: it.term1, item: it, children: [], favorit: undefined, search: source.search, listItemView: source.listItemView}))

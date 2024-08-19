@@ -39,6 +39,7 @@ export interface IDataImportItemSource extends IItemSource {
   listItemView: 'name'|'item-detail'|undefined;
   mapTo: 'leaf-item'|'group-with-reference-id'|'categories-with-items'|undefined;
   dataSourceKey: string;  // field key of data import
+  fieldPrefix: string|undefined; // prefix for each field in dataimport
 }
 
 export interface IFileItemSource extends IItemSource {

@@ -27,7 +27,7 @@
     <a [routerLink]="['/'].concat(x.path ?? [])" queryParamsHandling="preserve" touchClick>{{ x.name }}</a>
   </li>
   <li *ngIf="enableSearch" class="search_mock">
-    <a routerLink="search" queryParamsHandling="preserve" touchClick>
+    <a routerLink="/search" queryParamsHandling="preserve" touchClick>
       <span>Suchen</span>
       <img alt="Suche" src="assets/img/Lupe.png" />
     </a>

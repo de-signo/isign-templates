@@ -32,8 +32,8 @@ export class TrippleViewComponent {
 
   constructor(ts: TemplateService) {
     const tmpl = ts.getTemplate();
-    const startH = Number.parseInt(tmpl.parameters["tlstart"] ?? "0");
-    const endH = Number.parseInt(tmpl.parameters["tlend"] ?? "24");
+    const startH = Number.parseInt(tmpl.parameters["tlstart"] ?? "8");
+    const endH = Number.parseInt(tmpl.parameters["tlend"] ?? "17");
     this.hours = TrippleViewComponent.calcHours(startH, endH);
     this.fontSizeValue = this.calcFontSize(startH, endH);
     this.start = startH * 3600;
@@ -42,8 +42,8 @@ export class TrippleViewComponent {
 
   calcFontSize(start: number, end: number): number {
     const hoursAmount = end - start;
-    const minFontSize = 0.5;
-    const maxFontSize = 1.0;
+    const minFontSize = 0.8;
+    const maxFontSize = 1.3;
     const maxHours = 24;
     let fontSize = maxFontSize - (hoursAmount / maxHours) * (maxFontSize - minFontSize);
     return fontSize;

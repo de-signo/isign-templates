@@ -42,8 +42,8 @@ export class TrippleViewComponent {
 
   calcFontSize(start: number, end: number): number {
     const hoursAmount = end - start;
-    const minFontSize = 0.5;
-    const maxFontSize = 1.0;
+    const minFontSize = 0.8;
+    const maxFontSize = 1.3;
     const maxHours = 24;
     let fontSize = maxFontSize - (hoursAmount / maxHours) * (maxFontSize - minFontSize);
     return fontSize;

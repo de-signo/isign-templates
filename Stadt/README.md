@@ -18,3 +18,8 @@ Diese verhält sich unterschiedlich bei devel und production builds. "production
 
 Die Konfiguration der Seite erfolgt über die config.json Datei. Deren Schema ist in [src/app/config/app-config.model.ts](src/app/config/app-config.model.ts) hinterlegt. In der "devel" Umgebung wird die Datei [src/assets/config/config.dev.json](src/assets/config/config.dev.json) verwendet. In der "production" Umgebung hingegen die Datei [src/assets/config/config.json](src/assets/config/config.json)
 
+## Testlinks
+
+Testlinks für lokales debuggen:
+
+http://localhost:4200?s=test&s/search=qwertz&s/source=test&s/cat=category&s/id=id&s/term1=term1&s/term2=term2

@@ -23,7 +23,8 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { IAppConfig } from './app-config.model';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
+import { WellKnownISignInfoService } from '@isign/isign-services';
 
 @Injectable({
   providedIn: 'root'
@@ -31,11 +32,11 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class ConfigService {
   private settingsSubject: BehaviorSubject<IAppConfig|undefined> = new BehaviorSubject<IAppConfig|undefined>(undefined);
   settings: Observable<IAppConfig|undefined> = this.settingsSubject.asObservable();
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private readonly isign: WellKnownISignInfoService) {}
 
   async load() : Promise<void> {
     const jsonFile = `${environment.config}`;
-    const response = await this.http.get<IAppConfig>(jsonFile).toPromise();
+    const response = await lastValueFrom(this.http.get<IAppConfig>(jsonFile));
     this.settingsSubject.next(response);
   }
 }

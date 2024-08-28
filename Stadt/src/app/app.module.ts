@@ -37,7 +37,11 @@ import { HomeIconDirective } from './directives/home-icon.directive';
 import { BackIconDirective } from './directives/back-icon.directive';
 import { DownIconDirective } from './directives/down-icon.directive';
 import { UpIconDirective } from './directives/up-icon.directive';
-import { TemplateClickModule, TouchClickDirective } from 'isign-templates';
+import { TemplateClickModule } from 'isign-templates';
+import { TemplateBaseRefModule, TemplateModule } from '@isign/forms-templates';
+import { DataImportApiModule, ISignServicesModule } from '@isign/isign-services';
+import { ISignPlayerExtensionsModule } from '@isign/player-extensions';
+import { environment } from 'src/environments/environment';
 registerLocaleData(localeDe);
 
 export function initializeApp(appConfig: ConfigService) {
@@ -64,33 +68,48 @@ class CustomReuseStrategy extends BaseRouteReuseStrategy {
   }
 }
 
-@NgModule({ declarations: [
-        AppComponent,
-        CategoryViewComponent,
-        ListViewComponent,
-        DetailViewComponent,
-        SearchViewComponent,
-        SelectViewComponent,
-        BackIconDirective,
-        DownIconDirective,
-        HomeIconDirective,
-        UpIconDirective
-    ],
-    bootstrap: [AppComponent], imports: [BrowserModule,
-        RouterModule.forRoot([
-            { path: "", component: CategoryViewComponent },
-            { path: "index.cshtml", component: CategoryViewComponent },
-            { path: "search", component: SearchViewComponent },
-            { matcher: pathMatcher, component: SelectViewComponent }
-        ]),
-        NgIdleModule.forRoot(),
-        TemplateClickModule.forRoot()], providers: [
-        { provide: LOCALE_ID, useValue: "de-DE" },
-        ConfigService,
-        { provide: APP_INITIALIZER,
-            useFactory: initializeApp,
-            deps: [ConfigService], multi: true },
-        { provide: RouteReuseStrategy, useClass: CustomReuseStrategy },
-        provideHttpClient(withInterceptorsFromDi())
-    ] })
+@NgModule({
+  declarations: [
+    AppComponent,
+    CategoryViewComponent,
+    ListViewComponent,
+    DetailViewComponent,
+    SearchViewComponent,
+    SelectViewComponent,
+    BackIconDirective,
+    DownIconDirective,
+    HomeIconDirective,
+    UpIconDirective
+  ],
+  bootstrap: [AppComponent],
+  imports: [
+    // enable hosting in forms show
+    TemplateBaseRefModule.forRoot(),
+    // parse the template query
+    TemplateModule,
+    // enable player extensions
+    ISignPlayerExtensionsModule,
+    // enable date import api client
+    DataImportApiModule.forRoot(),
+    // use isign service lookup and authentication
+    ISignServicesModule.forRoot(environment.wellKnownISignUrl, "auto"),
+    BrowserModule,
+    RouterModule.forRoot([
+        { path: "", component: CategoryViewComponent },
+        { path: "index.html", component: CategoryViewComponent },
+        { path: "search", component: SearchViewComponent },
+        { matcher: pathMatcher, component: SelectViewComponent }
+    ]),
+    NgIdleModule.forRoot(),
+    TemplateClickModule.forRoot()],
+  providers: [
+    { provide: LOCALE_ID, useValue: "de-DE" },
+    ConfigService,
+    { provide: APP_INITIALIZER,
+        useFactory: initializeApp,
+        deps: [ConfigService], multi: true },
+    { provide: RouteReuseStrategy, useClass: CustomReuseStrategy },
+    provideHttpClient(withInterceptorsFromDi())
+  ]
+})
 export class AppModule { }

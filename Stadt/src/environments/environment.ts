@@ -26,9 +26,10 @@
 export const environment = {
   production: false,
   checkData: true,
-  config: "assets/config.dev.json",
-  dataImportServiceUrl: "assets/dataimport.json",
-  touchServiceUrl: ""
+  /*config: "assets/config.dev.json",*/
+  config: "assets/config.json",
+  touchServiceUrl: "",
+  wellKnownISignUrl: "test-data/test-services" 
 };
 
 /*

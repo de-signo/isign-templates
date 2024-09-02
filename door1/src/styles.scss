@@ -66,9 +66,9 @@ footer {
     margin: 10vh 0 0 15vw;
     padding: 1vh 1vw;
     font-size: 1.5rem;
-
     /* background */
     position: relative;
+
     &::before {
       content: "";
       position: absolute;
@@ -90,13 +90,14 @@ footer {
 
 .style-t2 {
   h1 {
-    margin: 10vh 0 0 15vw;
+    margin: 10vh 0 0 10vw;
     padding: 1vh 10vw 1vh 0;
     border-bottom: solid 0.5vh;
+    font-size: 1.5rem;
   }
 
   li {
-    margin: 0 0 0 15vw;
+    margin: 0 0 0 10vw;
   }
 
 }
@@ -104,6 +105,7 @@ footer {
 .style-t3 {
   h1 {
     margin: 10vh 10vw 0 10vw;
+    font-size: 1.5rem;
   }
 
   li {
@@ -117,6 +119,7 @@ footer {
     margin: 0;
     padding: 8vh 10vw 2vh 10vw;
     border-bottom: solid 0.5vh;
+    font-size: 1.5rem;
   }
 
   li {
@@ -128,11 +131,12 @@ footer {
 .style-t5 {
   h1 {
     text-align: left;
-    margin: 10vh 10vw 0 20vw;
+    margin: 10vh 10vw 0 16vw;
     padding: 1vh 1vw;
-    
+    font-size: 1.5rem;
     /* block */
     position: relative;
+
     &::before {
       content: "";
       position: absolute;
@@ -140,7 +144,7 @@ footer {
       height: calc(100% + 10vh);
       margin-top: -10vh;
       top: 0;
-      left: -10vw;
+      left: -6vw;
       background-color: black;
       z-index: -1;
     }

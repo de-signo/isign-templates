@@ -63,8 +63,9 @@ footer {
   h1 {
     color: white;
     background-color: black;
-    margin: 10vh 0 0 25vw;
+    margin: 10vh 0 0 15vw;
     padding: 1vh 1vw;
+    font-size: 1.5rem;
 
     /* background */
     position: relative;
@@ -74,7 +75,7 @@ footer {
       height: 100%;
       width: 10vw;
       top: 0;
-      left: -10vw;
+      left: -6vw;
       border-top-left-radius: 100vh;
       border-bottom-left-radius: 100vh;
       background-color: black;
@@ -83,7 +84,7 @@ footer {
   }
 
   li {
-    margin: 0 0 0 25vw;
+    margin: 0 0 0 15vw;
   }
 }
 

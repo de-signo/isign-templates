@@ -6,7 +6,7 @@ pipeline {
     booleanParam(name: 'clean', defaultValue: true, description: 'Clean before build')
     booleanParam(name: 'check', defaultValue: true, description: 'Check package-lock.json')
     string(name: 'notifyEmail', defaultValue: "michael.stoll@de-signo.de;furkan.ayhan@de-signo.de", description: 'E-Mail Adresses to notify about build result')
-    string(name: 'notifyEmailSuccess', defaultValue: "carmen.thomas@de-signo.de", description: 'E-Mail Adresses to notify about successfull build result')
+    string(name: 'notifyEmailSuccess', defaultValue: "carmen.thomas@de-signo.de;furkan.ayhan@de-signo.de", description: 'E-Mail Adresses to notify about successfull build result')
   }
 
   options {

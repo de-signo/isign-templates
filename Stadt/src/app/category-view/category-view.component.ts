@@ -20,9 +20,9 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../data/data.service';
 import { ViewModelService } from '../data/view-model.service';
+import { TemplateService } from '@isign/forms-templates';
 
 @Component({
   selector: 'app-category-view',
@@ -32,12 +32,11 @@ import { ViewModelService } from '../data/view-model.service';
 export class CategoryViewComponent implements OnInit {
   enableSearch = false;
 
-  constructor(public data: DataService, route: ActivatedRoute, private vm: ViewModelService) {
-    route.queryParams.subscribe(
-      params => this.enableSearch = !!params["s/search"]);
-   }
+  constructor(public data: DataService, tmpl: TemplateService, private vm: ViewModelService) {
+    this.enableSearch = !!tmpl.getTemplate().parameters["search"];
+  }
 
-   ngOnInit(): void {
-     this.vm.clear();
-   }
+  ngOnInit(): void {
+    this.vm.clear();
+  }
 }

@@ -20,18 +20,16 @@
  */
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 import { DataService } from '../data/data.service';
 import { ViewModelService } from '../data/view-model.service';
 
 import { CategoryViewComponent } from './category-view.component';
+import { TemplateService } from '@isign/forms-templates';
 
 describe('CategoryViewComponent', () => {
   let component: CategoryViewComponent;
   let fixture: ComponentFixture<CategoryViewComponent>;
-  let fakeActivatedRoute = {
-    queryParams: of(convertToParamMap({ }))};
   let fakeData = { tree: of([]) };
   let fakeVM = { clear: ()=>{} };
 
@@ -39,9 +37,9 @@ describe('CategoryViewComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ CategoryViewComponent ],
       providers: [
-        { provide: ActivatedRoute, useValue: fakeActivatedRoute },
         { provide: DataService, useValue: fakeData },
         { provide: ViewModelService, useValue: fakeVM },
+        { provide: TemplateService, useValue: { getTemplate: () => ({ parameters: { } }) }},
       ]
     })
     .compileComponents();

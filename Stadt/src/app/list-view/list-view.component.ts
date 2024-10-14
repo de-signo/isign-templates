@@ -21,12 +21,13 @@
 
 import { ViewportScroller } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild, } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Subscription, timer } from 'rxjs';
 import { Item, TreeEntity, TreeReference } from '../data/app-data.model';
 import { ConfigService } from '../data/config.service';
 import { TreeOperations } from '../data/data.service';
 import { ViewModelService } from '../data/view-model.service';
+import { TemplateService } from '@isign/forms-templates';
 
 @Component({
   selector: 'app-list-view',
@@ -51,10 +52,9 @@ export class ListViewComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild("divScroll") divScroll!: ElementRef<HTMLElement>;
 
   subscriptions: Subscription[] = [];
-  constructor(route: ActivatedRoute, private router: Router, config: ConfigService,
+  constructor(tmpl: TemplateService, private router: Router, config: ConfigService,
     private vm: ViewModelService, public scroller: ViewportScroller) {
-    this.subscriptions.push(route.queryParams.subscribe(
-      params => this.enableAnchors = !!params["s/hooks"]));
+    this.enableAnchors = !!tmpl.getTemplate().parameters["hooks"];
     this.subscriptions.push(config.settings.subscribe(
       settings => this.defaultItemView = settings?.list?.defaultItemView
     ));

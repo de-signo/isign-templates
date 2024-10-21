@@ -48,18 +48,12 @@ export class DataService {
     return new Date(originalDate.getTime() - timezoneOffset);
   }
 
-  private readDateFromSplitValues(date: string, time: string, timezoneOffset?: number): Date {
-    const originalDate = new Date(date);
-    const [hours, minutes, seconds = 0] = time.split(':').map(Number);
   
-    // Convert to local timezone
-    if (!timezoneOffset) {
-      // automatically convert specified timezone to local time
-      timezoneOffset =
-        (new Date().getTimezoneOffset()) - // target tz
-        originalDate.getTimezoneOffset() // source tz
-    }
-    return new Date(originalDate.getTime() + hours * 3600000 + minutes * 60000 + seconds * 1000 - timezoneOffset);
+  private readDateFromSplitValues(date: string, time: string, timezoneOffset?: number): Date {
+    const originalDate = new Date(date + " " + time);
+  
+    timezoneOffset ??= 0;
+    return new Date(originalDate.getTime() - timezoneOffset);
   }
 
   load(): Observable<BookingViewModel[]|null>

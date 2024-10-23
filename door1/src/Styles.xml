@@ -98,12 +98,6 @@
           <text key="t5">Typ 5</text>
         </content_class>
       </field>
-      <field key="roomId">
-        <names>
-          <name>Raum</name>
-        </names>
-        <content_class type="TextFree" />
-      </field>
 
       <field key="ds">
         <names>

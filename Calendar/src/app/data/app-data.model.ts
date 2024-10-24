@@ -19,9 +19,10 @@
  *  
  */
 
-export interface Item {
-  begin: string;
-  end: string;
+
+export interface ItemViewModel {
+  begin: Date;
+  end: Date;
   name1: string;
   name2: string;
   info1: string;

@@ -13,3 +13,9 @@ Diese verhält sich unterschiedlich bei devel und production builds. "production
 
  1. 'npm run zip' erstellt die ZIP-Datei
  2. dist/calendar.zip enthätlt das Ergebnis
+
+
+## Testlinks
+
+http://localhost:4200/?s=test&s/header=CALENDAR&s/days=1&s/startt=8&s/endt=18&s/source=test&s/begin=from&s/end=to&s/name1=title
+http://localhost:4200/?s=test&s/header=CALENDAR&s/days=MO-SA&s/startt=8&s/endt=18&s/source=test&s/begin=from&s/end=to&s/name1=title

@@ -23,6 +23,8 @@ import { TestBed } from '@angular/core/testing';
 import { DataService } from './data.service';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { DataImportService } from '@isign/isign-services';
+import { StyleService } from './style.service';
 
 describe('DataService', () => {
   let service: DataService;
@@ -32,6 +34,8 @@ describe('DataService', () => {
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
+        { provide: DataImportService, useValue: {}},
+        { provide: StyleService, useValue: {}},
       ]
     });
     service = TestBed.inject(DataService);

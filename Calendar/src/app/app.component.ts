@@ -23,11 +23,9 @@ import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { timer } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
-import { ItemViewModel } from './calendar/calendar.component';
-import { Item } from './data/app-data.model';
 import { DataService } from './data/data.service';
-import { StyleService } from './style.service';
-import { ActivatedRoute } from "@angular/router";
+import { StyleModel, StyleService } from './data/style.service';
+import { ItemViewModel } from './data/app-data.model';
 
 @Component({
   selector: 'app-root',
@@ -35,33 +33,24 @@ import { ActivatedRoute } from "@angular/router";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent  implements OnInit {
-  title(title: any) {
-    throw new Error('Method not implemented.');
-  }
-  dayTo: Date = new Date();
-  dayFrom: Date = new Date();
-  hourFrom = 0;
-  hourTo = 23; // inklusive
+  dayTo: Date;
+  dayFrom: Date;
   now: Date = new Date();
-  days = "1";
+  style: StyleModel;
 
-  constructor(private dataService: DataService, public style: StyleService, route: ActivatedRoute) {
-    route.queryParams.subscribe((params) => {
-      this.days = params["s/days"] ?? "1";
-      this.hourFrom = parseInt(params["s/startt"] ?? "0");
-      this.hourTo = parseInt(params["s/endt"] ?? "24") - 1;
-      this.setup();
-    });
-  }
+  constructor(
+    private dataService: DataService,
+    private readonly styleService: StyleService) {
 
-  private setup() {
+    const style = this.styleService.style;
+    this.style = style;
     const now = this.now;
     var dayStart: number;
     var dayEnd: number;
-    switch (this.days) {
+    switch (style.days) {
       default:
         dayStart = now.getDay();
-        dayEnd = dayStart + parseInt(this.days) - 1;
+        dayEnd = dayStart + parseInt(style.days) - 1;
         break;
       case "MO-FR":
         dayStart = 1;
@@ -90,7 +79,7 @@ export class AppComponent  implements OnInit {
     timer(0, 60* 60 * 1000).pipe(
       mergeMap(() => this.dataService.load())
     ).subscribe(
-      data => this.current = this.parse(data),
+      data => this.current = data,
       error => console.error(error)
     );
 
@@ -98,21 +87,6 @@ export class AppComponent  implements OnInit {
     this.now = new Date()
     timer(0, 15000).subscribe(
       _ => this.now = new Date()
-    );
-  }
-
-  private parse(input: Item[]): ItemViewModel[] {
-    return input.map(i => {
-      return <ItemViewModel>{
-        begin: new Date(Date.parse(i.begin)),
-        end: new Date(Date.parse(i.end)),
-        name1: i.name1,
-        name2: i.name2,
-        info1: i.info1,
-        info2: i.info2,
-        info3: i.info3
-      };
-    }
     );
   }
 }

@@ -20,10 +20,10 @@
  */
 
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TreeEntity } from '../data/app-data.model';
 import { DataService } from '../data/data.service';
+import { TemplateService } from '@isign/forms-templates';
 
 @Component({
   selector: 'app-search-view',
@@ -37,12 +37,9 @@ export class SearchViewComponent implements OnInit, OnDestroy {
   results: TreeEntity[] = [];
   private subscriptions: Subscription[] = [];
 
-  constructor(route: ActivatedRoute, private svc: DataService) {
-    this.subscriptions.push(route.queryParams.subscribe(params =>
-      {
-        let type = params["s/search"];
-        this.loadKeyboard(type);
-      }));
+  constructor(tmpl: TemplateService, private svc: DataService) {
+    let type = tmpl.getTemplate().parameters["search"] ?? "";
+    this.loadKeyboard(type);
   }
 
   ngOnInit(): void {

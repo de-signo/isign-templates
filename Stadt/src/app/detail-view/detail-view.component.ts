@@ -20,8 +20,7 @@
  */
 
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Item, TreeEntity } from '../data/app-data.model';
+import { TreeEntity } from '../data/app-data.model';
 import { DataService } from '../data/data.service';
 
 @Component({

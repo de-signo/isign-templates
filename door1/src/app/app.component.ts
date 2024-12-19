@@ -21,7 +21,7 @@
 
 import { Component, HostBinding } from '@angular/core';
 import { DataService } from './services/data.service';
-import { mergeMap, timer } from 'rxjs';
+import { catchError, mergeMap, retry, throwError, timer } from 'rxjs';
 import { StyleService } from './services/style.service';
 
 @Component({
@@ -29,6 +29,7 @@ import { StyleService } from './services/style.service';
   templateUrl: './app.component.html'
 })
 export class AppComponent {
+  private readonly updateInterval = 300 * 1000;
   title(title: any) {
     throw new Error('Method not implemented.');
   }
@@ -61,8 +62,13 @@ export class AppComponent {
         break;
     }
 
-    timer(0, 300 * 1000).pipe(
-      mergeMap(() => data.load())
+    timer(0, this.updateInterval).pipe(
+      mergeMap(() => data.load()),
+      catchError((error) => {
+        console.error("Failed to load data.", error);
+        return throwError(() => error);
+      }),
+      retry({ delay: this.updateInterval})
     ).subscribe({
       next: data => {
         this.header = data?.header ?? "";

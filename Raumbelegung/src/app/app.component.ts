@@ -19,10 +19,10 @@
  *  
  */
 
-import { ElementRef, HostBinding, Inject, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
+import { ElementRef, Inject, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
 import { Component } from '@angular/core';
-import { timer } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { throwError, timer } from 'rxjs';
+import { catchError, mergeMap, retry } from 'rxjs/operators';
 import { BookingViewModel } from './data/app-data.model';
 import { DataService } from './data/data.service';
 import { StyleService } from './data/style.service';
@@ -32,6 +32,7 @@ import { StyleService } from './data/style.service';
   templateUrl: './app.component.html',
 })
 export class AppComponent  implements OnInit {
+  private readonly updateInterval = 30 * 1000;
   @ViewChild('scrollcontainer') scrollcontainer !: ElementRef;
   scrollingState : "down"|"downdelay"|"up"|"updelay" = "downdelay";
   scrollingCounter = 0;
@@ -71,14 +72,19 @@ export class AppComponent  implements OnInit {
   current: BookingViewModel[] = []; 
 
   ngOnInit(): void {
-    timer(0, 10 * 1000).pipe(
+    timer(0, this.updateInterval).pipe(
       mergeMap(() => {
         this.currentDate = new Date().toLocaleDateString(this.locale, { year: 'numeric', month: '2-digit', day: '2-digit' });
         return this.dataService.load();
-      })
+      }),
+      catchError((error) => {
+        console.error("Failed to load data.", error);
+        return throwError(() => error);
+      }),
+      retry({ delay: this.updateInterval})
     ).subscribe({
       next: data => this.current = data ?? [],
-      error: error => console.error("Failed to load data.", error)
+      error: error => console.error("Finally failed to load data.", error)
     });
 
     timer(0, 50).subscribe(

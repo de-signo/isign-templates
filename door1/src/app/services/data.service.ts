@@ -21,9 +21,10 @@
 
 import { Injectable } from '@angular/core';
 import { DoorModel } from './app-data.model';
-import { Observable, map, of } from 'rxjs';
+import { Observable, from, map, of, switchMap } from 'rxjs';
 import { StyleService } from './style.service';
 import { DataImportService } from '@isign/isign-services';
+import { PlayerExtensionService } from '@isign/player-extensions';
 
 @Injectable({
   providedIn: 'root'
@@ -31,8 +32,25 @@ import { DataImportService } from '@isign/isign-services';
 export class DataService {
   constructor(
     private dataImport: DataImportService, 
-    private style: StyleService)
+    private style: StyleService,
+    private readonly ext: PlayerExtensionService)
   {}
+
+  private async getDataSourceParameters() {
+    // read location from query
+    let location = new URLSearchParams(window.location.search).get("location") ?? undefined;
+    if (!location) {
+      // read location from player
+      const player = await this.ext.getPlayer();
+      let playerInfo;
+      try {
+        playerInfo = await player?.getInfo();
+      }
+      catch {}
+      location = playerInfo?.parameters?.['location'];
+    }
+    return location ? { "location": location } : {};
+  }
 
   load(): Observable<DoorModel|null> {
     const style = this.style.style;
@@ -45,7 +63,9 @@ export class DataService {
       });
     }
     else {
-      return this.dataImport.getDataTable(style.datasource).pipe(
+      // wait for getDataSourceParamters, then call getDataTable
+      return from(this.getDataSourceParameters()).pipe(
+        switchMap(parameters => this.dataImport.getDataTable(style.datasource, parameters)),
         map(table => {
           if (!table?.length) {
             return null;
